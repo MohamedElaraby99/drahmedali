@@ -4,15 +4,15 @@ import Layout from "../../Layout/Layout";
 import { axiosInstance } from "../../Helpers/axiosInstance";
 import { getAllCourses } from "../../Redux/Slices/CourseSlice";
 import { getAllStages } from "../../Redux/Slices/StageSlice";
-import { adminGenerateCourseAccessCodes, adminListCourseAccessCodes, adminDeleteCourseAccessCode, adminBulkDeleteCourseAccessCodes } from "../../Redux/Slices/CourseAccessSlice";
+import { adminGenerateVideoAccessCodes, adminListVideoAccessCodes, adminDeleteVideoAccessCode, adminBulkDeleteVideoAccessCodes } from "../../Redux/Slices/VideoAccessSlice";
 
-export default function AdminCourseAccessCodes() {
+export default function AdminVideoAccessCodes() {
   const dispatch = useDispatch();
   const { courses } = useSelector((s) => s.course);
   const { stages } = useSelector((s) => s.stage);
-  const { admin, error } = useSelector((s) => s.courseAccess);
+  const { admin, error } = useSelector((s) => s.videoAccess);
 
-  const [form, setForm] = useState({ stageId: "", courseId: "", quantity: 1, accessStartAt: "", accessEndAt: "" });
+  const [form, setForm] = useState({ stageId: "", courseId: "", lessonId: "", quantity: 1, accessStartAt: "", accessEndAt: "" });
   const [searchTerm, setSearchTerm] = useState("");
   const [showOnlyUsed, setShowOnlyUsed] = useState(false);
   const [courseFilter, setCourseFilter] = useState("");
@@ -30,9 +30,9 @@ export default function AdminCourseAccessCodes() {
   const [page, setPage] = useState(1);
   const [limit] = useState(20);
   useEffect(() => {
-    dispatch(adminListCourseAccessCodes({ courseId: form.courseId || undefined, q: searchTerm || undefined, page, limit }));
+    dispatch(adminListVideoAccessCodes({ courseId: form.courseId || undefined, lessonId: form.lessonId || undefined, q: searchTerm || undefined, page, limit }));
     setSelected(new Set());
-  }, [dispatch, form.courseId, searchTerm, page, limit]);
+  }, [dispatch, form.courseId, form.lessonId, searchTerm, page, limit]);
 
   // Initialize default date range (now -> now + 7 days) if empty
   useEffect(() => {
@@ -56,13 +56,21 @@ export default function AdminCourseAccessCodes() {
     }
   }, []);
 
-  const onChange = (e) => setForm((p) => ({ ...p, [e.target.name]: e.target.value }));
+  const onChange = (e) => {
+    const { name, value } = e.target;
+    if (name === 'courseId') {
+      setForm((p) => ({ ...p, [name]: value, lessonId: "" }));
+    } else {
+      setForm((p) => ({ ...p, [name]: value }));
+    }
+  };
 
   const onGenerate = async (e) => {
     e.preventDefault();
-    if (!form.courseId) return;
+    if (!form.courseId || !form.lessonId) return;
     const payload = {
       courseId: form.courseId,
+      lessonId: form.lessonId,
       quantity: Number(form.quantity)
     };
     const toLocalInputValue = (d) => {
@@ -87,9 +95,9 @@ export default function AdminCourseAccessCodes() {
       alert('تاريخ النهاية يجب أن يكون بعد تاريخ البداية');
       return;
     }
-    console.log('📤 Generating course access codes with payload:', payload);
-    await dispatch(adminGenerateCourseAccessCodes(payload));
-    dispatch(adminListCourseAccessCodes({ courseId: form.courseId, page, limit }));
+    console.log('📤 Generating video access codes with payload:', payload);
+    await dispatch(adminGenerateVideoAccessCodes(payload));
+    dispatch(adminListVideoAccessCodes({ courseId: form.courseId, lessonId: form.lessonId, page, limit }));
   };
 
   // Filter codes based on search term and used filter

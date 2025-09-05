@@ -172,7 +172,7 @@ export default function CourseDetail() {
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-4 sm:mb-6">
                   <div className="text-center p-2 sm:p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
                     <FaUser className="text-[#9b172a] text-lg sm:text-xl mx-auto mb-1 sm:mb-2" />
-                    <div className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">المدرب</div>
+                    <div className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">المدرس</div>
                     <div className="font-semibold text-xs sm:text-sm text-gray-800 dark:text-white truncate">
                       {currentCourse.instructor?.name || currentCourse.instructor?.fullName || 'غير محدد'}
                     </div>
