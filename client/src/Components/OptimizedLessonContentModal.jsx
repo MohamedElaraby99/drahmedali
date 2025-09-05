@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { FaTimes, FaFilePdf, FaVideo, FaClipboardList, FaDumbbell, FaPlay, FaEye, FaSpinner, FaCheckCircle, FaTrophy, FaClock } from 'react-icons/fa';
+import { FaTimes, FaFilePdf, FaVideo, FaClipboardList, FaDumbbell, FaPlay, FaEye, FaSpinner, FaCheckCircle, FaTrophy, FaClock, FaLock } from 'react-icons/fa';
 import CustomVideoPlayer from './CustomVideoPlayer';
 import PDFViewer from './PDFViewer';
 import ExamModal from './Exam/ExamModal';
@@ -10,11 +10,23 @@ import VideoAccessModal from './VideoAccessModal';
 import useLessonData from '../Helpers/useLessonData';
 import { generateFileUrl } from "../utils/fileUtils";
 import RemainingDaysLabel from './RemainingDaysLabel';
+import { checkCourseAccess } from '../Redux/Slices/CourseAccessSlice';
+import { checkVideoAccess } from '../Redux/Slices/VideoAccessSlice';
 
 const OptimizedLessonContentModal = ({ isOpen, onClose, courseId, lessonId, unitId = null, lessonTitle = "درس" }) => {
   const { data: userData } = useSelector((state) => state.auth);
+  const userRole = userData?.role;
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { lesson, courseInfo, loading, error, refetch } = useLessonData(courseId, lessonId, unitId);
+  
+  // Course access state
+  const courseAccess = useSelector((state) => state.courseAccess.byCourseId[courseId]);
+  const courseAccessLoading = useSelector((state) => state.courseAccess.loading);
+  
+  // Video access state (for compatibility)
+  const videoAccess = useSelector((state) => state.videoAccess.byCourseId[courseId]);
+  const videoAccessLoading = useSelector((state) => state.videoAccess.loading);
   
   
   const [selectedTab, setSelectedTab] = useState('video');
@@ -47,6 +59,77 @@ const OptimizedLessonContentModal = ({ isOpen, onClose, courseId, lessonId, unit
       else if (lesson.trainings?.length > 0) setSelectedTab('training');
     }
   }, [lesson]);
+
+  // Check course access when component mounts or courseId changes
+  useEffect(() => {
+    if (courseId && userData?.id) {
+      dispatch(checkCourseAccess(courseId));
+    }
+  }, [courseId, userData?.id, dispatch]);
+
+  // Re-check access when courseAccess or videoAccess state changes
+  useEffect(() => {
+    if (courseId && userData?.id && (courseAccess !== undefined || videoAccess !== undefined)) {
+      // If we have access data, we can proceed
+      console.log('Access updated:', { courseAccess, videoAccess });
+      
+      // If user gains access while modal is open, close the modal and open video
+      if (videoAccessModalOpen && videoRequiringAccess && hasValidAccess()) {
+        setVideoAccessModalOpen(false);
+        setCurrentVideo(videoRequiringAccess);
+        setVideoPlayerOpen(true);
+        setVideoRequiringAccess(null);
+      }
+    }
+  }, [courseAccess, videoAccess, courseId, userData?.id, videoAccessModalOpen, videoRequiringAccess]);
+
+  // Helper function to check if user has valid access
+  const hasValidAccess = () => {
+    // Admin bypass
+    if (userRole === 'ADMIN' || userRole === 'SUPER_ADMIN') {
+      console.log('Admin access granted');
+      return true;
+    }
+    
+    // Free lessons
+    if (lesson?.price === 0) {
+      console.log('Free lesson access granted');
+      return true;
+    }
+    
+    // Check course access first
+    let accessData = courseAccess;
+    let accessSource = 'courseAccess';
+    
+    // If no course access, check video access
+    if (!accessData?.hasAccess && videoAccess?.hasAccess) {
+      accessData = videoAccess;
+      accessSource = 'videoAccess';
+    }
+    
+    // Check if user has active access
+    if (accessData?.hasAccess) {
+      // Additional check: ensure access hasn't expired
+      if (accessData.accessEndAt) {
+        const now = new Date();
+        const accessEnd = new Date(accessData.accessEndAt);
+        const isValid = accessEnd > now;
+        console.log('Access check:', { 
+          source: accessSource,
+          hasAccess: accessData.hasAccess, 
+          accessEndAt: accessData.accessEndAt, 
+          now: now.toISOString(), 
+          isValid 
+        });
+        return isValid;
+      }
+      console.log(`Access granted (no expiration) from ${accessSource}`);
+      return true;
+    }
+    
+    console.log('No access found in either slice');
+    return false;
+  };
 
   const getContentIcon = (type) => {
     switch (type) {
@@ -85,7 +168,7 @@ const OptimizedLessonContentModal = ({ isOpen, onClose, courseId, lessonId, unit
 
   const handleClearExamAttempt = async (examId) => {
     try {
-      const response = await fetch(`/api/v1/exams/clear/${courseId}/${lessonId}/${examId}${unitId ? `?unitId=${unitId}` : ''}`, {
+      const response = await fetch(`http://localhost:4008/api/v1/exams/clear/${courseId}/${lessonId}/${examId}${unitId ? `?unitId=${unitId}` : ''}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`,
@@ -109,7 +192,7 @@ const OptimizedLessonContentModal = ({ isOpen, onClose, courseId, lessonId, unit
 
   const handleClearTrainingAttempt = async (trainingId) => {
     try {
-      const response = await fetch(`/api/v1/exams/clear/${courseId}/${lessonId}/${trainingId}${unitId ? `?unitId=${unitId}` : ''}`, {
+      const response = await fetch(`http://localhost:4008/api/v1/exams/clear/${courseId}/${lessonId}/${trainingId}${unitId ? `?unitId=${unitId}` : ''}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`,
@@ -163,23 +246,50 @@ const OptimizedLessonContentModal = ({ isOpen, onClose, courseId, lessonId, unit
     return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
   };
 
-  // Check if video requires special access (example: videos with certain properties)
+  // Check if video requires special access - ALL VIDEOS NOW REQUIRE ACCESS CODES
   const videoRequiresSpecialAccess = (video) => {
-    // You can customize this logic based on your requirements
-    // For example, check if video has a special flag or is premium
-    return video.requiresAccessCode || video.premium || video.isLocked;
+    // Every video now requires an access code
+    return true;
   };
 
-  const handleVideoClick = (video) => {
-    // Check if video requires special access code
-    if (videoRequiresSpecialAccess(video)) {
-      setVideoRequiringAccess(video);
-      setVideoAccessModalOpen(true);
-    } else {
-      // Normal flow - open video player directly
+  // Check if lesson requires access code (price > 0 means locked)
+  const lessonRequiresAccessCode = (lesson) => {
+    // If lesson price is greater than 0, it requires access code
+    // Free lessons (price = 0) don't require access codes
+    return lesson.price > 0;
+  };
+
+  const handleVideoClick = async (video) => {
+    // Check video-specific access first
+    try {
+      const result = await dispatch(checkVideoAccess({
+        courseId,
+        lessonId,
+        videoId: video._id,
+        unitId
+      })).unwrap();
+
+      if (result.data.hasAccess) {
+        // User has valid access, allow direct video viewing
+        setCurrentVideo(video);
+        setVideoPlayerOpen(true);
+        return;
+      }
+    } catch (error) {
+      console.error('Error checking video access:', error);
+    }
+
+    // Fallback to general access check
+    if (hasValidAccess()) {
+      // User has valid access, allow direct video viewing
       setCurrentVideo(video);
       setVideoPlayerOpen(true);
+      return;
     }
+
+    // User doesn't have access, show access code modal
+    setVideoRequiringAccess(video);
+    setVideoAccessModalOpen(true);
   };
 
   const handleVideoAccessGranted = (video) => {
@@ -263,18 +373,49 @@ const OptimizedLessonContentModal = ({ isOpen, onClose, courseId, lessonId, unit
                 onClick={() => handleVideoClick(video)}
               >
                 <div className="text-center">
-                  <div className="bg-white/20 backdrop-blur-sm rounded-full p-6 mb-4 group-hover:bg-white/30 transition-all duration-200 transform group-hover:scale-110">
+                  <div className="bg-white/20 backdrop-blur-sm rounded-full p-6 mb-4 group-hover:bg-white/30 transition-all duration-200 transform group-hover:scale-110 relative">
                     <FaPlay className="text-white text-4xl ml-2" />
+                    {/* Lock Icon - Only show for paid lessons, Admin badge for admins, Checkmark for users with access */}
+                    {userRole === 'ADMIN' || userRole === 'SUPER_ADMIN' ? (
+                      <div className="absolute -top-2 -right-2 bg-green-500 text-white rounded-full p-1.5">
+                        <span className="text-xs font-bold">A</span>
+                      </div>
+                    ) : lesson.price > 0 ? (
+                      hasValidAccess() ? (
+                        <div className="absolute -top-2 -right-2 bg-green-500 text-white rounded-full p-1.5">
+                          <FaCheckCircle className="text-xs" />
+                        </div>
+                      ) : (
+                        <div className="absolute -top-2 -right-2 bg-yellow-500 text-white rounded-full p-1.5">
+                          <FaLock className="text-xs" />
+                        </div>
+                      )
+                    ) : null}
                   </div>
                   <h3 className="text-white text-lg font-semibold mb-2">{video.title}</h3>
-                  <p className="text-gray-300 text-sm">انقر لمشاهدة الفيديو</p>
+                  <p className="text-gray-300 text-sm">
+                    {userRole === 'ADMIN' || userRole === 'SUPER_ADMIN'
+                      ? 'مدير - وصول غير محدود'
+                      : lesson.price === 0 
+                        ? 'درس مجاني - متاح للمشاهدة' 
+                        : (courseAccessLoading || videoAccessLoading)
+                          ? 'جاري التحقق من الوصول...'
+                          : hasValidAccess()
+                            ? 'متاح للمشاهدة - تم تفعيل الوصول'
+                            : 'يتطلب كود وصول'
+                    }
+                  </p>
                 </div>
               </div>
             </div>
           ) : (
-            <div className="bg-gray-200 dark:bg-gray-700 rounded-lg p-8 text-center">
-              <FaPlay className="text-4xl text-gray-400 mx-auto mb-2" />
-              <p className="text-gray-500">لا يوجد رابط للفيديو</p>
+            <div 
+              className="bg-gray-200 dark:bg-gray-700 rounded-lg p-8 text-center cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+              onClick={() => handleVideoClick(video)}
+            >
+              <FaLock className="text-4xl text-gray-400 mx-auto mb-2" />
+              <p className="text-gray-500 mb-2">يتطلب كود وصول للفيديو</p>
+              <p className="text-sm text-gray-400">اضغط على الفيديو لإدخال كود الوصول</p>
             </div>
           )}
         </div>
@@ -490,13 +631,6 @@ const OptimizedLessonContentModal = ({ isOpen, onClose, courseId, lessonId, unit
                 <div className="text-lg font-bold text-green-600">
                   {Math.max(...training.userResults.map(r => r.percentage))}%
                 </div>
-                <button 
-                  onClick={() => handleClearTrainingAttempt(training._id)}
-                  className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-xs transition-colors mt-2"
-                  title="مسح محاولات التدريب"
-                >
-                  مسح المحاولات
-                </button>
               </div>
             )}
             
@@ -783,26 +917,30 @@ const OptimizedLessonContentModal = ({ isOpen, onClose, courseId, lessonId, unit
 
         <div className="p-3 sm:p-6">
           {/* Navigation Tabs */}
-          <div className="flex items-center justify-center mb-6 bg-gray-50 dark:bg-gray-800 rounded-xl p-2 overflow-x-auto">
+          <div className="flex flex-wrap gap-2 mb-6 bg-gray-50 dark:bg-gray-800 rounded-xl p-3 sm:p-4" style={{display: 'flex', flexWrap: 'wrap'}}>
             {[
-              { key: 'video', label: 'الفيديوهات', icon: <FaVideo className="text-[#9b172a]" />, count: lesson.videos?.length || 0 },
-              { key: 'pdf', label: 'الملفات', icon: <FaFilePdf className="text-red-500" />, count: lesson.pdfs?.length || 0 },
-              { key: 'exam', label: 'الامتحانات', icon: <FaClipboardList className="text-[#9b172a]" />, count: lesson.exams?.length || 0 },
-              { key: 'essayExam', label: 'الامتحانات المقالية', icon: <FaClipboardList className="text-purple-500" />, count: lesson.essayExams?.length || 0 },
-              { key: 'training', label: 'التدريبات', icon: <FaDumbbell className="text-green-500" />, count: lesson.trainings?.length || 0 }
+              { key: 'video', label: 'الفيديوهات', icon: <FaVideo style={{fontSize: '24px'}} className="text-[#9b172a]" />, count: lesson.videos?.length || 0 },
+              { key: 'pdf', label: 'الملفات', icon: <FaFilePdf style={{fontSize: '24px'}} className="text-red-500" />, count: lesson.pdfs?.length || 0 },
+              { key: 'exam', label: 'الامتحانات', icon: <FaClipboardList style={{fontSize: '24px'}} className="text-[#9b172a]" />, count: lesson.exams?.length || 0 },
+              { key: 'essayExam', label: 'الامتحانات المقالية', icon: <FaClipboardList style={{fontSize: '24px'}} className="text-purple-500" />, count: lesson.essayExams?.length || 0 },
+              { key: 'training', label: 'التدريبات', icon: <FaDumbbell style={{fontSize: '24px'}} className="text-green-500" />, count: lesson.trainings?.length || 0 }
             ].filter(tab => tab.count > 0).map((tab) => (
               <button
                 key={tab.key}
                 onClick={() => setSelectedTab(tab.key)}
-                className={`flex items-center gap-1 sm:gap-2 px-2 sm:px-4 py-2 rounded-lg transition-all duration-200 mx-1 flex-shrink-0 ${
+                className={`flex items-center justify-between px-3 sm:px-4 py-3 sm:py-4 rounded-lg transition-all duration-200 flex-1 min-w-0 text-left min-h-[50px] sm:min-h-[60px] ${
                   selectedTab === tab.key
                     ? 'bg-white dark:bg-gray-700 text-[#9b172a] dark:text-[#9b172a]-400 shadow-md'
                     : 'text-gray-600 dark:text-gray-300 hover:bg-white dark:hover:bg-gray-700'
                 }`}
               >
-                {tab.icon}
-                <span className="font-medium text-xs sm:text-sm">{tab.label}</span>
-                <span className="text-xs bg-gray-200 dark:bg-gray-600 px-1 sm:px-2 py-1 rounded-full">
+                <div className="flex items-center gap-3 sm:gap-4 flex-1 min-w-0">
+                  <div className="flex-shrink-0 w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center">
+                    {tab.icon}
+                  </div>
+                  <span className="font-medium text-sm sm:text-base truncate">{tab.label}</span>
+                </div>
+                <span className="text-xs bg-gray-200 dark:bg-gray-600 px-2 py-1 rounded-full flex-shrink-0">
                   {tab.count}
                 </span>
               </button>
@@ -917,8 +1055,8 @@ const OptimizedLessonContentModal = ({ isOpen, onClose, courseId, lessonId, unit
         />
       )}
 
-      {/* Video Access Modal */}
-      {videoAccessModalOpen && videoRequiringAccess && (
+      {/* Video Access Modal - Only show if user doesn't have valid access */}
+      {videoAccessModalOpen && videoRequiringAccess && !hasValidAccess() && (
         <VideoAccessModal
           isOpen={videoAccessModalOpen}
           onClose={() => {
@@ -926,6 +1064,7 @@ const OptimizedLessonContentModal = ({ isOpen, onClose, courseId, lessonId, unit
             setVideoRequiringAccess(null);
           }}
           video={videoRequiringAccess}
+          lesson={lesson}
           courseId={courseId}
           lessonId={lessonId}
           unitId={unitId}

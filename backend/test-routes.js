@@ -7,7 +7,7 @@ const testRoutes = async () => {
   try {
     // Test the admin users route
     console.log('Testing admin users route...');
-    const adminUsersResponse = await fetch('http://localhost:4007/api/v1/admin/users/users', {
+    const adminUsersResponse = await fetch('http://localhost:4008/api/v1/admin/users/users', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -25,7 +25,7 @@ const testRoutes = async () => {
 
     // Test the exam results search route
     console.log('\nTesting exam results search route...');
-    const examSearchResponse = await fetch('http://localhost:4007/api/v1/exam-results/search', {
+    const examSearchResponse = await fetch('http://localhost:4008/api/v1/exam-results/search', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

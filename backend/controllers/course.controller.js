@@ -445,6 +445,7 @@ export const getLessonById = async (req, res, next) => {
     const { courseId, lessonId } = req.params;
     const { unitId } = req.query;
     const userId = req.user?._id || req.user?.id;
+    const userRole = req.user?.role;
 
     const course = await Course.findById(courseId).select('title instructor stage subject units directLessons');
         if (!course) {
@@ -462,6 +463,24 @@ export const getLessonById = async (req, res, next) => {
 
     if (!lesson) {
       return res.status(404).json({ success: false, message: 'Lesson not found' });
+    }
+
+    // Check user access to videos
+    let hasVideoAccess = false;
+    if (userRole === 'ADMIN' || userRole === 'SUPER_ADMIN') {
+      hasVideoAccess = true; // Admins have unlimited access
+    } else if (lesson.price === 0) {
+      hasVideoAccess = true; // Free lessons are accessible
+    } else if (userId) {
+      // Check if user has active course or video access
+      const CourseAccess = (await import('../models/courseAccess.model.js')).default;
+      const now = new Date();
+      const access = await CourseAccess.findOne({
+        userId,
+        courseId,
+        accessEndAt: { $gt: now }
+      }).sort({ accessEndAt: -1 });
+      hasVideoAccess = !!access;
     }
 
     // Process exam data with user results
@@ -593,12 +612,14 @@ export const getLessonById = async (req, res, next) => {
       description: lesson.description,
       price: lesson.price,
       content: lesson.content,
+      hasVideoAccess, // Include access status for frontend
       videos: filteredVideos.map(video => ({
         _id: video._id,
-        url: video.url,
+        url: hasVideoAccess ? video.url : null, // Hide URL if no access
         title: video.title,
         description: video.description,
-        publishDate: video.publishDate
+        publishDate: video.publishDate,
+        hasAccess: hasVideoAccess // Include access status for frontend
       })),
       pdfs: filteredPdfs.map(pdf => ({
         _id: pdf._id,

@@ -20,7 +20,7 @@ const convertPdfToImages = asyncHandler(async (req, res) => {
     // Extract filename from URL and decode it
     let filename;
     
-    if (pdfUrl.includes('localhost:4007') || pdfUrl.includes('api.drahmedali.online')) {
+    if (pdfUrl.includes('localhost:4008') || pdfUrl.includes('api.drahmedali.online')) {
       // Full backend URL provided (development or production)
       const urlParts = pdfUrl.split('/');
       const encodedFilename = urlParts[urlParts.length - 1];

@@ -37,6 +37,26 @@ const courseAccessCodeSchema = new Schema({
         type: Date,
         default: null
     },
+    // Track usage history for reusable codes
+    usageHistory: [{
+        userId: {
+            type: Schema.Types.ObjectId,
+            ref: 'User',
+            required: true
+        },
+        usedAt: {
+            type: Date,
+            default: Date.now
+        },
+        videoId: {
+            type: Schema.Types.ObjectId,
+            required: false
+        },
+        lessonId: {
+            type: Schema.Types.ObjectId,
+            required: false
+        }
+    }],
     createdBy: {
         type: Schema.Types.ObjectId,
         ref: 'User',
@@ -54,12 +74,20 @@ courseAccessCodeSchema.statics.generateCode = function () {
     return code;
 };
 
-// Validate a code can be redeemed
+// Validate a code can be redeemed (allows reuse during access window)
 courseAccessCodeSchema.statics.findRedeemable = function (code) {
+    const now = new Date();
     return this.findOne({
         code,
-        isUsed: false,
-        codeExpiresAt: { $gt: new Date() }
+        codeExpiresAt: { $gt: now },
+        // Allow reuse if we're within the access window
+        $or: [
+            { isUsed: false }, // Never used
+            { 
+                isUsed: true,
+                accessEndAt: { $gt: now } // Used but still within access window
+            }
+        ]
     });
 };
 

@@ -214,11 +214,12 @@ export default function CourseDetail() {
                         </div>
                       </div>
                       <p className="text-xs text-blue-800 dark:text-blue-200 leading-relaxed mb-3 text-right">
-                        بعض الفيديوهات في هذا الكورس تتطلب أكواد وصول خاصة. عند النقر على فيديو محمي، ستظهر نافذة لإدخال الكود المطلوب.
+                        الدروس المدفوعة في هذا الكورس تتطلب أكواد وصول خاصة. . عند النقر على فيديو مدفوع، ستظهر نافذة لإدخال الكود المطلوب.
                       </p>
                       <div className="p-2 sm:p-3 bg-blue-100 dark:bg-blue-800/50 rounded border-r-4 border-blue-400">
                         <ul className="text-xs text-blue-800 dark:text-blue-200 space-y-1 text-right">
-                          <li>• انقر على الفيديو المطلوب</li>
+                          <li>• الدروس المجانية متاحة مباشرة</li>
+                          <li>• الدروس المدفوعة تتطلب كود وصول</li>
                           <li>• أدخل الكود عند ظهور النافذة</li>
                           <li>• استمتع بمشاهدة الفيديو</li>
                         </ul>

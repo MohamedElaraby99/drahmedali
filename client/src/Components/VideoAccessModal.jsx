@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaTimes, FaPlay, FaExclamationTriangle, FaUnlock, FaSpinner } from 'react-icons/fa';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { axiosInstance } from '../Helpers/axiosInstance';
+import { checkCourseAccess } from '../Redux/Slices/CourseAccessSlice';
+import { redeemVideoAccessCode } from '../Redux/Slices/VideoAccessSlice';
 
 const VideoAccessModal = ({ 
   isOpen, 
   onClose, 
   video, 
+  lesson,
   courseId, 
   lessonId, 
   unitId,
@@ -18,6 +21,55 @@ const VideoAccessModal = ({
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
   const dispatch = useDispatch();
+  
+  // Check access state
+  const courseAccess = useSelector((state) => state.courseAccess.byCourseId[courseId]);
+  const videoAccess = useSelector((state) => state.videoAccess.byCourseId[courseId]);
+  const userData = useSelector((state) => state.auth.data);
+  const userRole = userData?.role;
+
+  // Helper function to check if user has valid access
+  const hasValidAccess = () => {
+    // Admin bypass
+    if (userRole === 'ADMIN' || userRole === 'SUPER_ADMIN') {
+      return true;
+    }
+    
+    // Free lessons
+    if (lesson?.price === 0) {
+      return true;
+    }
+    
+    // Check course access first
+    let accessData = courseAccess;
+    
+    // If no course access, check video access
+    if (!accessData?.hasAccess && videoAccess?.hasAccess) {
+      accessData = videoAccess;
+    }
+    
+    // Check if user has active access
+    if (accessData?.hasAccess) {
+      // Additional check: ensure access hasn't expired
+      if (accessData.accessEndAt) {
+        const now = new Date();
+        const accessEnd = new Date(accessData.accessEndAt);
+        return accessEnd > now;
+      }
+      return true;
+    }
+    
+    return false;
+  };
+
+  // Check if user already has access when modal opens
+  useEffect(() => {
+    if (isOpen && hasValidAccess()) {
+      console.log('User already has access, closing modal and opening video');
+      onAccessGranted(video);
+      onClose();
+    }
+  }, [isOpen, courseAccess, videoAccess, userRole, lesson?.price]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -38,20 +90,27 @@ const VideoAccessModal = ({
     setError('');
 
     try {
-      const response = await axiosInstance.post('/api/v1/courseAccess/redeem-video', {
+      const result = await dispatch(redeemVideoAccessCode({
         code: accessCode.trim().toUpperCase(),
         courseId,
         lessonId,
         unitId,
         videoId: video._id
-      });
+      })).unwrap();
 
-      if (response.data.success) {
+      if (result) {
         setSuccess(true);
+        
+        // Update course access state immediately
+        dispatch(checkCourseAccess(courseId));
+        
+        // Also call the access granted callback immediately
+        onAccessGranted(video);
+        
+        // Close modal immediately and let the parent handle video opening
         setTimeout(() => {
-          onAccessGranted(video);
           onClose();
-        }, 1500);
+        }, 1000); // Reduced timeout for faster response
       }
     } catch (err) {
       let errorMessage = 'تعذر تفعيل الكود';
@@ -143,7 +202,7 @@ const VideoAccessModal = ({
                   <span className="font-medium text-sm">مطلوب كود وصول</span>
                 </div>
                 <p className="text-yellow-700 dark:text-yellow-400 text-sm">
-                  هذا الفيديو يتطلب كود وصول خاص. أدخل الكود الذي حصلت عليه من المدرس.
+                  هذا الفيديو في درس مدفوع يتطلب كود وصول خاص. أدخل الكود الذي حصلت عليه من المدرس.
                 </p>
               </div>
 
@@ -191,6 +250,7 @@ const VideoAccessModal = ({
                     <li>• كل كود يستخدم مرة واحدة فقط</li>
                     <li>• الكود من 8-12 حرف وأرقام إنجليزي</li>
                     <li>• تأكد من كتابة الكود بشكل صحيح</li>
+                  
                   </ul>
                 </div>
 

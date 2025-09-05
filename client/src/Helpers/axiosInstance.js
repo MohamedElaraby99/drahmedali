@@ -25,7 +25,7 @@ const getBaseUrl = () => {
       window.location.hostname === '127.0.0.1' ||
       window.location.port === '5173' ||
       window.location.port === '5190') {
-    const devUrl = 'http://localhost:4007/api/v1';
+    const devUrl = 'http://localhost:4008/api/v1';
     console.log('✅ Using development API URL:', devUrl);
     return devUrl;
   }
@@ -51,9 +51,15 @@ export const axiosInstance = axios.create({
     }
 });
 
-// Add request interceptor to include device info in headers for cross-domain requests
+// Add request interceptor to include authentication token and device info
 axiosInstance.interceptors.request.use(
     (config) => {
+        // Add authentication token to headers
+        const token = localStorage.getItem('token');
+        if (token) {
+            config.headers['Authorization'] = `Bearer ${token}`;
+        }
+        
         // Add device info to headers for cross-domain requests
         if (!import.meta.env.DEV && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
             try {

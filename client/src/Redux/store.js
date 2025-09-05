@@ -18,6 +18,7 @@ import VideoProgressSliceReducer from "./Slices/VideoProgressSlice"
 import DeviceManagementSliceReducer from "./Slices/DeviceManagementSlice"
 import LiveMeetingSliceReducer from "./Slices/LiveMeetingSlice"
 import CourseAccessSliceReducer from "./Slices/CourseAccessSlice"
+import VideoAccessSliceReducer from "./Slices/VideoAccessSlice"
 import EssayExamSliceReducer from "./Slices/EssayExamSlice"
 import AttendanceSliceReducer from "./Slices/AttendanceSlice"
 import GroupsSliceReducer from "./Slices/GroupsSlice"
@@ -41,6 +42,7 @@ import FinancialSliceReducer from "./Slices/FinancialSlice"
         course: CourseSliceReducer,
 
         courseAccess: CourseAccessSliceReducer,
+        videoAccess: VideoAccessSliceReducer,
           exam: ExamSliceReducer,
   grade: GradeSliceReducer,
   instructor: InstructorSliceReducer,

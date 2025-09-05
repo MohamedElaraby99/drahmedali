@@ -226,7 +226,7 @@ export default function CoursesPage() {
                     {course.image && course.image.secure_url ? (
                       // Display actual course image
                       <img
-                        src={`${import.meta.env.VITE_REACT_APP_API_URL?.replace('/api/v1', '') || 'http://localhost:4007'}/uploads/courses/${course.image.public_id}`}
+                        src={`${import.meta.env.VITE_REACT_APP_API_URL?.replace('/api/v1', '') || 'http://localhost:4008'}/uploads/courses/${course.image.public_id}`}
                         alt={course.title}
                         className="w-full h-full object-cover"
                         onError={(e) => {

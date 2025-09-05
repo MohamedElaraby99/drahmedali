@@ -21,7 +21,7 @@ const courseAccessSchema = new Schema({
     },
     source: {
         type: String,
-        enum: ['code'],
+        enum: ['code', 'admin'],
         default: 'code'
     },
     codeId: {

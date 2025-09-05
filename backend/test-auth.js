@@ -21,7 +21,7 @@ const testAuth = async () => {
 
     // Test the admin users route with authentication
     console.log('\nTesting admin users route with authentication...');
-    const adminUsersResponse = await fetch('http://localhost:4007/api/v1/admin/users/users', {
+    const adminUsersResponse = await fetch('http://localhost:4008/api/v1/admin/users/users', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -44,7 +44,7 @@ const testAuth = async () => {
 
     // Test the exam results search route with authentication
     console.log('\nTesting exam results search route with authentication...');
-    const examSearchResponse = await fetch('http://localhost:4007/api/v1/exam-results/search?page=1&limit=20', {
+    const examSearchResponse = await fetch('http://localhost:4008/api/v1/exam-results/search?page=1&limit=20', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

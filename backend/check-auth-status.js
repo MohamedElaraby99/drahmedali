@@ -10,7 +10,7 @@ const checkAuthStatus = async () => {
     // Check if server is running
     console.log('1. Testing server connectivity...');
     try {
-      const response = await fetch('http://localhost:4007/api/v1/user/me');
+      const response = await fetch('http://localhost:4008/api/v1/user/me');
       console.log('   Server response status:', response.status);
       if (response.status === 401) {
         console.log('   ✅ Server is running, but requires authentication (expected)');
@@ -25,7 +25,7 @@ const checkAuthStatus = async () => {
     // Test admin users route without authentication
     console.log('\n2. Testing admin users route without authentication...');
     try {
-      const response = await fetch('http://localhost:4007/api/v1/admin/users/users');
+      const response = await fetch('http://localhost:4008/api/v1/admin/users/users');
       console.log('   Response status:', response.status);
       if (response.status === 400) {
         console.log('   ✅ Route exists, requires authentication (expected)');
@@ -41,7 +41,7 @@ const checkAuthStatus = async () => {
     // Test exam results search route without authentication
     console.log('\n3. Testing exam results search route without authentication...');
     try {
-      const response = await fetch('http://localhost:4007/api/v1/exam-results/search?page=1&limit=20');
+      const response = await fetch('http://localhost:4008/api/v1/exam-results/search?page=1&limit=20');
       console.log('   Response status:', response.status);
       if (response.status === 400) {
         console.log('   ✅ Route exists, requires authentication (expected)');

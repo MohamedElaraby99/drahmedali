@@ -103,12 +103,18 @@ export default function AdminVideoAccessCodes() {
   // Filter codes based on search term and used filter
   const filteredCodes = admin.codes.filter(code => {
     const courseName = code.courseId?.title || courses.find(c => c._id === code.courseId)?.title || '';
+    const lessonName = code.lessonId?.title || '';
     const userEmail = code.usedBy?.email || '';
     const matchesSearch = true; // handled server-side now
     const matchesUsedFilter = !showOnlyUsed || code.isUsed;
     const codeCourseId = typeof code.courseId === 'object' ? code.courseId?._id : code.courseId;
     const matchesCourseFilter = !courseFilter || codeCourseId === courseFilter;
-    return matchesSearch && matchesUsedFilter && matchesCourseFilter;
+    
+    // For now, since we're using course access codes, we'll show all codes for the selected course
+    // In the future, when we have proper video access codes, we'll filter by lessonId
+    const matchesLessonFilter = !form.lessonId || true; // Show all codes for now
+    
+    return matchesSearch && matchesUsedFilter && matchesCourseFilter && matchesLessonFilter;
   });
 
   const isAllSelected = filteredCodes.length > 0 && filteredCodes.every(c => selected.has(c._id || c.id));
@@ -135,24 +141,25 @@ export default function AdminVideoAccessCodes() {
       return;
     }
     if (!confirm('تأكيد حذف هذا الكود؟')) return;
-    await dispatch(adminDeleteCourseAccessCode({ id }));
+    await dispatch(adminDeleteVideoAccessCode({ id }));
     setSelected(prev => { const n = new Set(prev); n.delete(id); return n; });
-    dispatch(adminListCourseAccessCodes({ courseId: form.courseId || undefined, page, limit }));
+    dispatch(adminListVideoAccessCodes({ courseId: form.courseId || undefined, lessonId: form.lessonId || undefined, page, limit }));
   };
 
   const handleBulkDelete = async () => {
     const ids = Array.from(selected);
     if (ids.length === 0) return;
     if (!confirm(`تأكيد حذف ${ids.length} كود (غير مُستخدم فقط)؟`)) return;
-    await dispatch(adminBulkDeleteCourseAccessCodes({ ids, courseId: form.courseId || undefined, onlyUnused: true }));
+    await dispatch(adminBulkDeleteVideoAccessCodes({ ids, courseId: form.courseId || undefined, lessonId: form.lessonId || undefined, onlyUnused: true }));
     setSelected(new Set());
-    dispatch(adminListCourseAccessCodes({ courseId: form.courseId || undefined, page, limit }));
+    dispatch(adminListVideoAccessCodes({ courseId: form.courseId || undefined, lessonId: form.lessonId || undefined, page, limit }));
   };
 
   const buildCsvAndDownload = (codes) => {
     const headers = [
       'code',
       'course',
+      'lesson',
       'accessStartAt',
       'accessEndAt',
       'isUsed',
@@ -166,6 +173,12 @@ export default function AdminVideoAccessCodes() {
       }
       return courses.find(c => c._id === code.courseId)?.title || code.courseId || '';
     };
+    const getLessonName = (code) => {
+      if (typeof code.lessonId === 'object' && code.lessonId?.title) {
+        return code.lessonId.title;
+      }
+      return code.lessonId || '';
+    };
     const getUserEmail = (code) => {
       if (typeof code.usedBy === 'object' && code.usedBy?.email) {
         return code.usedBy.email;
@@ -175,6 +188,7 @@ export default function AdminVideoAccessCodes() {
     const rows = codes.map(c => ([
       c.code,
       getCourseName(c),
+      getLessonName(c),
       c.accessStartAt ? new Date(c.accessStartAt).toISOString() : '',
       c.accessEndAt ? new Date(c.accessEndAt).toISOString() : '',
       c.isUsed ? 'yes' : 'no',
@@ -275,6 +289,27 @@ export default function AdminVideoAccessCodes() {
       return '';
     }
   };
+
+  const getLessonName = (code) => {
+    try {
+      if (typeof code.lessonId === 'object' && code.lessonId?.title) {
+        return String(code.lessonId.title);
+      }
+      if (code.lessonId) {
+        return String(code.lessonId);
+      }
+      // For now, since we're using course access codes, show the selected lesson name
+      if (form.lessonId) {
+        const lessons = getLessonsFromCourse(form.courseId);
+        const lesson = lessons.find(l => l._id === form.lessonId);
+        return lesson ? lesson.title : 'درس محدد';
+      }
+      return 'جميع الدروس';
+    } catch (error) {
+      console.error('Error in getLessonName:', error, code);
+      return 'غير محدد';
+    }
+  };
   
   const getUserEmail = (code) => {
     try {
@@ -295,11 +330,39 @@ export default function AdminVideoAccessCodes() {
     console.log('UsedBy type:', typeof filteredCodes[0].usedBy, filteredCodes[0].usedBy);
   }
 
+  // Get all lessons from the selected course
+  const getLessonsFromCourse = (courseId) => {
+    const course = courses.find(c => c._id === courseId);
+    if (!course) return [];
+    
+    const lessons = [];
+    
+    // Add direct lessons
+    if (course.directLessons) {
+      course.directLessons.forEach(lesson => {
+        lessons.push({ ...lesson, unitTitle: 'المقدمة' });
+      });
+    }
+    
+    // Add lessons from units
+    if (course.units) {
+      course.units.forEach(unit => {
+        if (unit.lessons) {
+          unit.lessons.forEach(lesson => {
+            lessons.push({ ...lesson, unitTitle: unit.title });
+          });
+        }
+      });
+    }
+    
+    return lessons;
+  };
+
   return (
     <Layout>
       <div className="max-w-7xl mx-auto p-6" dir="rtl">
-        <h1 className="text-3xl font-bold mb-6">أكواد الوصول للكورسات</h1>
-        <form onSubmit={onGenerate} className="bg-white dark:bg-gray-800 rounded-xl shadow p-4 mb-6 grid grid-cols-1 md:grid-cols-6 gap-4" dir="rtl">
+        <h1 className="text-3xl font-bold mb-6">أكواد الوصول للفيديوهات</h1>
+        <form onSubmit={onGenerate} className="bg-white dark:bg-gray-800 rounded-xl shadow p-4 mb-6 grid grid-cols-1 md:grid-cols-7 gap-4" dir="rtl">
           <div>
             <label className="block text-sm mb-1">المرحلة</label>
             <select name="stageId" value={form.stageId} onChange={(e)=>{onChange(e); setForm(p=>({...p, courseId: ""}));}} className="w-full p-2 rounded border dark:bg-gray-700">
@@ -318,6 +381,17 @@ export default function AdminVideoAccessCodes() {
                 .map((c) => (
                   <option key={c._id} value={c._id}>{c.title}</option>
                 ))}
+            </select>
+          </div>
+          <div>
+            <label className="block text-sm mb-1">الدرس</label>
+            <select name="lessonId" value={form.lessonId} onChange={onChange} className="w-full p-2 rounded border dark:bg-gray-700" disabled={!form.courseId}>
+              <option value="">{form.courseId ? 'اختر درس' : 'اختر الكورس أولاً'}</option>
+              {getLessonsFromCourse(form.courseId).map((lesson) => (
+                <option key={lesson._id} value={lesson._id}>
+                  {lesson.unitTitle ? `${lesson.title} (${lesson.unitTitle})` : lesson.title}
+                </option>
+              ))}
             </select>
           </div>
           <div>
@@ -377,6 +451,7 @@ export default function AdminVideoAccessCodes() {
                   <th className="p-2"><input type="checkbox" checked={isAllSelected} onChange={toggleSelectAll} /></th>
                   <th className="p-2">الكود</th>
                   <th className="p-2">المادة</th>
+                  <th className="p-2">الدرس</th>
                   <th className="p-2 hidden sm:table-cell">الفترة</th>
                   <th className="p-2">الحالة</th>
                   <th className="p-2 hidden md:table-cell">المُستخدم</th>
@@ -393,6 +468,7 @@ export default function AdminVideoAccessCodes() {
                       <span className="px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded">{String(c.code || '')}</span>
                     </td>
                     <td className="p-2">{getCourseName(c)}</td>
+                    <td className="p-2">{getLessonName(c)}</td>
                     <td className="p-2 hidden sm:table-cell">{c.accessStartAt && c.accessEndAt ? `${new Date(c.accessStartAt).toLocaleString('ar-EG')} ← ${new Date(c.accessEndAt).toLocaleString('ar-EG')}` : '-'}</td>
                     <td className="p-2">
                       <span className={`px-2 py-1 rounded text-xs ${c.isUsed ? 'bg-red-100 text-red-800' : 'bg-green-100 text-green-800'}`}>
@@ -409,7 +485,7 @@ export default function AdminVideoAccessCodes() {
                 ))}
                 {filteredCodes.length === 0 && (
                   <tr>
-                    <td colSpan="9" className="p-4 text-center text-gray-500">
+                    <td colSpan="10" className="p-4 text-center text-gray-500">
                       {admin.listing ? 'جاري التحميل...' : 'لا توجد أكواد'}
                     </td>
                   </tr>

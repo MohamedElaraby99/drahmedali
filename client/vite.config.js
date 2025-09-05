@@ -8,7 +8,7 @@ export default defineConfig({
     'import.meta.env.VITE_REACT_APP_API_URL': JSON.stringify(
       process.env.NODE_ENV === 'production' 
         ? 'https://api.drahmedali.online/api/v1'
-        : (process.env.VITE_REACT_APP_API_URL || 'http://localhost:4007/api/v1')
+        : (process.env.VITE_REACT_APP_API_URL || 'http://localhost:4008/api/v1')
     )
   }
 })

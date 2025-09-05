@@ -364,11 +364,10 @@ const LessonContentModal = ({ isOpen, onClose, lesson }) => {
     switch (type) {
       case 'video':
         return (
-          <div className="bg-gradient-to-br from-[#9b172a]-50 to-indigo-100 dark:from-gray-800 dark:to-gray-900 p-4 sm:p-6 rounded-xl border border-[#9b172a]-200 dark:border-gray-700">
-         
-            <div className="mb-4 text-gray-600 dark:text-gray-300 leading-relaxed text-sm sm:text-base">{data.description}</div>
+          <div className="bg-gradient-to-br from-[#9b172a]-50 to-indigo-100 dark:from-gray-800 dark:to-gray-900 p-3 sm:p-4 md:p-6 rounded-lg sm:rounded-xl border border-[#9b172a]-200 dark:border-gray-700">
+            <div className="mb-3 sm:mb-4 text-gray-600 dark:text-gray-300 leading-relaxed text-xs sm:text-sm md:text-base">{data.description}</div>
             {data.url ? (
-              <div className="relative bg-black rounded-lg overflow-hidden shadow-lg aspect-video cursor-pointer group">
+              <div className="relative bg-black rounded-md sm:rounded-lg overflow-hidden shadow-lg aspect-video cursor-pointer group">
                 {/* YouTube Thumbnail Background */}
                 {(() => {
                   const videoId = extractYouTubeVideoId(data.url);
@@ -395,23 +394,31 @@ const LessonContentModal = ({ isOpen, onClose, lesson }) => {
                 <div 
                   className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-40 hover:bg-opacity-30 transition-all duration-200"
                   onClick={() => {
+                    // Admin bypass - admins can access any video
+                    const userRole = userData?.role;
+                    if (userRole === 'ADMIN' || userRole === 'SUPER_ADMIN') {
+                      setCurrentVideo(data);
+                      setVideoPlayerOpen(true);
+                      return;
+                    }
+                    
                     setCurrentVideo(data);
                     setVideoPlayerOpen(true);
                   }}
                 >
                   <div className="text-center">
-                    <div className="bg-white/20 backdrop-blur-sm rounded-full p-6 mb-4 group-hover:bg-white/30 transition-all duration-200 transform group-hover:scale-110">
-                      <FaPlay className="text-white text-4xl ml-2" />
+                    <div className="bg-white/20 backdrop-blur-sm rounded-full p-4 sm:p-6 mb-3 sm:mb-4 group-hover:bg-white/30 transition-all duration-200 transform group-hover:scale-110">
+                      <FaPlay className="text-white text-2xl sm:text-3xl md:text-4xl ml-1 sm:ml-2" />
                     </div>
-                    <h3 className="text-white text-lg font-semibold mb-2">{data.title}</h3>
-                    <p className="text-gray-300 text-sm">انقر لمشاهدة الفيديو</p>
+                    <h3 className="text-white text-sm sm:text-base md:text-lg font-semibold mb-1 sm:mb-2 px-2">{data.title}</h3>
+                    <p className="text-gray-300 text-xs sm:text-sm">انقر لمشاهدة الفيديو</p>
                   </div>
                 </div>
               </div>
             ) : (
-              <div className="bg-gray-200 dark:bg-gray-700 rounded-lg p-8 text-center">
-                <FaPlay className="text-4xl text-gray-400 mx-auto mb-2" />
-                <p className="text-gray-500">لا يوجد رابط للفيديو</p>
+              <div className="bg-gray-200 dark:bg-gray-700 rounded-md sm:rounded-lg p-6 sm:p-8 text-center">
+                <FaPlay className="text-2xl sm:text-3xl md:text-4xl text-gray-400 mx-auto mb-2" />
+                <p className="text-gray-500 text-sm sm:text-base">لا يوجد رابط للفيديو</p>
               </div>
             )}
           </div>
@@ -419,23 +426,23 @@ const LessonContentModal = ({ isOpen, onClose, lesson }) => {
         
              case 'pdf':
          return (
-           <div className="bg-gradient-to-br from-red-50 to-pink-100 dark:from-gray-800 dark:to-gray-900 p-4 sm:p-6 rounded-xl border border-red-200 dark:border-gray-700">
-             <div className="flex items-center gap-3 mb-4">
-               <div className="p-2 bg-red-100 dark:bg-red-900 rounded-lg">
-                 <FaFilePdf className="text-red-600 dark:text-red-400 text-lg sm:text-xl" />
+           <div className="bg-gradient-to-br from-red-50 to-pink-100 dark:from-gray-800 dark:to-gray-900 p-3 sm:p-4 md:p-6 rounded-lg sm:rounded-xl border border-red-200 dark:border-gray-700">
+             <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
+               <div className="p-1.5 sm:p-2 bg-red-100 dark:bg-red-900 rounded-md sm:rounded-lg">
+                 <FaFilePdf className="text-red-600 dark:text-red-400 text-sm sm:text-lg md:text-xl" />
                </div>
                <div className="flex-1 min-w-0">
-                 <div className="font-semibold text-lg sm:text-xl text-gray-800 dark:text-gray-200 break-words">{data.title || data.fileName}</div>
-                 <div className="text-sm text-red-600 dark:text-red-400 font-medium">ملف PDF</div>
+                 <div className="font-semibold text-sm sm:text-base md:text-lg lg:text-xl text-gray-800 dark:text-gray-200 break-words">{data.title || data.fileName}</div>
+                 <div className="text-xs sm:text-sm text-red-600 dark:text-red-400 font-medium">ملف PDF</div>
                </div>
              </div>
              
-             <div className="mb-4 text-gray-600 dark:text-gray-300 leading-relaxed text-sm sm:text-base">
+             <div className="mb-3 sm:mb-4 text-gray-600 dark:text-gray-300 leading-relaxed text-xs sm:text-sm md:text-base">
                {data.description || "مستند PDF قابل للعرض والتحميل"}
              </div>
              
-             <div className="bg-white dark:bg-gray-800 rounded-lg p-4 sm:p-6 border border-gray-200 dark:border-gray-600">
-               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+             <div className="bg-white dark:bg-gray-800 rounded-md sm:rounded-lg p-3 sm:p-4 md:p-6 border border-gray-200 dark:border-gray-600">
+               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-3">
                  <div className="flex items-center gap-3 flex-1 min-w-0">
                    <FaFilePdf className="text-red-500 text-xl sm:text-2xl flex-shrink-0" />
                    <div className="flex-1 min-w-0">
@@ -460,26 +467,26 @@ const LessonContentModal = ({ isOpen, onClose, lesson }) => {
         
       case 'exam':
         return (
-          <div className="bg-gradient-to-br from-[#9b172a]-50 to-indigo-100 dark:from-gray-800 dark:to-gray-900 p-4 sm:p-6 rounded-xl border border-[#9b172a]-200 dark:border-gray-700">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="p-2 bg-[#9b172a]-100 dark:bg-[#9b172a]-900 rounded-lg">
-                <FaClipboardList className="text-[#9b172a] dark:text-[#9b172a]-400 text-lg sm:text-xl" />
+          <div className="bg-gradient-to-br from-[#9b172a]-50 to-indigo-100 dark:from-gray-800 dark:to-gray-900 p-3 sm:p-4 md:p-6 rounded-lg sm:rounded-xl border border-[#9b172a]-200 dark:border-gray-700">
+            <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
+              <div className="p-1.5 sm:p-2 bg-[#9b172a]-100 dark:bg-[#9b172a]-900 rounded-md sm:rounded-lg">
+                <FaClipboardList className="text-[#9b172a] dark:text-[#9b172a]-400 text-sm sm:text-lg md:text-xl" />
               </div>
               <div className="flex-1 min-w-0">
-                <div className="font-semibold text-lg sm:text-xl text-gray-800 dark:text-gray-200 break-words">{data.title}</div>
-                <div className="text-sm text-[#9b172a] dark:text-[#9b172a]-400 font-medium">امتحان تفاعلي</div>
+                <div className="font-semibold text-sm sm:text-base md:text-lg lg:text-xl text-gray-800 dark:text-gray-200 break-words">{data.title}</div>
+                <div className="text-xs sm:text-sm text-[#9b172a] dark:text-[#9b172a]-400 font-medium">امتحان تفاعلي</div>
               </div>
             </div>
-            <div className="mb-4 text-gray-600 dark:text-gray-300 leading-relaxed text-sm sm:text-base">{data.description}</div>
-            <div className="bg-white dark:bg-gray-800 rounded-lg p-4 sm:p-6 border border-gray-200 dark:border-gray-600">
+            <div className="mb-3 sm:mb-4 text-gray-600 dark:text-gray-300 leading-relaxed text-xs sm:text-sm md:text-base">{data.description}</div>
+            <div className="bg-white dark:bg-gray-800 rounded-md sm:rounded-lg p-3 sm:p-4 md:p-6 border border-gray-200 dark:border-gray-600">
               <div className="text-center">
-                <div className="mb-4">
-                  <div className="text-base sm:text-lg font-medium mb-2">جاهز لبدء الامتحان؟</div>
+                <div className="mb-3 sm:mb-4">
+                  <div className="text-sm sm:text-base md:text-lg font-medium mb-1 sm:mb-2">جاهز لبدء الامتحان؟</div>
                   <div className="text-xs sm:text-sm text-gray-500">تأكد من أنك مستعد قبل البدء</div>
                 </div>
                 <button 
                   onClick={() => handleStartExam(data)}
-                  className="bg-[#9b172a] hover:bg-[#9b172a]-700 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg transition-all duration-200 hover:shadow-lg font-medium text-sm sm:text-base w-full sm:w-auto"
+                  className="bg-[#9b172a] hover:bg-[#9b172a]-700 text-white px-3 sm:px-4 md:px-6 py-2 sm:py-3 rounded-md sm:rounded-lg transition-all duration-200 hover:shadow-lg font-medium text-xs sm:text-sm md:text-base w-full sm:w-auto"
                 >
                   بدء الامتحان
                 </button>
@@ -490,24 +497,24 @@ const LessonContentModal = ({ isOpen, onClose, lesson }) => {
         
       case 'training':
         return (
-          <div className="bg-gradient-to-br from-green-50 to-emerald-100 dark:from-gray-800 dark:to-gray-900 p-4 sm:p-6 rounded-xl border border-green-200 dark:border-gray-700">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="p-2 bg-green-100 dark:bg-green-900 rounded-lg">
-                <FaDumbbell className="text-green-600 dark:text-green-400 text-lg sm:text-xl" />
+          <div className="bg-gradient-to-br from-green-50 to-emerald-100 dark:from-gray-800 dark:to-gray-900 p-3 sm:p-4 md:p-6 rounded-lg sm:rounded-xl border border-green-200 dark:border-gray-700">
+            <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
+              <div className="p-1.5 sm:p-2 bg-green-100 dark:bg-green-900 rounded-md sm:rounded-lg">
+                <FaDumbbell className="text-green-600 dark:text-green-400 text-sm sm:text-lg md:text-xl" />
               </div>
               <div className="flex-1 min-w-0">
-                <div className="font-semibold text-lg sm:text-xl text-gray-800 dark:text-gray-200 break-words">{data.title}</div>
-                <div className="text-sm text-green-600 dark:text-green-400 font-medium">تدريب</div>
+                <div className="font-semibold text-sm sm:text-base md:text-lg lg:text-xl text-gray-800 dark:text-gray-200 break-words">{data.title}</div>
+                <div className="text-xs sm:text-sm text-green-600 dark:text-green-400 font-medium">تدريب</div>
               </div>
             </div>
-            <div className="mb-4 text-gray-600 dark:text-gray-300 leading-relaxed text-sm sm:text-base">{data.description}</div>
-            <div className="bg-white dark:bg-gray-800 rounded-lg p-4 sm:p-6 border border-gray-200 dark:border-gray-600">
+            <div className="mb-3 sm:mb-4 text-gray-600 dark:text-gray-300 leading-relaxed text-xs sm:text-sm md:text-base">{data.description}</div>
+            <div className="bg-white dark:bg-gray-800 rounded-md sm:rounded-lg p-3 sm:p-4 md:p-6 border border-gray-200 dark:border-gray-600">
               <div className="text-center">
-                <div className="mb-4">
-                  <div className="text-base sm:text-lg font-medium mb-2">جاهز للتدريب؟</div>
+                <div className="mb-3 sm:mb-4">
+                  <div className="text-sm sm:text-base md:text-lg font-medium mb-1 sm:mb-2">جاهز للتدريب؟</div>
                   <div className="text-xs sm:text-sm text-gray-500">تدرب على المفاهيم التي تعلمتها</div>
                 </div>
-                <button className="bg-green-600 hover:bg-green-700 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg transition-all duration-200 hover:shadow-lg font-medium text-sm sm:text-base w-full sm:w-auto">
+                <button className="bg-green-600 hover:bg-green-700 text-white px-3 sm:px-4 md:px-6 py-2 sm:py-3 rounded-md sm:rounded-lg transition-all duration-200 hover:shadow-lg font-medium text-xs sm:text-sm md:text-base w-full sm:w-auto">
                   بدء التدريب
                 </button>
               </div>
@@ -523,17 +530,17 @@ const LessonContentModal = ({ isOpen, onClose, lesson }) => {
   if (!isOpen || !lesson) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60 backdrop-blur-sm p-2 sm:p-4">
-      <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl w-full max-w-5xl max-h-[95vh] overflow-hidden relative">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60 backdrop-blur-sm p-1 sm:p-2 md:p-4">
+      <div className="bg-white dark:bg-gray-900 rounded-xl sm:rounded-2xl shadow-2xl w-full max-w-xs sm:max-w-2xl md:max-w-4xl lg:max-w-5xl max-h-[98vh] sm:max-h-[95vh] overflow-hidden relative">
         {/* Header */}
-        <div className="bg-gradient-to-r from-[#9b172a] to-[#9b172a] text-white p-4 sm:p-6 rounded-t-2xl">
-          <div className="flex items-start justify-between gap-3">
+        <div className="bg-gradient-to-r from-[#9b172a] to-[#9b172a] text-white p-3 sm:p-4 md:p-6 rounded-t-xl sm:rounded-t-2xl">
+          <div className="flex items-start justify-between gap-2 sm:gap-3">
             <div className="flex-1 min-w-0">
-              <h2 className="text-lg sm:text-xl md:text-2xl font-bold leading-tight break-words">{lesson.title}</h2>
-              <p className="text-[#9b172a]-100 mt-1 text-sm sm:text-base leading-relaxed break-words">{lesson.description}</p>
+              <h2 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-tight break-words">{lesson.title}</h2>
+              <p className="text-[#9b172a]-100 mt-1 text-xs sm:text-sm md:text-base leading-relaxed break-words line-clamp-2">{lesson.description}</p>
             </div>
             <button
-              className="text-white hover:text-red-200 text-xl sm:text-2xl transition-colors duration-200 flex-shrink-0 p-1"
+              className="text-white hover:text-red-200 text-lg sm:text-xl md:text-2xl transition-colors duration-200 flex-shrink-0 p-1"
               onClick={onClose}
             >
               <FaTimes />
@@ -542,51 +549,47 @@ const LessonContentModal = ({ isOpen, onClose, lesson }) => {
         </div>
 
         {allContent.length > 0 ? (
-          <div className="p-3 sm:p-6">
+          <div className="p-2 sm:p-3 md:p-6 flex flex-wrap justify-wrap">
             {/* Navigation Tabs */}
-            <div className="flex items-center justify-center mb-6 bg-gray-50 dark:bg-gray-800 rounded-xl p-2 overflow-x-auto">
+            <div className="flex flex-wrap justify-wrap space-y-3 mb-4 sm:mb-6 bg-gray-50 dark:bg-gray-800 rounded-lg sm:rounded-xl p-3 sm:p-4" style={{display: 'flex', flexDirection: 'wrap'}}>
               {[
-                { key: 'video', label: 'الفيديوهات', icon: <FaVideo className="text-[#9b172a]" /> },
-                { key: 'pdf', label: 'الملفات', icon: <FaFilePdf className="text-red-500" /> },
-                { key: 'exam', label: 'الامتحانات', icon: <FaClipboardList className="text-[#9b172a]" /> },
-                { key: 'training', label: 'التدريبات', icon: <FaDumbbell className="text-green-500" /> }
+                { key: 'video', label: 'الفيديوهات', icon: <FaVideo style={{fontSize: '24px'}} className="text-[#9b172a]" /> },
+                { key: 'pdf', label: 'الملفات', icon: <FaFilePdf style={{fontSize: '24px'}} className="text-red-500" /> },
+                { key: 'exam', label: 'الامتحانات', icon: <FaClipboardList style={{fontSize: '24px'}} className="text-[#9b172a]" /> },
+                { key: 'training', label: 'التدريبات', icon: <FaDumbbell style={{fontSize: '24px'}} className="text-green-500" /> }
               ].map((tab) => (
                 <button
                   key={tab.key}
                   onClick={() => {
                     setSelectedTab(tab.key);
                   }}
-                  className={`flex items-center gap-1 sm:gap-2 px-2 sm:px-4 py-2 rounded-lg transition-all duration-200 mx-1 flex-shrink-0 ${
+                  className={`flex items-center justify-between px-4 py-4 rounded-lg transition-all duration-200 w-full text-left min-h-[60px] ${
                     selectedTab === tab.key
                       ? 'bg-white dark:bg-gray-700 text-[#9b172a] dark:text-[#9b172a]-400 shadow-md'
                       : 'text-gray-600 dark:text-gray-300 hover:bg-white dark:hover:bg-gray-700'
                   }`}
                 >
-                  {tab.icon}
-                  <span className="font-medium text-xs sm:text-sm">{tab.label}</span>
-                  <span className="text-xs bg-gray-200 dark:bg-gray-600 px-1 sm:px-2 py-1 rounded-full">
+                  <div className="flex items-center gap-4 flex-1 min-w-0">
+                    <div className="flex-shrink-0 w-8 h-8 flex items-center justify-center">
+                      {tab.icon}
+                    </div>
+                    <span className="font-medium text-base truncate">{tab.label}</span>
+                  </div>
+                  <span className="text-xs bg-gray-200 dark:bg-gray-600 px-3 py-1 rounded-full flex-shrink-0">
                     {getTabCount(tab.key)}
                   </span>
                 </button>
               ))}
             </div>
 
-            {/* Content Navigation Header */}
-            {getTotalCount() > 0 && (
-              <div className="flex items-center justify-between mb-6 bg-gray-50 dark:bg-gray-800 rounded-xl p-4">
-         
-              </div>
-            )}
-
             {/* Content Display */}
             <div className={`transition-all duration-300 ${isTransitioning ? 'opacity-50 scale-95' : 'opacity-100 scale-100'}`}>
               {getCurrentContent() && renderContentItem(getCurrentContent())}
             </div>
 
-
             {/* Content Preview Dots */}
             {getTotalCount() > 1 && (
-              <div className="flex justify-center mt-4 gap-2">
+              <div className="flex justify-center mt-3 sm:mt-4 gap-1 sm:gap-2">
                 {Array.from({ length: getTotalCount() }, (_, index) => (
                   <button
                     key={index}
@@ -599,7 +602,7 @@ const LessonContentModal = ({ isOpen, onClose, lesson }) => {
                       else setCurrentContentIndex(index);
                       setTimeout(() => setIsTransitioning(false), 300);
                     }}
-                    className={`w-3 h-3 rounded-full transition-all duration-200 ${
+                    className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-200 ${
                       index === getCurrentIndex()
                         ? 'bg-[#9b172a] scale-125' 
                         : 'bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500'
@@ -611,18 +614,18 @@ const LessonContentModal = ({ isOpen, onClose, lesson }) => {
 
             {/* Empty State */}
             {getTotalCount() === 0 && (
-              <div className="text-center py-8 sm:py-12">
-                <div className="text-gray-400 text-4xl sm:text-6xl mb-4">
+              <div className="text-center py-6 sm:py-8 md:py-12">
+                <div className="text-gray-400 text-3xl sm:text-4xl md:text-6xl mb-3 sm:mb-4">
                   {selectedTab === 'video' && '🎥'}
                   {selectedTab === 'pdf' && '📄'}
                   {selectedTab === 'exam' && '📝'}
                   {selectedTab === 'training' && '💪'}
                   {selectedTab === 'all' && '📚'}
                 </div>
-                <div className="text-lg sm:text-xl font-medium text-gray-600 dark:text-gray-300 mb-2">
+                <div className="text-base sm:text-lg md:text-xl font-medium text-gray-600 dark:text-gray-300 mb-1 sm:mb-2">
                   لا يوجد {getContentTypeText(selectedTab)} متاح
                 </div>
-                <div className="text-sm sm:text-base text-gray-500 dark:text-gray-400">
+                <div className="text-xs sm:text-sm md:text-base text-gray-500 dark:text-gray-400 px-4">
                   لم يتم إضافة أي {getContentTypeText(selectedTab)} لهذا الدرس بعد
                 </div>
               </div>
