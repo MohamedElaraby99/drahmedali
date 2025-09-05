@@ -159,8 +159,6 @@ const authSlice = createSlice({
             localStorage.removeItem("role");
             localStorage.removeItem("isLoggedIn");
             localStorage.removeItem("walletBalance");
-            localStorage.removeItem("purchaseHistory");
-            localStorage.removeItem("purchasedContent");
             localStorage.removeItem("courseProgress");
             localStorage.removeItem("examResults");
             localStorage.removeItem("userPreferences");
@@ -211,8 +209,6 @@ const authSlice = createSlice({
             
             // Clear all other user-related data from localStorage
             localStorage.removeItem("walletBalance");
-            localStorage.removeItem("purchaseHistory");
-            localStorage.removeItem("purchasedContent");
             localStorage.removeItem("courseProgress");
             localStorage.removeItem("examResults");
             localStorage.removeItem("userPreferences");

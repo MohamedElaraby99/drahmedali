@@ -1,19 +1,24 @@
 import React from 'react';
-import { FaPlay, FaEye } from 'react-icons/fa';
+import { FaPlay, FaEye, FaLock } from 'react-icons/fa';
 
 const WatchButton = ({ 
-  item, 
-  purchaseType, 
-  onWatch, 
+  lesson, 
+  onWatchClick, 
+  userRole,
+  isLoggedIn,
   className = "",
   showIcon = true,
-  variant = "primary", // primary, secondary, outline
-  showButton = true // New prop to control button visibility
+  variant = "primary" // primary, secondary, outline
 }) => {
 
-
+  const isAdmin = userRole === 'ADMIN' || userRole === 'SUPER_ADMIN';
+  
   const getButtonStyles = () => {
     const baseStyles = "flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-colors";
+    
+    if (!isLoggedIn) {
+      return `${baseStyles} bg-gray-400 text-white cursor-not-allowed`;
+    }
     
     switch (variant) {
       case "primary":
@@ -30,6 +35,10 @@ const WatchButton = ({
   const getIcon = () => {
     if (!showIcon) return null;
     
+    if (!isLoggedIn) {
+      return <FaLock className="text-sm" />;
+    }
+    
     switch (variant) {
       case "outline":
         return <FaEye className="text-sm" />;
@@ -39,17 +48,25 @@ const WatchButton = ({
   };
 
   const getText = () => {
+    if (!isLoggedIn) {
+      return 'تسجيل الدخول للمشاهدة';
+    }
     return 'مشاهدة المحتوى';
   };
 
-  // Don't render anything if showButton is false
-  if (!showButton) {
-    return null;
-  }
+  const handleClick = () => {
+    if (!isLoggedIn) {
+      return; // Do nothing if not logged in
+    }
+    if (onWatchClick) {
+      onWatchClick(lesson);
+    }
+  };
 
   return (
     <button
-      onClick={() => onWatch && onWatch(item, purchaseType)}
+      onClick={handleClick}
+      disabled={!isLoggedIn}
       className={`${getButtonStyles()} ${className}`}
     >
       {getIcon()}

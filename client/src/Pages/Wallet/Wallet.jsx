@@ -4,28 +4,21 @@ import { toast } from "react-hot-toast";
 import Layout from "../../Layout/Layout";
 import { 
     getWalletBalance, 
-    rechargeWallet, 
-    getTransactionHistory,
-    validateRechargeCode,
+    getWalletTransactions,
     clearWalletError 
 } from "../../Redux/Slices/WalletSlice";
-import { getPaymentServices } from "../../Redux/Slices/WhatsAppServiceSlice";
 import { formatCairoDate } from "../../utils/timezone";
 import { 
     FaWallet, 
-    FaCreditCard, 
     FaHistory, 
-    FaPlus, 
     FaCheckCircle, 
     FaTimesCircle, 
-    FaExclamationTriangle,
     FaEye,
     FaEyeSlash,
     FaCalendarAlt,
     FaMoneyBillWave,
     FaArrowUp,
     FaArrowDown,
-    FaWhatsapp,
     FaClock
 } from "react-icons/fa";
 
@@ -36,25 +29,16 @@ export default function Wallet() {
         balance, 
         transactions, 
         loading, 
-        error, 
-        rechargeLoading, 
-        rechargeError,
-        codeValidation 
+        error
     } = useSelector((state) => state.wallet);
-    const { services: whatsappServices } = useSelector((state) => state.whatsappService);
 
-    const [rechargeForm, setRechargeForm] = useState({
-        code: "",
-        amount: ""
-    });
     const [showAmount, setShowAmount] = useState(false);
     const [activeTab, setActiveTab] = useState("balance");
 
     useEffect(() => {
         if (user) {
             dispatch(getWalletBalance());
-            dispatch(getTransactionHistory());
-            dispatch(getPaymentServices());
+            dispatch(getWalletTransactions());
         }
     }, [dispatch, user]);
 
@@ -63,53 +47,7 @@ export default function Wallet() {
             toast.error(error);
             dispatch(clearWalletError());
         }
-        if (rechargeError) {
-            toast.error(rechargeError);
-            dispatch(clearWalletError());
-        }
-    }, [error, rechargeError, dispatch]);
-
-    const handleRechargeFormChange = (e) => {
-        const { name, value } = e.target;
-        setRechargeForm(prev => ({
-            ...prev,
-            [name]: value
-        }));
-    };
-
-    const handleCodeValidation = async (code) => {
-        if (code.length >= 6) {
-            await dispatch(validateRechargeCode({ code }));
-        }
-    };
-
-    const handleRecharge = async (e) => {
-        e.preventDefault();
-        
-        if (!rechargeForm.code || !rechargeForm.amount) {
-            toast.error("يرجى ملء جميع الحقول");
-            return;
-        }
-
-        const amount = parseFloat(rechargeForm.amount);
-        if (isNaN(amount) || amount <= 0) {
-            toast.error("يرجى إدخال مبلغ صحيح");
-            return;
-        }
-
-        try {
-            await dispatch(rechargeWallet({ 
-                code: rechargeForm.code, 
-                amount: amount 
-            })).unwrap();
-            
-            toast.success("تم شحن المحفظة بنجاح!");
-            setRechargeForm({ code: "", amount: "" });
-            dispatch(getWalletBalance());
-        } catch (error) {
-            // Error is handled in useEffect
-        }
-    };
+    }, [error, dispatch]);
 
     const formatDate = (dateString) => {
         return formatCairoDate(dateString, {
@@ -123,366 +61,158 @@ export default function Wallet() {
 
     const getTransactionIcon = (type) => {
         switch (type) {
+            case 'credit':
             case 'recharge':
                 return <FaArrowUp className="text-green-500" />;
+            case 'debit':
             case 'purchase':
                 return <FaArrowDown className="text-red-500" />;
-            case 'refund':
-                return <FaArrowUp className="text-[#9b172a]" />;
             default:
-                return <FaMoneyBillWave className="text-gray-500" />;
-        }
-    };
-
-    const getTransactionColor = (type) => {
-        switch (type) {
-            case 'recharge':
-                return 'text-green-600 bg-green-50 dark:bg-green-900/20';
-            case 'purchase':
-                return 'text-red-600 bg-red-50 dark:bg-red-900/20';
-            case 'refund':
-                return 'text-[#9b172a] bg-[#9b172a]-50 dark:bg-[#9b172a]-900/20';
-            default:
-                return 'text-gray-600 bg-gray-50 dark:bg-gray-700';
+                return <FaMoneyBillWave className="text-blue-500" />;
         }
     };
 
     const getTransactionTypeText = (type) => {
         switch (type) {
+            case 'credit':
             case 'recharge':
-                return 'شحن';
+                return 'إضافة رصيد';
+            case 'debit':
             case 'purchase':
-                return 'شراء';
-            case 'refund':
-                return 'استرداد';
+                return 'خصم رصيد';
             default:
                 return 'معاملة';
         }
     };
 
-    const getStatusText = (status) => {
+    const getStatusBadge = (status) => {
         switch (status) {
             case 'completed':
-                return 'مكتمل';
+                return (
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
+                        <FaCheckCircle className="w-3 h-3 ml-1" />
+                        مكتملة
+                    </span>
+                );
             case 'pending':
-                return 'قيد الانتظار';
+                return (
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200">
+                        <FaClock className="w-3 h-3 ml-1" />
+                        قيد الانتظار
+                    </span>
+                );
             case 'failed':
-                return 'فشل';
+                return (
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">
+                        <FaTimesCircle className="w-3 h-3 ml-1" />
+                        فاشلة
+                    </span>
+                );
             default:
-                return status;
+                return (
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200">
+                        غير محدد
+                    </span>
+                );
         }
     };
 
+    if (loading) {
+        return (
+            <Layout>
+                <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center">
+                    <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-[#9b172a]"></div>
+                </div>
+            </Layout>
+        );
+    }
+
     return (
         <Layout>
-            <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-[#9b172a]-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 py-8" dir="rtl">
-                <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                    {/* Header */}
+            <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 py-8">
+                <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-8">
-                        <div className="mx-auto h-16 w-16 bg-gradient-to-r from-green-600 to-[#9b172a] rounded-full flex items-center justify-center mb-4 shadow-lg">
-                            <FaWallet className="h-8 w-8 text-white" />
-                        </div>
                         <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
                             محفظتي
                         </h1>
-                        <p className="text-gray-600 dark:text-gray-300">
-                            إدارة رصيدك وعرض سجل المعاملات
+                        <p className="text-lg text-gray-600 dark:text-gray-400">
+                            إدارة رصيدك ومعاملاتك المالية
                         </p>
                     </div>
 
                     {/* Balance Card */}
-                    <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 mb-8 border border-gray-100 dark:border-gray-700">
+                    <div className="bg-gradient-to-r from-[#9b172a] to-purple-600 rounded-2xl p-8 text-white shadow-2xl mb-8 transform hover:scale-105 transition-all duration-300">
                         <div className="flex items-center justify-between">
                             <div>
-                                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-                                    الرصيد الحالي
-                                </h2>
-                                <div className="flex items-center space-x-reverse space-x-2">
-                                    <span className="text-4xl font-bold text-green-600 dark:text-green-400">
-                                        {showAmount ? `${balance.toFixed(2)} جنيه` : "**** جنيه"}
+                                <div className="flex items-center mb-4">
+                                    <FaWallet className="text-3xl mr-3" />
+                                    <h2 className="text-2xl font-bold">الرصيد الحالي</h2>
+                                </div>
+                                <div className="flex items-center">
+                                    <span className="text-4xl font-bold mr-2">
+                                        {showAmount ? balance || 0 : '****'}
                                     </span>
+                                    <span className="text-xl">جنيه</span>
                                     <button
                                         onClick={() => setShowAmount(!showAmount)}
-                                        className="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+                                        className="mr-4 p-2 rounded-full hover:bg-white hover:bg-opacity-20 transition-colors"
                                     >
-                                        {showAmount ? <FaEyeSlash className="w-4 h-4" /> : <FaEye className="w-4 h-4" />}
+                                        {showAmount ? <FaEyeSlash /> : <FaEye />}
                                     </button>
                                 </div>
                             </div>
                             <div className="text-right">
-                                <p className="text-sm text-gray-500 dark:text-gray-400">
-                                    إجمالي المعاملات
-                                </p>
-                                <p className="text-2xl font-bold text-gray-900 dark:text-white">
-                                    {transactions.length}
-                                </p>
+                                <FaMoneyBillWave className="text-6xl opacity-30" />
                             </div>
                         </div>
                     </div>
 
                     {/* Tabs */}
-                    <div className="flex space-x-reverse space-x-4 mb-6">
-                        <button
-                            onClick={() => setActiveTab("balance")}
-                            className={`px-6 py-3 rounded-lg font-medium transition-colors ${
-                                activeTab === "balance"
-                                    ? "bg-[#9b172a] text-white"
-                                    : "bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600"
-                            }`}
-                        >
-                            <FaCreditCard className="inline ml-2" />
-                            شحن المحفظة
-                        </button>
-                        <button
-                            onClick={() => setActiveTab("history")}
-                            className={`px-6 py-3 rounded-lg font-medium transition-colors ${
-                                activeTab === "history"
-                                    ? "bg-[#9b172a] text-white"
-                                    : "bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600"
-                            }`}
-                        >
-                            <FaHistory className="inline ml-2" />
-                            سجل المعاملات
-                        </button>
-                    </div>
+                    <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden">
+                        <div className="border-b border-gray-200 dark:border-gray-700">
+                            <nav className="flex -mb-px">
+                                <button
+                                    onClick={() => setActiveTab("balance")}
+                                    className={`py-4 px-6 text-sm font-medium border-b-2 transition-colors duration-200 ${
+                                        activeTab === "balance"
+                                            ? "border-[#9b172a] text-[#9b172a]"
+                                            : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300"
+                                    }`}
+                                >
+                                    <FaWallet className="inline ml-2" />
+                                    الرصيد
+                                </button>
+                                <button
+                                    onClick={() => setActiveTab("history")}
+                                    className={`py-4 px-6 text-sm font-medium border-b-2 transition-colors duration-200 ${
+                                        activeTab === "history"
+                                            ? "border-[#9b172a] text-[#9b172a]"
+                                            : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300"
+                                    }`}
+                                >
+                                    <FaHistory className="inline ml-2" />
+                                    سجل المعاملات
+                                </button>
+                            </nav>
+                        </div>
 
-                    {/* Tab Content */}
-                    <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700">
                         {activeTab === "balance" && (
-                            <div className="p-6">
-                                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6">
-                                    شحن محفظتك
-                                </h3>
-                                
-                                {/* How to recharge instructions */}
-                                <div className="bg-[#9b172a]-50 dark:bg-[#9b172a]-900/20 border border-[#9b172a]-200 dark:border-[#9b172a]-800 rounded-lg p-4 mb-6">
-                                    <h4 className="text-lg font-semibold text-[#9b172a]-900 dark:text-[#9b172a]-100 mb-3">
-                                        كيفية الشحن:
-                                    </h4>
-                                    <ul className="space-y-2 text-[#9b172a]-800 dark:text-[#9b172a]-200">
-                                        <li className="flex items-start">
-                                            <span className="text-[#9b172a] dark:text-[#9b172a]-400 ml-2">•</span>
-                                            تواصل معنا على واتساب: <strong> 01120920153</strong> للحصول على كود شحن
-                                        </li>
-                                        <li className="flex items-start">
-                                            <span className="text-[#9b172a] dark:text-[#9b172a]-400 ml-2">•</span>
-                                            أو ادفع عبر فودافون كاش: <strong>01120920153</strong>
-                                        </li>
-                                        <li className="flex items-start">
-                                            <span className="text-[#9b172a] dark:text-[#9b172a]-400 ml-2">•</span>
-                                            اشتر كود شحن من البائعين المعتمدين
-                                        </li>
-                                        <li className="flex items-start">
-                                            <span className="text-[#9b172a] dark:text-[#9b172a]-400 ml-2">•</span>
-                                            أدخل الكود والمبلغ في النموذج أعلاه
-                                        </li>
-                                        <li className="flex items-start">
-                                            <span className="text-[#9b172a] dark:text-[#9b172a]-400 ml-2">•</span>
-                                            سيتم إضافة المبلغ إلى محفظتك فوراً
-                                        </li>
-                                        <li className="flex items-start">
-                                            <span className="text-[#9b172a] dark:text-[#9b172a]-400 ml-2">•</span>
-                                            استخدم رصيدك لشراء الكورسات والخدمات التي ستتواصل معنا بشأنها على واتساب
-                                        </li>
-                                    </ul>
-                                    
-                                    {/* Contact Methods */}
-                                    <div className="mt-4 space-y-3">
-                                        {/* WhatsApp Contact */}
-                                        <div className="p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-700 rounded-lg">
-                                            <h5 className="text-md font-semibold text-green-900 dark:text-green-100 mb-3 flex items-center gap-2">
-                                                <FaWhatsapp className="text-green-600 dark:text-green-400" />
-                                                للحصول على كود شحن - تواصل معنا على واتساب
-                                            </h5>
-                                            <div className="flex items-center justify-between p-3 bg-white dark:bg-gray-800 rounded border border-green-200 dark:border-green-600">
-                                                <div>
-                                                    <div className="font-medium text-gray-900 dark:text-white">
-                                                        رقم الواتساب
-                                                    </div>
-                                                    <div className="text-lg font-bold text-green-600 dark:text-green-400">
-                                                        01120920153
-                                                    </div>
-                                                    <div className="text-sm text-gray-600 dark:text-gray-400">
-                                                        متاح على مدار 24/7
-                                                    </div>
-                                                </div>
-                                                <button
-                                                    onClick={() => {
-                                                        const message = `مرحباً! أنا مهتم بشراء كود شحن للمحفظة. هل يمكنك تقديم المزيد من المعلومات؟`;
-                                                        window.open(`https://wa.me/201120920153?text=${encodeURIComponent(message)}`, '_blank');
-                                                    }}
-                                                    className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg text-sm font-medium transition-colors flex items-center gap-2"
-                                                >
-                                                    <FaWhatsapp />
-                                                    تواصل الآن
-                                                </button>
-                                            </div>
-                                        </div>
-
-                                        {/* Vodafone Cash Contact */}
-                                        <div className="p-4 bg-[#9b172a]-50 dark:bg-[#9b172a]-900/20 border border-[#9b172a]-200 dark:border-[#9b172a]-700 rounded-lg">
-                                            <h5 className="text-md font-semibold text-[#9b172a]-900 dark:text-[#9b172a]-100 mb-3 flex items-center gap-2">
-                                                <FaCreditCard className="text-[#9b172a] dark:text-[#9b172a]-400" />
-                                                الدفع عبر فودافون كاش
-                                            </h5>
-                                            <div className="flex items-center justify-between p-3 bg-white dark:bg-gray-800 rounded border border-[#9b172a]-200 dark:border-[#9b172a]">
-                                                <div>
-                                                    <div className="font-medium text-gray-900 dark:text-white">
-                                                        رقم فودافون كاش
-                                                    </div>
-                                                    <div className="text-lg font-bold text-[#9b172a] dark:text-[#9b172a]-400">
-                                                        01120920153
-                                                    </div>
-                                                    <div className="text-sm text-gray-600 dark:text-gray-400">
-                                                        ادفع المبلغ وسيصلك الكود فوراً
-                                                    </div>
-                                                </div>
-                                                <div className="text-center">
-                                                    <div className="text-xs text-gray-500 dark:text-gray-400 mb-2">
-                                                        ادفع المبلغ المطلوب
-                                                    </div>
-                                                    <div className="text-xs text-gray-500 dark:text-gray-400">
-                                                        ثم تواصل على الواتساب
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                            <div className="p-8">
+                                <div className="text-center">
+                                    <FaWallet className="text-6xl text-gray-400 mx-auto mb-4" />
+                                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
+                                        رصيد المحفظة
+                                    </h3>
+                                    <p className="text-gray-600 dark:text-gray-400 mb-6">
+                                        يمكنك استخدام أكواد الوصول للحصول على محتوى مخصص في الكورسات
+                                    </p>
+                                    <div className="text-4xl font-bold text-[#9b172a] mb-2">
+                                        {balance || 0} جنيه
                                     </div>
-                                    
-                                    {/* WhatsApp Contact Information */}
-                                    {whatsappServices && whatsappServices.length > 0 && (
-                                        <div className="mt-4 p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-700 rounded-lg">
-                                            <h5 className="text-md font-semibold text-green-900 dark:text-green-100 mb-3 flex items-center gap-2">
-                                                <FaWhatsapp className="text-green-600 dark:text-green-400" />
-                                                تحتاج مساعدة؟ تواصل معنا على واتساب
-                                            </h5>
-                                            <div className="space-y-3">
-                                                {whatsappServices.map((service) => (
-                                                    <div key={service._id} className="space-y-2">
-                                                        <div className="flex items-center gap-2">
-                                                            <span className="text-lg">{service.icon}</span>
-                                                            <h6 className="font-medium text-green-900 dark:text-green-100">
-                                                                {service.name}
-                                                            </h6>
-                                                        </div>
-                                                        <p className="text-sm text-green-800 dark:text-green-200 mb-2">
-                                                            {service.description}
-                                                        </p>
-                                                        {service.whatsappNumbers.map((number, index) => (
-                                                            <div key={number._id || index} className="flex items-center justify-between p-3 bg-white dark:bg-gray-800 rounded border border-green-200 dark:border-green-600">
-                                                                <div>
-                                                                    <div className="font-medium text-gray-900 dark:text-white">
-                                                                        {number.name}
-                                                                    </div>
-                                                                    <div className="text-sm text-gray-600 dark:text-gray-400">
-                                                                        {number.number}
-                                                                    </div>
-                                                                    {number.workingHours && (
-                                                                        <div className="text-xs text-gray-500 dark:text-gray-400 flex items-center gap-1">
-                                                                            <FaClock />
-                                                                            {number.workingHours}
-                                                                        </div>
-                                                                    )}
-                                                                </div>
-                                                                <button
-                                                                    onClick={() => {
-                                                                        const message = `مرحباً! أنا مهتم بخدمة ${service.name}. ${service.instructions || 'هل يمكنك تقديم المزيد من المعلومات؟'}`;
-                                                                        window.open(`https://wa.me/${number.number}?text=${encodeURIComponent(message)}`, '_blank');
-                                                                    }}
-                                                                    className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2"
-                                                                >
-                                                                    <FaWhatsapp />
-                                                                    تواصل
-                                                                </button>
-                                                            </div>
-                                                        ))}
-                                                    </div>
-                                                ))}
-                                            </div>
-                                            <div className="mt-3 p-2 bg-[#9b172a]-50 dark:bg-[#9b172a]-900/20 border border-[#9b172a]-200 dark:border-[#9b172a]-700 rounded">
-                                                <p className="text-xs text-[#9b172a]-800 dark:text-[#9b172a]-200">
-                                                    <strong>ساعات العمل:</strong> الدعم متاح على مدار 24/7
-                                                </p>
-                                            </div>
-                                        </div>
-                                    )}
+                                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                                        آخر تحديث: {new Date().toLocaleDateString('ar-EG')}
+                                    </p>
                                 </div>
-                                
-                                <form onSubmit={handleRecharge} className="space-y-6">
-                                    {/* Code Input */}
-                                    <div>
-                                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                                            كود الشحن
-                                        </label>
-                                        <div className="relative">
-                                            <input
-                                                type="text"
-                                                name="code"
-                                                value={rechargeForm.code}
-                                                onChange={(e) => {
-                                                    handleRechargeFormChange(e);
-                                                    handleCodeValidation(e.target.value);
-                                                }}
-                                                className="block w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#9b172a] focus:border-transparent transition-all duration-200"
-                                                placeholder="أدخل كود الشحن الخاص بك"
-                                                required
-                                            />
-                                            {rechargeForm.code && (
-                                                <div className="absolute left-3 top-1/2 transform -translate-y-1/2">
-                                                    {codeValidation.isValid ? (
-                                                        <FaCheckCircle className="text-green-500 w-5 h-5" />
-                                                    ) : codeValidation.error ? (
-                                                        <FaTimesCircle className="text-red-500 w-5 h-5" />
-                                                    ) : codeValidation.loading ? (
-                                                        <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-[#9b172a]"></div>
-                                                    ) : (
-                                                        <FaExclamationTriangle className="text-[#9b172a] w-5 h-5" />
-                                                    )}
-                                                </div>
-                                            )}
-                                        </div>
-                                        {codeValidation.error && (
-                                            <p className="text-red-500 text-sm mt-1">{codeValidation.error}</p>
-                                        )}
-                                    </div>
-
-                                    {/* Amount Input */}
-                                    <div>
-                                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                                            المبلغ (جنيه)
-                                        </label>
-                                        <input
-                                            type="number"
-                                            name="amount"
-                                            value={rechargeForm.amount}
-                                            onChange={handleRechargeFormChange}
-                                            className="block w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#9b172a] focus:border-transparent transition-all duration-200"
-                                            placeholder="أدخل المبلغ بالجنيه"
-                                            min="1"
-                                            step="0.01"
-                                            required
-                                        />
-                                    </div>
-
-                                    {/* Submit Button */}
-                                    <button
-                                        type="submit"
-                                        disabled={rechargeLoading || !codeValidation.isValid}
-                                        className="w-full flex justify-center items-center py-3 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-gradient-to-r from-green-600 to-[#9b172a] hover:from-green-700 hover:to-[#9b172a]-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 transform hover:scale-105 shadow-lg"
-                                    >
-                                        {rechargeLoading ? (
-                                            <div className="flex items-center">
-                                                <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white ml-2"></div>
-                                                جاري المعالجة...
-                                            </div>
-                                        ) : (
-                                            <div className="flex items-center">
-                                                <FaPlus className="ml-2" />
-                                                شحن المحفظة
-                                            </div>
-                                        )}
-                                    </button>
-                                </form>
                             </div>
                         )}
 
@@ -493,61 +223,65 @@ export default function Wallet() {
                                 </h3>
                                 
                                 {loading ? (
-                                    <div className="flex justify-center items-center py-8">
+                                    <div className="flex justify-center py-8">
                                         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#9b172a]"></div>
                                     </div>
-                                ) : transactions.length === 0 ? (
-                                    <div className="text-center py-8">
-                                        <FaHistory className="mx-auto h-12 w-12 text-gray-400 mb-4" />
-                                        <p className="text-gray-500 dark:text-gray-400">
-                                            لم يتم العثور على معاملات. ابدأ بشحن محفظتك!
-                                        </p>
-                                    </div>
-                                ) : (
+                                ) : transactions && transactions.length > 0 ? (
                                     <div className="space-y-4">
                                         {transactions.map((transaction, index) => (
-                                            <div
-                                                key={index}
-                                                className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600"
+                                            <div 
+                                                key={transaction._id || index}
+                                                className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors"
                                             >
-                                                <div className="flex items-center space-x-reverse space-x-4">
-                                                    <div className={`p-2 rounded-full ${getTransactionColor(transaction.type)}`}>
+                                                <div className="flex items-center space-x-4 space-x-reverse">
+                                                    <div className="flex-shrink-0">
                                                         {getTransactionIcon(transaction.type)}
                                                     </div>
                                                     <div>
-                                                        <p className="font-medium text-gray-900 dark:text-white">
-                                                            {transaction.description}
+                                                        <p className="text-sm font-medium text-gray-900 dark:text-white">
+                                                            {transaction.description || getTransactionTypeText(transaction.type)}
                                                         </p>
-                                                        <p className="text-sm text-gray-500 dark:text-gray-400">
-                                                            الكود: {transaction.code}
-                                                        </p>
-                                                        <p className="text-xs text-gray-400 dark:text-gray-500 flex items-center">
-                                                            <FaCalendarAlt className="ml-1" />
+                                                        <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 mt-1">
+                                                            <FaCalendarAlt className="w-3 h-3 ml-1" />
                                                             {formatDate(transaction.date)}
-                                                        </p>
+                                                        </div>
+                                                        {transaction.code && (
+                                                            <p className="text-xs text-gray-400 dark:text-gray-500">
+                                                                كود: {transaction.code}
+                                                            </p>
+                                                        )}
                                                     </div>
                                                 </div>
-                                                <div className="text-right">
-                                                    <p className={`font-bold text-lg ${
-                                                        transaction.type === 'recharge' || transaction.type === 'refund'
-                                                            ? 'text-green-600 dark:text-green-400'
-                                                            : 'text-red-600 dark:text-red-400'
-                                                    }`}>
-                                                        {transaction.type === 'recharge' || transaction.type === 'refund' ? '+' : '-'}
-                                                        {Math.abs(transaction.amount).toFixed(2)} جنيه
-                                                    </p>
-                                                    <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
-                                                        transaction.status === 'completed'
-                                                            ? 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400'
-                                                            : transaction.status === 'pending'
-                                                            ? 'bg-[#9b172a]-100 text-[#9b172a]-800 dark:bg-[#9b172a]-900/20 dark:text-[#9b172a]-400'
-                                                            : 'bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400'
-                                                    }`}>
-                                                        {getStatusText(transaction.status)}
-                                                    </span>
+                                                <div className="text-left">
+                                                    <div className="flex items-center">
+                                                        <span className={`text-lg font-bold ${
+                                                            transaction.type === 'credit' || transaction.type === 'recharge'
+                                                                ? 'text-green-600 dark:text-green-400'
+                                                                : 'text-red-600 dark:text-red-400'
+                                                        }`}>
+                                                            {transaction.type === 'credit' || transaction.type === 'recharge' ? '+' : '-'}
+                                                            {transaction.amount}
+                                                        </span>
+                                                        <span className="text-sm text-gray-500 dark:text-gray-400 mr-1">
+                                                            جنيه
+                                                        </span>
+                                                    </div>
+                                                    <div className="mt-1">
+                                                        {getStatusBadge(transaction.status)}
+                                                    </div>
                                                 </div>
                                             </div>
                                         ))}
+                                    </div>
+                                ) : (
+                                    <div className="text-center py-12">
+                                        <FaHistory className="text-6xl text-gray-400 mx-auto mb-4" />
+                                        <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+                                            لا توجد معاملات
+                                        </h4>
+                                        <p className="text-gray-600 dark:text-gray-400">
+                                            لم تقم بأي معاملات مالية حتى الآن
+                                        </p>
                                     </div>
                                 )}
                             </div>
@@ -557,4 +291,4 @@ export default function Wallet() {
             </div>
         </Layout>
     );
-} 
+}

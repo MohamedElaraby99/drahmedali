@@ -3,12 +3,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Layout from '../../Layout/Layout';
 import { getCourseById } from '../../Redux/Slices/CourseSlice';
-import { 
-  purchaseContent, 
-  checkPurchaseStatus, 
-  getWalletBalance 
-} from '../../Redux/Slices/PaymentSlice';
-import { PaymentSuccessAlert, PaymentErrorAlert } from '../../Components/ModernAlert';
+import { getWalletBalance } from '../../Redux/Slices/WalletSlice';
 import WatchButton from '../../Components/WatchButton';
 import OptimizedLessonContentModal from '../../Components/OptimizedLessonContentModal';
 import { 

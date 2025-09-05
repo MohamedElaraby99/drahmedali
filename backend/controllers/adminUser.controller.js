@@ -261,7 +261,7 @@ const getUserDetails = async (req, res, next) => {
             walletBalance: user.wallet?.balance || 0,
             totalTransactions: user.wallet?.transactions?.length || 0,
             totalRecharges: user.wallet?.transactions?.filter(t => t.type === 'recharge').length || 0,
-            totalPurchases: user.wallet?.transactions?.filter(t => t.type === 'purchase').length || 0,
+            totalCredits: user.wallet?.transactions?.filter(t => t.type === 'credit').length || 0,
             subscriptionStatus: user.subscription?.status || 'inactive'
         };
 
@@ -471,10 +471,10 @@ const getUserStats = async (req, res, next) => {
             walletBalance: user.wallet?.balance || 0,
             totalTransactions: transactions.length,
             totalRecharges: transactions.filter(t => t.type === 'recharge').length,
-            totalPurchases: transactions.filter(t => t.type === 'purchase').length,
-            totalRefunds: transactions.filter(t => t.type === 'refund').length,
+            totalCredits: transactions.filter(t => t.type === 'credit').length,
+            totalDebits: transactions.filter(t => t.type === 'debit').length,
             totalSpent: transactions
-                .filter(t => t.type === 'purchase')
+                .filter(t => t.type === 'debit')
                 .reduce((sum, t) => sum + t.amount, 0),
             totalRecharged: transactions
                 .filter(t => t.type === 'recharge')

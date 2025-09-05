@@ -7,9 +7,7 @@ import {
   FaFilePdf, 
   FaClipboardCheck, 
   FaClipboardList, 
-  FaGem, 
-  FaCheck, 
-  FaLock 
+  FaGem
 } from 'react-icons/fa';
 
 export default function LessonCard({ 
@@ -20,19 +18,13 @@ export default function LessonCard({
   onAddPdf, 
   onAddTrainingExam, 
   onAddFinalExam, 
-  isPurchased, 
-  canAfford, 
-  onPurchase,
   getLessonTitle,
   getLessonDescription,
   getLessonDuration,
-  getLessonPrice,
   hasVideo,
   hasPdf,
   hasTrainingExam,
-  hasFinalExam,
-  formatPrice,
-  getPriceBadgeColor
+  hasFinalExam
 }) {
   return (
     <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-600 hover:shadow-lg transition-all duration-200 overflow-hidden">
@@ -44,7 +36,7 @@ export default function LessonCard({
               <div className="w-12 h-12 bg-gradient-to-r from-[#9b172a] to-indigo-600 rounded-lg flex items-center justify-center flex-shrink-0">
                 <FaPlay className="text-white" />
               </div>
-              {hasVideo(lesson) && (
+              {hasVideo && hasVideo(lesson) && (
                 <div className="absolute -top-1 -right-1 w-5 h-5 bg-gradient-to-r from-[#9b172a]-400 to-[#9b172a] rounded-full flex items-center justify-center">
                   <FaGem className="text-white text-xs" />
                 </div>
@@ -52,7 +44,7 @@ export default function LessonCard({
             </div>
             <div className="flex-1 min-w-0">
               <h3 className="font-semibold text-gray-900 dark:text-white text-lg mb-1">
-                {getLessonTitle(lesson)}
+                {getLessonTitle ? getLessonTitle(lesson) : lesson.title}
               </h3>
               {lesson.unitTitle && (
                 <p className="text-sm text-green-600 dark:text-green-400 mb-1">
@@ -61,7 +53,7 @@ export default function LessonCard({
               )}
               {lesson.description && (
                 <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2">
-                  {getLessonDescription(lesson)}
+                  {getLessonDescription ? getLessonDescription(lesson) : lesson.description}
                 </p>
               )}
             </div>
@@ -73,28 +65,28 @@ export default function LessonCard({
           {lesson.duration && (
             <span className="flex items-center gap-1 text-xs text-gray-500 dark:text-gray-400">
               <FaClock />
-              {getLessonDuration(lesson)} دقيقة
+              {getLessonDuration ? getLessonDuration(lesson) : lesson.duration} دقيقة
             </span>
           )}
-          {hasVideo(lesson) && (
+          {hasVideo && hasVideo(lesson) && (
             <span className="flex items-center gap-1 text-xs text-green-600">
               <FaVideo />
               فيديو متاح
             </span>
           )}
-          {hasPdf(lesson) && (
+          {hasPdf && hasPdf(lesson) && (
             <span className="flex items-center gap-1 text-xs text-[#9b172a]">
               <FaFilePdf />
               PDF متاح
             </span>
           )}
-          {hasTrainingExam(lesson) && (
+          {hasTrainingExam && hasTrainingExam(lesson) && (
             <span className="flex items-center gap-1 text-xs text-[#9b172a]">
               <FaClipboardCheck />
               امتحان تدريبي
             </span>
           )}
-          {hasFinalExam(lesson) && (
+          {hasFinalExam && hasFinalExam(lesson) && (
             <span className="flex items-center gap-1 text-xs text-[#9b172a]">
               <FaClipboardList />
               امتحان 
@@ -102,39 +94,24 @@ export default function LessonCard({
           )}
         </div>
 
-        {/* Purchase Section */}
+        {/* Action Section */}
         <div className="border-t border-gray-200 dark:border-gray-600 pt-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              {isPurchased ? (
-                <span className="px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300">
-                  <FaCheck className="inline mr-1" />
-                  تم الشراء
-                </span>
-              ) : (
-                <>
-                  <span className={`px-3 py-1 rounded-full text-sm font-medium ${getPriceBadgeColor(getLessonPrice(lesson))}`}>
-                    {formatPrice(getLessonPrice(lesson))}
-                  </span>
-                  {!canAfford && (
-                    <span className="text-xs text-red-600 dark:text-red-400 flex items-center gap-1">
-                      <FaLock />
-                      رصيد غير كافي
-                    </span>
-                  )}
-                </>
-              )}
+              <span className="px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300">
+                متاح للمشاهدة
+              </span>
             </div>
             <button
-              onClick={() => onDetail(lesson)}
+              onClick={() => onDetail && onDetail(lesson)}
               className="px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 flex items-center gap-2 shadow-md hover:shadow-lg transform hover:scale-105 bg-gradient-to-r from-[#9b172a] to-[#9b172a] text-white hover:from-[#9b172a] hover:to-[#9b172a]-700"
             >
               <FaEye />
-              {isPurchased ? 'مشاهدة' : 'التفاصيل'}
+              مشاهدة
             </button>
           </div>
         </div>
       </div>
     </div>
   );
-} 
+}

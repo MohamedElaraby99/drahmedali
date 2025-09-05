@@ -127,14 +127,14 @@ export default function HomePage() {
   const handleAPKDownload = () => {
     // Create a download link for the APK file
     const link = document.createElement('a');
-    link.href = '/downloads/drAhmedAli.apk'; // Update this path to your APK file location
-    link.download = 'drAhmedAli.apk';
+    link.href = '/downloads/دكتور احمد علي.apk'; // Update this path to your APK file location
+    link.download = 'دكتور احمد علي.apk';
     link.target = '_blank';
     
     // Fallback for mobile browsers
     if (navigator.userAgent.toLowerCase().indexOf('android') > -1) {
       // For Android devices, open the download directly
-      window.open('/downloads/drAhmedAli.apk', '_blank');
+      window.open('/downloads/دكتور احمد علي.apk', '_blank');
     } else {
       // For other devices, trigger download
       document.body.appendChild(link);
