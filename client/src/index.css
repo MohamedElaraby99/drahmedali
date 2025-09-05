@@ -1,0 +1,726 @@
+/* Lemonada font is imported in index.html */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Lemonada Font Classes */
+.lemonada-light {
+  font-family: "Lemonada", cursive;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.lemonada-regular {
+  font-family: "Lemonada", cursive;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.lemonada-medium {
+  font-family: "Lemonada", cursive;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.lemonada-semibold {
+  font-family: "Lemonada", cursive;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.lemonada-bold {
+  font-family: "Lemonada", cursive;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* Global Lemonada Font Application */
+html {
+  font-family: 'Lemonada', cursive;
+}
+
+/* Set default font weight for better readability */
+body {
+  font-family: 'Lemonada', cursive;
+  font-weight: 400;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+/* Ensure all text elements use Lemonada */
+h1, h2, h3, h4, h5, h6, p, span, div, button, input, textarea, select, label, a {
+  font-family: 'Lemonada', cursive;
+  font-optical-sizing: auto;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  font-family: 'Marhey', sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  font-family: 'Marhey', sans-serif;
+}
+
+input:disabled,
+button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+button:hover {
+  opacity: 0.7;
+}
+
+/* Ensure mobile menu is hidden on desktop */
+@media (min-width: 768px) {
+  .md\\:hidden {
+    display: none !important;
+  }
+  
+  /* Hide Sidebar burger menu on desktop */
+  .drawer-content label[for="my-drawer"] {
+    display: none !important;
+  }
+}
+
+/* Mobile menu items cursor pointer */
+.mobile-menu-item {
+  cursor: pointer;
+}
+
+.mobile-menu-item:hover {
+  cursor: pointer;
+}
+
+/* Desktop menu items cursor pointer */
+.navbar-item {
+  cursor: pointer;
+}
+
+.navbar-item:hover {
+  cursor: pointer;
+}
+
+/* Global input styling for light mode */
+input:not([class*="bg-"]), textarea:not([class*="bg-"]), select:not([class*="bg-"]) {
+  background-color: white !important;
+  color: black !important;
+  border-color: #d1d5db !important;
+}
+
+/* Dark mode overrides */
+.dark input:not([class*="bg-"]), .dark textarea:not([class*="bg-"]), .dark select:not([class*="bg-"]) {
+  background-color: rgb(55 65 81) !important;
+  color: white !important;
+  border-color: rgb(75 85 99) !important;
+}
+
+/* Focus states */
+input:not([class*="bg-"]):focus, textarea:not([class*="bg-"]):focus, select:not([class*="bg-"]):focus {
+  background-color: white !important;
+  color: black !important;
+  border-color: #3b82f6 !important;
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+}
+
+.dark input:not([class*="bg-"]):focus, .dark textarea:not([class*="bg-"]):focus, .dark select:not([class*="bg-"]):focus {
+  background-color: rgb(55 65 81) !important;
+  color: white !important;
+  border-color: #60a5fa !important;
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.1) !important;
+}
+
+/* Placeholder styling */
+input::placeholder, textarea::placeholder {
+  color: #6b7280 !important;
+}
+
+.dark input::placeholder, .dark textarea::placeholder {
+  color: #9ca3af !important;
+}
+
+/* Utility class for consistent input styling */
+.input-light {
+  background-color: white !important;
+  color: black !important;
+  border-color: #d1d5db !important;
+}
+
+.dark .input-light {
+  background-color: rgb(55 65 81) !important;
+  color: white !important;
+  border-color: rgb(75 85 99) !important;
+}
+
+/* Animation keyframes */
+@keyframes blob {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Animation classes */
+.animate-blob {
+  animation: blob 7s infinite;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.animate-slide-in-up {
+  animation: slideInUp 0.6s ease-out;
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.6s ease-out;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.6s ease-out;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
+/* Hover animations */
+.hover-lift {
+  transition: transform 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px);
+}
+
+.hover-scale {
+  transition: transform 0.3s ease;
+}
+
+.hover-scale:hover {
+  transform: scale(1.05);
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glass morphism effect */
+.glass {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.dark .glass {
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Burger menu animations */
+.burger-menu-button {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.burger-menu-button:hover {
+  transform: scale(1.05);
+}
+
+.burger-menu-button:active {
+  transform: scale(0.95);
+}
+
+/* Ensure burger menu is hidden on desktop */
+@media (min-width: 768px) {
+  .burger-menu-button {
+    display: none !important;
+  }
+}
+
+/* Right-side drawer styles */
+.drawer-side-right {
+  right: 0 !important;
+  left: auto !important;
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
+  position: fixed !important;
+}
+
+.drawer-side-right.drawer-open {
+  transform: translateX(0);
+}
+
+/* Override any left positioning */
+.drawer-side-right {
+  left: unset !important;
+  right: 0 !important;
+}
+
+/* RTL Drawer Styles - Ensure sidebar opens from right */
+.drawer.drawer-end .drawer-side {
+  right: 0 !important;
+  left: auto !important;
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out, width 0.3s ease-in-out;
+  z-index: 50 !important;
+}
+
+.drawer.drawer-end .drawer-side.drawer-open {
+  transform: translateX(0) !important;
+  width: 320px !important;
+  z-index: 50 !important;
+}
+
+/* Drawer toggle mechanism - when checkbox is checked */
+.drawer-toggle:checked ~ .drawer-side {
+  transform: translateX(0) !important;
+  width: 100% !important;
+  z-index: 50 !important;
+}
+
+/* Ensure drawer overlay covers the right side but doesn't block sidebar */
+.drawer-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 40;
+  pointer-events: none;
+}
+
+/* When drawer is open, show overlay */
+.drawer-toggle:checked ~ .drawer-side .drawer-overlay {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Ensure sidebar content is clickable */
+.drawer.drawer-end .drawer-side > div {
+  z-index: 60 !important;
+  position: relative;
+  pointer-events: auto;
+}
+
+/* Menu slide animations */
+.menu-slide-enter {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.menu-slide-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.3s ease-out;
+}
+
+.menu-slide-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.menu-slide-exit-active {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.3s ease-in;
+}
+
+/* Navbar animations */
+.navbar-item {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.navbar-item:hover {
+  transform: translateY(-2px);
+}
+
+/* Logo animations */
+.logo-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.logo-hover:hover {
+  transform: scale(1.05) rotate(5deg);
+}
+
+/* User avatar animations */
+.user-avatar {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.user-avatar:hover {
+  transform: scale(1.1);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Menu item animations */
+.menu-item {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.menu-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.menu-item:hover::before {
+  left: 100%;
+}
+
+/* Active menu item indicator */
+.active-menu-item {
+  position: relative;
+}
+
+.active-menu-item::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.active-menu-item:hover::after {
+  transform: scaleX(1);
+}
+
+/* Mobile menu enhancements */
+.mobile-menu-item {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.mobile-menu-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+  transition: left 0.5s;
+}
+
+.mobile-menu-item:hover::before {
+  left: 100%;
+}
+
+/* Mobile header animations */
+.mobile-header {
+  backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.dark .mobile-header {
+  background: rgba(17, 24, 39, 0.95);
+}
+
+/* Mobile menu slide animation */
+.mobile-menu-slide {
+  animation: slideDown 0.3s ease-out;
+}
+
+.mobile-menu-container {
+  transform-origin: top;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile user avatar pulse */
+.mobile-user-avatar {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
+  }
+}
+
+/* Mobile menu item icons */
+.mobile-menu-icon {
+  transition: all 0.3s ease;
+}
+
+.mobile-menu-item:hover .mobile-menu-icon {
+  transform: scale(1.1) rotate(5deg);
+}
+
+/* Mobile menu sections */
+.mobile-menu-section {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(139, 92, 246, 0.05));
+  border-radius: 12px;
+  margin: 8px 16px;
+  padding: 12px;
+}
+
+.dark .mobile-menu-section {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
+}
+
+.shadow-custom {
+  box-shadow: 0px 8px 24px #00000011;
+}
+
+::-webkit-scrollbar {
+  background: #9797e70c;
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #bae716c4;
+  transition: cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #bae716;
+}
+
+html.light ::-webkit-scrollbar-thumb {
+  background: #0000ff85;
+}
+
+html.light ::-webkit-scrollbar-thumb:hover {
+  background: #0000ff;
+}
+
+/* custom slider button */
+.slick-slider .slick-arrow {
+  height: 50px;
+  width: 50px;
+  background-color: #3f355c;
+  z-index: 5;
+  border-radius: 100px;
+}
+
+.slick-slider .slick-arrow:hover {
+  background-color: #1414df;
+}
+
+.slick-slider .slick-arrow::before {
+  color: #ffffff;
+  font-size: 52px;
+  font-weight: 700;
+  box-shadow: 0px 3px 5px #0000003d;
+  border-radius: 100px;
+}
+
+.slick-slider .slick-next {
+  right: -12px;
+}
+
+.slick-slider .slick-prev {
+  left: -12px;
+}
+
+.slick-dots {
+  bottom: 7px;
+}
+
+.slick-dots li {
+  background-color: rgba(255, 255, 255, 0.356);
+  border-radius: 50%;
+  height: 15px;
+  width: 15px;
+  transition: all cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.slick-dots button::before {
+  content: "";
+  display: none;
+}
+
+.slick-dots .slick-active {
+  background: #ffffff;
+  height: 22px;
+  width: 22px;
+}
+
+/* 404 Page Styles */
+.bg-grid-pattern {
+  background-image: 
+    linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Enhanced 404 page animations */
+@keyframes bounce-delayed {
+  0%, 20%, 53%, 80%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  40%, 43% {
+    transform: translate3d(0, -30px, 0);
+  }
+  70% {
+    transform: translate3d(0, -15px, 0);
+  }
+  90% {
+    transform: translate3d(0, -4px, 0);
+  }
+}
+
+.animate-bounce-delayed {
+  animation: bounce-delayed 2s infinite;
+}
+
+/* Wave animation for 404 page */
+@keyframes wave {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-wave {
+  animation: wave 3s ease-in-out infinite;
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
+
+/* Light mode form controls fix */
+html.light input,
+html.light select,
+html.light textarea {
+  background-color: #ffffff !important;
+  color: #111827 !important; /* gray-900 */
+}
+
+html.light input::placeholder,
+html.light textarea::placeholder {
+  color: #6b7280; /* gray-500 */
+}
+
+html.light .form-control,
+html.light .input,
+html.light .select,
+html.light .textarea {
+  background-color: #ffffff !important;
+  color: #111827 !important;
+}
