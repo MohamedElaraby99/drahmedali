@@ -131,9 +131,9 @@ const CourseNotifications = () => {
       {/* Notification Bell Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="relative p-2.5 md:p-3 rounded-xl bg-gradient-to-r from-blue-100 to-blue-200 dark:from-blue-800 dark:to-blue-700 hover:from-blue-200 hover:to-blue-300 dark:hover:from-blue-700 dark:hover:to-blue-600 transition-all duration-300 shadow-lg hover:shadow-xl border border-blue-200 dark:border-blue-600"
+        className="relative p-2.5 md:p-3 rounded-xl bg-gradient-to-r from-[#9b172a]/10 to-[#9b172a]/20 hover:from-[#9b172a]/20 hover:to-[#9b172a]/30 transition-all duration-300 shadow-lg hover:shadow-xl border border-[#9b172a]/30"
       >
-        <FaBell className="w-4 h-4 md:w-5 md:h-5 text-blue-700 dark:text-blue-300" />
+        <FaBell className="w-4 h-4 md:w-5 md:h-5 text-[#9b172a]" />
         
         {/* Unread Count Badge */}
         {unreadCount > 0 && (

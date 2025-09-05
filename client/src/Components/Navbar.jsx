@@ -136,7 +136,7 @@ export default function Navbar() {
             {/* Theme Toggle */}
             <button
               onClick={toggleDarkMode}
-              className="relative w-16 h-8 rounded-full bg-gradient-to-r from-blue-400 to-blue-500 hover:from-blue-500 hover:to-blue-600 transition-all duration-300 shadow-lg hover:shadow-xl border border-blue-300 dark:border-blue-600 overflow-hidden"
+              className="relative w-16 h-8 rounded-full bg-gradient-to-r from-[#9b172a] to-[#9b172a] hover:from-[#7d1324] hover:to-[#7d1324] transition-all duration-300 shadow-lg hover:shadow-xl border border-[#9b172a]/60 overflow-hidden"
             >
               {/* Sun Icon (Left side) */}
               <div className={`absolute left-1 top-1/2 transform -translate-y-1/2 transition-all duration-300 ${darkMode ? 'opacity-40' : 'opacity-100'}`}>
@@ -149,11 +149,11 @@ export default function Navbar() {
               </div>
               
               {/* Toggle Thumb */}
-              <div className={`absolute top-1 w-6 h-6 bg-white rounded-full border-2 border-blue-400 transition-all duration-300 transform ${darkMode ? 'translate-x-8' : 'translate-x-1'}`}>
+              <div className={`absolute top-1 w-6 h-6 bg-white rounded-full border-2 border-[#9b172a]/40 transition-all duration-300 transform ${darkMode ? 'translate-x-8' : 'translate-x-1'}`}>
                 {darkMode ? (
-                  <FaMoon className="w-3 h-3 text-blue-500 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
+                  <FaMoon className="w-3 h-3 text-[#9b172a] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
                 ) : (
-                  <FaSun className="w-3 h-3 text-blue-500 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
+                  <FaSun className="w-3 h-3 text-[#9b172a] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
                 )}
               </div>
             </button>
@@ -162,7 +162,7 @@ export default function Navbar() {
             {!user?.fullName && (
               <Link
                 to="/signup"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-2xl text-sm font-semibold text-white bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600 hover:from-blue-700 hover:via-blue-600 hover:to-blue-700 shadow-lg hover:shadow-xl transition-all duration-300 border border-blue-400/40"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-2xl text-sm font-semibold text-white bg-gradient-to-r from-[#9b172a] via-[#9b172a] to-[#9b172a] hover:from-[#7d1324] hover:via-[#7d1324] hover:to-[#7d1324] shadow-lg hover:shadow-xl transition-all duration-300 border border-[#9b172a]/40"
               >
                 <FaPlus className="w-4 h-4" />
                 <span>سجل الآن</span>
@@ -172,7 +172,7 @@ export default function Navbar() {
             {!user?.fullName && (
               <Link
                 to="/login"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-2xl text-sm font-semibold border-2 border-blue-500 text-blue-600 dark:text-blue-400 hover:bg-gradient-to-r hover:from-blue-500 hover:via-blue-600 hover:to-blue-500 hover:text-white transition-all duration-300 shadow-md hover:shadow-xl"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-2xl text-sm font-semibold border-2 border-[#9b172a] text-[#9b172a] dark:text-[#9b172a] hover:bg-gradient-to-r hover:from-[#9b172a] hover:via-[#9b172a] hover:to-[#9b172a] hover:text-white transition-all duration-300 shadow-md hover:shadow-xl"
               >
                 <FaUser className="w-4 h-4" />
                 <span>تسجيل الدخول</span>
@@ -188,9 +188,9 @@ export default function Navbar() {
               {user?.fullName && (
                 <button
                   onClick={toggleMenu}
-                  className="p-2.5 md:p-3 rounded-xl bg-gradient-to-r from-blue-100 to-blue-200 dark:from-blue-800 dark:to-blue-700 hover:from-blue-200 hover:to-blue-300 dark:hover:from-blue-700 dark:hover:to-blue-600 transition-all duration-300 shadow-lg hover:shadow-xl border border-blue-200 dark:border-blue-600"
+                  className="p-2.5 md:p-3 rounded-xl bg-gradient-to-r from-[#9b172a]/10 to-[#9b172a]/20 hover:from-[#9b172a]/20 hover:to-[#9b172a]/30 transition-all duration-300 shadow-lg hover:shadow-xl border border-[#9b172a]/30"
                 >
-                  <FaBars className="w-4 h-4 md:w-5 md:h-5 text-blue-700 dark:text-blue-300" />
+                  <FaBars className="w-4 h-4 md:w-5 md:h-5 text-[#9b172a]" />
                 </button>
               )}
             </div>
@@ -335,14 +335,14 @@ export default function Navbar() {
                 
                 <Link
                   to="/login"
-                  className="flex items-center justify-center gap-2 w-full px-4 py-2 text-center bg-gradient-to-r from-blue-500 via-blue-600 to-blue-500 hover:from-blue-600 hover:via-blue-700 hover:to-blue-600 text-white rounded-xl font-semibold text-sm transition-all duration-300 transform hover:scale-105 mobile-menu-item shadow-lg hover:shadow-xl border-2 border-blue-400/50"
+                  className="flex items-center justify-center gap-2 w-full px-4 py-2 text-center bg-gradient-to-r from-[#9b172a] via-[#9b172a] to-[#9b172a] hover:from-[#7d1324] hover:via-[#7d1324] hover:to-[#7d1324] text-white rounded-xl font-semibold text-sm transition-all duration-300 transform hover:scale-105 mobile-menu-item shadow-lg hover:shadow-xl border-2 border-[#9b172a]/50"
                 >
                   <FaUser className="w-4 h-4" />
                   تسجيل الدخول
                 </Link>
                 <Link
                   to="/signup"
-                  className="flex items-center justify-center gap-2 w-full px-4 py-2 text-center border-2 border-blue-500 text-blue-600 dark:text-blue-400 hover:bg-gradient-to-r hover:from-blue-500 hover:via-blue-600 hover:to-blue-500 hover:text-white rounded-xl font-semibold text-sm transition-all duration-300 mobile-menu-item shadow-lg hover:shadow-xl"
+                  className="flex items-center justify-center gap-2 w-full px-4 py-2 text-center border-2 border-[#9b172a] text-[#9b172a] dark:text-[#9b172a] hover:bg-gradient-to-r hover:from-[#9b172a] hover:via-[#9b172a] hover:to-[#9b172a] hover:text-white rounded-xl font-semibold text-sm transition-all duration-300 mobile-menu-item shadow-lg hover:shadow-xl"
                 >
                   <FaPlus className="w-4 h-4" />
                   إنشاء حساب جديد

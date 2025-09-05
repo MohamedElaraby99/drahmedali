@@ -476,14 +476,14 @@ export default function CourseDetail() {
       <div className="flex items-center gap-2">
         <button 
           onClick={() => handlePreviewClick(item, purchaseType)}
-          className="text-blue-600 hover:text-blue-700 flex items-center gap-1"
+          className="text-[#9b172a] hover:text-[#7d1324] flex items-center gap-1"
         >
           <FaEye />
           <span>معاينة</span>
         </button>
         <button 
           onClick={() => handlePurchaseClick(item, purchaseType)}
-          className="text-blue-600 hover:text-blue-700 flex items-center gap-1"
+          className="text-[#9b172a] hover:text-[#7d1324] flex items-center gap-1"
           disabled={paymentLoading}
         >
           <FaLock />
@@ -498,7 +498,7 @@ export default function CourseDetail() {
       <Layout>
         <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#9b172a] mx-auto"></div>
             <p className="mt-4 text-gray-600 dark:text-gray-400">جاري تحميل تفاصيل الدرس...</p>
           </div>
         </div>
@@ -520,7 +520,7 @@ export default function CourseDetail() {
             </p>
             <Link
               to="/courses"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-[#9b172a] hover:bg-[#7d1324] text-white rounded-lg transition-colors"
             >
               <FaArrowLeft />
               <span>العودة للكورسات </span>
@@ -538,7 +538,7 @@ export default function CourseDetail() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6">
           <Link
             to="/courses"
-            className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 transition-colors text-sm sm:text-base"
+            className="inline-flex items-center gap-2 text-[#9b172a] hover:text-[#7d1324] transition-colors text-sm sm:text-base"
           >
             <FaArrowLeft className="text-sm sm:text-base" />
             <span>العودة للكورسات</span>
@@ -564,7 +564,7 @@ export default function CourseDetail() {
                 </>
               ) : (
                 <>
-                  <div className="w-full h-full bg-gradient-to-br from-blue-500 to-blue-600"></div>
+                  <div className="w-full h-full bg-gradient-to-br from-[#9b172a] to-[#9b172a]"></div>
                   <div className="absolute inset-0 bg-black bg-opacity-30"></div>
                   <div className="absolute inset-0 flex items-center justify-center">
                     <FaBookOpen className="text-6xl sm:text-8xl text-white opacity-80" />
@@ -573,7 +573,7 @@ export default function CourseDetail() {
               )}
               
               {/* Fallback gradient for broken images */}
-              <div className="hidden w-full h-full bg-gradient-to-br from-blue-500 to-blue-600">
+              <div className="hidden w-full h-full bg-gradient-to-br from-[#9b172a] to-[#9b172a]">
                 <div className="absolute inset-0 bg-black bg-opacity-30"></div>
                 <div className="absolute inset-0 flex items-center justify-center">
                   <FaBookOpen className="text-8xl text-white opacity-80" />
@@ -603,13 +603,13 @@ export default function CourseDetail() {
                   {/* Course Stats */}
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 mb-6">
                     <div className="text-center p-3 sm:p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                      <div className="text-xl sm:text-2xl font-bold text-blue-600 mb-1">
+                      <div className="text-xl sm:text-2xl font-bold text-[#9b172a] mb-1">
                         {getTotalLessons(currentCourse)}
                       </div>
                       <div className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">درس</div>
                     </div>
                     <div className="text-center p-3 sm:p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                      <div className="text-xl sm:text-2xl font-bold text-blue-600 mb-1">
+                      <div className="text-xl sm:text-2xl font-bold text-[#9b172a] mb-1">
                         {currentCourse.units?.length || 0}
                       </div>
                       <div className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">وحدة</div>
@@ -617,8 +617,8 @@ export default function CourseDetail() {
                   </div>
 
                   {/* Instructor Info */}
-                  <div className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg mb-6">
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
+                  <div className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 bg-red-50 dark:bg-red-900/20 rounded-lg mb-6">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#9b172a] rounded-full flex items-center justify-center flex-shrink-0">
                       <FaUser className="text-white text-lg sm:text-xl" />
                     </div>
                     <div className="min-w-0 flex-1">
@@ -711,7 +711,7 @@ export default function CourseDetail() {
                                  }
                                }}
                                placeholder="زي كده: ABC123XYZ9"
-                               className="flex-1 min-w-0 px-4 py-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-center font-mono text-lg tracking-wider"
+                               className="flex-1 min-w-0 px-4 py-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white focus:ring-2 focus:ring-[#9b172a] focus:border-transparent transition-all duration-200 text-center font-mono text-lg tracking-wider"
                                maxLength="12"
                                style={{ letterSpacing: '0.1em' }}
                                required
@@ -747,7 +747,7 @@ export default function CourseDetail() {
                                  }
                                }}
                                placeholder="زي كده: ABC123XYZ9"
-                               className="w-full px-4 py-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-center font-mono text-lg tracking-wider"
+                               className="w-full px-4 py-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white focus:ring-2 focus:ring-[#9b172a] focus:border-transparent transition-all duration-200 text-center font-mono text-lg tracking-wider"
                                maxLength="12"
                                style={{ letterSpacing: '0.1em' }}
                                required
@@ -770,9 +770,9 @@ export default function CourseDetail() {
                                  <span className="text-red-500">خلاص الكود انتهى</span>
                                )}
                                </p>
-                                                            <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700 rounded-lg p-3">
-                                 <h4 className="text-xs font-medium text-blue-900 dark:text-blue-100 mb-1">حاجات مهمة:</h4>
-                                 <ul className="text-xs text-blue-800 dark:text-blue-200 space-y-1">
+                                                            <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-700 rounded-lg p-3">
+                                 <h4 className="text-xs font-medium text-red-900 dark:text-red-100 mb-1">حاجات مهمة:</h4>
+                                 <ul className="text-xs text-red-800 dark:text-red-200 space-y-1">
                                    <li>• الكود ده للكورس ده بس</li>
                                    <li>• كل كود يتستعمل مرة واحدة بس</li>
                                    <li>• الكود من 8-12 حرف وأرقام إنجليزي</li>
@@ -795,12 +795,12 @@ export default function CourseDetail() {
            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-4 sm:mb-6">
              <div className={`border rounded-xl p-3 sm:p-4 ${
                courseAccessState?.hasAccess 
-                 ? 'bg-gradient-to-r from-blue-50 to-blue-50 dark:from-blue-900/20 dark:to-blue-900/20 border-blue-200 dark:border-blue-700'
+                 ? 'bg-gradient-to-r from-blue-50 to-blue-50 dark:from-blue-900/20 dark:to-blue-900/20 border-red-200 dark:border-red-700'
                  : 'bg-gradient-to-r from-red-50 to-blue-50 dark:from-red-900/20 dark:to-blue-900/20 border-red-200 dark:border-red-700'
              }`}>
                <div className="flex items-center justify-center gap-2 sm:gap-3">
                  {courseAccessState?.hasAccess ? (
-                   <FaClock className="text-blue-600 text-lg sm:text-xl flex-shrink-0" />
+                   <FaClock className="text-[#9b172a] text-lg sm:text-xl flex-shrink-0" />
                  ) : (
                    <FaExclamationTriangle className="text-red-600 text-lg sm:text-xl flex-shrink-0" />
                  )}
@@ -838,7 +838,7 @@ export default function CourseDetail() {
                         className="flex flex-col sm:flex-row sm:items-center justify-between p-3 sm:p-4 bg-gray-50 dark:bg-gray-700 rounded-lg gap-3 sm:gap-4"
                       >
                         <div className="flex items-start sm:items-center gap-3 min-w-0 flex-1">
-                          <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
+                          <div className="w-8 h-8 bg-[#9b172a] rounded-full flex items-center justify-center flex-shrink-0">
                             <FaPlay className="text-white text-sm" />
                           </div>
                           <div className="min-w-0 flex-1">
@@ -884,7 +884,7 @@ export default function CourseDetail() {
                           onClick={() => toggleUnit(unit._id || unitIndex)}
                         >
                           <div className="flex items-start sm:items-center gap-3 min-w-0 flex-1">
-                            <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
+                            <div className="w-8 h-8 bg-[#9b172a] rounded-full flex items-center justify-center flex-shrink-0">
                               <FaBookOpen className="text-white text-sm" />
                             </div>
                             <div className="min-w-0 flex-1">
@@ -922,7 +922,7 @@ export default function CourseDetail() {
                                   className="flex flex-col sm:flex-row sm:items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg gap-3 sm:gap-4"
                                 >
                                   <div className="flex items-start sm:items-center gap-3 min-w-0 flex-1">
-                                    <div className="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <div className="w-6 h-6 bg-[#9b172a] rounded-full flex items-center justify-center flex-shrink-0">
                                       <FaPlay className="text-white text-xs" />
                                     </div>
                                     <div className="min-w-0 flex-1">
@@ -1006,7 +1006,7 @@ export default function CourseDetail() {
                 
                 <div className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg mt-2">
                   <span className="text-gray-600 dark:text-gray-300">رصيد المحفظة:</span>
-                  <span className="font-semibold text-blue-600">{walletBalance} جنيه</span>
+                  <span className="font-semibold text-[#9b172a]">{walletBalance} جنيه</span>
                 </div>
               </div>
               
@@ -1020,7 +1020,7 @@ export default function CourseDetail() {
                 <button
                   onClick={handlePurchaseConfirm}
                   disabled={paymentLoading || walletBalance < selectedItem.price}
-                  className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
+                  className="flex-1 px-4 py-2 bg-[#9b172a] text-white rounded-lg hover:bg-[#7d1324] disabled:bg-gray-400 disabled:cursor-not-allowed"
                 >
                   {paymentLoading ? 'جاري الشراء...' : 'تأكيد الشراء'}
                 </button>
@@ -1090,7 +1090,7 @@ export default function CourseDetail() {
                        {previewItem.videos.slice(0, 2).map((video, index) => (
                          <div key={index} className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
                            <div className="flex items-center gap-2">
-                             <FaPlay className="text-blue-600" />
+                             <FaPlay className="text-[#9b172a]" />
                              <span className="text-sm text-gray-700 dark:text-gray-300">{video.title}</span>
                            </div>
                          </div>
@@ -1134,7 +1134,7 @@ export default function CourseDetail() {
                        {previewItem.exams.slice(0, 2).map((exam, index) => (
                          <div key={index} className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
                            <div className="flex items-center gap-2">
-                             <FaGraduationCap className="text-blue-600" />
+                             <FaGraduationCap className="text-[#9b172a]" />
                              <span className="text-sm text-gray-700 dark:text-gray-300">{exam.title}</span>
                            </div>
                          </div>
@@ -1171,30 +1171,30 @@ export default function CourseDetail() {
                  )}
 
                  {/* Show content summary instead of "Content will be added soon" */}
-                 <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700 rounded-lg p-4 mb-4">
-                   <h6 className="font-medium text-blue-900 dark:text-blue-100 mb-3">ملخص المحتوى</h6>
+                 <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-700 rounded-lg p-4 mb-4">
+                   <h6 className="font-medium text-red-900 dark:text-red-100 mb-3">ملخص المحتوى</h6>
                    <div className="grid grid-cols-2 gap-3 text-sm">
                      <div className="flex items-center gap-2">
-                       <FaPlay className="text-blue-600" />
-                       <span className="text-blue-700 dark:text-blue-300">
+                       <FaPlay className="text-[#9b172a]" />
+                       <span className="text-red-700 dark:text-red-300">
                          {previewItem.videosCount || 0} فيديو
                        </span>
                      </div>
                      <div className="flex items-center gap-2">
                        <FaBookOpen className="text-red-600" />
-                       <span className="text-blue-700 dark:text-blue-300">
+                       <span className="text-red-700 dark:text-red-300">
                          {previewItem.pdfsCount || 0} ملف PDF
                        </span>
                      </div>
                      <div className="flex items-center gap-2">
-                       <FaClipboardList className="text-blue-600" />
-                       <span className="text-blue-700 dark:text-blue-300">
+                       <FaClipboardList className="text-[#9b172a]" />
+                       <span className="text-red-700 dark:text-red-300">
                          {previewItem.examsCount || 0} اختبار
                        </span>
                      </div>
                      <div className="flex items-center gap-2">
                        <FaStar className="text-green-600" />
-                       <span className="text-blue-700 dark:text-blue-300">
+                       <span className="text-red-700 dark:text-red-300">
                          {previewItem.trainingsCount || 0} تدريب
                        </span>
                      </div>
@@ -1216,7 +1216,7 @@ export default function CourseDetail() {
                         setSelectedItem({ ...previewItem, purchaseType: previewItem.purchaseType });
                         setShowPurchaseModal(true);
                       }}
-                      className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                      className="flex-1 px-4 py-2 bg-[#9b172a] text-white rounded-lg hover:bg-[#7d1324]"
                     >
                       شراء الدرس
                     </button>

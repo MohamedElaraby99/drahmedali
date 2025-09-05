@@ -94,19 +94,19 @@ const ModernAlert = ({
     },
     warning: {
       icon: <FaExclamationTriangle />,
-      bgColor: 'bg-gradient-to-r from-blue-500 to-blue-600',
-      borderColor: 'border-blue-200 dark:border-blue-800',
-      textColor: 'text-blue-800 dark:text-blue-200',
-      bgLight: 'bg-blue-50 dark:bg-blue-900/20',
-      progressColor: 'bg-blue-500'
+      bgColor: 'bg-gradient-to-r from-[#9b172a] to-[#9b172a]',
+      borderColor: 'border-red-200 dark:border-red-800',
+      textColor: 'text-red-800 dark:text-red-200',
+      bgLight: 'bg-red-50 dark:bg-red-900/20',
+      progressColor: 'bg-[#9b172a]'
     },
     info: {
       icon: <FaInfoCircle />,
-      bgColor: 'bg-gradient-to-r from-blue-500 to-indigo-600',
-      borderColor: 'border-blue-200 dark:border-blue-800',
-      textColor: 'text-blue-800 dark:text-blue-200',
-      bgLight: 'bg-blue-50 dark:bg-blue-900/20',
-      progressColor: 'bg-blue-500'
+      bgColor: 'bg-gradient-to-r from-[#9b172a] to-[#9b172a]',
+      borderColor: 'border-red-200 dark:border-red-800',
+      textColor: 'text-red-800 dark:text-red-200',
+      bgLight: 'bg-red-50 dark:bg-red-900/20',
+      progressColor: 'bg-[#9b172a]'
     }
   };
 

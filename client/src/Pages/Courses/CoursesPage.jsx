@@ -105,13 +105,13 @@ export default function CoursesPage() {
     <Layout>
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900" dir="rtl">
         {/* Header Section */}
-        <div className="bg-gradient-to-r from-blue-600 to-blue-600 text-white py-16">
+        <div className="bg-gradient-to-r from-[#9b172a] to-[#9b172a] text-white py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center">
               <h1 className="text-4xl md:text-5xl font-bold mb-4">
                 المواد المتاحة
               </h1>
-              <p className="text-xl text-blue-100 max-w-3xl mx-auto">
+              <p className="text-xl text-red-100 max-w-3xl mx-auto">
                 الدورات التعليمية المتاحة
               </p>
             </div>
@@ -129,7 +129,7 @@ export default function CoursesPage() {
                 placeholder="ابحث في الدورات..."
                 value={filters.search}
                 onChange={(e) => handleFilterChange('search', e.target.value)}
-                className="w-full pr-12 pl-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full pr-12 pl-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-[#9b172a] focus:border-transparent"
               />
             </div>
           </div>
@@ -157,7 +157,7 @@ export default function CoursesPage() {
                   <select
                     value={filters.stage}
                     onChange={(e) => handleFilterChange('stage', e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-[#9b172a] focus:border-transparent"
                   >
                     <option value="">جميع المراحل</option>
                     {stages.map((stage) => (
@@ -176,7 +176,7 @@ export default function CoursesPage() {
                   <select
                     value={filters.subject}
                     onChange={(e) => handleFilterChange('subject', e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-[#9b172a] focus:border-transparent"
                   >
                     <option value="">جميع المواد</option>
                                          {subjects.map((subject) => (
@@ -211,7 +211,7 @@ export default function CoursesPage() {
           {/* Courses Grid */}
           {loading ? (
             <div className="text-center py-12">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#9b172a] mx-auto"></div>
               <p className="mt-4 text-gray-600 dark:text-gray-400">جاري تحميل الدورات...</p>
             </div>
           ) : filteredCourses.length > 0 ? (
@@ -222,7 +222,7 @@ export default function CoursesPage() {
                   className="bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group"
                 >
                   {/* Course Image */}
-                  <div className="h-48 bg-gradient-to-br from-blue-500 to-blue-600 relative overflow-hidden">
+                  <div className="h-48 bg-gradient-to-br from-[#9b172a] to-[#9b172a] relative overflow-hidden">
                     {course.image && course.image.secure_url ? (
                       // Display actual course image
                       <img
@@ -283,8 +283,8 @@ export default function CoursesPage() {
                       </div>
 
                                              {/* Total Lessons */}
-                       <div className="flex items-center gap-2 text-sm font-semibold text-blue-600">
-                         <FaStar className="text-blue-500" />
+                       <div className="flex items-center gap-2 text-sm font-semibold text-[#9b172a]">
+                         <FaStar className="text-[#9b172a]" />
                          <span>{getTotalLessons(course)} درس متاح</span>
                        </div>
                     </div>
@@ -293,7 +293,7 @@ export default function CoursesPage() {
                     <div className="flex gap-2">
                       <Link
                         to={`/courses/${course._id}`}
-                        className="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-center py-2 px-4 rounded-lg font-medium transition-colors flex items-center justify-center gap-2"
+                        className="flex-1 bg-[#9b172a] hover:bg-[#7d1324] text-white text-center py-2 px-4 rounded-lg font-medium transition-colors flex items-center justify-center gap-2"
                       >
                         <FaEye />
                         <span>عرض التفاصيل</span>

@@ -46,7 +46,7 @@ const ExamSearchDashboard = () => {
     if (score >= 90) return 'text-green-600';
     if (score >= 80) return 'text-blue-600';
     if (score >= 70) return 'text-blue-600';
-    if (score >= 50) return 'text-blue-600';
+    if (score >= 50) return 'text-[#9b172a]';
     return 'text-red-600';
   };
 
@@ -88,12 +88,12 @@ const ExamSearchDashboard = () => {
 
   return (
     <Layout>
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+      <div className="min-h-screen bg-gradient-to-br from-red-50 via-red-50 to-red-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
         <div className="container mx-auto px-4 py-8">
           {/* Header */}
           <div className="mb-8">
             <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2 text-right">
-              <FaClipboardList className="inline-block mr-3 text-blue-600" />
+              <FaClipboardList className="inline-block mr-3 text-[#9b172a]" />
               جميع الامتحانات والنتائج
             </h1>
             <p className="text-gray-600 dark:text-gray-300 text-right">
