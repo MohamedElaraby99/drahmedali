@@ -33,7 +33,7 @@ const register = async (req, res, next) => {
             }
         }
 
-        const { fullName, email, password, phoneNumber, fatherPhoneNumber, governorate, stage, age, adminCode, deviceInfo } = requestBody;
+        const { fullName, email, password, phoneNumber, fatherPhoneNumber, governorate, stage, center, age, adminCode, deviceInfo } = requestBody;
 
         // Determine user role based on admin code
         let userRole = 'USER';
@@ -52,8 +52,8 @@ const register = async (req, res, next) => {
             if (!phoneNumber) {
                 return next(new AppError("Phone number is required for regular users", 400));
             }
-            if (!governorate || !stage || !age) {
-                return next(new AppError("Governorate, stage, and age are required for regular users", 400));
+            if (!governorate || !stage || !center || !age) {
+                return next(new AppError("Governorate, stage, center, and age are required for regular users", 400));
             }
         } else if (userRole === 'ADMIN') {
             // For ADMIN role: email is required
@@ -96,6 +96,7 @@ const register = async (req, res, next) => {
             if (fatherPhoneNumber) userData.fatherPhoneNumber = fatherPhoneNumber;
             userData.governorate = governorate;
             userData.stage = stage;
+            userData.center = center;
             userData.age = parseInt(age);
         } else if (userRole === 'ADMIN') {
             userData.email = email;

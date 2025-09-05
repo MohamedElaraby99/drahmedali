@@ -788,6 +788,20 @@ export default function AdminDashboard() {
                   </div>
                 </div>
 
+                {/* إدارة المراكز */}
+                <div className="bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl p-4 lg:p-6 text-white hover:from-orange-600 hover:to-orange-700 transition-all duration-200 transform hover:scale-105 cursor-pointer shadow-lg hover:shadow-xl" onClick={() => navigate("/admin/centers")}>
+                  <div className="flex items-center justify-between mb-3">
+                    <FaBuilding className="text-2xl lg:text-3xl text-orange-200" />
+                    <div className="w-3 h-3 bg-orange-200 rounded-full animate-pulse"></div>
+                  </div>
+                  <h4 className="text-lg lg:text-xl font-bold mb-2">إدارة المراكز</h4>
+                  <p className="text-orange-100 text-sm lg:text-base opacity-90">إدارة المراكز التعليمية</p>
+                  <div className="mt-4 flex items-center justify-between">
+                    <span className="text-xs text-orange-200">إدارة كاملة</span>
+                    <FaArrowUp className="text-orange-200 transform rotate-45" />
+                  </div>
+                </div>
+
               </div>
             </div>
 

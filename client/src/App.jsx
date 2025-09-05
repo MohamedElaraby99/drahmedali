@@ -34,6 +34,7 @@ import WhatsAppServiceDashboard from "./Pages/Dashboard/WhatsAppServiceDashboard
 import WhatsAppServices from "./Pages/WhatsAppServices/WhatsAppServices";
 import InstructorDashboard from "./Pages/Dashboard/InstructorDashboard";
 import StageDashboard from "./Pages/Dashboard/StageDashboard";
+import CentersDashboard from "./Pages/Dashboard/CentersDashboard";
 
 import Instructors from "./Pages/Instructors";
 import InstructorDetail from "./Pages/InstructorDetail";
@@ -115,6 +116,7 @@ function App() {
                     <Route path="/admin/users" element={<AdminUserDashboard />} />
                     <Route path="/admin/instructors" element={<InstructorDashboard />} />
                     <Route path="/admin/stages" element={<StageDashboard />} />
+                    <Route path="/admin/centers" element={<CentersDashboard />} />
                     <Route path="/admin/whatsapp-services" element={<WhatsAppServiceDashboard />} />
                     <Route path="/admin/course-content" element={<CourseContentManager />} />
                     <Route path="/admin/course-dashboard" element={<CourseDashboard />} />

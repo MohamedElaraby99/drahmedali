@@ -31,12 +31,11 @@ import {
   FaUnlock,
   FaWallet,
   FaTimes,
-  FaClipboardList
+  FaClipboardList,
+  FaExclamationTriangle
 } from 'react-icons/fa';
 import { generateImageUrl } from '../../utils/fileUtils';
 import { placeholderImages } from '../../utils/placeholderImages';
-import { checkCourseAccess, redeemCourseAccessCode } from '../../Redux/Slices/CourseAccessSlice';
-import { axiosInstance } from '../../Helpers/axiosInstance';
 import RemainingDaysLabel from '../../Components/RemainingDaysLabel';
 
 export default function CourseDetail() {
@@ -46,9 +45,6 @@ export default function CourseDetail() {
   const { currentCourse, loading } = useSelector((state) => state.course);
   const { walletBalance, purchaseStatus, loading: paymentLoading } = useSelector((state) => state.payment);
   const { data: user, isLoggedIn } = useSelector((state) => state.auth);
-  const courseAccessState = useSelector((state) => state.courseAccess.byCourseId[id]);
-  const [accessAlertShown, setAccessAlertShown] = useState(false);
-  const hidePrices = !!courseAccessState?.hasAccess && courseAccessState?.source === 'code';
   const hasAnyPurchase = (() => {
     if (!currentCourse || !purchaseStatus) return false;
     const prefix = `${currentCourse._id}-`;
@@ -65,7 +61,6 @@ export default function CourseDetail() {
   const [previewItem, setPreviewItem] = useState(null);
   const [showLessonModal, setShowLessonModal] = useState(false);
   const [selectedLesson, setSelectedLesson] = useState(null);
-  const [redeemCode, setRedeemCode] = useState('');
 
   useEffect(() => {
     if (id) {
@@ -73,36 +68,6 @@ export default function CourseDetail() {
     }
   }, [dispatch, id]);
 
-  // Check timed-access via code
-  useEffect(() => {
-    if (id && user && isLoggedIn) {
-      dispatch(checkCourseAccess(id));
-    }
-  }, [dispatch, id, user, isLoggedIn]);
-
-  // Periodic check for access expiration (every minute)
-  useEffect(() => {
-    if (!courseAccessState?.hasAccess || !courseAccessState?.accessEndAt) return;
-    
-    const interval = setInterval(() => {
-      const now = new Date();
-      const endDate = new Date(courseAccessState.accessEndAt);
-      
-      if (endDate <= now) {
-        // Access has expired, refresh status
-        dispatch(checkCourseAccess(id));
-        
-        // Show immediate notification that access has expired
-        if (!accessAlertShown) {
-          setAlertMessage('انتهت صلاحية الوصول عبر الكود. يرجى إعادة تفعيل كود جديد أو شراء المحتوى.');
-          setShowErrorAlert(true);
-          setAccessAlertShown(true);
-        }
-      }
-    }, 60000); // Check every minute
-    
-    return () => clearInterval(interval);
-  }, [courseAccessState?.hasAccess, courseAccessState?.accessEndAt, dispatch, id, accessAlertShown]);
 
   // Fetch wallet balance only when user is logged in
   useEffect(() => {
@@ -208,52 +173,9 @@ export default function CourseDetail() {
       return true;
     }
     
-    // Check if code-based access has expired
-    if (courseAccessState?.source === 'code' && courseAccessState?.accessEndAt) {
-      const now = new Date();
-      const endDate = new Date(courseAccessState.accessEndAt);
-      const isExpired = endDate <= now;
-      
-      // If access has expired, block access
-      if (isExpired) {
-        return false;
-      }
-    }
-    
-    // If user has active course access via code, allow viewing
-    if (courseAccessState?.hasAccess) {
-      return true;
-    }
-    
     const key = `${currentCourse._id}-${purchaseType}-${itemId}`;
     return purchaseStatus[key] || false;
   };
-
-  // Block access if code-based access expired (only for code access, not purchased)
-  useEffect(() => {
-    if (!user || user.role === 'ADMIN' || user.role === 'SUPER_ADMIN') return;
-    if (!currentCourse) return;
-    
-    // Check if access has expired
-    const hasCodeSource = courseAccessState?.source === 'code';
-    const hasActive = !!courseAccessState?.hasAccess;
-    const accessEndAt = courseAccessState?.accessEndAt;
-    
-    if (hasCodeSource && accessEndAt) {
-      const now = new Date();
-      const endDate = new Date(accessEndAt);
-      const isExpired = endDate <= now;
-      
-      if (isExpired && !hasAnyPurchase && !accessAlertShown) {
-        setAlertMessage('انتهت صلاحية الوصول عبر الكود. يرجى إعادة تفعيل كود جديد أو شراء المحتوى.');
-        setShowErrorAlert(true);
-        setAccessAlertShown(true);
-        
-        // Force refresh access status to clear expired access
-        dispatch(checkCourseAccess(currentCourse._id));
-      }
-    }
-  }, [user, currentCourse, courseAccessState, hasAnyPurchase, accessAlertShown, dispatch]);
 
   const handlePurchaseClick = (item, purchaseType) => {
     if (!user || !isLoggedIn) {
@@ -278,97 +200,13 @@ export default function CourseDetail() {
       return;
     }
 
-    // Check if code-based access has expired
-    if (courseAccessState?.source === 'code' && courseAccessState?.accessEndAt) {
-      const now = new Date();
-      const endDate = new Date(courseAccessState.accessEndAt);
-      const isExpired = endDate <= now;
-      
-      if (isExpired) {
-        setAlertMessage('انتهت صلاحية الوصول عبر الكود. يرجى إعادة تفعيل كود جديد أو شراء المحتوى.');
-        setShowErrorAlert(true);
-        return;
-      }
-    }
 
     setSelectedItem({ ...item, purchaseType });
     setShowPurchaseModal(true);
   };
 
-  const handleRedeemCode = async (e) => {
-    e.preventDefault();
-    if (!redeemCode.trim()) {
-      setAlertMessage('يرجى إدخال الكود أولاً');
-      setShowErrorAlert(true);
-      return;
-    }
-
-    // Basic code format validation
-    const codeFormat = /^[A-Z0-9]{8,12}$/;
-    if (!codeFormat.test(redeemCode.trim().toUpperCase())) {
-      setAlertMessage('تنسيق الكود غير صحيح. يجب أن يتكون الكود من 8-12 حرف وأرقام باللغة الإنجليزية فقط');
-      setShowErrorAlert(true);
-      return;
-    }
-
-    try {
-      await dispatch(redeemCourseAccessCode({ 
-        code: redeemCode.trim().toUpperCase(),
-        courseId: currentCourse._id 
-      })).unwrap();
-      
-      setRedeemCode('');
-      setAlertMessage('🎉 تم تفعيل الوصول للكورس بنجاح! يمكنك الآن الوصول لجميع محتويات الكورس');
-      setShowSuccessAlert(true);
-      
-      // Clear the access alert since access is restored
-      setAccessAlertShown(false);
-      
-      // Refresh course access status
-      dispatch(checkCourseAccess(currentCourse._id));
-    } catch (err) {
-      // Enhanced error messages based on backend responses
-      let errorMessage = 'تعذر تفعيل الكود';
-      
-      if (err?.message) {
-        const message = err.message.toLowerCase();
-        
-        if (message.includes('invalid or expired code')) {
-          errorMessage = '❌ الكود غير صحيح أو منتهي الصلاحية. تأكد من كتابة الكود بشكل صحيح';
-        } else if (message.includes('not valid for this course')) {
-          errorMessage = '🚫 هذا الكود غير صالح لهذا الكورس. تأكد من أنك تستخدم الكود الصحيح للكورس المطلوب';
-        } else if (message.includes('expired for its access window')) {
-          errorMessage = '⏰ انتهت صلاحية هذا الكود. يرجى الحصول على كود جديد من المدرس';
-        } else if (message.includes('course not found')) {
-          errorMessage = '📚 الكورس المرتبط بهذا الكود غير موجود. يرجى التواصل مع الدعم الفني';
-        } else if (message.includes('code is required')) {
-          errorMessage = '📝 يرجى إدخال الكود';
-        } else if (message.includes('already used')) {
-          errorMessage = '🔒 تم استخدام هذا الكود من قبل. كل كود يمكن استخدامه مرة واحدة فقط';
-        } else {
-          errorMessage = `❌ ${err.message}`;
-        }
-      }
-      
-      setAlertMessage(errorMessage);
-      setShowErrorAlert(true);
-    }
-  };
 
   const handlePreviewClick = (item, purchaseType) => {
-    // Check if code-based access has expired
-    if (courseAccessState?.source === 'code' && courseAccessState?.accessEndAt) {
-      const now = new Date();
-      const endDate = new Date(courseAccessState.accessEndAt);
-      const isExpired = endDate <= now;
-      
-      if (isExpired) {
-        setAlertMessage('انتهت صلاحية الوصول عبر الكود. يرجى إعادة تفعيل كود جديد أو شراء المحتوى.');
-        setShowErrorAlert(true);
-        return;
-      }
-    }
-    
     // Allow preview for all users (logged in or not)
     console.log('Preview item data:', item);
     console.log('Content counts:', {
@@ -404,19 +242,6 @@ export default function CourseDetail() {
 
 
   const handleWatchClick = async (item, purchaseType, unitId = null) => {
-    // Check if code-based access has expired
-    if (courseAccessState?.source === 'code' && courseAccessState?.accessEndAt) {
-      const now = new Date();
-      const endDate = new Date(courseAccessState.accessEndAt);
-      const isExpired = endDate <= now;
-      
-      if (isExpired) {
-        setAlertMessage('انتهت صلاحية الوصول عبر الكود. يرجى إعادة تفعيل كود جديد أو شراء المحتوى.');
-        setShowErrorAlert(true);
-        return;
-      }
-    }
-
     // Store lesson info including unit context for the optimized modal
     const lessonInfo = {
       lessonId: item._id,
@@ -646,16 +471,6 @@ export default function CourseDetail() {
                         </div>
                       )}
 
-                                             {/* Remaining Days Label */}
-                       {courseAccessState?.source === 'code' && courseAccessState?.accessEndAt && (
-                         <div className="mb-4 sm:mb-6">
-                           <RemainingDaysLabel 
-                             accessEndAt={courseAccessState.accessEndAt}
-                             className="w-full justify-center text-sm sm:text-base"
-                             showExpiredMessage={!courseAccessState?.hasAccess}
-                           />
-                         </div>
-                       )}
 
                     <div className="space-y-2 sm:space-y-3 mb-4 sm:mb-6">
                       <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-600 dark:text-gray-400">
@@ -668,119 +483,30 @@ export default function CourseDetail() {
                       </div>
                     </div>
 
-                                         {/* Redeem Access Code */}
+                                         {/* Video Access Information */}
                      {user && isLoggedIn && user.role !== 'ADMIN' && user.role !== 'SUPER_ADMIN' && (
                        <div className="space-y-3">
-                         {/* Show expired access warning */}
-                         {courseAccessState?.source === 'code' && !courseAccessState?.hasAccess && courseAccessState?.accessEndAt && (
-                           <div className="p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-700 rounded-lg">
-                             <div className="flex items-center gap-2 text-red-700 dark:text-red-300">
-                               <FaExclamationTriangle className="text-red-600" />
-                               <span className="text-sm font-medium">خلاص الكود انتهى</span>
+                         <div className="p-4 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 border border-blue-200 dark:border-blue-700 rounded-lg">
+                           <div className="flex items-center gap-3 mb-2">
+                             <div className="p-2 bg-blue-100 dark:bg-blue-800 rounded-lg">
+                               <FaPlay className="text-blue-600 dark:text-blue-400" />
                              </div>
-                             <p className="text-xs text-red-600 dark:text-red-400 mt-1">
-                               لازم تدخل كود جديد عشان ترجع تدخل الكورس تاني
-                             </p>
+                             <div>
+                               <h4 className="text-sm font-semibold text-blue-900 dark:text-blue-100">أكواد الفيديوهات</h4>
+                               <p className="text-xs text-blue-700 dark:text-blue-300">وصول مخصص للفيديوهات</p>
+                             </div>
                            </div>
-                         )}
-                         
-                         <form onSubmit={handleRedeemCode} className="space-y-4">
-                           <label className="block text-sm sm:text-base font-medium text-gray-700 dark:text-gray-300 text-right">
-                             {courseAccessState?.source === 'code' && !courseAccessState?.hasAccess 
-                               ? 'اكتب الكود الجديد هنا' 
-                               : 'معاك كود للكورس؟'
-                             }
-                           </label>
-                           
-                           {/* Desktop Layout */}
-                           <div className="hidden sm:flex flex-col sm:flex-row gap-3">
-                             <input
-                               type="text"
-                               value={redeemCode}
-                               onChange={(e) => {
-                                 // Auto-format: uppercase and remove spaces/special chars
-                                 const formatted = e.target.value.replace(/[^A-Z0-9]/gi, '').toUpperCase();
-                                 if (formatted.length <= 12) {
-                                   setRedeemCode(formatted);
-                                 }
-                               }}
-                               onKeyDown={(e) => {
-                                 // Prevent space key
-                                 if (e.key === ' ') {
-                                   e.preventDefault();
-                                 }
-                               }}
-                               placeholder="زي كده: ABC123XYZ9"
-                               className="flex-1 min-w-0 px-4 py-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white focus:ring-2 focus:ring-[#9b172a] focus:border-transparent transition-all duration-200 text-center font-mono text-lg tracking-wider"
-                               maxLength="12"
-                               style={{ letterSpacing: '0.1em' }}
-                               required
-                             />
-                             <button
-                               type="submit"
-                               className={`px-4 sm:px-6 py-3 text-white rounded-lg font-medium transition-all duration-200 flex-shrink-0 min-w-max ${
-                                 courseAccessState?.source === 'code' && !courseAccessState?.hasAccess
-                                   ? 'bg-red-600 hover:bg-red-700 focus:ring-red-500'
-                                   : 'bg-green-600 hover:bg-green-700 focus:ring-green-500'
-                               } focus:ring-2 focus:ring-opacity-50`}
-                             >
-                               {courseAccessState?.source === 'code' && !courseAccessState?.hasAccess ? 'فعّل تاني' : 'فعّل'}
-                             </button>
+                           <p className="text-xs text-blue-800 dark:text-blue-200 leading-relaxed">
+                             بعض الفيديوهات في هذا الكورس تتطلب أكواد وصول خاصة. عند النقر على فيديو محمي، ستظهر نافذة لإدخال الكود المطلوب.
+                           </p>
+                           <div className="mt-3 p-2 bg-blue-100 dark:bg-blue-800/50 rounded border-l-4 border-blue-400">
+                             <ul className="text-xs text-blue-800 dark:text-blue-200 space-y-1">
+                               <li>• انقر على الفيديو المطلوب</li>
+                               <li>• أدخل الكود عند ظهور النافذة</li>
+                               <li>• استمتع بمشاهدة الفيديو</li>
+                             </ul>
                            </div>
-
-                           {/* Mobile Layout */}
-                           <div className="sm:hidden space-y-3">
-                             <input
-                               type="text"
-                               value={redeemCode}
-                               onChange={(e) => {
-                                 // Auto-format: uppercase and remove spaces/special chars
-                                 const formatted = e.target.value.replace(/[^A-Z0-9]/gi, '').toUpperCase();
-                                 if (formatted.length <= 12) {
-                                   setRedeemCode(formatted);
-                                 }
-                               }}
-                               onKeyDown={(e) => {
-                                 // Prevent space key
-                                 if (e.key === ' ') {
-                                   e.preventDefault();
-                                 }
-                               }}
-                               placeholder="زي كده: ABC123XYZ9"
-                               className="w-full px-4 py-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white focus:ring-2 focus:ring-[#9b172a] focus:border-transparent transition-all duration-200 text-center font-mono text-lg tracking-wider"
-                               maxLength="12"
-                               style={{ letterSpacing: '0.1em' }}
-                               required
-                             />
-                             <button
-                               type="submit"
-                               className={`w-full px-4 py-3 text-white rounded-lg font-medium transition-all duration-200 ${
-                                 courseAccessState?.source === 'code' && !courseAccessState?.hasAccess
-                                   ? 'bg-red-600 hover:bg-red-700 focus:ring-red-500'
-                                   : 'bg-green-600 hover:bg-green-700 focus:ring-green-500'
-                               } focus:ring-2 focus:ring-opacity-50 text-base`}
-                             >
-                               {courseAccessState?.source === 'code' && !courseAccessState?.hasAccess ? 'فعّل تاني' : 'فعّل'}
-                             </button>
-                           </div>
-
-                           <div className="space-y-2">
-                             <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 text-right leading-relaxed">
-                               {courseAccessState?.source === 'code' && !courseAccessState?.hasAccess && courseAccessState?.accessEndAt && (
-                                 <span className="text-red-500">خلاص الكود انتهى</span>
-                               )}
-                               </p>
-                                                            <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-700 rounded-lg p-3">
-                                 <h4 className="text-xs font-medium text-red-900 dark:text-red-100 mb-1">حاجات مهمة:</h4>
-                                 <ul className="text-xs text-red-800 dark:text-red-200 space-y-1">
-                                   <li>• الكود ده للكورس ده بس</li>
-                                   <li>• كل كود يتستعمل مرة واحدة بس</li>
-                                   <li>• الكود من 8-12 حرف وأرقام إنجليزي</li>
-                                   <li>• اتأكد إنك كاتب الكود صح</li>
-                                 </ul>
-                               </div>
-                           </div>
-                         </form>
+                         </div>
                        </div>
                      )}
                   </div>
@@ -790,29 +516,6 @@ export default function CourseDetail() {
                      </div>
          </div>
 
-         {/* Remaining Days Banner */}
-         {courseAccessState?.source === 'code' && courseAccessState?.accessEndAt && (
-           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-4 sm:mb-6">
-             <div className={`border rounded-xl p-3 sm:p-4 ${
-               courseAccessState?.hasAccess 
-                 ? 'bg-gradient-to-r from-[#9b172a]-50 to-[#9b172a]-50 dark:from-[#9b172a]-900/20 dark:to-[#9b172a]-900/20 border-red-200 dark:border-red-700'
-                 : 'bg-gradient-to-r from-red-50 to-[#9b172a]-50 dark:from-red-900/20 dark:to-[#9b172a]-900/20 border-red-200 dark:border-red-700'
-             }`}>
-               <div className="flex items-center justify-center gap-2 sm:gap-3">
-                 {courseAccessState?.hasAccess ? (
-                   <FaClock className="text-[#9b172a] text-lg sm:text-xl flex-shrink-0" />
-                 ) : (
-                   <FaExclamationTriangle className="text-red-600 text-lg sm:text-xl flex-shrink-0" />
-                 )}
-                 <RemainingDaysLabel 
-                   accessEndAt={courseAccessState.accessEndAt}
-                   className="text-base sm:text-lg font-semibold text-center"
-                   showExpiredMessage={!courseAccessState?.hasAccess}
-                 />
-               </div>
-             </div>
-           </div>
-         )}
  
          {/* هيكل الدورة */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
@@ -851,7 +554,7 @@ export default function CourseDetail() {
                           </div>
                         </div>
                         <div className="flex items-center justify-between sm:justify-end gap-3 sm:gap-4 flex-shrink-0">
-                          {!hidePrices && lesson.price > 0 && (
+                          {lesson.price > 0 && (
                             <span className="text-sm font-medium text-green-600 whitespace-nowrap">
                               {lesson.price} جنيه
                             </span>
@@ -935,7 +638,7 @@ export default function CourseDetail() {
                                     </div>
                                   </div>
                                   <div className="flex items-center justify-between sm:justify-end gap-3 sm:gap-4 flex-shrink-0">
-                                    {!hidePrices && lesson.price > 0 && (
+                                    {lesson.price > 0 && (
                                       <span className="text-sm font-medium text-green-600 whitespace-nowrap">
                                         {lesson.price} جنيه
                                       </span>
@@ -1064,16 +767,6 @@ export default function CourseDetail() {
                     <span className="font-semibold text-green-600">{previewItem.price} جنيه</span>
                   </div>
 
-                                     {/* Show remaining days if user has code-based access */}
-                   {courseAccessState?.source === 'code' && courseAccessState?.accessEndAt && (
-                     <div className="mb-4">
-                       <RemainingDaysLabel 
-                         accessEndAt={courseAccessState.accessEndAt}
-                         className="w-full justify-center"
-                         showExpiredMessage={!courseAccessState?.hasAccess}
-                       />
-                     </div>
-                   )}
                 </div>
 
                {/* Preview Content */}
@@ -1252,7 +945,6 @@ export default function CourseDetail() {
               lessonId={selectedLesson.lessonId}
               unitId={selectedLesson.unitId}
               lessonTitle={selectedLesson.title}
-              courseAccessState={courseAccessState}
             />
           )}
 

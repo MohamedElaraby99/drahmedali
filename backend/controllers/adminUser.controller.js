@@ -127,6 +127,7 @@ const createUser = async (req, res, next) => {
             fatherPhoneNumber,
             governorate,
             stage,
+            center,
             age 
         } = req.body;
 
@@ -156,8 +157,8 @@ const createUser = async (req, res, next) => {
         // Role-specific field validation
         if (role === 'USER') {
             // For USER role: phone number is required, email is optional
-            if (!phoneNumber || !governorate || !stage || !age) {
-                return next(new AppError("Phone number, governorate, stage, and age are required for regular users", 400));
+            if (!phoneNumber || !governorate || !stage || !center || !age) {
+                return next(new AppError("Phone number, governorate, stage, center, and age are required for regular users", 400));
             }
         } else if (role === 'ADMIN') {
             // For ADMIN role: email is required
@@ -201,6 +202,7 @@ const createUser = async (req, res, next) => {
             if (fatherPhoneNumber) userData.fatherPhoneNumber = fatherPhoneNumber;
             userData.governorate = governorate;
             userData.stage = stage;
+            userData.center = center;
             userData.age = parseInt(age);
         } else if (role === 'ADMIN') {
             userData.email = email;

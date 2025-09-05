@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserData, updateUserData } from "../../Redux/Slices/AuthSlice";
 import InputBox from "../../Components/InputBox/InputBox";
-import { FaUserCircle, FaPhone, FaMapMarkerAlt, FaGraduationCap, FaCalendarAlt, FaEnvelope, FaUser, FaIdCard, FaEdit, FaSave, FaTimes, FaBook } from "react-icons/fa";
+import { FaUserCircle, FaPhone, FaMapMarkerAlt, FaGraduationCap, FaCalendarAlt, FaEnvelope, FaUser, FaIdCard, FaEdit, FaSave, FaTimes, FaBook, FaBuilding } from "react-icons/fa";
 import { IoIosLock, IoIosRefresh } from "react-icons/io";
 import { FiMoreVertical } from "react-icons/fi";
 import Layout from "../../Layout/Layout";
@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 
 import { egyptianCities, getArabicCity } from "../../utils/governorateMapping";
 import UserQRCode from "../../Components/UserQRCode";
+import { axiosInstance } from "../../Helpers/axiosInstance";
 
 
 export default function Profile() {
@@ -23,6 +24,7 @@ export default function Profile() {
     phoneNumber: userData?.phoneNumber || "",
     fatherPhoneNumber: userData?.fatherPhoneNumber || "",
     governorate: userData?.governorate || "",
+    center: userData?.center || "",
     age: userData?.age || "",
     avatar: null,
     previewImage: null,
@@ -31,6 +33,7 @@ export default function Profile() {
   const avatarInputRef = useRef(null);
   const [isChanged, setIschanged] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [centers, setCenters] = useState([]);
 
   function handleImageUpload(e) {
     e.preventDefault();
@@ -60,6 +63,7 @@ export default function Profile() {
     if (userData?.role !== 'ADMIN' && userData?.role !== 'SUPER_ADMIN') {
       formData.append("fatherPhoneNumber", userInput.fatherPhoneNumber);
       formData.append("governorate", userInput.governorate);
+      formData.append("center", userInput.center);
       formData.append("age", userInput.age);
     }
     
@@ -91,6 +95,7 @@ export default function Profile() {
       phoneNumber: userData?.phoneNumber || "",
       fatherPhoneNumber: userData?.fatherPhoneNumber || "",
       governorate: userData?.governorate || "",
+      center: userData?.center?._id || "",
       age: userData?.age || "",
       avatar: null,
       previewImage: null,
@@ -101,6 +106,7 @@ export default function Profile() {
       phoneNumber: userData?.phoneNumber || "",
       fatherPhoneNumber: userData?.fatherPhoneNumber || "",
       governorate: userData?.governorate || "",
+      center: userData?.center?._id || "",
       age: userData?.age || "",
     });
   }
@@ -114,6 +120,7 @@ export default function Profile() {
       phoneNumber: userData?.phoneNumber || "",
       fatherPhoneNumber: userData?.fatherPhoneNumber || "",
       governorate: userData?.governorate || "",
+      center: userData?.center?._id || "",
       age: userData?.age || "",
       avatar: null,
       previewImage: null,
@@ -133,6 +140,7 @@ export default function Profile() {
         hasChanges = hasChanges ||
           userInput.fatherPhoneNumber !== userData?.fatherPhoneNumber ||
           userInput.governorate !== userData?.governorate ||
+          userInput.center !== (userData?.center?._id || "") ||
           userInput.age !== userData?.age;
       }
       
@@ -161,6 +169,22 @@ export default function Profile() {
       console.log('User data fetch result:', result);
     }
     if (Object.keys(userData).length < 1) fetchUser();
+  }, []);
+
+  // Fetch centers on component mount
+  useEffect(() => {
+    const fetchCenters = async () => {
+      try {
+        const response = await axiosInstance.get('/centers/active');
+        if (response.data.success) {
+          setCenters(response.data.data.centers);
+        }
+      } catch (error) {
+        console.error('Error fetching centers:', error);
+      }
+    };
+
+    fetchCenters();
   }, []);
 
   // Debug: Log user data to see what's being received
@@ -393,6 +417,39 @@ export default function Profile() {
                     <div className="text-xs text-gray-500 dark:text-gray-400">
                       المرحلة الدراسية لا يمكن تعديلها
                     </div>
+                  </div>
+
+                  {/* Center */}
+                  <div className="space-y-2">
+                    <label className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300">
+                      <FaBuilding className="text-[#9b172a]" />
+                      المركز التعليمي
+                    </label>
+                    <select
+                      value={isEditing ? userInput.center : (userData?.center?._id || "")}
+                      onChange={(e) => setUserInput({ ...userInput, center: e.target.value })}
+                      disabled={!isEditing}
+                      className={`w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#9b172a] focus:border-transparent text-right ${
+                        !isEditing 
+                          ? 'bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-300 cursor-not-allowed' 
+                          : 'bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
+                      }`}
+                      dir="rtl"
+                    >
+                      <option value="">اختر المركز التعليمي</option>
+                      {centers.map((center) => (
+                        <option key={center._id} value={center._id}>
+                          {center.name}
+                          {center.location && ` - ${center.location}`}
+                        </option>
+                      ))}
+                    </select>
+                    {!isEditing && userData?.center && (
+                      <div className="text-xs text-gray-500 dark:text-gray-400">
+                        المركز الحالي: {userData.center.name}
+                        {userData.center.location && ` - ${userData.center.location}`}
+                      </div>
+                    )}
                   </div>
 
                   {/* Governorate */}

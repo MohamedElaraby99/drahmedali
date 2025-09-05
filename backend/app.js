@@ -29,6 +29,7 @@ import groupRoutes from './routes/group.routes.js';
 import financialRoutes from './routes/financial.routes.js';
 import courseNotificationRoutes from './routes/courseNotification.routes.js';
 import achievementsRoutes from './routes/achievements.routes.js';
+import centerRoutes from './routes/center.routes.js';
 
 import gradeRoutes from './routes/grade.routes.js';
 import offlineGradeRoutes from './routes/offlineGrade.routes.js';
@@ -325,6 +326,7 @@ app.use('/api/v1/offline-grades', offlineGradeRoutes);
 app.use('/api/v1/achievements', achievementRoutes);
 app.use('/api/v1/instructors', instructorRoutes);
 app.use('/api/v1/stages', stageRoutes);
+app.use('/api/v1/centers', centerRoutes);
  
 
 app.all('*', (req, res) => {

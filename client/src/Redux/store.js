@@ -10,12 +10,10 @@ import AdminRechargeCodeSliceReducer from "./Slices/AdminRechargeCodeSlice"
 import AdminUserSliceReducer from "./Slices/AdminUserSlice"
 import WhatsAppServiceSliceReducer from "./Slices/WhatsAppServiceSlice"
 import CourseSliceReducer from "./Slices/CourseSlice"
-import LessonPurchaseSliceReducer from "./Slices/LessonPurchaseSlice"
 import ExamSliceReducer from "./Slices/ExamSlice"
 import GradeSliceReducer from "./Slices/GradeSlice"
 import InstructorSliceReducer from "./Slices/InstructorSlice"
 import StageSliceReducer from "./Slices/StageSlice"
-import PaymentSliceReducer from "./Slices/PaymentSlice"
 import VideoProgressSliceReducer from "./Slices/VideoProgressSlice"
 import DeviceManagementSliceReducer from "./Slices/DeviceManagementSlice"
 import LiveMeetingSliceReducer from "./Slices/LiveMeetingSlice"
@@ -42,13 +40,11 @@ import FinancialSliceReducer from "./Slices/FinancialSlice"
         whatsappService: WhatsAppServiceSliceReducer,
         course: CourseSliceReducer,
 
-        lessonPurchase: LessonPurchaseSliceReducer,
         courseAccess: CourseAccessSliceReducer,
           exam: ExamSliceReducer,
   grade: GradeSliceReducer,
   instructor: InstructorSliceReducer,
   stage: StageSliceReducer,
-  payment: PaymentSliceReducer,
   videoProgress: VideoProgressSliceReducer,
   deviceManagement: DeviceManagementSliceReducer,
   liveMeeting: LiveMeetingSliceReducer,

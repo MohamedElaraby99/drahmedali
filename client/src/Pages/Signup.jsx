@@ -7,7 +7,7 @@ import Layout from "../Layout/Layout";
 import { createAccount } from "../Redux/Slices/AuthSlice";
 import InputBox from "../Components/InputBox/InputBox";
 import CaptchaComponent from "../Components/CaptchaComponent";
-import { FaUser, FaEnvelope, FaLock, FaEye, FaEyeSlash, FaUserPlus, FaGraduationCap, FaCamera, FaUpload, FaPhone, FaMapMarkerAlt, FaBook, FaExclamationTriangle, FaTimes, FaCheckCircle, FaInfoCircle } from "react-icons/fa";
+import { FaUser, FaEnvelope, FaLock, FaEye, FaEyeSlash, FaUserPlus, FaGraduationCap, FaCamera, FaUpload, FaPhone, FaMapMarkerAlt, FaBook, FaExclamationTriangle, FaTimes, FaCheckCircle, FaInfoCircle, FaBuilding } from "react-icons/fa";
 import { axiosInstance } from "../Helpers/axiosInstance";
 import { useEffect } from "react";
 import { egyptianCities } from "../utils/governorateMapping";
@@ -22,6 +22,7 @@ export default function Signup() {
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [stages, setStages] = useState([]);
+  const [centers, setCenters] = useState([]);
   const [captchaSessionId, setCaptchaSessionId] = useState("");
   const [isCaptchaVerified, setIsCaptchaVerified] = useState(false);
   const [captchaReset, setCaptchaReset] = useState(false);
@@ -36,6 +37,7 @@ export default function Signup() {
     fatherPhoneNumber: "",
     governorate: "",
     stage: "",
+    center: "",
     age: "",
     avatar: "",
     adminCode: "",
@@ -44,7 +46,7 @@ export default function Signup() {
   // Check if this is an admin registration
   const isAdminRegistration = signupData.adminCode === 'ADMIN123';
 
-  // Fetch stages on component mount
+  // Fetch stages and centers on component mount
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -52,6 +54,12 @@ export default function Signup() {
         const stagesResponse = await axiosInstance.get('/stages');
         if (stagesResponse.data.success) {
           setStages(stagesResponse.data.data.stages);
+        }
+
+        // Fetch active centers
+        const centersResponse = await axiosInstance.get('/centers/active');
+        if (centersResponse.data.success) {
+          setCenters(centersResponse.data.data.centers);
         }
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -183,6 +191,11 @@ export default function Signup() {
       if (!signupData.stage || signupData.stage.trim() === "") {
         errors.push("🎓 اختار السنة الدراسية بتاعتك");
         newFieldErrors.stage = "اختار سنتك الدراسية";
+      }
+      
+      if (!signupData.center || signupData.center.trim() === "") {
+        errors.push("🏢 اختار المركز التعليمي بتاعك");
+        newFieldErrors.center = "اختار المركز التعليمي";
       }
       
       if (!signupData.age || signupData.age.trim() === "") {
@@ -318,6 +331,7 @@ export default function Signup() {
       }
       requestData.governorate = signupData.governorate;
       requestData.stage = signupData.stage;
+      requestData.center = signupData.center;
       requestData.age = signupData.age;
     }
 
@@ -364,6 +378,7 @@ export default function Signup() {
             fatherPhoneNumber: "",
             governorate: "",
             stage: "",
+            center: "",
             age: "",
             avatar: "",
             adminCode: "",
@@ -411,6 +426,7 @@ export default function Signup() {
             fatherPhoneNumber: "",
             governorate: "",
             stage: "",
+            center: "",
             age: "",
             avatar: "",
             adminCode: "",
@@ -737,6 +753,46 @@ export default function Signup() {
                       <p className="text-red-500 text-xs mt-1 text-right flex items-center gap-1">
                         <FaExclamationTriangle className="text-xs" />
                         {fieldErrors.stage}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {/* Center Field - Only for regular users */}
+              {!isAdminRegistration && (
+                <div className="group">
+                  <label htmlFor="center" className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3 text-right">
+                    المركز التعليمي
+                  </label>
+                  <div className="relative">
+                    <div className="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
+                      <FaBuilding className="h-5 w-5 text-[#9b172a] group-focus-within:text-[#9b172a] transition-colors duration-200" />
+                    </div>
+                    <select
+                      id="center"
+                      name="center"
+                      required
+                      className={`block w-full pr-12 pl-4 py-4 border-2 rounded-xl bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-4 transition-all duration-300 text-right shadow-sm hover:shadow-md ${
+                        fieldErrors.center 
+                          ? 'border-red-500 focus:ring-red-500/20 focus:border-red-500' 
+                          : 'border-gray-200 dark:border-gray-600 focus:ring-[#9b172a]/20 focus:border-[#9b172a]'
+                      }`}
+                      value={signupData.center}
+                      onChange={handleUserInput}
+                    >
+                      <option value="">اختر المركز التعليمي</option>
+                      {centers.map((center) => (
+                        <option key={center._id} value={center._id}>
+                          {center.name}
+                          {center.location && ` - ${center.location}`}
+                        </option>
+                      ))}
+                    </select>
+                    {fieldErrors.center && (
+                      <p className="text-red-500 text-xs mt-1 text-right flex items-center gap-1">
+                        <FaExclamationTriangle className="text-xs" />
+                        {fieldErrors.center}
                       </p>
                     )}
                   </div>

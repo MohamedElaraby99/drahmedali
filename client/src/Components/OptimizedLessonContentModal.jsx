@@ -6,18 +6,16 @@ import CustomVideoPlayer from './CustomVideoPlayer';
 import PDFViewer from './PDFViewer';
 import ExamModal from './Exam/ExamModal';
 import EssayExamModal from './EssayExamModal';
+import VideoAccessModal from './VideoAccessModal';
 import useLessonData from '../Helpers/useLessonData';
 import { generateFileUrl } from "../utils/fileUtils";
 import RemainingDaysLabel from './RemainingDaysLabel';
 
-const OptimizedLessonContentModal = ({ isOpen, onClose, courseId, lessonId, unitId = null, lessonTitle = "درس", courseAccessState = null }) => {
+const OptimizedLessonContentModal = ({ isOpen, onClose, courseId, lessonId, unitId = null, lessonTitle = "درس" }) => {
   const { data: userData } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const { lesson, courseInfo, loading, error, refetch } = useLessonData(courseId, lessonId, unitId);
   
-  // Check if access has expired
-  const isAccessExpired = courseAccessState?.source === 'code' && courseAccessState?.accessEndAt && 
-    new Date(courseAccessState.accessEndAt) <= new Date();
   
   const [selectedTab, setSelectedTab] = useState('video');
   const [examModalOpen, setExamModalOpen] = useState(false);
@@ -33,6 +31,10 @@ const OptimizedLessonContentModal = ({ isOpen, onClose, courseId, lessonId, unit
   // PDFViewer state
   const [pdfViewerOpen, setPdfViewerOpen] = useState(false);
   const [currentPdf, setCurrentPdf] = useState(null);
+
+  // VideoAccessModal state
+  const [videoAccessModalOpen, setVideoAccessModalOpen] = useState(false);
+  const [videoRequiringAccess, setVideoRequiringAccess] = useState(null);
 
   // Reset tab when lesson changes
   useEffect(() => {
@@ -161,6 +163,36 @@ const OptimizedLessonContentModal = ({ isOpen, onClose, courseId, lessonId, unit
     return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
   };
 
+  // Check if video requires special access (example: videos with certain properties)
+  const videoRequiresSpecialAccess = (video) => {
+    // You can customize this logic based on your requirements
+    // For example, check if video has a special flag or is premium
+    return video.requiresAccessCode || video.premium || video.isLocked;
+  };
+
+  const handleVideoClick = (video) => {
+    // Check if video requires special access code
+    if (videoRequiresSpecialAccess(video)) {
+      setVideoRequiringAccess(video);
+      setVideoAccessModalOpen(true);
+    } else {
+      // Normal flow - open video player directly
+      setCurrentVideo(video);
+      setVideoPlayerOpen(true);
+    }
+  };
+
+  const handleVideoAccessGranted = (video) => {
+    // When access is granted, open the video player
+    setCurrentVideo(video);
+    setVideoPlayerOpen(true);
+  };
+
+  const handleVideoAccessDenied = () => {
+    // Handle case when access is denied (optional)
+    console.log('Video access denied');
+  };
+
   const convertUrl = (url) => {
     if (!url) return null;
     
@@ -228,14 +260,7 @@ const OptimizedLessonContentModal = ({ isOpen, onClose, courseId, lessonId, unit
               {/* Play Button Overlay */}
               <div 
                 className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-40 hover:bg-opacity-30 transition-all duration-200"
-                                 onClick={() => {
-                   // Check if access has expired before opening video
-                   if (isAccessExpired) {
-                     return;
-                   }
-                   setCurrentVideo(video);
-                   setVideoPlayerOpen(true);
-                 }}
+                onClick={() => handleVideoClick(video)}
               >
                 <div className="text-center">
                   <div className="bg-white/20 backdrop-blur-sm rounded-full p-6 mb-4 group-hover:bg-white/30 transition-all duration-200 transform group-hover:scale-110">
@@ -288,15 +313,10 @@ const OptimizedLessonContentModal = ({ isOpen, onClose, courseId, lessonId, unit
               </div>
                              <button
                  onClick={() => {
-                   // Check if access has expired before opening PDF
-                   if (isAccessExpired) {
-                     return;
-                   }
                    setCurrentPdf(pdf);
                    setPdfViewerOpen(true);
                  }}
                  className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-3 sm:px-4 py-2 rounded-lg transition-all duration-200 hover:shadow-lg text-sm sm:text-base w-full sm:w-auto justify-center"
-                 disabled={isAccessExpired}
                >
                  <FaEye />
                  عرض المستند
@@ -405,15 +425,8 @@ const OptimizedLessonContentModal = ({ isOpen, onClose, courseId, lessonId, unit
                 </div>
               ) : (
                                  <button 
-                   onClick={() => {
-                     // Check if access has expired before starting exam
-                     if (isAccessExpired) {
-                       return;
-                     }
-                     handleStartExam(exam, 'exam');
-                   }}
+                   onClick={() => handleStartExam(exam, 'exam')}
                    className="bg-[#9b172a] hover:bg-[#9b172a]-700 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg transition-all duration-200 hover:shadow-lg font-medium text-sm sm:text-base w-full sm:w-auto"
-                   disabled={isAccessExpired}
                  >
                    بدء الامتحان
                  </button>
@@ -478,16 +491,9 @@ const OptimizedLessonContentModal = ({ isOpen, onClose, courseId, lessonId, unit
                   {Math.max(...training.userResults.map(r => r.percentage))}%
                 </div>
                 <button 
-                  onClick={() => {
-                    // Check if access has expired before clearing training attempt
-                    if (isAccessExpired) {
-                      return;
-                    }
-                    handleClearTrainingAttempt(training._id);
-                  }}
+                  onClick={() => handleClearTrainingAttempt(training._id)}
                   className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-xs transition-colors mt-2"
                   title="مسح محاولات التدريب"
-                  disabled={isAccessExpired}
                 >
                   مسح المحاولات
                 </button>
@@ -513,15 +519,8 @@ const OptimizedLessonContentModal = ({ isOpen, onClose, courseId, lessonId, unit
                 </div>
               ) : (
                                  <button 
-                   onClick={() => {
-                     // Check if access has expired before starting training
-                     if (isAccessExpired) {
-                       return;
-                     }
-                     handleStartExam(training, 'training');
-                   }}
+                   onClick={() => handleStartExam(training, 'training')}
                    className="bg-green-600 hover:bg-green-700 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg transition-all duration-200 hover:shadow-lg font-medium text-sm sm:text-base w-full sm:w-auto"
-                   disabled={isAccessExpired}
                  >
                    {training.attemptCount > 0 ? 'إعادة التدريب' : 'بدء التدريب'}
                  </button>
@@ -684,12 +683,10 @@ const OptimizedLessonContentModal = ({ isOpen, onClose, courseId, lessonId, unit
                 return (
                   <button
                     onClick={() => {
-                      if (isAccessExpired) return;
                       setSelectedEssayExam(exam);
                       setEssayExamModalOpen(true);
                     }}
                     className="bg-purple-600 hover:bg-purple-700 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg transition-all duration-200 hover:shadow-lg font-medium text-sm sm:text-base w-full sm:w-auto"
-                    disabled={isAccessExpired}
                   >
                     بدء الامتحان المقالي
                   </button>
@@ -703,27 +700,6 @@ const OptimizedLessonContentModal = ({ isOpen, onClose, courseId, lessonId, unit
   );
 
   if (!isOpen) return null;
-
-  // Block access if code-based access has expired
-  if (isAccessExpired) {
-    return (
-      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60 backdrop-blur-sm">
-        <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl p-8 text-center max-w-md">
-          <div className="text-red-500 text-4xl mb-4">⚠️</div>
-          <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-2">انتهت صلاحية الوصول</h3>
-          <p className="text-gray-600 dark:text-gray-300 mb-4">
-            انتهت صلاحية الوصول عبر الكود. يرجى إعادة تفعيل كود جديد أو شراء المحتوى.
-          </p>
-          <button 
-            onClick={onClose}
-            className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg"
-          >
-            إغلاق
-          </button>
-        </div>
-      </div>
-    );
-  }
 
   if (loading) {
     return (
@@ -795,16 +771,6 @@ const OptimizedLessonContentModal = ({ isOpen, onClose, courseId, lessonId, unit
                 <p className="text-[#9b172a]-200 mt-1 text-xs sm:text-sm">{courseInfo.title}</p>
               )}
               
-                             {/* Show remaining days if user has code-based access */}
-               {courseAccessState?.source === 'code' && courseAccessState?.accessEndAt && (
-                 <div className="mt-3">
-                   <RemainingDaysLabel 
-                     accessEndAt={courseAccessState.accessEndAt}
-                     className="bg-white/20 text-white border-white/30"
-                     showExpiredMessage={!courseAccessState?.hasAccess}
-                   />
-                 </div>
-               )}
             </div>
             <button
               className="text-white hover:text-red-200 text-xl sm:text-2xl transition-colors duration-200 flex-shrink-0 p-1"
@@ -948,6 +914,23 @@ const OptimizedLessonContentModal = ({ isOpen, onClose, courseId, lessonId, unit
             setSelectedEssayExam(null);
             refetch(); // Refresh lesson data to show updated submission status
           }}
+        />
+      )}
+
+      {/* Video Access Modal */}
+      {videoAccessModalOpen && videoRequiringAccess && (
+        <VideoAccessModal
+          isOpen={videoAccessModalOpen}
+          onClose={() => {
+            setVideoAccessModalOpen(false);
+            setVideoRequiringAccess(null);
+          }}
+          video={videoRequiringAccess}
+          courseId={courseId}
+          lessonId={lessonId}
+          unitId={unitId}
+          onAccessGranted={handleVideoAccessGranted}
+          onAccessDenied={handleVideoAccessDenied}
         />
       )}
     </div>

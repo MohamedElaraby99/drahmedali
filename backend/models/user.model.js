@@ -60,6 +60,13 @@ const userSchema = new Schema({
             return !['ADMIN', 'SUPER_ADMIN'].includes(this.role);
         }
     },
+    center: {
+        type: Schema.Types.ObjectId,
+        ref: 'Center',
+        required: function() {
+            return !['ADMIN', 'SUPER_ADMIN'].includes(this.role);
+        }
+    },
     age: {
         type: Number,
         required: function() {

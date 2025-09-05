@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { isLoggedIn, authorisedRoles } from '../middleware/auth.middleware.js';
-import { generateCourseAccessCodes, redeemCourseAccessCode, checkCourseAccess, listCourseAccessCodes, deleteCourseAccessCode, bulkDeleteCourseAccessCodes } from '../controllers/courseAccess.controller.js';
+import { generateCourseAccessCodes, redeemCourseAccessCode, checkCourseAccess, listCourseAccessCodes, deleteCourseAccessCode, bulkDeleteCourseAccessCodes, redeemVideoAccessCode } from '../controllers/courseAccess.controller.js';
 
 const router = Router();
 
@@ -12,6 +12,7 @@ router.post('/admin/codes/bulk-delete', isLoggedIn, authorisedRoles("ADMIN", "SU
 
 // User endpoints
 router.post('/redeem', isLoggedIn, redeemCourseAccessCode);
+router.post('/redeem-video', isLoggedIn, redeemVideoAccessCode);
 router.get('/check/:courseId', isLoggedIn, checkCourseAccess);
 
 export default router;

@@ -98,6 +98,7 @@ export default function AdminUserDashboard() {
     const [showResetWalletsConfirm, setShowResetWalletsConfirm] = useState(false);
     const [showResetCodesConfirm, setShowResetCodesConfirm] = useState(false);
     const [createUserForm, setCreateUserForm] = useState({
+        fullName: '',
         email: '',
         password: '',
         role: 'USER',
@@ -105,30 +106,39 @@ export default function AdminUserDashboard() {
         fatherPhoneNumber: '',
         governorate: '',
         stage: '',
+        center: '',
         age: ''
     });
     const [activeTab, setActiveTab] = useState("users");
     const [stages, setStages] = useState([]);
+    const [centers, setCenters] = useState([]);
 
     // Check if current user can create admin users
     const canCreateAdmin = user && (user.role === 'SUPER_ADMIN');
     const canDeleteAdmin = user && (user.role === 'SUPER_ADMIN');
     const canChangeRoleToAdmin = user && (user.role === 'SUPER_ADMIN');
 
-    // Fetch stages on component mount
+    // Fetch stages and centers on component mount
     useEffect(() => {
-        const fetchStages = async () => {
+        const fetchData = async () => {
             try {
-                const response = await axiosInstance.get('/stages');
-                if (response.data.success) {
-                    setStages(response.data.data.stages);
+                // Fetch stages
+                const stagesResponse = await axiosInstance.get('/stages');
+                if (stagesResponse.data.success) {
+                    setStages(stagesResponse.data.data.stages);
+                }
+
+                // Fetch centers
+                const centersResponse = await axiosInstance.get('/centers/active');
+                if (centersResponse.data.success) {
+                    setCenters(centersResponse.data.data.centers);
                 }
             } catch (error) {
-                console.error('Error fetching stages:', error);
+                console.error('Error fetching data:', error);
             }
         };
 
-        fetchStages();
+        fetchData();
     }, []);
 
     // Monitor filter changes
@@ -349,6 +359,7 @@ export default function AdminUserDashboard() {
             fatherPhoneNumber: user.fatherPhoneNumber || '',
             governorate: user.governorate || '',
             stage: user.stage?._id || null,
+            center: user.center?._id || null,
             age: user.age || '',
             role: user.role || 'USER',
             code: user.code || '',
@@ -1257,9 +1268,36 @@ export default function AdminUserDashboard() {
                                 onSubmit={async (e) => {
                                     e.preventDefault();
                                     try {
+                                        console.log('Creating user with data:', createUserForm);
+                                        
+                                        // Client-side validation for USER role
+                                        if (createUserForm.role === 'USER') {
+                                            if (!createUserForm.center) {
+                                                toast.error('يرجى اختيار المركز التعليمي للطلاب');
+                                                return;
+                                            }
+                                            if (!createUserForm.phoneNumber) {
+                                                toast.error('رقم الهاتف مطلوب للطلاب');
+                                                return;
+                                            }
+                                            if (!createUserForm.governorate) {
+                                                toast.error('المحافظة مطلوبة للطلاب');
+                                                return;
+                                            }
+                                            if (!createUserForm.stage) {
+                                                toast.error('المرحلة التعليمية مطلوبة للطلاب');
+                                                return;
+                                            }
+                                            if (!createUserForm.age) {
+                                                toast.error('العمر مطلوب للطلاب');
+                                                return;
+                                            }
+                                        }
+                                        
                                         await dispatch(createUser(createUserForm)).unwrap();
                                         setShowCreateModal(false);
                                         setCreateUserForm({
+                                            fullName: '',
                                             email: '',
                                             password: '',
                                             role: 'USER',
@@ -1267,11 +1305,24 @@ export default function AdminUserDashboard() {
                                             fatherPhoneNumber: '',
                                             governorate: '',
                                             stage: '',
+                                            center: '',
                                             age: ''
                                         });
                                         toast.success('تم إنشاء المستخدم بنجاح');
                                     } catch (error) {
-                                        toast.error(error || 'فشل في إنشاء المستخدم');
+                                        console.error('Create user error:', error);
+                                        const errorMessage = error?.response?.data?.message || error?.message || error || 'فشل في إنشاء المستخدم';
+                                        
+                                        // Show specific error messages for common issues
+                                        if (errorMessage.includes('Phone number already exists')) {
+                                            toast.error('رقم الهاتف مستخدم بالفعل. يرجى استخدام رقم هاتف آخر.');
+                                        } else if (errorMessage.includes('Email already exists')) {
+                                            toast.error('البريد الإلكتروني مستخدم بالفعل. يرجى استخدام بريد إلكتروني آخر.');
+                                        } else if (errorMessage.includes('required')) {
+                                            toast.error('يرجى ملء جميع الحقول المطلوبة.');
+                                        } else {
+                                            toast.error(errorMessage);
+                                        }
                                     }
                                 }}
                                 className="p-6 space-y-4"
@@ -1311,14 +1362,28 @@ export default function AdminUserDashboard() {
                                 </div>
 
                                 {/* Basic Information */}
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                                     <div>
                                         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                                            البريد الإلكتروني *
+                                            الاسم الكامل *
+                                        </label>
+                                        <input
+                                            type="text"
+                                            required
+                                            value={createUserForm.fullName}
+                                            onChange={(e) => setCreateUserForm({...createUserForm, fullName: e.target.value})}
+                                            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-[#9b172a]"
+                                            placeholder="أدخل الاسم الكامل"
+                                        />
+                                    </div>
+
+                                    <div>
+                                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                            البريد الإلكتروني {createUserForm.role === 'ADMIN' ? '*' : '(اختياري)'}
                                         </label>
                                         <input
                                             type="email"
-                                            required
+                                            required={createUserForm.role === 'ADMIN'}
                                             value={createUserForm.email}
                                             onChange={(e) => setCreateUserForm({...createUserForm, email: e.target.value})}
                                             className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-[#9b172a]"
@@ -1359,6 +1424,12 @@ export default function AdminUserDashboard() {
                                                     className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-[#9b172a]"
                                                     placeholder="أدخل رقم الهاتف"
                                                 />
+                                                <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                                                    رقم الهاتف يجب أن يكون فريد (غير مستخدم من قبل)
+                                                </div>
+                                                <div className="text-xs text-blue-600 dark:text-blue-400 mt-1">
+                                                    💡 يمكنك البحث في قائمة المستخدمين أعلاه للتحقق من الأرقام المستخدمة
+                                                </div>
                                             </div>
 
                                             <div>
@@ -1408,6 +1479,26 @@ export default function AdminUserDashboard() {
                                                     {stages.map((stage) => (
                                                         <option key={stage._id} value={stage._id}>
                                                             {stage.name}
+                                                        </option>
+                                                    ))}
+                                                </select>
+                                            </div>
+
+                                            <div>
+                                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                                    المركز التعليمي *
+                                                </label>
+                                                <select
+                                                    required
+                                                    value={createUserForm.center}
+                                                    onChange={(e) => setCreateUserForm({...createUserForm, center: e.target.value})}
+                                                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-[#9b172a]"
+                                                >
+                                                    <option value="">اختر المركز التعليمي</option>
+                                                    {centers.map((center) => (
+                                                        <option key={center._id} value={center._id}>
+                                                            {center.name}
+                                                            {center.location && ` - ${center.location}`}
                                                         </option>
                                                     ))}
                                                 </select>
@@ -1738,6 +1829,28 @@ export default function AdminUserDashboard() {
                                             ) : (
                                                 <p className="text-gray-900 dark:text-white font-medium">
                                                     {selectedUser.stage && selectedUser.stage.name ? selectedUser.stage.name : 'غير محدد'}
+                                                </p>
+                                            )}
+                                        </div>
+                                        <div className="space-y-2">
+                                            <label className="text-sm font-medium text-gray-600 dark:text-gray-400">المركز التعليمي</label>
+                                            {isEditing ? (
+                                                <select
+                                                    value={editForm.center || ""}
+                                                    onChange={(e) => setEditForm({...editForm, center: e.target.value || null})}
+                                                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-[#9b172a]"
+                                                >
+                                                    <option value="">اختر المركز التعليمي</option>
+                                                    {centers.map((center) => (
+                                                        <option key={center._id} value={center._id}>
+                                                            {center.name}
+                                                            {center.location && ` - ${center.location}`}
+                                                        </option>
+                                                    ))}
+                                                </select>
+                                            ) : (
+                                                <p className="text-gray-900 dark:text-white font-medium">
+                                                    {selectedUser.center && selectedUser.center.name ? selectedUser.center.name : 'غير محدد'}
                                                 </p>
                                             )}
                                         </div>

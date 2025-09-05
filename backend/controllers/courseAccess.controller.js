@@ -262,4 +262,138 @@ export const bulkDeleteCourseAccessCodes = asyncHandler(async (req, res) => {
     return res.status(200).json(new ApiResponse(200, { deletedCount: result.deletedCount || 0 }, 'Bulk delete completed'));
 });
 
+// User: redeem code specifically for video access
+export const redeemVideoAccessCode = asyncHandler(async (req, res) => {
+    const { code, courseId, lessonId, unitId, videoId } = req.body;
+    const userId = req.user.id;
+    
+    if (!code) throw new ApiError(400, 'code is required');
+    if (!courseId) throw new ApiError(400, 'courseId is required');
+    if (!lessonId) throw new ApiError(400, 'lessonId is required');
+    if (!videoId) throw new ApiError(400, 'videoId is required');
+
+    const redeemable = await CourseAccessCode.findRedeemable(code);
+    if (!redeemable) throw new ApiError(400, 'Invalid or expired code');
+
+    // Check if the code is for the correct course
+    if (redeemable.courseId.toString() !== courseId) {
+        throw new ApiError(400, 'This code is not valid for this course');
+    }
+
+    // Ensure course exists
+    const course = await Course.findById(redeemable.courseId);
+    if (!course) throw new ApiError(404, 'Course not found for this code');
+
+    // Additional validation: Check if the lesson and video exist in the course
+    let lessonFound = false;
+    let videoFound = false;
+
+    // Check direct lessons
+    if (course.directLessons) {
+        const lesson = course.directLessons.find(l => l._id.toString() === lessonId);
+        if (lesson) {
+            lessonFound = true;
+            const video = lesson.videos?.find(v => v._id.toString() === videoId);
+            if (video) videoFound = true;
+        }
+    }
+
+    // Check lessons within units if not found in direct lessons
+    if (!lessonFound && course.units) {
+        for (const unit of course.units) {
+            if (unitId && unit._id.toString() !== unitId) continue;
+            
+            const lesson = unit.lessons?.find(l => l._id.toString() === lessonId);
+            if (lesson) {
+                lessonFound = true;
+                const video = lesson.videos?.find(v => v._id.toString() === videoId);
+                if (video) videoFound = true;
+                break;
+            }
+        }
+    }
+
+    if (!lessonFound) {
+        throw new ApiError(404, 'Lesson not found in this course');
+    }
+
+    if (!videoFound) {
+        throw new ApiError(404, 'Video not found in this lesson');
+    }
+
+    const now = new Date();
+    // Compute access window based on fixed date range
+    let start = new Date(redeemable.accessStartAt);
+    let end = new Date(redeemable.accessEndAt);
+    if (now > end) throw new ApiError(400, 'This code is expired for its access window');
+
+    // Create or update access record for video-specific access
+    const existingAccess = await CourseAccess.findOne({
+        userId,
+        courseId: redeemable.courseId,
+        source: 'code'
+    });
+
+    let access;
+    if (existingAccess) {
+        // Update existing access if the new code provides longer access
+        if (end > new Date(existingAccess.accessEndAt)) {
+            existingAccess.accessEndAt = end;
+            existingAccess.accessStartAt = start;
+            existingAccess.codeId = redeemable._id;
+            access = await existingAccess.save();
+        } else {
+            access = existingAccess;
+        }
+    } else {
+        // Create new access record
+        access = await CourseAccess.create({
+            userId,
+            courseId: redeemable.courseId,
+            accessStartAt: start,
+            accessEndAt: end,
+            source: 'code',
+            codeId: redeemable._id
+        });
+    }
+
+    // Mark code as used
+    redeemable.isUsed = true;
+    redeemable.usedBy = userId;
+    redeemable.usedAt = now;
+    await redeemable.save();
+
+    // Log wallet transaction entry (video access code usage)
+    try {
+        const user = await userModel.findById(userId).select('wallet');
+        if (user) {
+            if (!user.wallet) {
+                user.wallet = { balance: 0, transactions: [] };
+            }
+            user.wallet.transactions.push({
+                type: 'video_access_code',
+                amount: 0,
+                code: redeemable.code,
+                description: `تم تفعيل كود وصول للفيديو في الكورس: ${course.title}`,
+                date: now,
+                status: 'completed'
+            });
+            await user.save();
+        }
+    } catch (e) {
+        console.error('Failed to record video access code transaction:', e.message);
+    }
+
+    return res.status(200).json(new ApiResponse(200, {
+        access: {
+            id: access._id,
+            courseId: access.courseId,
+            accessStartAt: access.accessStartAt,
+            accessEndAt: access.accessEndAt,
+            videoId,
+            lessonId
+        }
+    }, 'Video access unlocked successfully'));
+});
+
 

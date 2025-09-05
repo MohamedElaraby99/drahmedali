@@ -29,7 +29,10 @@ const lessonSchema = new mongoose.Schema({
       url: { type: String, required: true },
       title: { type: String, default: '' },
       description: { type: String, default: '' },
-      publishDate: { type: Date }
+      publishDate: { type: Date },
+      requiresAccessCode: { type: Boolean, default: false },
+      premium: { type: Boolean, default: false },
+      isLocked: { type: Boolean, default: false }
     }
   ],
   pdfs: [
