@@ -33,6 +33,10 @@ const examResultSchema = new Schema({
         enum: ['training', 'final'],
         required: true
     },
+    examId: {
+        type: String,
+        required: true
+    },
     score: {
         type: Number,
         required: true,

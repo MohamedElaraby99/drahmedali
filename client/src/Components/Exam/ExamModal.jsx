@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { 
   FaTimes, 
   FaClock, 
@@ -15,7 +16,9 @@ import {
   FaArrowLeft,
   FaArrowRight,
   FaEye,
-  FaEyeSlash
+  FaEyeSlash,
+  FaHistory,
+  FaCheckCircle
 } from 'react-icons/fa';
 import { takeTrainingExam, takeFinalExam, clearExamError, clearLastExamResult } from '../../Redux/Slices/ExamSlice';
 import { axiosInstance } from '../../Helpers/axiosInstance';
@@ -24,6 +27,7 @@ import { toast } from 'react-hot-toast';
 
 const ExamModal = ({ isOpen, onClose, exam, courseId, lessonId, unitId, examType = 'training' }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { loading, error, lastExamResult } = useSelector(state => state.exam);
   
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -40,6 +44,7 @@ const ExamModal = ({ isOpen, onClose, exam, courseId, lessonId, unitId, examType
   const [timeTaken, setTimeTaken] = useState(0);
   const [imageModalOpen, setImageModalOpen] = useState(false);
   const [currentImage, setCurrentImage] = useState(null);
+  const [showDetailedReview, setShowDetailedReview] = useState(false);
   
   const timerRef = useRef(null);
   const startTimeRef = useRef(null);
@@ -80,6 +85,7 @@ const ExamModal = ({ isOpen, onClose, exam, courseId, lessonId, unitId, examType
       setExamCompleted(false);
       setShowResults(false);
       setTimeTaken(0);
+      setShowDetailedReview(false);
     }
   }, [exam]);
 
@@ -90,6 +96,7 @@ const ExamModal = ({ isOpen, onClose, exam, courseId, lessonId, unitId, examType
     setShowResults(false);
     setExamCompleted(false);
     setIsTimerRunning(false);
+    setShowDetailedReview(false);
   }, [dispatch, exam?._id]);
 
   // Handle exam result only when it matches current exam context
@@ -379,7 +386,87 @@ const ExamModal = ({ isOpen, onClose, exam, courseId, lessonId, unitId, examType
           </div>
         </div>
 
-        <div className="mt-6">
+        {/* Detailed Question Review Button */}
+        {lastExamResult?.questions && lastExamResult.questions.length > 0 && (
+          <div className="mt-6">
+            <button
+              onClick={() => setShowDetailedReview(!showDetailedReview)}
+              className="w-full bg-gray-600 hover:bg-gray-700 text-white py-3 px-4 rounded-lg font-medium transition-colors flex items-center justify-center gap-2"
+            >
+              <FaEye />
+              {showDetailedReview ? 'إخفاء مراجعة الأسئلة' : 'مراجعة الأسئلة التفصيلية'}
+            </button>
+          </div>
+        )}
+
+        {/* Detailed Question Review Content */}
+        {showDetailedReview && lastExamResult?.questions && lastExamResult.questions.length > 0 && (
+          <div className="mt-6">
+            <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+              مراجعة الأسئلة
+            </h4>
+            <div className="space-y-4 max-h-96 overflow-y-auto">
+              {lastExamResult.questions.map((question, index) => (
+                <div key={index} className="border border-gray-200 dark:border-gray-600 rounded-lg p-4">
+                  <div className="flex items-start gap-2 mb-3">
+                    {question.isCorrect ? (
+                      <FaCheckCircle className="text-green-500 mt-1" />
+                    ) : (
+                      <FaTimes className="text-red-500 mt-1" />
+                    )}
+                    <div className="flex-1">
+                      <p className="font-medium text-gray-900 dark:text-white mb-2">
+                        السؤال {index + 1}: {question.question}
+                      </p>
+                      <div className="space-y-1">
+                        {question.options?.map((option, optionIndex) => (
+                          <div
+                            key={optionIndex}
+                            className={`p-2 rounded ${
+                              optionIndex === question.correctAnswer
+                                ? 'bg-green-100 dark:bg-green-900/20 text-green-700 dark:text-green-400'
+                                : optionIndex === question.userAnswer && !question.isCorrect
+                                ? 'bg-red-100 dark:bg-red-900/20 text-red-700 dark:text-red-400'
+                                : 'bg-gray-100 dark:bg-gray-700'
+                            }`}
+                          >
+                            {option}
+                            {optionIndex === question.correctAnswer && (
+                              <span className="mr-2 text-green-600 dark:text-green-400">✓ صحيح</span>
+                            )}
+                            {optionIndex === question.userAnswer && !question.isCorrect && (
+                              <span className="mr-2 text-red-600 dark:text-red-400">✗ إجابتك</span>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                      {question.explanation && (
+                        <div className="mt-3 p-3 bg-[#9b172a]-50 dark:bg-[#9b172a]-900/20 rounded-lg">
+                          <p className="text-sm text-[#9b172a]-700 dark:text-[#9b172a]-300">
+                            <strong>التفسير:</strong> {question.explanation}
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <div className="mt-6 space-y-3">
+          {/* <button
+            onClick={() => {
+              onClose();
+              navigate('/exam-history');
+            }}
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-4 rounded-lg font-medium transition-colors flex items-center justify-center gap-2"
+          >
+            <FaHistory />
+            عرض جميع النتائج
+          </button> */}
+          
           <button
             onClick={onClose}
             className="w-full bg-[#9b172a] hover:bg-[#9b172a]-700 text-white py-3 px-4 rounded-lg font-medium transition-colors"

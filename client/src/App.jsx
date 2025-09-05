@@ -109,7 +109,6 @@ function App() {
         <Route path="/courses/:id" element={<CourseDetail />} />
 
                   <Route element={<RequireAuth allowedRoles={["ADMIN", "SUPER_ADMIN"]} />}>
-                    <Route path="/exam-history" element={<ExamHistory />} />
                     <Route path="/admin" element={<AdminDashboard />} />
                     <Route path="/admin/dashboard" element={<AdminDashboard />} />
                     <Route path="/admin/recharge-codes" element={<AdminRechargeCodeDashboard />} />
@@ -149,6 +148,7 @@ function App() {
             element={<ChangePassword />}
           />
           <Route path="/live-meetings" element={<LiveMeetings />} />
+          <Route path="/exam-history" element={<ExamHistory />} />
         </Route>
 
         <Route path="*" element={<NotFound />} />

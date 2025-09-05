@@ -166,6 +166,15 @@ export default function Sidebar({ hideBar = false }) {
 
             {isLoggedIn && (
               <li>
+                <Link to="/exam-history" className="flex gap-3 items-center text-gray-700 dark:text-white hover:text-[#9b172a] dark:hover:text-[#9b172a] transition-colors text-right py-2" onClick={closeSidebar}>
+                <FaClipboardCheck size={16} className="text-gray-500 dark:text-slate-100" />
+                  تاريخ الامتحانات
+                </Link>
+              </li>
+            )}
+
+            {isLoggedIn && (
+              <li>
                 <Link to="/live-meetings" className="flex gap-3 items-center text-gray-700 dark:text-white hover:text-[#9b172a] dark:hover:text-[#9b172a] transition-colors text-right py-2" onClick={closeSidebar}>
                 <FaVideo size={16} className="text-gray-500 dark:text-slate-100" />
                   الجلسات المباشرة

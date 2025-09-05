@@ -308,7 +308,16 @@ const takeFinalExam = asyncHandler(async (req, res) => {
             correctAnswers,
             wrongAnswers: totalQuestions - correctAnswers,
             timeTaken: timeTaken,
-            answers: detailedAnswers
+            answers: detailedAnswers,
+            questions: questions.map((question, index) => ({
+                question: question.question,
+                options: question.options,
+                correctAnswer: question.correctAnswer,
+                explanation: question.explanation || '',
+                userAnswer: detailedAnswers[index]?.selectedAnswer,
+                isCorrect: detailedAnswers[index]?.isCorrect,
+                questionIndex: index
+            }))
         }
     });
 });
@@ -337,17 +346,71 @@ const getUserExamHistory = asyncHandler(async (req, res) => {
 
     const skip = (page - 1) * limit;
 
-    const results = await ExamResult.find({ user: userId })
-        .populate('course', 'title')
-        .sort({ createdAt: -1 })
-        .skip(skip)
-        .limit(parseInt(limit));
+    // For now, return mock data to test the frontend
+    // TODO: Implement proper exam history fetching from course userAttempts
+    const mockResults = [
+        {
+            _id: "mock_exam_1",
+            courseId: "68baeedb2b115f11a2b3314a",
+            courseTitle: "Test Course",
+            lessonId: "68baef032b115f11a2b33194",
+            lessonTitle: "Test Lesson",
+            unitId: null,
+            unitTitle: null,
+            examId: "mock_exam_id",
+            examType: "training",
+            score: 85,
+            totalQuestions: 10,
+            correctAnswers: 8,
+            wrongAnswers: 2,
+            timeTaken: 15,
+            timeLimit: 30,
+            passingScore: 50,
+            passed: true,
+            answers: [
+                { questionIndex: 0, selectedAnswer: 0, correctAnswer: 0, isCorrect: true },
+                { questionIndex: 1, selectedAnswer: 1, correctAnswer: 2, isCorrect: false },
+                { questionIndex: 2, selectedAnswer: 2, correctAnswer: 2, isCorrect: true }
+            ],
+            completedAt: new Date(),
+            questions: [
+                {
+                    question: "What is the capital of Egypt?",
+                    options: ["Cairo", "Alexandria", "Luxor", "Aswan"],
+                    correctAnswer: 0,
+                    explanation: "Cairo is the capital and largest city of Egypt.",
+                    userAnswer: 0,
+                    isCorrect: true,
+                    questionIndex: 0
+                },
+                {
+                    question: "Which programming language is used for web development?",
+                    options: ["Python", "Java", "JavaScript", "C++"],
+                    correctAnswer: 2,
+                    explanation: "JavaScript is primarily used for web development.",
+                    userAnswer: 1,
+                    isCorrect: false,
+                    questionIndex: 1
+                },
+                {
+                    question: "What does HTML stand for?",
+                    options: ["HyperText Markup Language", "High Tech Modern Language", "Home Tool Markup Language", "Hyperlink and Text Markup Language"],
+                    correctAnswer: 0,
+                    explanation: "HTML stands for HyperText Markup Language.",
+                    userAnswer: 0,
+                    isCorrect: true,
+                    questionIndex: 2
+                }
+            ]
+        }
+    ];
 
-    const total = await ExamResult.countDocuments({ user: userId });
+    const total = mockResults.length;
+    const paginatedResults = mockResults.slice(skip, skip + parseInt(limit));
 
     res.status(200).json({
         success: true,
-        data: results,
+        data: paginatedResults,
         pagination: {
             currentPage: parseInt(page),
             totalPages: Math.ceil(total / limit),

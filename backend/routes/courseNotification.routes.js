@@ -2,7 +2,8 @@ import express from 'express';
 import {
   getCourseNotifications,
   markNotificationAsRead,
-  markAllNotificationsAsRead
+  markAllNotificationsAsRead,
+  debugNotificationStatus
 } from '../controllers/courseNotification.controller.js';
 import { isLoggedIn } from '../middleware/auth.middleware.js';
 
@@ -19,5 +20,8 @@ router.patch('/notifications/:notificationId/read', markNotificationAsRead);
 
 // Mark all notifications as read
 router.patch('/notifications/read-all', markAllNotificationsAsRead);
+
+// Debug endpoint to check notification status
+router.get('/notifications/debug', debugNotificationStatus);
 
 export default router;

@@ -6,8 +6,9 @@ import NotificationRead from '../models/NotificationRead.js';
 // Get course notifications for logged-in user
 const getCourseNotifications = async (req, res) => {
   try {
-    const userId = req.user.id;
+    const userId = req.user._id || req.user.id;
     console.log('🔔 Getting notifications for user:', userId);
+    console.log('🔔 User object:', req.user);
     
     // Get user details to find their stage
     const user = await User.findById(userId);
@@ -67,6 +68,8 @@ const getCourseNotifications = async (req, res) => {
     const readNotificationIds = new Set(readNotifications.map(n => n.notificationId));
     
     console.log(`🔔 User has ${readNotificationIds.size} read notifications`);
+    console.log(`🔔 Read notification IDs:`, Array.from(readNotificationIds));
+    console.log(`🔔 All read notifications from DB:`, readNotifications);
 
     // Generate notifications based on course updates
     const notifications = [];
@@ -95,7 +98,11 @@ const getCourseNotifications = async (req, res) => {
       const allVideos = [];
       allLessons.forEach(lesson => {
         const videos = lesson.videos || [];
-        allVideos.push(...videos.map(video => ({ ...video, lessonTitle: lesson.title })));
+        allVideos.push(...videos.map(video => ({ 
+          ...video, 
+          lessonTitle: lesson.title,
+          _id: video._id || video.id || `video_${Math.random().toString(36).substr(2, 9)}` // Ensure video has an ID
+        })));
       });
       console.log(`🔔 Course ${course.title} has ${allVideos.length} videos`);
 
@@ -116,6 +123,7 @@ const getCourseNotifications = async (req, res) => {
       // Create notifications for new lessons (only if not read)
       recentLessons.forEach(lesson => {
         const notificationId = `lesson_${lesson._id}_${course._id}`;
+        console.log(`🔔 Checking lesson notification ID: ${notificationId}, isRead: ${readNotificationIds.has(notificationId)}`);
         if (!readNotificationIds.has(notificationId)) {
           notifications.push({
             _id: notificationId,
@@ -139,6 +147,7 @@ const getCourseNotifications = async (req, res) => {
       // Create notifications for new videos (only if not read)
       recentVideos.forEach(video => {
         const notificationId = `video_${video._id}_${course._id}`;
+        console.log(`🔔 Checking video notification ID: ${notificationId}, isRead: ${readNotificationIds.has(notificationId)}`);
         if (!readNotificationIds.has(notificationId)) {
           notifications.push({
             _id: notificationId,
@@ -164,6 +173,7 @@ const getCourseNotifications = async (req, res) => {
       // Always create a notification for course updates if course was updated recently (only if not read)
       if (new Date(course.updatedAt) >= sevenDaysAgo) {
         const notificationId = `course_${course._id}`;
+        console.log(`🔔 Checking course notification ID: ${notificationId}, isRead: ${readNotificationIds.has(notificationId)}`);
         if (!readNotificationIds.has(notificationId)) {
           notifications.push({
             _id: notificationId,
@@ -210,7 +220,7 @@ const getCourseNotifications = async (req, res) => {
 const markNotificationAsRead = async (req, res) => {
   try {
     const { notificationId } = req.params;
-    const userId = req.user._id;
+    const userId = req.user._id || req.user.id;
     
     console.log(`🔔 Marking notification ${notificationId} as read for user ${userId}`);
     
@@ -241,16 +251,30 @@ const markNotificationAsRead = async (req, res) => {
 // Mark all notifications as read
 const markAllNotificationsAsRead = async (req, res) => {
   try {
-    const userId = req.user._id;
+    const userId = req.user._id || req.user.id;
     
     console.log(`🔔 Marking all notifications as read for user ${userId}`);
+    console.log(`🔔 User object:`, req.user);
     
-    // Get all current notifications for the user
-    const userStageId = req.user.stage?._id || req.user.stage;
+    // Get user details to find their stage (consistent with getCourseNotifications)
+    const user = await User.findById(userId);
+    console.log('🔔 User stage:', user?.stage);
+    
+    if (!user?.stage) {
+      return res.status(200).json({
+        success: true,
+        message: 'User stage not found',
+        data: []
+      });
+    }
+
+    // Extract stage ID - handle both ObjectId and object with _id
+    const userStageId = user.stage._id || user.stage;
+    console.log('🔔 User stage ID:', userStageId);
     
     const coursesWithUpdates = await Course.find({
       stage: userStageId
-    }).populate('lessons').populate('units.lessons');
+    });
     
     // Generate notification IDs for all current notifications
     const allNotificationIds = [];
@@ -288,7 +312,11 @@ const markAllNotificationsAsRead = async (req, res) => {
       const allVideos = [];
       allLessons.forEach(lesson => {
         const videos = lesson.videos || [];
-        allVideos.push(...videos.map(video => ({ ...video, lessonTitle: lesson.title })));
+        allVideos.push(...videos.map(video => ({ 
+          ...video, 
+          lessonTitle: lesson.title,
+          _id: video._id || video.id || `video_${Math.random().toString(36).substr(2, 9)}` // Ensure video has an ID
+        })));
       });
       
       const recentVideos = allVideos.filter(video => 
@@ -299,6 +327,8 @@ const markAllNotificationsAsRead = async (req, res) => {
         allNotificationIds.push(`video_${video._id}_${course._id}`);
       });
     }
+    
+    console.log(`🔔 Generated ${allNotificationIds.length} notification IDs to mark as read:`, allNotificationIds);
     
     // Mark all notifications as read
     const readPromises = allNotificationIds.map(notificationId => 
@@ -328,8 +358,93 @@ const markAllNotificationsAsRead = async (req, res) => {
   }
 };
 
+// Debug endpoint to check notification read status
+const debugNotificationStatus = async (req, res) => {
+  try {
+    const userId = req.user._id || req.user.id;
+    
+    // Get all read notifications for this user
+    const readNotifications = await NotificationRead.find({ userId });
+    
+    // Get user stage
+    const user = await User.findById(userId);
+    const userStageId = user?.stage?._id || user?.stage;
+    
+    // Get courses for this stage
+    const courses = await Course.find({ stage: userStageId });
+    
+    // Generate all possible notification IDs
+    const allNotificationIds = [];
+    const sevenDaysAgo = new Date();
+    sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+    
+    for (const course of courses) {
+      if (new Date(course.updatedAt) >= sevenDaysAgo) {
+        allNotificationIds.push(`course_${course._id}`);
+      }
+      
+      // Add lesson and video notifications
+      const allLessons = [];
+      if (course.units && course.units.length > 0) {
+        course.units.forEach(unit => {
+          if (unit.lessons && unit.lessons.length > 0) {
+            allLessons.push(...unit.lessons);
+          }
+        });
+      }
+      if (course.directLessons && course.directLessons.length > 0) {
+        allLessons.push(...course.directLessons);
+      }
+      
+      const recentLessons = allLessons.filter(lesson => 
+        new Date(lesson.createdAt || lesson.updatedAt || course.createdAt) >= sevenDaysAgo
+      );
+      
+      recentLessons.forEach(lesson => {
+        allNotificationIds.push(`lesson_${lesson._id}_${course._id}`);
+      });
+      
+      const allVideos = [];
+      allLessons.forEach(lesson => {
+        const videos = lesson.videos || [];
+        allVideos.push(...videos.map(video => ({ ...video, lessonTitle: lesson.title })));
+      });
+      
+      const recentVideos = allVideos.filter(video => 
+        new Date(video.createdAt || video.updatedAt || course.createdAt) >= sevenDaysAgo
+      );
+      
+      recentVideos.forEach(video => {
+        allNotificationIds.push(`video_${video._id}_${course._id}`);
+      });
+    }
+    
+    res.status(200).json({
+      success: true,
+      data: {
+        userId,
+        userStageId,
+        totalPossibleNotifications: allNotificationIds.length,
+        readNotifications: readNotifications.length,
+        readNotificationIds: readNotifications.map(n => n.notificationId),
+        allPossibleNotificationIds: allNotificationIds,
+        coursesCount: courses.length
+      }
+    });
+    
+  } catch (error) {
+    console.error('Error in debug endpoint:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Debug error',
+      error: error.message
+    });
+  }
+};
+
 export {
   getCourseNotifications,
   markNotificationAsRead,
-  markAllNotificationsAsRead
+  markAllNotificationsAsRead,
+  debugNotificationStatus
 };

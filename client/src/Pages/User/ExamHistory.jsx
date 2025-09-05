@@ -8,6 +8,7 @@ import {
   FaStar, 
   FaCheckCircle, 
   FaTimesCircle,
+  FaTimes,
   FaEye,
   FaArrowLeft,
   FaArrowRight,
@@ -60,6 +61,8 @@ const ExamHistory = () => {
   };
 
   const handleViewResult = (result) => {
+    console.log('🔍 Exam result data:', result);
+    console.log('🔍 Questions data:', result.questions);
     setSelectedResult(result);
     setShowResultModal(true);
   };
@@ -352,8 +355,9 @@ const ExamHistory = () => {
                   <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
                     Question Review
                   </h4>
-                  <div className="space-y-4">
-                    {selectedResult.questions?.map((question, index) => (
+                  {selectedResult.questions && selectedResult.questions.length > 0 ? (
+                    <div className="space-y-4">
+                      {selectedResult.questions.map((question, index) => (
                       <div key={index} className="border border-gray-200 dark:border-gray-600 rounded-lg p-4">
                         <div className="flex items-start gap-2 mb-3">
                           {question.isCorrect ? (
@@ -366,7 +370,7 @@ const ExamHistory = () => {
                               Question {index + 1}: {question.question}
                             </p>
                             <div className="space-y-1">
-                              {question.options.slice(0, question.numberOfOptions || 4).map((option, optionIndex) => (
+                              {question.options?.map((option, optionIndex) => (
                                 <div
                                   key={optionIndex}
                                   className={`p-2 rounded ${
@@ -397,8 +401,13 @@ const ExamHistory = () => {
                           </div>
                         </div>
                       </div>
-                    ))}
-                  </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="text-center py-8 text-gray-500 dark:text-gray-400">
+                      <p>No detailed question data available for this exam.</p>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
