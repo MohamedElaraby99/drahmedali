@@ -187,7 +187,7 @@ const ExamResultsDashboard = () => {
 
   const getScoreColor = (score) => {
     if (score >= 80) return 'text-green-600 bg-green-100';
-    if (score >= 60) return 'text-blue-600 bg-blue-100';
+    if (score >= 60) return 'text-[#9b172a] bg-[#9b172a]-100';
     return 'text-red-600 bg-red-100';
   };
 
@@ -208,7 +208,7 @@ const ExamResultsDashboard = () => {
           <div className="mb-8">
             <div className="flex items-center justify-between mb-4">
               <h1 className="text-3xl font-bold text-gray-900 dark:text-white flex items-center gap-3">
-                <FaClipboardCheck className="text-blue-600" />
+                <FaClipboardCheck className="text-[#9b172a]" />
                 نتائج الامتحانات
               </h1>
               <button
@@ -226,7 +226,7 @@ const ExamResultsDashboard = () => {
                 <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-md">
                   <div className="flex items-center">
                     <div className="flex-shrink-0">
-                      <FaUsers className="h-8 w-8 text-blue-600" />
+                      <FaUsers className="h-8 w-8 text-[#9b172a]" />
                     </div>
                     <div className="mr-5 w-0 flex-1">
                       <dl>
@@ -280,7 +280,7 @@ const ExamResultsDashboard = () => {
                 <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-md">
                   <div className="flex items-center">
                     <div className="flex-shrink-0">
-                      <FaClock className="h-8 w-8 text-blue-600" />
+                      <FaClock className="h-8 w-8 text-[#9b172a]" />
                     </div>
                     <div className="mr-5 w-0 flex-1">
                       <dl>
@@ -313,7 +313,7 @@ const ExamResultsDashboard = () => {
                     value={filters.search}
                     onChange={(e) => handleFilterChange('search', e.target.value)}
                     placeholder="اسم الطالب أو البريد الإلكتروني..."
-                    className="w-full pr-10 pl-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                    className="w-full pr-10 pl-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#9b172a] focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                   />
                 </div>
               </div>
@@ -326,7 +326,7 @@ const ExamResultsDashboard = () => {
                 <select
                   value={filters.courseId}
                   onChange={(e) => handleFilterChange('courseId', e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#9b172a] focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 >
                   <option value="">جميع الدورات</option>
                   {courses.map((course) => (
@@ -345,7 +345,7 @@ const ExamResultsDashboard = () => {
                 <select
                   value={filters.stageId}
                   onChange={(e) => handleFilterChange('stageId', e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#9b172a] focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 >
                   <option value="">جميع المراحل</option>
                   {stages.map((stage) => (
@@ -364,7 +364,7 @@ const ExamResultsDashboard = () => {
                 <select
                   value={filters.examType}
                   onChange={(e) => handleFilterChange('examType', e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#9b172a] focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 >
                   <option value="">جميع الأنواع</option>
                   <option value="training">تدريب</option>
@@ -380,7 +380,7 @@ const ExamResultsDashboard = () => {
                 <select
                   value={filters.passed}
                   onChange={(e) => handleFilterChange('passed', e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#9b172a] focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 >
                   <option value="">جميع النتائج</option>
                   <option value="true">ناجح</option>
@@ -394,7 +394,7 @@ const ExamResultsDashboard = () => {
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
             {loading ? (
               <div className="flex items-center justify-center py-12">
-                <FaSpinner className="animate-spin text-4xl text-blue-600" />
+                <FaSpinner className="animate-spin text-4xl text-[#9b172a]" />
                 <span className="mr-3 text-lg text-gray-600 dark:text-gray-300">جاري التحميل...</span>
               </div>
             ) : examResults.length > 0 ? (
@@ -450,7 +450,7 @@ const ExamResultsDashboard = () => {
                           <td className="px-6 py-4 whitespace-nowrap">
                             <div className="flex items-center">
                               <div className="flex-shrink-0 h-10 w-10">
-                                <div className="h-10 w-10 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 flex items-center justify-center text-white font-bold">
+                                <div className="h-10 w-10 rounded-full bg-gradient-to-r from-[#9b172a] to-[#9b172a] flex items-center justify-center text-white font-bold">
                                   {result.user?.fullName?.charAt(0) || 'U'}
                                 </div>
                               </div>
@@ -479,7 +479,7 @@ const ExamResultsDashboard = () => {
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
                             <div className="flex flex-col">
-                              <span className="font-medium text-blue-600 dark:text-blue-400">
+                              <span className="font-medium text-[#9b172a] dark:text-[#9b172a]-400">
                                 {result.user?.stage || result.course?.stage || 'غير محدد'}
                               </span>
                               <span className="text-xs text-gray-500 dark:text-gray-400">
@@ -490,8 +490,8 @@ const ExamResultsDashboard = () => {
                           <td className="px-6 py-4 whitespace-nowrap">
                             <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
                               result.examType === 'final' 
-                                ? 'bg-blue-100 text-blue-800' 
-                                : 'bg-blue-100 text-blue-800'
+                                ? 'bg-[#9b172a]-100 text-[#9b172a]-800' 
+                                : 'bg-[#9b172a]-100 text-[#9b172a]-800'
                             }`}>
                               {result.examType === 'final' ? 'امتحان نهائي' : 'تدريب'}
                             </span>
@@ -519,7 +519,7 @@ const ExamResultsDashboard = () => {
                           <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                             <button
                               onClick={() => openDetailsModal(result)}
-                              className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300 flex items-center gap-1"
+                              className="text-[#9b172a] hover:text-[#9b172a]-900 dark:text-[#9b172a]-400 dark:hover:text-[#9b172a]-300 flex items-center gap-1"
                             >
                               <FaEye />
                               عرض التفاصيل
@@ -575,7 +575,7 @@ const ExamResultsDashboard = () => {
                                 onClick={() => handlePageChange(page)}
                                 className={`relative inline-flex items-center px-4 py-2 border text-sm font-medium ${
                                   page === pagination.currentPage
-                                    ? 'z-10 bg-blue-50 border-blue-500 text-blue-600'
+                                    ? 'z-10 bg-[#9b172a]-50 border-[#9b172a] text-[#9b172a]'
                                     : 'bg-white border-gray-300 text-gray-500 hover:bg-gray-50'
                                 }`}
                               >

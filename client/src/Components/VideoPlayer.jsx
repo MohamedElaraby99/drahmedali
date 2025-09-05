@@ -586,7 +586,7 @@ const VideoPlayer = ({
                   <button
                     onClick={() => setIsBookmarked(!isBookmarked)}
                     className={`p-2 rounded-lg transition-colors ${
-                      isBookmarked ? 'text-blue-500 bg-blue-500/20' : 'text-white hover:bg-black/30'
+                      isBookmarked ? 'text-[#9b172a] bg-[#9b172a]/20' : 'text-white hover:bg-black/30'
                     }`}
                   >
                     <FaBookmark className="text-lg" />
@@ -658,11 +658,11 @@ const VideoPlayer = ({
                     onMouseLeave={() => setIsDragging(false)}
                   >
                     <div 
-                      className="bg-blue-500 h-1 rounded-full transition-all duration-200"
+                      className="bg-[#9b172a] h-1 rounded-full transition-all duration-200"
                       style={{ width: `${(currentTime / duration) * 100}%` }}
                     ></div>
                     <div 
-                      className="absolute top-1/2 transform -translate-y-1/2 w-3 h-3 bg-blue-500 rounded-full shadow-lg"
+                      className="absolute top-1/2 transform -translate-y-1/2 w-3 h-3 bg-[#9b172a] rounded-full shadow-lg"
                       style={{ left: `${(currentTime / duration) * 100}%`, marginLeft: '-6px' }}
                     ></div>
                   </div>
@@ -711,7 +711,7 @@ const VideoPlayer = ({
                     <button
                       onClick={() => setShowCaptions(!showCaptions)}
                       className={`p-2 rounded-lg transition-colors ${
-                        showCaptions ? 'text-blue-500 bg-blue-500/20' : 'text-white hover:bg-black/30'
+                        showCaptions ? 'text-[#9b172a] bg-[#9b172a]/20' : 'text-white hover:bg-black/30'
                       }`}
                     >
                       <FaClosedCaptioning className="text-lg" />
@@ -739,7 +739,7 @@ const VideoPlayer = ({
                                 setShowSettings(false);
                               }}
                               className={`block w-full text-left px-2 py-1 rounded text-sm ${
-                                playbackRate === rate ? 'bg-blue-500' : 'hover:bg-white/20'
+                                playbackRate === rate ? 'bg-[#9b172a]' : 'hover:bg-white/20'
                               }`}
                             >
                               {rate}x

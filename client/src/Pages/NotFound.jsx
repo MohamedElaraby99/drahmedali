@@ -11,13 +11,13 @@ function NotFound() {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="relative min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 overflow-hidden">
+      <section className="relative min-h-screen bg-gradient-to-br from-[#9b172a]-50 via-indigo-50 to-[#9b172a]-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 overflow-hidden">
         {/* Background Pattern */}
         <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
         
         {/* Floating Elements */}
-        <div className="absolute top-20 left-10 w-20 h-20 bg-blue-200 dark:bg-blue-800 rounded-full opacity-20 animate-bounce"></div>
-        <div className="absolute top-40 right-20 w-16 h-16 bg-blue-200 dark:bg-blue-800 rounded-full opacity-20 animate-pulse"></div>
+        <div className="absolute top-20 left-10 w-20 h-20 bg-[#9b172a]-200 dark:bg-[#9b172a]-800 rounded-full opacity-20 animate-bounce"></div>
+        <div className="absolute top-40 right-20 w-16 h-16 bg-[#9b172a]-200 dark:bg-[#9b172a]-800 rounded-full opacity-20 animate-pulse"></div>
         <div className="absolute bottom-20 left-20 w-12 h-12 bg-indigo-200 dark:bg-indigo-800 rounded-full opacity-20 animate-bounce"></div>
         
         <div className="relative z-10 container mx-auto px-4 py-16">
@@ -32,7 +32,7 @@ function NotFound() {
               </div>
 
               {/* Main Heading */}
-              <h1 className="text-8xl lg:text-9xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-blue-600 to-indigo-600 dark:from-blue-400 dark:via-blue-400 dark:to-indigo-400 mb-6 leading-none">
+              <h1 className="text-8xl lg:text-9xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#9b172a] via-[#9b172a] to-indigo-600 dark:from-[#9b172a]-400 dark:via-[#9b172a]-400 dark:to-indigo-400 mb-6 leading-none">
             404
           </h1>
 
@@ -52,7 +52,7 @@ function NotFound() {
                 {/* Go Back Button */}
                 <button
                   onClick={() => navigate(-1)}
-                  className="group relative inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-600 hover:from-blue-700 hover:to-blue-700 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-xl"
+                  className="group relative inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-[#9b172a] to-[#9b172a] hover:from-[#9b172a]-700 hover:to-[#9b172a]-700 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-xl"
                 >
                   <FaArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform duration-300" />
                   العودة للخلف
@@ -61,7 +61,7 @@ function NotFound() {
                 {/* Home Button */}
                 <button
                   onClick={() => navigate("/")}
-                  className="group relative inline-flex items-center justify-center px-8 py-4 bg-white dark:bg-gray-800 text-gray-800 dark:text-white font-semibold rounded-xl border-2 border-gray-200 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-400 transition-all duration-300 transform hover:scale-105 hover:shadow-xl"
+                  className="group relative inline-flex items-center justify-center px-8 py-4 bg-white dark:bg-gray-800 text-gray-800 dark:text-white font-semibold rounded-xl border-2 border-gray-200 dark:border-gray-700 hover:border-[#9b172a] dark:hover:border-[#9b172a]-400 transition-all duration-300 transform hover:scale-105 hover:shadow-xl"
                 >
                   <FaHome className="w-4 h-4 mr-2 group-hover:scale-110 transition-transform duration-300" />
                   العودة للرئيسية
@@ -71,19 +71,19 @@ function NotFound() {
               {/* Search Suggestion */}
               <div className="mt-8 p-4 bg-white/50 dark:bg-gray-800/50 rounded-xl backdrop-blur-sm">
                 <div className="flex items-center gap-3 text-gray-600 dark:text-gray-300">
-                  <FaSearch className="w-4 h-4 text-blue-500" />
+                  <FaSearch className="w-4 h-4 text-[#9b172a]" />
                   <span className="text-sm">
                     جرب البحث عما تبحث عنه، أو استكشف{" "}
                     <button 
                       onClick={() => navigate("/subjects")}
-                      className="text-blue-600 dark:text-blue-400 hover:underline font-medium"
+                      className="text-[#9b172a] dark:text-[#9b172a]-400 hover:underline font-medium"
                     >
                       المواد الدراسية
                     </button>{" "}
                     و{" "}
                     <button 
                       onClick={() => navigate("/subjects")}
-                      className="text-blue-600 dark:text-blue-400 hover:underline font-medium"
+                      className="text-[#9b172a] dark:text-[#9b172a]-400 hover:underline font-medium"
                     >
                       المواد الدراسية
                     </button>
@@ -97,7 +97,7 @@ function NotFound() {
               <div className="relative">
                 {/* Image Container with Glow Effect */}
                 <div className="relative p-8">
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-400/20 to-blue-400/20 rounded-3xl blur-3xl animate-pulse"></div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#9b172a]-400/20 to-[#9b172a]-400/20 rounded-3xl blur-3xl animate-pulse"></div>
                   <img 
                     src={NotFoundImg} 
                     alt="رسم توضيحي للصفحة غير الموجودة" 
@@ -106,10 +106,10 @@ function NotFound() {
                 </div>
                 
                 {/* Floating Numbers */}
-                <div className="absolute top-10 right-10 text-6xl font-black text-blue-200 dark:text-blue-800 animate-bounce">
+                <div className="absolute top-10 right-10 text-6xl font-black text-[#9b172a]-200 dark:text-[#9b172a]-800 animate-bounce">
                   4
                 </div>
-                <div className="absolute bottom-10 left-10 text-6xl font-black text-blue-200 dark:text-blue-800 animate-bounce" style={{animationDelay: '0.5s'}}>
+                <div className="absolute bottom-10 left-10 text-6xl font-black text-[#9b172a]-200 dark:text-[#9b172a]-800 animate-bounce" style={{animationDelay: '0.5s'}}>
                   0
                 </div>
                 <div className="absolute top-1/2 right-5 text-6xl font-black text-indigo-200 dark:text-indigo-800 animate-bounce" style={{animationDelay: '1s'}}>
@@ -159,9 +159,9 @@ function NotFound() {
 
           <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
             {/* Quick Links */}
-            <div className="group p-6 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-700 rounded-xl hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+            <div className="group p-6 bg-gradient-to-br from-[#9b172a]-50 to-indigo-50 dark:from-gray-800 dark:to-gray-700 rounded-xl hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
               <div className="text-center">
-                <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                <div className="w-12 h-12 bg-[#9b172a] rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
                   <FaGraduationCap className="w-6 h-6 text-white" />
                 </div>
                 <h4 className="font-semibold text-gray-800 dark:text-white mb-2">
@@ -175,16 +175,16 @@ function NotFound() {
                 </p>
                 <button 
                   onClick={() => navigate("/courses")}
-                  className="text-blue-600 dark:text-blue-400 hover:underline font-medium text-sm"
+                  className="text-[#9b172a] dark:text-[#9b172a]-400 hover:underline font-medium text-sm"
                 >
                   {role === "USER" ? "عرض كورساتي →" : "عرض جميع الكورسات →"}
                 </button>
               </div>
             </div>
 
-            <div className="group p-6 bg-gradient-to-br from-blue-50 to-pink-50 dark:from-gray-800 dark:to-gray-700 rounded-xl hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+            <div className="group p-6 bg-gradient-to-br from-[#9b172a]-50 to-pink-50 dark:from-gray-800 dark:to-gray-700 rounded-xl hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
               <div className="text-center">
-                <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                <div className="w-12 h-12 bg-[#9b172a] rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
                   <FaBlog className="w-6 h-6 text-white" />
                 </div>
                 <h4 className="font-semibold text-gray-800 dark:text-white mb-2">اقرأ المدونة</h4>
@@ -193,7 +193,7 @@ function NotFound() {
                 </p>
                 <button 
                   onClick={() => navigate("/blogs")}
-                  className="text-blue-600 dark:text-blue-400 hover:underline font-medium text-sm"
+                  className="text-[#9b172a] dark:text-[#9b172a]-400 hover:underline font-medium text-sm"
                 >
                   اقرأ المقالات →
                 </button>

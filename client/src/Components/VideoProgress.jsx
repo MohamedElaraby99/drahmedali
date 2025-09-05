@@ -294,8 +294,8 @@ const VideoProgress = ({
 
   const getProgressColor = (progress) => {
     if (progress >= 90) return 'text-green-500';
-    if (progress >= 70) return 'text-blue-500';
-    if (progress >= 50) return 'text-blue-500';
+    if (progress >= 70) return 'text-[#9b172a]';
+    if (progress >= 50) return 'text-[#9b172a]';
     return 'text-red-500';
   };
 
@@ -318,7 +318,7 @@ const VideoProgress = ({
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-3">
-          <FaUser className="text-blue-500" />
+          <FaUser className="text-[#9b172a]" />
                   <div>
           <h3 className="font-semibold text-gray-900 dark:text-white">
             {userData?.fullName || 'User'}
@@ -343,7 +343,7 @@ const VideoProgress = ({
           
           <button
             onClick={() => setShowCheckpointDetails(!showCheckpointDetails)}
-            className="p-2 text-blue-500 hover:text-blue-700 transition-colors"
+            className="p-2 text-[#9b172a] hover:text-[#9b172a]-700 transition-colors"
             title={showCheckpointDetails ? "Hide Checkpoint Details" : "Show Checkpoint Details"}
           >
             <FaList />
@@ -370,7 +370,7 @@ const VideoProgress = ({
         
         <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2" dir="ltr">
           <div 
-            className="bg-blue-500 h-2 rounded-full transition-all duration-300"
+            className="bg-[#9b172a] h-2 rounded-full transition-all duration-300"
             style={{ width: `${currentVideoProgress?.progress || 0}%` }}
           ></div>
         </div>
@@ -387,7 +387,7 @@ const VideoProgress = ({
           <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2 flex items-center gap-2">
             <FaClock />
             Progress Checkpoints
-            <span className="text-xs text-blue-500">
+            <span className="text-xs text-[#9b172a]">
               (Next: {nextCheckpointIndex < currentCheckpoints.length ? `${currentCheckpoints[nextCheckpointIndex]?.percentage}%` : 'Complete'})
             </span>
           </h4>
@@ -403,7 +403,7 @@ const VideoProgress = ({
                 color = 'text-green-500';
               } else if (isNext) {
                 icon = FaClock;
-                color = 'text-blue-500';
+                color = 'text-[#9b172a]';
               } else {
                 icon = FaCircle;
                 color = 'text-gray-400';
@@ -413,7 +413,7 @@ const VideoProgress = ({
               const hasValidTime = checkpoint.time > 0;
               
               return (
-                <div key={index} className={`text-center ${isNext ? 'ring-2 ring-blue-300 rounded-lg p-1' : ''}`}>
+                <div key={index} className={`text-center ${isNext ? 'ring-2 ring-[#9b172a]-300 rounded-lg p-1' : ''}`}>
                   <Icon className={`mx-auto mb-1 ${color}`} />
                   <div className="text-xs text-gray-500 dark:text-gray-400">
                     {checkpoint.percentage}%
@@ -440,7 +440,7 @@ const VideoProgress = ({
             <div>
               <span className="text-gray-500 dark:text-gray-400">Status:</span>
               <span className={`ml-2 font-semibold ${
-                currentVideoProgress?.isCompleted ? 'text-green-500' : 'text-blue-500'
+                currentVideoProgress?.isCompleted ? 'text-green-500' : 'text-[#9b172a]'
               }`}>
                 {currentVideoProgress?.isCompleted ? 'Completed' : 'In Progress'}
               </span>
@@ -504,7 +504,7 @@ const VideoProgress = ({
       {/* Loading State */}
       {loading && (
         <div className="flex items-center justify-center py-4">
-          <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-500"></div>
+          <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-[#9b172a]"></div>
           <span className="ml-2 text-sm text-gray-500 dark:text-gray-400">Updating progress...</span>
         </div>
       )}

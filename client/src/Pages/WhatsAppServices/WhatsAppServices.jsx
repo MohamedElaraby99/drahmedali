@@ -48,13 +48,13 @@ export default function WhatsAppServices() {
     const getCategoryIcon = (category) => {
         switch (category) {
             case 'course':
-                return <FaBook className="text-blue-500" />;
+                return <FaBook className="text-[#9b172a]" />;
             case 'tutoring':
                 return <FaUsers className="text-green-500" />;
             case 'consultation':
-                return <FaHeadset className="text-blue-500" />;
+                return <FaHeadset className="text-[#9b172a]" />;
             case 'support':
-                return <FaCog className="text-blue-500" />;
+                return <FaCog className="text-[#9b172a]" />;
             default:
                 return <FaInfoCircle className="text-gray-500" />;
         }
@@ -63,13 +63,13 @@ export default function WhatsAppServices() {
     const getCategoryColor = (category) => {
         switch (category) {
             case 'course':
-                return 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200';
+                return 'bg-[#9b172a]-100 text-[#9b172a]-800 dark:bg-[#9b172a]-900 dark:text-[#9b172a]-200';
             case 'tutoring':
                 return 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200';
             case 'consultation':
-                return 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200';
+                return 'bg-[#9b172a]-100 text-[#9b172a]-800 dark:bg-[#9b172a]-900 dark:text-[#9b172a]-200';
             case 'support':
-                return 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200';
+                return 'bg-[#9b172a]-100 text-[#9b172a]-800 dark:bg-[#9b172a]-900 dark:text-[#9b172a]-200';
             default:
                 return 'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200';
         }
@@ -99,11 +99,11 @@ export default function WhatsAppServices() {
 
     return (
         <Layout>
-            <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 py-8">
+            <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-[#9b172a]-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 py-8">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     {/* Header */}
                     <div className="text-center mb-8">
-                        <div className="mx-auto h-16 w-16 bg-gradient-to-r from-green-600 to-blue-600 rounded-full flex items-center justify-center mb-4 shadow-lg">
+                        <div className="mx-auto h-16 w-16 bg-gradient-to-r from-green-600 to-[#9b172a] rounded-full flex items-center justify-center mb-4 shadow-lg">
                             <FaWhatsapp className="h-8 w-8 text-white" />
                         </div>
                         <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
@@ -119,8 +119,8 @@ export default function WhatsAppServices() {
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
                         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-200 dark:border-gray-700">
                             <div className="flex items-center">
-                                <div className="p-3 bg-blue-100 dark:bg-blue-900 rounded-lg">
-                                    <FaBook className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+                                <div className="p-3 bg-[#9b172a]-100 dark:bg-[#9b172a]-900 rounded-lg">
+                                    <FaBook className="h-6 w-6 text-[#9b172a] dark:text-[#9b172a]-400" />
                                 </div>
                                 <div className="ml-4">
                                     <p className="text-sm font-medium text-gray-600 dark:text-gray-400">إجمالي الخدمات</p>
@@ -143,8 +143,8 @@ export default function WhatsAppServices() {
                         </div>
                         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-200 dark:border-gray-700">
                             <div className="flex items-center">
-                                <div className="p-3 bg-blue-100 dark:bg-blue-900 rounded-lg">
-                                    <FaHeadset className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+                                <div className="p-3 bg-[#9b172a]-100 dark:bg-[#9b172a]-900 rounded-lg">
+                                    <FaHeadset className="h-6 w-6 text-[#9b172a] dark:text-[#9b172a]-400" />
                                 </div>
                                 <div className="ml-4">
                                     <p className="text-sm font-medium text-gray-600 dark:text-gray-400">الفئات</p>
@@ -156,8 +156,8 @@ export default function WhatsAppServices() {
                         </div>
                         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-200 dark:border-gray-700">
                             <div className="flex items-center">
-                                <div className="p-3 bg-blue-100 dark:bg-blue-900 rounded-lg">
-                                    <FaPhone className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+                                <div className="p-3 bg-[#9b172a]-100 dark:bg-[#9b172a]-900 rounded-lg">
+                                    <FaPhone className="h-6 w-6 text-[#9b172a] dark:text-[#9b172a]-400" />
                                 </div>
                                 <div className="ml-4">
                                     <p className="text-sm font-medium text-gray-600 dark:text-gray-400">أرقام الاتصال</p>
@@ -232,7 +232,7 @@ export default function WhatsAppServices() {
                                                 </div>
                                             </div>
                                             <div className="flex items-center gap-1">
-                                                <FaStar className="text-blue-400 text-sm" />
+                                                <FaStar className="text-[#9b172a]-400 text-sm" />
                                                 <span className="text-sm text-gray-500 dark:text-gray-400">4.8</span>
                                             </div>
                                         </div>
@@ -256,8 +256,8 @@ export default function WhatsAppServices() {
                                         </div>
 
                                         {service.instructions && (
-                                            <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-3 mb-4">
-                                                <p className="text-sm text-blue-800 dark:text-blue-200">
+                                            <div className="bg-[#9b172a]-50 dark:bg-[#9b172a]-900/20 border border-[#9b172a]-200 dark:border-[#9b172a]-800 rounded-lg p-3 mb-4">
+                                                <p className="text-sm text-[#9b172a]-800 dark:text-[#9b172a]-200">
                                                     {service.instructions}
                                                 </p>
                                             </div>
@@ -320,7 +320,7 @@ export default function WhatsAppServices() {
                     )}
 
                     {/* Call to Action */}
-                    <div className="mt-12 bg-gradient-to-r from-green-600 to-blue-600 rounded-lg p-8 text-center text-white">
+                    <div className="mt-12 bg-gradient-to-r from-green-600 to-[#9b172a] rounded-lg p-8 text-center text-white">
                         <h2 className="text-2xl font-bold mb-4">تحتاج مساعدة؟</h2>
                         <p className="text-green-100 mb-6 max-w-2xl mx-auto">
                             لا تجد ما تبحث عنه؟ فريق الدعم لدينا متاح على مدار الساعة لمساعدتك في أي أسئلة أو طلبات خاصة.

@@ -7,7 +7,7 @@ export default defineConfig({
   define: {
     'import.meta.env.VITE_REACT_APP_API_URL': JSON.stringify(
       process.env.NODE_ENV === 'production' 
-        ? 'https://api.almongz.online/api/v1'
+        ? 'https://api.drahmedali.online/api/v1'
         : (process.env.VITE_REACT_APP_API_URL || 'http://localhost:4007/api/v1')
     )
   }

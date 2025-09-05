@@ -48,9 +48,9 @@ const OptimizedLessonContentModal = ({ isOpen, onClose, courseId, lessonId, unit
 
   const getContentIcon = (type) => {
     switch (type) {
-      case 'video': return <FaVideo className="text-blue-500" />;
+      case 'video': return <FaVideo className="text-[#9b172a]" />;
       case 'pdf': return <FaFilePdf className="text-red-500" />;
-      case 'exam': return <FaClipboardList className="text-blue-500" />;
+      case 'exam': return <FaClipboardList className="text-[#9b172a]" />;
       case 'essayExam': return <FaClipboardList className="text-purple-500" />;
       case 'training': return <FaDumbbell className="text-green-500" />;
       default: return null;
@@ -195,10 +195,10 @@ const OptimizedLessonContentModal = ({ isOpen, onClose, courseId, lessonId, unit
   const renderVideoContent = () => (
     <div className="space-y-4">
       {lesson.videos?.map((video, index) => (
-        <div key={video._id} className="bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-800 dark:to-gray-900 p-4 sm:p-6 rounded-xl border border-blue-200 dark:border-gray-700">
+        <div key={video._id} className="bg-gradient-to-br from-[#9b172a]-50 to-indigo-100 dark:from-gray-800 dark:to-gray-900 p-4 sm:p-6 rounded-xl border border-[#9b172a]-200 dark:border-gray-700">
           <div className="mb-4 text-gray-600 dark:text-gray-300 leading-relaxed text-sm sm:text-base">{video.description}</div>
           {video.publishDate && (
-            <div className="mb-3 flex items-center gap-2 text-blue-600 dark:text-blue-400 text-sm">
+            <div className="mb-3 flex items-center gap-2 text-[#9b172a] dark:text-[#9b172a]-400 text-sm">
               <FaClock />
               <span>تاريخ النشر: {new Date(video.publishDate).toLocaleDateString('ar')} {new Date(video.publishDate).toLocaleTimeString('ar', { hour: '2-digit', minute: '2-digit' })}</span>
             </div>
@@ -269,7 +269,7 @@ const OptimizedLessonContentModal = ({ isOpen, onClose, courseId, lessonId, unit
               <div className="font-semibold text-lg sm:text-xl text-gray-800 dark:text-gray-200 break-words">{pdf.title || pdf.fileName}</div>
               <div className="text-sm text-red-600 dark:text-red-400 font-medium">ملف PDF</div>
               {pdf.publishDate && (
-                <div className="mt-1 flex items-center gap-2 text-blue-600 dark:text-blue-400 text-xs">
+                <div className="mt-1 flex items-center gap-2 text-[#9b172a] dark:text-[#9b172a]-400 text-xs">
                   <FaClock />
                   <span>تاريخ النشر: {new Date(pdf.publishDate).toLocaleDateString('ar')} {new Date(pdf.publishDate).toLocaleTimeString('ar', { hour: '2-digit', minute: '2-digit' })}</span>
                 </div>
@@ -311,14 +311,14 @@ const OptimizedLessonContentModal = ({ isOpen, onClose, courseId, lessonId, unit
   const renderExamContent = () => (
     <div className="space-y-4">
       {lesson.exams?.map((exam, index) => (
-        <div key={exam._id} className="bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-800 dark:to-gray-900 p-4 sm:p-6 rounded-xl border border-blue-200 dark:border-gray-700">
+        <div key={exam._id} className="bg-gradient-to-br from-[#9b172a]-50 to-indigo-100 dark:from-gray-800 dark:to-gray-900 p-4 sm:p-6 rounded-xl border border-[#9b172a]-200 dark:border-gray-700">
           <div className="flex items-center gap-3 mb-4">
-            <div className="p-2 bg-blue-100 dark:bg-blue-900 rounded-lg">
-              <FaClipboardList className="text-blue-600 dark:text-blue-400 text-lg sm:text-xl" />
+            <div className="p-2 bg-[#9b172a]-100 dark:bg-[#9b172a]-900 rounded-lg">
+              <FaClipboardList className="text-[#9b172a] dark:text-[#9b172a]-400 text-lg sm:text-xl" />
             </div>
             <div className="flex-1 min-w-0">
               <div className="font-semibold text-lg sm:text-xl text-gray-800 dark:text-gray-200 break-words">{exam.title}</div>
-              <div className="text-sm text-blue-600 dark:text-blue-400 font-medium">امتحان </div>
+              <div className="text-sm text-[#9b172a] dark:text-[#9b172a]-400 font-medium">امتحان </div>
             </div>
             {exam.userResult?.hasTaken && (
               <div className="text-right">
@@ -344,9 +344,9 @@ const OptimizedLessonContentModal = ({ isOpen, onClose, courseId, lessonId, unit
             
             {/* Date Information */}
             {(exam.openDate || exam.closeDate) && (
-              <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-                <div className="text-sm font-medium text-blue-800 dark:text-blue-300 mb-2">معلومات التواريخ:</div>
-                <div className="space-y-1 text-xs text-blue-700 dark:text-blue-400">
+              <div className="mb-4 p-3 bg-[#9b172a]-50 dark:bg-[#9b172a]-900/20 rounded-lg">
+                <div className="text-sm font-medium text-[#9b172a]-800 dark:text-[#9b172a]-300 mb-2">معلومات التواريخ:</div>
+                <div className="space-y-1 text-xs text-[#9b172a]-700 dark:text-[#9b172a]-400">
                   {exam.openDate && (
                     <div>يفتح في: {new Date(exam.openDate).toLocaleDateString('ar')} {new Date(exam.openDate).toLocaleTimeString('ar', { hour: '2-digit', minute: '2-digit' })}</div>
                   )}
@@ -373,7 +373,7 @@ const OptimizedLessonContentModal = ({ isOpen, onClose, courseId, lessonId, unit
                 </div>
               ) : exam.examStatus === 'not_open' ? (
                 <div className="space-y-3">
-                  <div className="flex items-center justify-center gap-2 text-blue-600">
+                  <div className="flex items-center justify-center gap-2 text-[#9b172a]">
                     <FaClock />
                     <span>الامتحان غير متاح بعد</span>
                   </div>
@@ -412,7 +412,7 @@ const OptimizedLessonContentModal = ({ isOpen, onClose, courseId, lessonId, unit
                      }
                      handleStartExam(exam, 'exam');
                    }}
-                   className="bg-blue-600 hover:bg-blue-700 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg transition-all duration-200 hover:shadow-lg font-medium text-sm sm:text-base w-full sm:w-auto"
+                   className="bg-[#9b172a] hover:bg-[#9b172a]-700 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg transition-all duration-200 hover:shadow-lg font-medium text-sm sm:text-base w-full sm:w-auto"
                    disabled={isAccessExpired}
                  >
                    بدء الامتحان
@@ -497,7 +497,7 @@ const OptimizedLessonContentModal = ({ isOpen, onClose, courseId, lessonId, unit
             <div className="text-center">
               {training.trainingStatus === 'not_open' ? (
                 <div className="space-y-3">
-                  <div className="flex items-center justify-center gap-2 text-blue-600">
+                  <div className="flex items-center justify-center gap-2 text-[#9b172a]">
                     <FaClock />
                     <span>التدريب غير متاح بعد</span>
                   </div>
@@ -656,7 +656,7 @@ const OptimizedLessonContentModal = ({ isOpen, onClose, courseId, lessonId, unit
                 if (exam.openDate && new Date(exam.openDate) > new Date()) {
                   return (
                     <div className="space-y-3">
-                      <div className="flex items-center justify-center gap-2 text-blue-600">
+                      <div className="flex items-center justify-center gap-2 text-[#9b172a]">
                         <FaClock />
                         <span>الامتحان غير متاح بعد</span>
                       </div>
@@ -729,7 +729,7 @@ const OptimizedLessonContentModal = ({ isOpen, onClose, courseId, lessonId, unit
     return (
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60 backdrop-blur-sm">
         <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl p-8 text-center">
-          <FaSpinner className="animate-spin text-4xl text-blue-600 mx-auto mb-4" />
+          <FaSpinner className="animate-spin text-4xl text-[#9b172a] mx-auto mb-4" />
           <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">جاري تحميل محتوى الدرس...</h3>
         </div>
       </div>
@@ -769,7 +769,7 @@ const OptimizedLessonContentModal = ({ isOpen, onClose, courseId, lessonId, unit
           <p className="text-gray-600 dark:text-gray-300 mb-4">{error}</p>
           <div className="flex flex-col gap-2">
             <div className="flex gap-2">
-              <button onClick={handleRetry} className="flex-1 bg-blue-600 text-white px-4 py-2 rounded-lg">
+              <button onClick={handleRetry} className="flex-1 bg-[#9b172a] text-white px-4 py-2 rounded-lg">
                 {isAuthError ? 'تسجيل الدخول' : 'إعادة المحاولة'}
               </button>
               <button onClick={onClose} className="flex-1 bg-gray-600 text-white px-4 py-2 rounded-lg">إغلاق</button>
@@ -786,13 +786,13 @@ const OptimizedLessonContentModal = ({ isOpen, onClose, courseId, lessonId, unit
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60 backdrop-blur-sm p-2 sm:p-4">
       <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl w-full max-w-5xl max-h-[95vh] overflow-hidden relative">
         {/* Header */}
-        <div className="bg-gradient-to-r from-blue-600 to-blue-600 text-white p-4 sm:p-6 rounded-t-2xl">
+        <div className="bg-gradient-to-r from-[#9b172a] to-[#9b172a] text-white p-4 sm:p-6 rounded-t-2xl">
           <div className="flex items-start justify-between gap-3">
             <div className="flex-1 min-w-0">
               <h2 className="text-lg sm:text-xl md:text-2xl font-bold leading-tight break-words">{lesson.title}</h2>
-              <p className="text-blue-100 mt-1 text-sm sm:text-base leading-relaxed break-words">{lesson.description}</p>
+              <p className="text-[#9b172a]-100 mt-1 text-sm sm:text-base leading-relaxed break-words">{lesson.description}</p>
               {courseInfo && (
-                <p className="text-blue-200 mt-1 text-xs sm:text-sm">{courseInfo.title}</p>
+                <p className="text-[#9b172a]-200 mt-1 text-xs sm:text-sm">{courseInfo.title}</p>
               )}
               
                              {/* Show remaining days if user has code-based access */}
@@ -819,9 +819,9 @@ const OptimizedLessonContentModal = ({ isOpen, onClose, courseId, lessonId, unit
           {/* Navigation Tabs */}
           <div className="flex items-center justify-center mb-6 bg-gray-50 dark:bg-gray-800 rounded-xl p-2 overflow-x-auto">
             {[
-              { key: 'video', label: 'الفيديوهات', icon: <FaVideo className="text-blue-500" />, count: lesson.videos?.length || 0 },
+              { key: 'video', label: 'الفيديوهات', icon: <FaVideo className="text-[#9b172a]" />, count: lesson.videos?.length || 0 },
               { key: 'pdf', label: 'الملفات', icon: <FaFilePdf className="text-red-500" />, count: lesson.pdfs?.length || 0 },
-              { key: 'exam', label: 'الامتحانات', icon: <FaClipboardList className="text-blue-500" />, count: lesson.exams?.length || 0 },
+              { key: 'exam', label: 'الامتحانات', icon: <FaClipboardList className="text-[#9b172a]" />, count: lesson.exams?.length || 0 },
               { key: 'essayExam', label: 'الامتحانات المقالية', icon: <FaClipboardList className="text-purple-500" />, count: lesson.essayExams?.length || 0 },
               { key: 'training', label: 'التدريبات', icon: <FaDumbbell className="text-green-500" />, count: lesson.trainings?.length || 0 }
             ].filter(tab => tab.count > 0).map((tab) => (
@@ -830,7 +830,7 @@ const OptimizedLessonContentModal = ({ isOpen, onClose, courseId, lessonId, unit
                 onClick={() => setSelectedTab(tab.key)}
                 className={`flex items-center gap-1 sm:gap-2 px-2 sm:px-4 py-2 rounded-lg transition-all duration-200 mx-1 flex-shrink-0 ${
                   selectedTab === tab.key
-                    ? 'bg-white dark:bg-gray-700 text-blue-600 dark:text-blue-400 shadow-md'
+                    ? 'bg-white dark:bg-gray-700 text-[#9b172a] dark:text-[#9b172a]-400 shadow-md'
                     : 'text-gray-600 dark:text-gray-300 hover:bg-white dark:hover:bg-gray-700'
                 }`}
               >

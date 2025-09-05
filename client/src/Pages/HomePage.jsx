@@ -48,7 +48,8 @@ import {
   FaWhatsapp,
   FaFacebook,
   FaYoutube,
-  FaComments
+  FaComments,
+  FaTiktok
 } from "react-icons/fa";
 import { placeholderImages } from "../utils/placeholderImages";
 // Using a public URL for now - replace with your actual image URL
@@ -126,14 +127,14 @@ export default function HomePage() {
   const handleAPKDownload = () => {
     // Create a download link for the APK file
     const link = document.createElement('a');
-    link.href = '/downloads/almongez.apk'; // Update this path to your APK file location
-    link.download = 'almongez.apk';
+    link.href = '/downloads/drahmedali.apk'; // Update this path to your APK file location
+    link.download = 'drahmedali.apk';
     link.target = '_blank';
     
     // Fallback for mobile browsers
     if (navigator.userAgent.toLowerCase().indexOf('android') > -1) {
       // For Android devices, open the download directly
-      window.open('/downloads/almongez.apk', '_blank');
+      window.open('/downloads/drahmedali.apk', '_blank');
     } else {
       // For other devices, trigger download
       document.body.appendChild(link);
@@ -805,7 +806,7 @@ export default function HomePage() {
 
 
       {/* Mobile App Download Section */}
-      <section className="py-20 bg-gradient-to-br from-green-50 via-blue-50 to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900" dir="rtl">
+      <section className="py-20 bg-gradient-to-br from-green-50 via-[#9b172a]-50 to-[#9b172a]-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900" dir="rtl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             
@@ -819,7 +820,7 @@ export default function HomePage() {
                 
                 <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white leading-tight">
                   حمّل التطبيق
-                  <span className="block text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-blue-600">
+                  <span className="block text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-[#9b172a]">
                     وتعلم في أي مكان
                   </span>
                 </h2>
@@ -839,22 +840,22 @@ export default function HomePage() {
                 </div>
                 
                 <div className="flex items-center space-x-3">
-                  <div className="flex-shrink-0 w-8 h-8 bg-blue-100 dark:bg-blue-900/20 rounded-full flex items-center justify-center">
-                    <FaPlay className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                  <div className="flex-shrink-0 w-8 h-8 bg-[#9b172a]-100 dark:bg-[#9b172a]-900/20 rounded-full flex items-center justify-center">
+                    <FaPlay className="w-4 h-4 text-[#9b172a] dark:text-[#9b172a]-400" />
                   </div>
                   <span className="text-gray-700 dark:text-gray-300 mr-3">فيديوهات عالية الجودة</span>
                 </div>
                 
                 <div className="flex items-center space-x-3">
-                  <div className="flex-shrink-0 w-8 h-8 bg-blue-100 dark:bg-blue-900/20 rounded-full flex items-center justify-center">
-                    <FaBookOpen className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                  <div className="flex-shrink-0 w-8 h-8 bg-[#9b172a]-100 dark:bg-[#9b172a]-900/20 rounded-full flex items-center justify-center">
+                    <FaBookOpen className="w-4 h-4 text-[#9b172a] dark:text-[#9b172a]-400" />
                   </div>
                   <span className="text-gray-700 dark:text-gray-300 mr-3">مكتبة شاملة</span>
                 </div>
                 
                 <div className="flex items-center space-x-3">
-                  <div className="flex-shrink-0 w-8 h-8 bg-blue-100 dark:bg-blue-900/20 rounded-full flex items-center justify-center">
-                    <FaCheckCircle className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                  <div className="flex-shrink-0 w-8 h-8 bg-[#9b172a]-100 dark:bg-[#9b172a]-900/20 rounded-full flex items-center justify-center">
+                    <FaCheckCircle className="w-4 h-4 text-[#9b172a] dark:text-[#9b172a]-400" />
                   </div>
                   <span className="text-gray-700 dark:text-gray-300 mr-3">تتبع التقدم</span>
                 </div>
@@ -927,38 +928,38 @@ export default function HomePage() {
                     <div className="p-6 space-y-6">
                       {/* App Header */}
                       <div className="flex items-center space-x-4" dir="rtl">
-                        <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center">
+                        <div className="w-12 h-12 bg-gradient-to-br from-[#9b172a] to-[#9b172a] rounded-xl flex items-center justify-center">
                           <img src={logo} alt="logo" className="w-12 h-12" />
                         </div>
                         <div>
-                          <h3 className="font-bold text-lg text-gray-900">تطبيق المنجز</h3>
+                          <h3 className="font-bold text-lg text-gray-900">تطبيق دكتور أحمد</h3>
                           <p className="text-sm text-gray-600">منصة التعلم الذكية</p>
                         </div>
                       </div>
 
                       {/* Course Cards Preview */}
-                      <div className="space-y-4">
-                        <div className="bg-gradient-to-r from-blue-50 to-blue-50 rounded-xl p-4">
+                      <div className="space-y-4" dir="rtl" >
+                        <div className="bg-gradient-to-r from-[#9b172a] to-[#9b172a] rounded-xl p-4">
                           <div className="flex justify-between items-start mb-2">
-                            <h4 className="font-semibold text-gray-900">الكيمياء</h4>
+                            <h4 className="font-semibold text-gray-900">الفيزياء</h4>
                             <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">جديد</span>
                           </div>
-                          <p className="text-sm text-gray-600 mb-3"> الكيمياء </p>
+                          <p className="text-sm text-gray-900 mb-3"> الفيزياء </p>
                           <div className="flex justify-between items-center">
-                            <span className="text-sm text-blue-600 font-medium">30% مكتمل</span>
-                            <button className="bg-blue-600 text-white px-4 py-1 rounded-full text-xs">متابعة</button>
+                            <span className="text-sm text-[#9b172a] font-medium">30% مكتمل</span>
+                            <button className="bg-[#9b172a] text-white px-4 py-1 rounded-full text-xs">متابعة</button>
                           </div>
                         </div>
 
-                        <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-xl p-4">
+                        <div className="bg-gradient-to-r from-green-50 to-[#9b172a]-50 rounded-xl p-4">
                           <div className="flex justify-between items-start mb-2">
                             <h4 className="font-semibold text-gray-900">علوم متكاملة </h4>
-                            <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">شائع</span>
+                            <span className="text-xs bg-[#9b172a]-100 text-[#9b172a]-800 px-2 py-1 rounded-full">شائع</span>
                           </div>
                           <p className="text-sm text-gray-600 mb-3">  علوم متكاملة </p>
                           <div className="flex justify-between items-center">
                             <span className="text-sm text-green-600 font-medium">75% مكتمل</span>
-                            <button className="bg-blue-600 text-white px-4 py-1 rounded-full text-xs">متابعة</button>
+                            <button className="bg-[#9b172a] text-white px-4 py-1 rounded-full text-xs">متابعة</button>
                           </div>
                         </div>
                       </div>
@@ -1000,7 +1001,7 @@ export default function HomePage() {
       </section>
 
       {/* Static FAQ Section */}
-      <section className="py-16 px-4 lg:px-20 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-gray-800" dir="rtl">
+      <section className="py-16 px-4 lg:px-20 bg-gradient-to-br from-gray-50 to-[#9b172a]-50 dark:from-gray-900 dark:to-gray-800" dir="rtl">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-gray-800 dark:text-white mb-4 text-right">
@@ -1043,13 +1044,13 @@ export default function HomePage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Phone */}
               <div className="flex items-center p-4 bg-gray-50 dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-                <div className="flex-shrink-0 w-12 h-12 bg-blue-100 dark:bg-blue-900/20 rounded-full flex items-center justify-center mr-4">
-                  <FaPhone className="text-blue-600 dark:text-blue-400 text-xl" />
+                <div className="flex-shrink-0 w-12 h-12 bg-[#9b172a]-100 dark:bg-[#9b172a]-900/20 rounded-full flex items-center justify-center mr-4">
+                  <FaPhone className="text-[#9b172a] dark:text-[#9b172a]-400 text-xl" />
                 </div>
                 <div>
                   <h3 className="font-semibold text-gray-900 dark:text-white">الهاتف</h3>
-                  <a href="tel:01125800332" className="text-blue-600 dark:text-blue-400 hover:underline">
-                    01125800332
+                  <a href="tel:01120920153" className="text-[#9b172a] dark:text-[#9b172a]-400 hover:underline">
+                    01120920153
                   </a>
                 </div>
               </div>
@@ -1061,8 +1062,8 @@ export default function HomePage() {
                 </div>
                 <div>
                   <h3 className="font-semibold text-gray-900 dark:text-white">واتساب</h3>
-                  <a href="https://wa.me/+201125800332" className="text-green-600 dark:text-green-400 hover:underline">
-                  +201125800332
+                  <a href="https://wa.me/+201120920153" className="text-green-600 dark:text-green-400 hover:underline">
+                  +201120920153
                   </a>
                 </div>
               </div>
@@ -1075,7 +1076,7 @@ export default function HomePage() {
               </h3>
               <div className="flex flex-wrap justify-center gap-6 max-w-md mx-auto">
                 <a
-                  href="https://www.facebook.com/people/MrMahmoud-Abdel-Aziz/100070094625467/?mibextid=ZbWKwL"
+                  href="https://www.facebook.com/profile.php?id=100075431541020&mibextid=ZbWKwL"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group flex flex-col items-center p-4 bg-gray-50 dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:text-[#9b172a] hover:scale-105"
@@ -1089,7 +1090,7 @@ export default function HomePage() {
                   </span>
                 </a>
                 <a
-                  href="https://www.youtube.com/@mahmoudAbdel_Aziz"
+                  href="https://youtube.com/@dr.ahmedali84?si=duv4lzCvpgCWnmVV"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group flex flex-col items-center p-4 bg-gray-50 dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:text-[#9b172a] hover:scale-105"
@@ -1102,9 +1103,22 @@ export default function HomePage() {
                     YouTube
                   </span>
                 </a>
-                <a
-                  href="https://wa.me/01125800332"
+                <a href="https://www.tiktok.com/@dr.ahmedali.physics?_r=1&_d=dg3efc6k3359b4&sec_uid=MS4wLjABAAAAf3HmNa9tmQXpzXufto73qWhFAuMb7QK1HKizPgYa984_EqTuq2HByBzEeQmp2JY3&share_author_id=6906572971282154501&sharer_language=ar&source=h5_m&u_code=dg3efalj7m1c2m&timestamp=1757077792&user_id=6906572971282154501&sec_user_id=MS4wLjABAAAAf3HmNa9tmQXpzXufto73qWhFAuMb7QK1HKizPgYa984_EqTuq2HByBzEeQmp2JY3&item_author_type=1&utm_source=copy&utm_campaign=client_share&utm_medium=android&share_iid=7528408886655780624&share_link_id=3e1ac305-cc82-4b23-a0f5-c268be509b9c&share_app_id=1233&ugbiz_name=ACCOUNT&ug_btm=b8727%2Cb4907&social_share_type=5&enable_checksum=1" 
                   target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex flex-col items-center p-4 bg-gray-50 dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:text-[#9b172a] hover:scale-105"
+                  title="TikTok"
+                  >
+                  <div className="w-12 h-12 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center mb-2 group-hover:bg-opacity-80 transition-colors">
+                    <FaTiktok className="text-2xl" />
+                  </div>
+                  <span className="text-xs font-medium text-gray-600 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white transition-colors">
+                    TikTok
+                  </span>
+                </a>
+                <a
+                  href="https://wa.me/01120920153"
+                  target="_blank" 
                   rel="noopener noreferrer"
                   className="group flex flex-col items-center p-4 bg-gray-50 dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:text-green-500 hover:scale-105"
                   title="WhatsApp"
@@ -1173,7 +1187,7 @@ export default function HomePage() {
                 href="https://fikra.solutions/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-semibold text-blue-600 hover:text-[#9b172a] dark:text-[#9b172a] dark:hover:text-[#7d1324]"
+                className="font-semibold text-[#9b172a] hover:text-[#9b172a] dark:text-[#9b172a] dark:hover:text-[#7d1324]"
               >
                 Fikra Software
               </a>
@@ -1204,7 +1218,7 @@ export default function HomePage() {
 
       {/* Floating WhatsApp Button */}
       <a
-        href="https://wa.me/+201125800332"
+        href="https://wa.me/+201120920153"
         target="_blank"
         rel="noopener noreferrer"
         className="fixed left-8 bottom-8 z-50 p-4 bg-green-500 hover:bg-green-600 text-white rounded-full shadow-lg hover:shadow-xl transform hover:scale-110 transition-all duration-300 group animate-bounce"

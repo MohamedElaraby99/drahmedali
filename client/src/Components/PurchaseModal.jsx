@@ -139,7 +139,7 @@ const PurchaseModal = ({
         )}
 
         {/* Header */}
-        <div className="bg-gradient-to-r from-blue-500 to-blue-600 p-6 text-white">
+        <div className="bg-gradient-to-r from-[#9b172a] to-[#9b172a] p-6 text-white">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
@@ -164,7 +164,7 @@ const PurchaseModal = ({
           {/* Lesson Info */}
           <div className="bg-gray-50 dark:bg-gray-700 rounded-xl p-4 mb-6">
             <div className="flex items-start gap-3">
-              <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg flex items-center justify-center">
+              <div className="w-12 h-12 bg-gradient-to-r from-[#9b172a] to-[#9b172a] rounded-lg flex items-center justify-center">
                 <FaPlay className="text-white text-lg" />
               </div>
               <div className="flex-1">
@@ -177,7 +177,7 @@ const PurchaseModal = ({
                   </p>
                 )}
                 <div className="flex items-center gap-2 mt-2">
-                  <span className="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs rounded-full font-medium">
+                  <span className="px-2 py-1 bg-[#9b172a]-100 dark:bg-[#9b172a]-900 text-[#9b172a]-800 dark:text-[#9b172a]-200 text-xs rounded-full font-medium">
                     درس فيديو
                   </span>
                   <span className="px-2 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs rounded-full font-medium">
@@ -189,11 +189,11 @@ const PurchaseModal = ({
           </div>
 
           {/* Pricing */}
-          <div className="bg-gradient-to-r from-blue-50 to-blue-50 dark:from-blue-900/20 dark:to-blue-900/20 rounded-xl p-4 mb-6">
+          <div className="bg-gradient-to-r from-[#9b172a]-50 to-[#9b172a]-50 dark:from-[#9b172a]-900/20 dark:to-[#9b172a]-900/20 rounded-xl p-4 mb-6">
             <div className="flex items-center justify-between mb-3">
               <span className="text-sm text-gray-600 dark:text-gray-400">سعر الدرس</span>
               <div className="flex items-center gap-2">
-                <FaCoins className="text-blue-500" />
+                <FaCoins className="text-[#9b172a]" />
                 <span className="text-2xl font-bold text-gray-900 dark:text-white">
                   {price} نقطة
                 </span>
@@ -262,7 +262,7 @@ const PurchaseModal = ({
             ) : (
               <button
                 onClick={onClose}
-                className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-4 px-6 rounded-xl font-semibold hover:from-blue-600 hover:to-blue-700 transition-all duration-200 transform hover:scale-[1.02] flex items-center justify-center gap-3"
+                className="w-full bg-gradient-to-r from-[#9b172a] to-[#9b172a] text-white py-4 px-6 rounded-xl font-semibold hover:from-[#9b172a] hover:to-[#9b172a]-700 transition-all duration-200 transform hover:scale-[1.02] flex items-center justify-center gap-3"
               >
                 <FaWallet />
                 شحن المحفظة
@@ -280,7 +280,7 @@ const PurchaseModal = ({
           {/* Benefits */}
           <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-600">
             <h4 className="font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
-              <FaStar className="text-blue-500" />
+              <FaStar className="text-[#9b172a]" />
               ما ستحصل عليه
             </h4>
             <div className="space-y-2 text-sm text-gray-600 dark:text-gray-400">

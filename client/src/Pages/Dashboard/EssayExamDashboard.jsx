@@ -228,7 +228,7 @@ const EssayExamDashboard = () => {
 
   return (
     <Layout>
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 p-6" dir="rtl">
+      <div className="min-h-screen bg-gradient-to-br from-[#9b172a]-50 via-indigo-50 to-[#9b172a]-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 p-6" dir="rtl">
         <div className="max-w-7xl mx-auto">
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-right">
             لوحة تحكم الامتحانات المقالية
@@ -310,7 +310,7 @@ const EssayExamDashboard = () => {
                     </thead>
                     <tbody className="bg-white dark:bg-gray-700 divide-y divide-gray-200 dark:divide-gray-600">
                       {availableExams.map(exam => (
-                        <tr key={exam._id} className={selectedExam?._id === exam._id ? 'bg-blue-50 dark:bg-blue-900/20' : ''}>
+                        <tr key={exam._id} className={selectedExam?._id === exam._id ? 'bg-[#9b172a]-50 dark:bg-[#9b172a]-900/20' : ''}>
                           <td className="px-3 py-2 text-sm text-gray-900 dark:text-white">{exam.title}</td>
                           <td className="px-3 py-2 text-sm text-gray-700 dark:text-gray-200">{exam.questions?.length || 0}</td>
                           <td className="px-3 py-2 text-xs text-gray-500">{exam.openDate ? new Date(exam.openDate).toLocaleString('ar-EG') : '-'}</td>
@@ -318,7 +318,7 @@ const EssayExamDashboard = () => {
                           <td className="px-3 py-2">
                             <button
                               onClick={() => setSelectedExam(exam)}
-                              className="px-3 py-1.5 bg-blue-600 text-white rounded hover:bg-blue-700 text-xs"
+                              className="px-3 py-1.5 bg-[#9b172a] text-white rounded hover:bg-[#9b172a]-700 text-xs"
                             >
                               اختيار
                             </button>
@@ -457,7 +457,7 @@ const EssayExamDashboard = () => {
                                         <div className="flex items-center gap-2">
                                           <button
                                             onClick={() => downloadFile(userSubmission.fileAnswer.url, userSubmission.fileAnswer.fileName)}
-                                            className="flex items-center gap-2 px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                                            className="flex items-center gap-2 px-3 py-2 bg-[#9b172a] text-white rounded-lg hover:bg-[#9b172a]-700 transition-colors"
                                           >
                                             <FaDownload />
                                             تحميل {userSubmission.fileAnswer.fileName}

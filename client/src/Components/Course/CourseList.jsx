@@ -102,7 +102,7 @@ const CourseList = ({ courses, loading, pagination, onEditCourse, role, onRefres
               {/* Featured Badge Overlay */}
               {course.featured && (
                 <div className="absolute top-2 right-2 z-10">
-                  <span className="inline-flex items-center px-2 py-1 bg-blue-400 text-blue-900 text-xs font-bold rounded-full shadow-lg">
+                  <span className="inline-flex items-center px-2 py-1 bg-[#9b172a]-400 text-[#9b172a]-900 text-xs font-bold rounded-full shadow-lg">
                     <FaStar className="w-3 h-3 mr-1 fill-current" />
                     مميز
                   </span>
@@ -130,7 +130,7 @@ const CourseList = ({ courses, loading, pagination, onEditCourse, role, onRefres
               ) : (
                 <>
                   {console.log('📚 No course image, using fallback for:', course.title)}
-                  <div className="w-full h-full bg-gradient-to-br from-blue-500 to-blue-600"></div>
+                  <div className="w-full h-full bg-gradient-to-br from-[#9b172a] to-[#9b172a]"></div>
                   <div className="absolute inset-0 bg-black bg-opacity-20"></div>
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="text-white text-4xl">📚</div>
@@ -139,7 +139,7 @@ const CourseList = ({ courses, loading, pagination, onEditCourse, role, onRefres
               )}
               
               {/* Fallback gradient for broken images */}
-              <div className="hidden w-full h-full bg-gradient-to-br from-blue-500 to-blue-600">
+              <div className="hidden w-full h-full bg-gradient-to-br from-[#9b172a] to-[#9b172a]">
                 <div className="absolute inset-0 bg-black bg-opacity-20"></div>
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-white text-4xl">📚</div>
@@ -179,7 +179,7 @@ const CourseList = ({ courses, loading, pagination, onEditCourse, role, onRefres
               {/* Stage Info */}
               {course.stage && (
                 <div className="mb-3">
-                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
+                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#9b172a]-100 text-[#9b172a]-800 dark:bg-[#9b172a]-900 dark:text-[#9b172a]-200">
                     {course.stage.name}
                   </span>
                 </div>
@@ -188,7 +188,7 @@ const CourseList = ({ courses, loading, pagination, onEditCourse, role, onRefres
               {/* Featured Badge */}
               {course.featured && (
                 <div className="mb-3">
-                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
+                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#9b172a]-100 text-[#9b172a]-800 dark:bg-[#9b172a]-900 dark:text-[#9b172a]-200">
                     <FaStar className="w-3 h-3 mr-1 fill-current" />
                     مميز
                   </span>
@@ -209,7 +209,7 @@ const CourseList = ({ courses, loading, pagination, onEditCourse, role, onRefres
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => onEditCourse(course)}
-                  className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 p-2 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors"
+                  className="text-[#9b172a] dark:text-[#9b172a]-400 hover:text-[#9b172a]-800 dark:hover:text-[#9b172a]-300 p-2 rounded-lg hover:bg-[#9b172a]-50 dark:hover:bg-[#9b172a]-900/20 transition-colors"
                   title="تعديل"
                 >
                   <FaEdit className="text-sm" />
@@ -228,8 +228,8 @@ const CourseList = ({ courses, loading, pagination, onEditCourse, role, onRefres
                     onClick={() => handleToggleFeatured(course._id, course.featured)}
                     className={`p-2 rounded-lg transition-colors ${
                       course.featured 
-                        ? 'text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 hover:bg-blue-50 dark:hover:bg-blue-900/20' 
-                        : 'text-gray-400 dark:text-gray-500 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20'
+                        ? 'text-[#9b172a] dark:text-[#9b172a]-400 hover:text-[#9b172a]-800 dark:hover:text-[#9b172a]-300 hover:bg-[#9b172a]-50 dark:hover:bg-[#9b172a]-900/20' 
+                        : 'text-gray-400 dark:text-gray-500 hover:text-[#9b172a] dark:hover:text-[#9b172a]-400 hover:bg-[#9b172a]-50 dark:hover:bg-[#9b172a]-900/20'
                     }`}
                     title={course.featured ? 'إلغاء التمييز' : 'تمييز الدورة'}
                   >
@@ -238,7 +238,7 @@ const CourseList = ({ courses, loading, pagination, onEditCourse, role, onRefres
                 )}
                 <button
                   onClick={() => setStructureModalCourse(course._id)}
-                  className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 p-2 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors"
+                  className="text-[#9b172a] dark:text-[#9b172a]-400 hover:text-[#9b172a]-800 dark:hover:text-[#9b172a]-300 p-2 rounded-lg hover:bg-[#9b172a]-50 dark:hover:bg-[#9b172a]-900/20 transition-colors"
                   title="إدارة الهيكل"
                 >
                   <FaList className="text-sm" />

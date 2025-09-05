@@ -184,7 +184,7 @@ export default function StageDashboard() {
             </div>
             <button
               onClick={() => setShowCreateModal(true)}
-              className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-colors duration-200"
+              className="inline-flex items-center gap-2 bg-[#9b172a] hover:bg-[#9b172a]-700 text-white px-6 py-3 rounded-lg transition-colors duration-200"
             >
               <FaPlus />
               إضافة مرحلة جديدة
@@ -199,8 +199,8 @@ export default function StageDashboard() {
                   <p className="text-sm font-medium text-gray-600 dark:text-gray-400">إجمالي المراحل</p>
                   <p className="text-2xl font-bold text-gray-900 dark:text-white">{adminStages.length}</p>
                 </div>
-                <div className="p-3 bg-blue-100 dark:bg-blue-900 rounded-full">
-                  <FaChartBar className="text-blue-600 dark:text-blue-400" size={20} />
+                <div className="p-3 bg-[#9b172a]-100 dark:bg-[#9b172a]-900 rounded-full">
+                  <FaChartBar className="text-[#9b172a] dark:text-[#9b172a]-400" size={20} />
                 </div>
               </div>
             </div>
@@ -221,12 +221,12 @@ export default function StageDashboard() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium text-gray-600 dark:text-gray-400">إجمالي المواد</p>
-                  <p className="text-2xl font-bold text-blue-600">
+                  <p className="text-2xl font-bold text-[#9b172a]">
                     {stagesWithStats.reduce((sum, stage) => sum + (stage.subjectsCount || 0), 0)}
                   </p>
                 </div>
-                <div className="p-3 bg-blue-100 dark:bg-blue-900 rounded-full">
-                  <FaBook className="text-blue-600 dark:text-blue-400" size={20} />
+                <div className="p-3 bg-[#9b172a]-100 dark:bg-[#9b172a]-900 rounded-full">
+                  <FaBook className="text-[#9b172a] dark:text-[#9b172a]-400" size={20} />
                 </div>
               </div>
             </div>
@@ -235,12 +235,12 @@ export default function StageDashboard() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium text-gray-600 dark:text-gray-400">إجمالي الطلاب</p>
-                  <p className="text-2xl font-bold text-blue-600">
+                  <p className="text-2xl font-bold text-[#9b172a]">
                     {stagesWithStats.reduce((sum, stage) => sum + (stage.studentsCount || 0), 0)}
                   </p>
                 </div>
-                <div className="p-3 bg-blue-100 dark:bg-blue-900 rounded-full">
-                  <FaUsers className="text-blue-600 dark:text-blue-400" size={20} />
+                <div className="p-3 bg-[#9b172a]-100 dark:bg-[#9b172a]-900 rounded-full">
+                  <FaUsers className="text-[#9b172a] dark:text-[#9b172a]-400" size={20} />
                 </div>
               </div>
             </div>
@@ -256,14 +256,14 @@ export default function StageDashboard() {
                   placeholder="البحث في المراحل..."
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
+                  className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#9b172a] focus:border-transparent dark:bg-gray-700 dark:text-white"
                 />
               </div>
 
               <select
                 value={status}
                 onChange={(e) => setStatus(e.target.value)}
-                className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
+                className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#9b172a] focus:border-transparent dark:bg-gray-700 dark:text-white"
               >
                 <option value="">جميع الحالات</option>
                 <option value="active">نشط</option>
@@ -298,7 +298,7 @@ export default function StageDashboard() {
                     <tr>
                       <td colSpan="3" className="px-6 py-8 text-center">
                         <div className="flex items-center justify-center">
-                          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+                          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#9b172a]"></div>
                           <span className="mr-3 text-gray-500 dark:text-gray-400">جاري التحميل...</span>
                         </div>
                       </td>
@@ -321,11 +321,11 @@ export default function StageDashboard() {
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div className="flex items-center space-x-4 space-x-reverse">
                             <div className="flex items-center text-sm text-gray-900 dark:text-white">
-                              <FaBook className="mr-1 text-blue-500" />
+                              <FaBook className="mr-1 text-[#9b172a]" />
                               {stagesWithStats.find(s => s._id === stage._id)?.subjectsCount || 0}
                             </div>
                             <div className="flex items-center text-sm text-gray-900 dark:text-white">
-                              <FaUsers className="mr-1 text-blue-500" />
+                              <FaUsers className="mr-1 text-[#9b172a]" />
                               {stagesWithStats.find(s => s._id === stage._id)?.studentsCount || 0}
                             </div>
                           </div>
@@ -339,7 +339,7 @@ export default function StageDashboard() {
                           <div className="flex items-center space-x-2 space-x-reverse">
                             <button
                               onClick={() => handleToggleStatus(stage._id)}
-                              className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300"
+                              className="text-[#9b172a] hover:text-[#9b172a]-900 dark:text-[#9b172a]-400 dark:hover:text-[#9b172a]-300"
                               title={stage.status === 'active' ? 'إلغاء التفعيل' : 'تفعيل'}
                             >
                               {stage.status === 'active' ? <FaToggleOn size={16} /> : <FaToggleOff size={16} />}
@@ -397,7 +397,7 @@ export default function StageDashboard() {
                       name="name"
                       value={formData.name}
                       onChange={handleInputChange}
-                      className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white ${
+                      className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9b172a] dark:bg-gray-700 dark:text-white ${
                         errors.name ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
                       }`}
                       placeholder="اسم المرحلة"
@@ -415,7 +415,7 @@ export default function StageDashboard() {
                       name="status"
                       value={formData.status}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+                      className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9b172a] dark:bg-gray-700 dark:text-white"
                     >
                       <option value="active">نشط</option>
                       <option value="inactive">غير نشط</option>
@@ -435,7 +435,7 @@ export default function StageDashboard() {
                     </button>
                     <button
                       type="submit"
-                      className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors duration-200"
+                      className="inline-flex items-center gap-2 bg-[#9b172a] hover:bg-[#9b172a]-700 text-white px-4 py-2 rounded-lg transition-colors duration-200"
                     >
                       <FaSave />
                       إنشاء مرحلة
@@ -476,7 +476,7 @@ export default function StageDashboard() {
                       name="name"
                       value={formData.name}
                       onChange={handleInputChange}
-                      className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white ${
+                      className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9b172a] dark:bg-gray-700 dark:text-white ${
                         errors.name ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
                       }`}
                       placeholder="اسم المرحلة"
@@ -494,7 +494,7 @@ export default function StageDashboard() {
                       name="status"
                       value={formData.status}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+                      className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9b172a] dark:bg-gray-700 dark:text-white"
                     >
                       <option value="active">نشط</option>
                       <option value="inactive">غير نشط</option>
@@ -515,7 +515,7 @@ export default function StageDashboard() {
                     </button>
                     <button
                       type="submit"
-                      className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors duration-200"
+                      className="inline-flex items-center gap-2 bg-[#9b172a] hover:bg-[#9b172a]-700 text-white px-4 py-2 rounded-lg transition-colors duration-200"
                     >
                       <FaSave />
                       تحديث المرحلة

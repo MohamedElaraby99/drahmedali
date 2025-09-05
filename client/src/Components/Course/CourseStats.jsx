@@ -26,9 +26,9 @@ const CourseStats = ({ stats, loading }) => {
       title: "إجمالي الدورات",
       value: stats?.totalCourses || 0,
       icon: FaBook,
-      color: "from-blue-500 to-blue-600",
-      bgColor: "bg-blue-50 dark:bg-blue-900/20",
-      textColor: "text-blue-600 dark:text-blue-400"
+      color: "from-[#9b172a] to-[#9b172a]",
+      bgColor: "bg-[#9b172a]-50 dark:bg-[#9b172a]-900/20",
+      textColor: "text-[#9b172a] dark:text-[#9b172a]-400"
     },
     {
       title: "الكورسات المنشورة",
@@ -42,9 +42,9 @@ const CourseStats = ({ stats, loading }) => {
       title: "إجمالي الطلاب",
       value: stats?.totalStudents || 0,
       icon: FaUsers,
-      color: "from-blue-500 to-blue-600",
-      bgColor: "bg-blue-50 dark:bg-blue-900/20",
-      textColor: "text-blue-600 dark:text-blue-400"
+      color: "from-[#9b172a] to-[#9b172a]",
+      bgColor: "bg-[#9b172a]-50 dark:bg-[#9b172a]-900/20",
+      textColor: "text-[#9b172a] dark:text-[#9b172a]-400"
     }
   ];
 

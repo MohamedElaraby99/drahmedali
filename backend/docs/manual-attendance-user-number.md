@@ -180,7 +180,7 @@ Action: Cross-validates with user ID and records attendance
 ## 🔄 Integration with Existing System
 
 ### Enhanced Manual Attendance Function
-The existing [handleManualAttendance](file://c:\Users\AG\Desktop\almongez\client\src\Pages\Dashboard\CenterManagement\Attendance.jsx#L96-L119) function has been updated to use the new [takeAttendanceByPhone](file://c:\Users\AG\Desktop\almongez\client\src\Redux\Slices\AttendanceSlice.js#L16-L26) API:
+The existing [handleManualAttendance](file://c:\Users\AG\Desktop\drahmedali\client\src\Pages\Dashboard\CenterManagement\Attendance.jsx#L96-L119) function has been updated to use the new [takeAttendanceByPhone](file://c:\Users\AG\Desktop\drahmedali\client\src\Redux\Slices\AttendanceSlice.js#L16-L26) API:
 
 ```javascript
 const handleManualAttendance = async (studentId, status) => {

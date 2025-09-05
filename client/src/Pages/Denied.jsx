@@ -15,7 +15,7 @@ function Denied() {
             Access Denied
           </div>
           <button className="mt-5">
-            <a className="relative inline-block text-sm font-medium text-[#FF6A3D] group active:text-blue-500 focus:outline-none focus:ring">
+            <a className="relative inline-block text-sm font-medium text-[#FF6A3D] group active:text-[#9b172a] focus:outline-none focus:ring">
               <span
                 onClick={() => navigate(-2)}
                 className="relative block px-8 py-3 bg-[#1A2238] text-white border border-current"

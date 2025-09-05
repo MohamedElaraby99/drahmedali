@@ -124,7 +124,7 @@ export default function Navbar() {
               {/* Logo Image */}
                              <img 
                  src={logo} 
-                 alt="منصة  almongezz" 
+                 alt="منصة  drahmedali" 
                  className="w-16 h-16 md:w-20 md:h-20 object-contain group-hover:scale-110 transition-transform duration-300 dark:drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] dark:group-hover:drop-shadow-[0_0_20px_rgba(255,255,255,0.5)]"
                />
             </div>
@@ -219,13 +219,13 @@ export default function Navbar() {
                   to={item.path}
                   className={`flex items-center space-x-4 px-6 py-4 mx-4 rounded-2xl font-medium transition-all duration-300 mobile-menu-item ${
                     location.pathname === item.path
-                      ? "text-blue-600 dark:text-blue-400 bg-gradient-to-r from-blue-50 to-blue-50 dark:from-blue-900/20 dark:to-blue-900/20 shadow-lg"
-                      : "text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gradient-to-r hover:from-gray-50 hover:to-blue-50 dark:hover:from-gray-800 dark:hover:to-blue-900/20"
+                      ? "text-[#9b172a] dark:text-[#9b172a]-400 bg-gradient-to-r from-[#9b172a]-50 to-[#9b172a]-50 dark:from-[#9b172a]-900/20 dark:to-[#9b172a]-900/20 shadow-lg"
+                      : "text-gray-700 dark:text-gray-300 hover:text-[#9b172a] dark:hover:text-[#9b172a]-400 hover:bg-gradient-to-r hover:from-gray-50 hover:to-[#9b172a]-50 dark:hover:from-gray-800 dark:hover:to-[#9b172a]-900/20"
                   }`}
                 >
                   <div className={`p-3 rounded-xl shadow-lg ${
                     location.pathname === item.path
-                      ? "bg-gradient-to-r from-blue-100 to-blue-100 dark:from-blue-900/30 dark:to-blue-900/30"
+                      ? "bg-gradient-to-r from-[#9b172a]-100 to-[#9b172a]-100 dark:from-[#9b172a]-900/30 dark:to-[#9b172a]-900/30"
                       : "bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800"
                   }`}>
                     <item.icon className="w-5 h-5" />
@@ -239,9 +239,9 @@ export default function Navbar() {
             {user && (
               <>
                 <div className="border-t border-gray-200/50 dark:border-gray-700/50 pt-6">
-                  <div className="px-6 py-4 mx-4 bg-gradient-to-r from-blue-50 to-blue-50 dark:from-blue-900/20 dark:to-blue-900/20 rounded-2xl shadow-lg">
+                  <div className="px-6 py-4 mx-4 bg-gradient-to-r from-[#9b172a]-50 to-[#9b172a]-50 dark:from-[#9b172a]-900/20 dark:to-[#9b172a]-900/20 rounded-2xl shadow-lg">
                     <div className="flex items-center space-x-4">
-                      <div className="w-14 h-14 bg-gradient-to-r from-blue-600 to-blue-600 rounded-2xl flex items-center justify-center shadow-xl">
+                      <div className="w-14 h-14 bg-gradient-to-r from-[#9b172a] to-[#9b172a] rounded-2xl flex items-center justify-center shadow-xl">
                         <span className="text-white font-bold text-lg">
                           {user.fullName?.charAt(0)?.toUpperCase() || "U"}
                         </span>
@@ -253,7 +253,7 @@ export default function Navbar() {
                         <p className="text-sm text-gray-600 dark:text-gray-400">
                           {user.email}
                         </p>
-                        <p className="text-xs text-blue-600 dark:text-blue-400 font-semibold uppercase tracking-wider">
+                        <p className="text-xs text-[#9b172a] dark:text-[#9b172a]-400 font-semibold uppercase tracking-wider">
                           {user.role}
                         </p>
                       </div>
@@ -265,7 +265,7 @@ export default function Navbar() {
                 {user.role === "ADMIN" && (
                   <div className="space-y-3">
                     <div className="px-6 py-3">
-                      <p className="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider">
+                      <p className="text-xs font-bold text-[#9b172a] dark:text-[#9b172a]-400 uppercase tracking-wider">
                         لوحة الإدارة
                       </p>
                     </div>
@@ -275,13 +275,13 @@ export default function Navbar() {
                         to={item.path}
                         className={`flex items-center space-x-4 px-6 py-4 mx-4 rounded-2xl font-medium transition-all duration-300 mobile-menu-item ${
                           location.pathname === item.path
-                            ? "text-blue-600 dark:text-blue-400 bg-gradient-to-r from-blue-50 to-blue-50 dark:from-blue-900/20 dark:to-blue-900/20 shadow-lg"
-                            : "text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gradient-to-r hover:from-gray-50 hover:to-blue-50 dark:hover:from-gray-800 dark:hover:to-blue-900/20"
+                            ? "text-[#9b172a] dark:text-[#9b172a]-400 bg-gradient-to-r from-[#9b172a]-50 to-[#9b172a]-50 dark:from-[#9b172a]-900/20 dark:to-[#9b172a]-900/20 shadow-lg"
+                            : "text-gray-700 dark:text-gray-300 hover:text-[#9b172a] dark:hover:text-[#9b172a]-400 hover:bg-gradient-to-r hover:from-gray-50 hover:to-[#9b172a]-50 dark:hover:from-gray-800 dark:hover:to-[#9b172a]-900/20"
                         }`}
                       >
                         <div className={`p-3 rounded-xl shadow-lg ${
                           location.pathname === item.path
-                            ? "bg-gradient-to-r from-blue-100 to-blue-100 dark:from-blue-900/30 dark:to-blue-900/30"
+                            ? "bg-gradient-to-r from-[#9b172a]-100 to-[#9b172a]-100 dark:from-[#9b172a]-900/30 dark:to-[#9b172a]-900/30"
                             : "bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800"
                         }`}>
                           <item.icon className="w-5 h-5" />
@@ -301,7 +301,7 @@ export default function Navbar() {
                   </div>
                   <Link
                     to="/profile"
-                    className="flex items-center space-x-4 px-6 py-4 mx-4 rounded-2xl font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gradient-to-r hover:from-gray-50 hover:to-blue-50 dark:hover:from-gray-800 dark:hover:to-blue-900/20 transition-all duration-300 mobile-menu-item"
+                    className="flex items-center space-x-4 px-6 py-4 mx-4 rounded-2xl font-medium text-gray-700 dark:text-gray-300 hover:text-[#9b172a] dark:hover:text-[#9b172a]-400 hover:bg-gradient-to-r hover:from-gray-50 hover:to-[#9b172a]-50 dark:hover:from-gray-800 dark:hover:to-[#9b172a]-900/20 transition-all duration-300 mobile-menu-item"
                   >
                     <div className="p-3 rounded-xl shadow-lg bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800">
                       <FaUser className="w-5 h-5" />
@@ -329,7 +329,7 @@ export default function Navbar() {
                     انضم إلينا الآن
                   </h3>
                   <p className="text-sm text-gray-600 dark:text-gray-400">
-                    ابدأ رحلة التعلم مع منصة  almongezz
+                    ابدأ رحلة التعلم مع منصة  drahmedali
                   </p>
                 </div>
                 

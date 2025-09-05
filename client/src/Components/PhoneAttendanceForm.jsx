@@ -88,7 +88,7 @@ const PhoneAttendanceForm = ({ courseId, liveMeetingId, onSuccess, onClose }) =>
         {/* Phone Number */}
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-            <FaPhone className="inline mr-2 text-blue-500" />
+            <FaPhone className="inline mr-2 text-[#9b172a]" />
             رقم الهاتف
           </label>
           <input
@@ -97,7 +97,7 @@ const PhoneAttendanceForm = ({ courseId, liveMeetingId, onSuccess, onClose }) =>
             value={formData.phoneNumber}
             onChange={handleInputChange}
             placeholder="01234567890"
-            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#9b172a] focus:border-transparent dark:bg-gray-700 dark:text-white"
             dir="ltr"
           />
           <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
@@ -115,7 +115,7 @@ const PhoneAttendanceForm = ({ courseId, liveMeetingId, onSuccess, onClose }) =>
             name="status"
             value={formData.status}
             onChange={handleInputChange}
-            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#9b172a] focus:border-transparent dark:bg-gray-700 dark:text-white"
           >
             <option value="present">حاضر</option>
             <option value="late">متأخر</option>
@@ -135,7 +135,7 @@ const PhoneAttendanceForm = ({ courseId, liveMeetingId, onSuccess, onClose }) =>
             value={formData.scanLocation}
             onChange={handleInputChange}
             placeholder="مثال: قاعة المحاضرات الرئيسية"
-            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#9b172a] focus:border-transparent dark:bg-gray-700 dark:text-white"
           />
         </div>
 
@@ -151,7 +151,7 @@ const PhoneAttendanceForm = ({ courseId, liveMeetingId, onSuccess, onClose }) =>
             onChange={handleInputChange}
             placeholder="أي ملاحظات إضافية..."
             rows={3}
-            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white resize-none"
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#9b172a] focus:border-transparent dark:bg-gray-700 dark:text-white resize-none"
           />
         </div>
 
@@ -193,11 +193,11 @@ const PhoneAttendanceForm = ({ courseId, liveMeetingId, onSuccess, onClose }) =>
       </form>
 
       {/* Info Section */}
-      <div className="mt-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-        <h4 className="text-sm font-medium text-blue-800 dark:text-blue-300 mb-2">
+      <div className="mt-6 p-4 bg-[#9b172a]-50 dark:bg-[#9b172a]-900/20 rounded-lg">
+        <h4 className="text-sm font-medium text-[#9b172a]-800 dark:text-[#9b172a]-300 mb-2">
           معلومات مهمة:
         </h4>
-        <ul className="text-xs text-blue-700 dark:text-blue-400 space-y-1">
+        <ul className="text-xs text-[#9b172a]-700 dark:text-[#9b172a]-400 space-y-1">
           <li>• يجب إدخال رقم الهاتف أو رقم الهوية على الأقل</li>
           <li>• في حالة إدخال كلاهما، سيتم التحقق من تطابقهما</li>
           <li>• يمكن البحث عن الطالب باستخدام رقم الهاتف فقط</li>

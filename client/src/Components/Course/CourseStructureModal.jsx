@@ -205,7 +205,7 @@ const CourseStructureModal = ({ courseId, onClose, isOpen }) => {
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white">وحدات</h3>
               <button
                 onClick={() => setShowAddUnit(true)}
-                className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+                className="flex items-center gap-2 bg-[#9b172a] text-white px-4 py-2 rounded-md hover:bg-[#9b172a]-700"
               >
                 <FaPlus className="text-sm" />
 اضافة وحدة              </button>
@@ -225,7 +225,7 @@ const CourseStructureModal = ({ courseId, onClose, isOpen }) => {
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => setSelectedUnit(unit)}
-                      className="text-blue-600 hover:text-blue-800 p-1"
+                      className="text-[#9b172a] hover:text-[#9b172a]-800 p-1"
                       title="Edit Unit"
                     >
                       <FaEdit className="text-sm" />
@@ -279,7 +279,7 @@ const CourseStructureModal = ({ courseId, onClose, isOpen }) => {
                       <div className="flex items-center gap-2">
                         <button
                           onClick={() => openLessonModal(lesson, unit._id, lesson._id)}
-                          className="text-blue-600 hover:text-blue-800 p-1"
+                          className="text-[#9b172a] hover:text-[#9b172a]-800 p-1"
                         >
                           <FaEdit className="text-sm" />
                         </button>
@@ -304,7 +304,7 @@ const CourseStructureModal = ({ courseId, onClose, isOpen }) => {
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white">درس</h3>
               <button
                 onClick={() => setShowAddDirectLesson(true)}
-                className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+                className="flex items-center gap-2 bg-[#9b172a] text-white px-4 py-2 rounded-md hover:bg-[#9b172a]-700"
               >
                 <FaPlus className="text-sm" />
 اضافة درس
@@ -335,7 +335,7 @@ const CourseStructureModal = ({ courseId, onClose, isOpen }) => {
                 <div className="flex items-center gap-2">
                   <button
                     onClick={() => openLessonModal(lesson, null, lesson._id)}
-                    className="text-blue-600 hover:text-blue-800 p-1"
+                    className="text-[#9b172a] hover:text-[#9b172a]-800 p-1"
                   >
                     <FaEdit className="text-sm" />
                   </button>
@@ -393,7 +393,7 @@ const CourseStructureModal = ({ courseId, onClose, isOpen }) => {
               <div className="flex gap-2 mt-6">
                 <button
                   onClick={handleAddUnit}
-                  className="flex-1 bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700"
+                  className="flex-1 bg-[#9b172a] text-white py-2 rounded-md hover:bg-[#9b172a]-700"
                 >
                   اضافة وحدة
                 </button>
@@ -449,7 +449,7 @@ const CourseStructureModal = ({ courseId, onClose, isOpen }) => {
               <div className="flex gap-2 mt-6">
                 <button
                   onClick={() => handleUpdateUnit(selectedUnit._id, { title: selectedUnit.title, description: selectedUnit.description, price: selectedUnit.price })}
-                  className="flex-1 bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700"
+                  className="flex-1 bg-[#9b172a] text-white py-2 rounded-md hover:bg-[#9b172a]-700"
                 >
                   تعديل الوحدة
                 </button>
@@ -505,7 +505,7 @@ const CourseStructureModal = ({ courseId, onClose, isOpen }) => {
               <div className="flex gap-2 mt-6">
                 <button
                   onClick={() => showAddDirectLesson ? handleAddLesson() : handleAddLesson(showAddLesson.unitId)}
-                  className="flex-1 bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700"
+                  className="flex-1 bg-[#9b172a] text-white py-2 rounded-md hover:bg-[#9b172a]-700"
                 >
                   اضافة الدرس
                 </button>

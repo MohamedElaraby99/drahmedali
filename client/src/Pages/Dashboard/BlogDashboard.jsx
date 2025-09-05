@@ -172,7 +172,7 @@ export default function BlogDashboard() {
             </div>
             <button
               onClick={() => setShowCreateModal(true)}
-              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg flex items-center gap-2 transition-colors duration-200"
+              className="bg-[#9b172a] hover:bg-[#9b172a]-700 text-white px-6 py-3 rounded-lg flex items-center gap-2 transition-colors duration-200"
             >
               <FaPlus />
                             إنشاء مدونة جديدة
@@ -187,8 +187,8 @@ export default function BlogDashboard() {
                   <p className="text-sm text-gray-600 dark:text-gray-400">إجمالي المدونات</p>
                   <p className="text-2xl font-bold text-gray-800 dark:text-white">{totalBlogs}</p>
                 </div>
-                <div className="bg-blue-100 dark:bg-blue-900 p-3 rounded-full">
-                  <FaEye className="text-blue-600 dark:text-blue-400" />
+                <div className="bg-[#9b172a]-100 dark:bg-[#9b172a]-900 p-3 rounded-full">
+                  <FaEye className="text-[#9b172a] dark:text-[#9b172a]-400" />
                 </div>
               </div>
             </div>
@@ -209,10 +209,10 @@ export default function BlogDashboard() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-gray-600 dark:text-gray-400">المسودات</p>
-                  <p className="text-2xl font-bold text-blue-600">{draftBlogs}</p>
+                  <p className="text-2xl font-bold text-[#9b172a]">{draftBlogs}</p>
                 </div>
-                <div className="bg-blue-100 dark:bg-blue-900 p-3 rounded-full">
-                  <FaEdit className="text-blue-600 dark:text-blue-400" />
+                <div className="bg-[#9b172a]-100 dark:bg-[#9b172a]-900 p-3 rounded-full">
+                  <FaEdit className="text-[#9b172a] dark:text-[#9b172a]-400" />
                 </div>
               </div>
             </div>
@@ -221,10 +221,10 @@ export default function BlogDashboard() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-gray-600 dark:text-gray-400">إجمالي المشاهدات</p>
-                  <p className="text-2xl font-bold text-blue-600">{totalViews}</p>
+                  <p className="text-2xl font-bold text-[#9b172a]">{totalViews}</p>
                 </div>
-                <div className="bg-blue-100 dark:bg-blue-900 p-3 rounded-full">
-                  <FaEye className="text-blue-600 dark:text-blue-400" />
+                <div className="bg-[#9b172a]-100 dark:bg-[#9b172a]-900 p-3 rounded-full">
+                  <FaEye className="text-[#9b172a] dark:text-[#9b172a]-400" />
                 </div>
               </div>
             </div>
@@ -256,7 +256,7 @@ export default function BlogDashboard() {
                     placeholder="البحث في المدونات..."
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
-                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9b172a]"
                   />
                 </div>
               </div>
@@ -268,7 +268,7 @@ export default function BlogDashboard() {
                 <select
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9b172a]"
                 >
                   <option value="">جميع الفئات</option>
                   {categories.map((cat) => (
@@ -284,7 +284,7 @@ export default function BlogDashboard() {
                 <select
                   value={status}
                   onChange={(e) => setStatus(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9b172a]"
                 >
                   <option value="">جميع الحالات</option>
                   <option value="published">منشور</option>
@@ -340,7 +340,7 @@ export default function BlogDashboard() {
                   {loading ? (
                     <tr>
                       <td colSpan="7" className="px-6 py-4 text-center">
-                        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500 mx-auto"></div>
+                        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#9b172a] mx-auto"></div>
                         <p className="mt-2 text-gray-600 dark:text-gray-300">جاري تحميل المدونات...</p>
                       </td>
                     </tr>
@@ -371,7 +371,7 @@ export default function BlogDashboard() {
                           {blog.author}
                         </td>
                         <td className="px-6 py-4">
-                          <span className="px-2 py-1 text-xs font-medium bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full">
+                          <span className="px-2 py-1 text-xs font-medium bg-[#9b172a]-100 dark:bg-[#9b172a]-900 text-[#9b172a]-800 dark:text-[#9b172a]-200 rounded-full">
                             {blog.category}
                           </span>
                         </td>
@@ -379,7 +379,7 @@ export default function BlogDashboard() {
                           <span className={`px-2 py-1 text-xs font-medium rounded-full ${
                             blog.status === 'published' 
                               ? 'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200'
-                              : 'bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200'
+                              : 'bg-[#9b172a]-100 dark:bg-[#9b172a]-900 text-[#9b172a]-800 dark:text-[#9b172a]-200'
                           }`}>
                             {blog.status}
                           </span>
@@ -403,7 +403,7 @@ export default function BlogDashboard() {
                           <div className="flex items-center gap-2">
                             <button
                               onClick={() => openEditModal(blog)}
-                              className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300"
+                              className="text-[#9b172a] hover:text-[#9b172a]-900 dark:text-[#9b172a]-400 dark:hover:text-[#9b172a]-300"
                             >
                               <FaEdit />
                             </button>
@@ -454,7 +454,7 @@ export default function BlogDashboard() {
                     required
                     value={formData.title}
                     onChange={(e) => setFormData({...formData, title: e.target.value})}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9b172a]"
                   />
                 </div>
 
@@ -467,7 +467,7 @@ export default function BlogDashboard() {
                     value={formData.excerpt}
                     onChange={(e) => setFormData({...formData, excerpt: e.target.value})}
                     rows="3"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9b172a]"
                   />
                 </div>
 
@@ -480,7 +480,7 @@ export default function BlogDashboard() {
                     value={formData.content}
                     onChange={(e) => setFormData({...formData, content: e.target.value})}
                     rows="6"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9b172a]"
                   />
                 </div>
 
@@ -493,7 +493,7 @@ export default function BlogDashboard() {
                       required
                       value={formData.category}
                       onChange={(e) => setFormData({...formData, category: e.target.value})}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9b172a]"
                     >
                       <option value="">اختر الفئة</option>
                       {categories.map((cat) => (
@@ -509,7 +509,7 @@ export default function BlogDashboard() {
                     <select
                       value={formData.status}
                       onChange={(e) => setFormData({...formData, status: e.target.value})}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9b172a]"
                     >
                       <option value="published">منشور</option>
                       <option value="draft">مسودة</option>
@@ -527,7 +527,7 @@ export default function BlogDashboard() {
                       required
                       value={formData.author}
                       onChange={(e) => setFormData({...formData, author: e.target.value})}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9b172a]"
                     />
                   </div>
 
@@ -540,7 +540,7 @@ export default function BlogDashboard() {
                       value={formData.tags}
                       onChange={(e) => setFormData({...formData, tags: e.target.value})}
                       placeholder="علامة1، علامة2، علامة3"
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9b172a]"
                     />
                   </div>
                 </div>
@@ -558,7 +558,7 @@ export default function BlogDashboard() {
                         setSelectedImage(URL.createObjectURL(e.target.files[0]));
                       }
                     }}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9b172a]"
                   />
                   {selectedImage && (
                     <div className="mt-2">
@@ -584,7 +584,7 @@ export default function BlogDashboard() {
                   </button>
                   <button
                     type="submit"
-                    className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                    className="px-6 py-2 bg-[#9b172a] text-white rounded-lg hover:bg-[#9b172a]-700"
                   >
                     إنشاء المدونة
                   </button>
@@ -618,7 +618,7 @@ export default function BlogDashboard() {
                     required
                     value={formData.title}
                     onChange={(e) => setFormData({...formData, title: e.target.value})}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9b172a]"
                   />
                 </div>
 
@@ -631,7 +631,7 @@ export default function BlogDashboard() {
                     value={formData.excerpt}
                     onChange={(e) => setFormData({...formData, excerpt: e.target.value})}
                     rows="3"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9b172a]"
                   />
                 </div>
 
@@ -644,7 +644,7 @@ export default function BlogDashboard() {
                     value={formData.content}
                     onChange={(e) => setFormData({...formData, content: e.target.value})}
                     rows="6"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9b172a]"
                   />
                 </div>
 
@@ -657,7 +657,7 @@ export default function BlogDashboard() {
                       required
                       value={formData.category}
                       onChange={(e) => setFormData({...formData, category: e.target.value})}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9b172a]"
                     >
                       <option value="">اختر الفئة</option>
                       {categories.map((cat) => (
@@ -673,7 +673,7 @@ export default function BlogDashboard() {
                     <select
                       value={formData.status}
                       onChange={(e) => setFormData({...formData, status: e.target.value})}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9b172a]"
                     >
                       <option value="published">منشور</option>
                       <option value="draft">مسودة</option>
@@ -691,7 +691,7 @@ export default function BlogDashboard() {
                       required
                       value={formData.author}
                       onChange={(e) => setFormData({...formData, author: e.target.value})}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9b172a]"
                     />
                   </div>
 
@@ -704,7 +704,7 @@ export default function BlogDashboard() {
                       value={formData.tags}
                       onChange={(e) => setFormData({...formData, tags: e.target.value})}
                       placeholder="علامة1، علامة2، علامة3"
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9b172a]"
                     />
                   </div>
                 </div>
@@ -722,7 +722,7 @@ export default function BlogDashboard() {
                         setSelectedImage(URL.createObjectURL(e.target.files[0]));
                       }
                     }}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9b172a]"
                   />
                   {selectedImage && (
                     <div className="mt-2">
@@ -758,7 +758,7 @@ export default function BlogDashboard() {
                   </button>
                   <button
                     type="submit"
-                    className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                    className="px-6 py-2 bg-[#9b172a] text-white rounded-lg hover:bg-[#9b172a]-700"
                   >
                     تحديث المدونة
                   </button>

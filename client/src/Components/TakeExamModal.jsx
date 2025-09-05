@@ -203,8 +203,8 @@ const TakeExamModal = ({
 
   const getScoreColor = (score) => {
     if (score >= 90) return 'text-green-600';
-    if (score >= 80) return 'text-blue-600';
-    if (score >= 70) return 'text-blue-600';
+    if (score >= 80) return 'text-[#9b172a]';
+    if (score >= 70) return 'text-[#9b172a]';
     return 'text-red-600';
   };
 
@@ -218,7 +218,7 @@ const TakeExamModal = ({
           <div className="flex items-center gap-2 sm:gap-4 min-w-0">
             <div className="flex items-center gap-1 sm:gap-2">
               {examType === 'training' ? (
-                <FaClipboardCheck className="text-lg sm:text-2xl text-blue-500 flex-shrink-0" />
+                <FaClipboardCheck className="text-lg sm:text-2xl text-[#9b172a] flex-shrink-0" />
               ) : (
                 <FaGraduationCap className="text-lg sm:text-2xl text-red-500 flex-shrink-0" />
               )}
@@ -262,7 +262,7 @@ const TakeExamModal = ({
             {checkingExam ? (
               <div className="space-y-6">
                 <div className="text-center py-8">
-                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500 mx-auto mb-4"></div>
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#9b172a] mx-auto mb-4"></div>
                   <p className="text-gray-600 dark:text-gray-400">Checking exam status...</p>
                 </div>
               </div>
@@ -296,7 +296,7 @@ const TakeExamModal = ({
                   </h3>
                   <div className="space-y-3 text-sm text-gray-600 dark:text-gray-400">
                     <div className="flex items-center gap-2">
-                      <FaClock className="text-blue-500" />
+                      <FaClock className="text-[#9b172a]" />
                       <span>Time Limit: {timeLimit} minutes</span>
                     </div>
                     <div className="flex items-center gap-2">
@@ -304,7 +304,7 @@ const TakeExamModal = ({
                       <span>Total Questions: {totalQuestions}</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <FaTrophy className="text-blue-500" />
+                      <FaTrophy className="text-[#9b172a]" />
                       <span>Passing Score: {exam?.passingScore}%</span>
                     </div>
                     <div className="flex items-center gap-2">
@@ -316,7 +316,7 @@ const TakeExamModal = ({
                 
                 <button
                   onClick={startExam}
-                  className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-3 rounded-lg hover:from-blue-600 hover:to-blue-700 transition-all duration-200"
+                  className="w-full bg-gradient-to-r from-[#9b172a] to-[#9b172a] text-white py-3 rounded-lg hover:from-[#9b172a] hover:to-[#9b172a]-700 transition-all duration-200"
                 >
                   Start {examType === 'training' ? 'Training' : 'Final'} Exam
                 </button>
@@ -366,7 +366,7 @@ const TakeExamModal = ({
                       onClick={() => setCurrentQuestion(index)}
                       className={`p-1 sm:p-2 rounded-lg text-xs sm:text-sm font-medium transition-colors ${
                         index === currentQuestion
-                          ? 'bg-blue-500 text-white'
+                          ? 'bg-[#9b172a] text-white'
                           : getQuestionStatus(index) === 'answered'
                           ? 'bg-green-100 text-green-700 dark:bg-green-900/20 dark:text-green-400'
                           : 'bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
@@ -465,8 +465,8 @@ const TakeExamModal = ({
                             ))}
                           </div>
                           {question.explanation && (
-                            <div className="mt-3 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-                              <p className="text-sm text-blue-700 dark:text-blue-300">
+                            <div className="mt-3 p-3 bg-[#9b172a]-50 dark:bg-[#9b172a]-900/20 rounded-lg">
+                              <p className="text-sm text-[#9b172a]-700 dark:text-[#9b172a]-300">
                                 <strong>Explanation:</strong> {question.explanation}
                               </p>
                             </div>
@@ -489,7 +489,7 @@ const TakeExamModal = ({
                       onClick={() => setReviewMode(!reviewMode)}
                       className={`px-2 sm:px-3 py-1 rounded text-xs sm:text-sm ${
                         reviewMode 
-                          ? 'bg-blue-500 text-white' 
+                          ? 'bg-[#9b172a] text-white' 
                           : 'bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300'
                       }`}
                     >
@@ -512,7 +512,7 @@ const TakeExamModal = ({
                           key={optionIndex}
                           className={`flex items-start sm:items-center p-3 rounded-lg border-2 cursor-pointer transition-colors ${
                             answers[currentQuestion]?.selectedAnswer === optionIndex
-                              ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20'
+                              ? 'border-[#9b172a] bg-[#9b172a]-50 dark:bg-[#9b172a]-900/20'
                               : 'border-gray-200 dark:border-gray-600 hover:border-gray-300 dark:hover:border-gray-500'
                           }`}
                         >
@@ -566,7 +566,7 @@ const TakeExamModal = ({
                     ) : (
                       <button
                         onClick={handleNextQuestion}
-                        className="flex items-center gap-1 sm:gap-2 px-3 sm:px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors text-sm sm:text-base"
+                        className="flex items-center gap-1 sm:gap-2 px-3 sm:px-4 py-2 bg-[#9b172a] text-white rounded-lg hover:bg-[#9b172a] transition-colors text-sm sm:text-base"
                       >
                         <span className="hidden sm:inline">Next</span>
                         <FaArrowRight className="text-xs sm:text-sm" />

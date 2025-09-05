@@ -56,7 +56,7 @@ const qrData = {
     <FaIdCard className="text-green-500" />
     رقم المستخدم
   </label>
-  <div className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 font-mono text-sm">
+  <div className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-[#9b172a]-50 dark:bg-[#9b172a]-900/20 text-[#9b172a]-700 dark:text-[#9b172a]-300 font-mono text-sm">
     {userData?._id || "غير متوفر"}
   </div>
   <div className="text-xs text-gray-500 dark:text-gray-400">
@@ -87,7 +87,7 @@ const qrData = {
 
 ### Profile Page
 1. **Dedicated Section**: User number has its own field in Account Information
-2. **Distinctive Styling**: Blue background to make it stand out
+2. **Distinctive Styling**: [#9b172a] background to make it stand out
 3. **Monospace Font**: Easy to read and copy
 4. **Helpful Text**: Explains how instructors can use the number
 
@@ -125,7 +125,7 @@ const testUserNumber = "507f1f77bcf86cd799439011";
 
 ### 3. Profile Display Test
 - ✅ User number shows in Account Information section
-- ✅ User number displays with blue styling
+- ✅ User number displays with [#9b172a] styling
 - ✅ Help text explains manual attendance usage
 - ✅ User number is copyable (monospace font)
 
@@ -197,7 +197,7 @@ Account Information Section:
 │ دور الحساب: [USER        ] │
 │ رقم المستخدم:               │ ← NEW: Dedicated field
 │ ┌─────────────────────────┐ │
-│ │ 507f1f77bcf86cd799439011│ │ ← Blue background, monospace
+│ │ 507f1f77bcf86cd799439011│ │ ← [#9b172a] background, monospace
 │ └─────────────────────────┘ │
 │ يمكن للمدربين استخدام هذا   │ ← Helpful instruction
 │ الرقم لتسجيل الحضور يدوياً  │
@@ -211,7 +211,7 @@ Account Information Section:
 - [x] Added user number display to QR code information
 - [x] Added dedicated user number field to profile page
 - [x] Updated QR code description to mention user number usage
-- [x] Made user number visually prominent with blue styling
+- [x] Made user number visually prominent with [#9b172a] styling
 - [x] Added helpful instructions for instructors
 
 ### Integration Points ✅

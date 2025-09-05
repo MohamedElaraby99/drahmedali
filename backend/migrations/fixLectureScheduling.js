@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 // Load environment variables
 dotenv.config();
 
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/almongezz
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/drahmedali
 
 async function fixLectureScheduling() {
   try {

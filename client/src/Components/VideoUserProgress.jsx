@@ -40,8 +40,8 @@ const VideoUserProgress = ({ videoId, courseId }) => {
 
   const getProgressColor = (progress) => {
     if (progress >= 90) return 'text-green-500';
-    if (progress >= 70) return 'text-blue-500';
-    if (progress >= 50) return 'text-blue-500';
+    if (progress >= 70) return 'text-[#9b172a]';
+    if (progress >= 50) return 'text-[#9b172a]';
     return 'text-red-500';
   };
 
@@ -51,7 +51,7 @@ const VideoUserProgress = ({ videoId, courseId }) => {
       return <FaCheckCircle className="text-green-500" />;
     }
     if (progress > 0) {
-      return <FaPlay className="text-blue-500" />;
+      return <FaPlay className="text-[#9b172a]" />;
     }
     return <FaPause className="text-gray-400" />;
   };
@@ -77,7 +77,7 @@ const VideoUserProgress = ({ videoId, courseId }) => {
     return (
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-3 sm:p-4 mb-4">
         <div className="flex items-center justify-center py-4">
-          <div className="animate-spin rounded-full h-6 w-6 sm:h-8 sm:w-8 border-b-2 border-blue-500"></div>
+          <div className="animate-spin rounded-full h-6 w-6 sm:h-8 sm:w-8 border-b-2 border-[#9b172a]"></div>
           <span className="ml-2 text-sm sm:text-base text-gray-600 dark:text-gray-400">Loading user progress...</span>
         </div>
       </div>
@@ -102,7 +102,7 @@ const VideoUserProgress = ({ videoId, courseId }) => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
         <div className="flex items-center gap-3">
-          <FaUsers className="text-blue-500 text-lg sm:text-xl flex-shrink-0" />
+          <FaUsers className="text-[#9b172a] text-lg sm:text-xl flex-shrink-0" />
           <div className="min-w-0">
             <h3 className="font-semibold text-gray-900 dark:text-white text-sm sm:text-base">
               All Users Progress
@@ -200,7 +200,7 @@ const VideoUserProgress = ({ videoId, courseId }) => {
                   <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
                     <div 
                       className={`h-2 rounded-full transition-all duration-300 ${
-                        userProgress.isCompleted ? 'bg-green-500' : 'bg-blue-500'
+                        userProgress.isCompleted ? 'bg-green-500' : 'bg-[#9b172a]'
                       }`}
                       style={{ width: `${userProgress.progress || 0}%` }}
                     ></div>
@@ -215,8 +215,8 @@ const VideoUserProgress = ({ videoId, courseId }) => {
       {/* Summary Stats */}
       <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 text-xs sm:text-sm">
-          <div className="text-center bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3">
-            <div className="text-lg sm:text-2xl font-bold text-blue-500">{sortedUsers.length}</div>
+          <div className="text-center bg-[#9b172a]-50 dark:bg-[#9b172a]-900/20 rounded-lg p-3">
+            <div className="text-lg sm:text-2xl font-bold text-[#9b172a]">{sortedUsers.length}</div>
             <div className="text-gray-500 dark:text-gray-400 text-xs sm:text-sm">Total Users</div>
           </div>
           <div className="text-center bg-green-50 dark:bg-green-900/20 rounded-lg p-3">
@@ -225,14 +225,14 @@ const VideoUserProgress = ({ videoId, courseId }) => {
             </div>
             <div className="text-gray-500 dark:text-gray-400 text-xs sm:text-sm">Completed</div>
           </div>
-          <div className="text-center bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3">
-            <div className="text-lg sm:text-2xl font-bold text-blue-500">
+          <div className="text-center bg-[#9b172a]-50 dark:bg-[#9b172a]-900/20 rounded-lg p-3">
+            <div className="text-lg sm:text-2xl font-bold text-[#9b172a]">
               {Math.round(sortedUsers.reduce((sum, u) => sum + (u.progress || 0), 0) / sortedUsers.length)}%
             </div>
             <div className="text-gray-500 dark:text-gray-400 text-xs sm:text-sm">Avg Progress</div>
           </div>
-          <div className="text-center bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3">
-            <div className="text-lg sm:text-2xl font-bold text-blue-500">
+          <div className="text-center bg-[#9b172a]-50 dark:bg-[#9b172a]-900/20 rounded-lg p-3">
+            <div className="text-lg sm:text-2xl font-bold text-[#9b172a]">
               {formatTime(Math.round(sortedUsers.reduce((sum, u) => sum + (u.totalWatchTime || 0), 0) / sortedUsers.length))}
             </div>
             <div className="text-gray-500 dark:text-gray-400 text-xs sm:text-sm">Avg Watch Time</div>

@@ -10,7 +10,7 @@ const connectDB = async () => {
     let mongoUri = process.env.MONGO_URI_ATLAS || 
                    process.env.MONGO_URI_COMPASS || 
                    process.env.MONGO_URI_COMMUNITY || 
-                   'mongodb://localhost:27017/almongezz_database';
+                   'mongodb://localhost:27017/drahmedali_database';
     
     console.log('🔗 Connecting to MongoDB...');
     await mongoose.connect(mongoUri, {

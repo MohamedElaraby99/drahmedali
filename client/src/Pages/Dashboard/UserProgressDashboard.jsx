@@ -134,8 +134,8 @@ const UserProgressDashboard = () => {
   // Get progress bar color
   const getProgressColor = (percentage) => {
     if (percentage >= 80) return 'bg-green-500';
-    if (percentage >= 60) return 'bg-blue-500';
-    if (percentage >= 40) return 'bg-blue-500';
+    if (percentage >= 60) return 'bg-[#9b172a]';
+    if (percentage >= 40) return 'bg-[#9b172a]';
     return 'bg-red-500';
   };
 
@@ -169,14 +169,14 @@ const UserProgressDashboard = () => {
 
   return (
     <Layout>
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 py-8" dir="rtl">
+      <div className="min-h-screen bg-gradient-to-br from-[#9b172a]-50 via-white to-[#9b172a]-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 py-8" dir="rtl">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-8">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
               <h1 className="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white flex items-center gap-3">
-                <FaChartBar className="text-blue-600" />
+                <FaChartBar className="text-[#9b172a]" />
                 لوحة تحكم تقدم الطلاب
               </h1>
               <p className="mt-2 text-gray-600 dark:text-gray-300">
@@ -193,7 +193,7 @@ const UserProgressDashboard = () => {
               </button>
               <button
                 onClick={fetchUsersProgress}
-                className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors"
+                className="bg-[#9b172a] hover:bg-[#9b172a]-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors"
               >
                 <FaSyncAlt />
                 تحديث
@@ -209,9 +209,9 @@ const UserProgressDashboard = () => {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium text-gray-600 dark:text-gray-400">إجمالي الطلاب</p>
-                  <p className="text-3xl font-bold text-blue-600">{summary.totalUniqueUsers || 0}</p>
+                  <p className="text-3xl font-bold text-[#9b172a]">{summary.totalUniqueUsers || 0}</p>
                 </div>
-                <FaUsers className="text-4xl text-blue-600 opacity-80" />
+                <FaUsers className="text-4xl text-[#9b172a] opacity-80" />
               </div>
             </div>
 
@@ -229,9 +229,9 @@ const UserProgressDashboard = () => {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium text-gray-600 dark:text-gray-400">الفيديوهات المكتملة</p>
-                  <p className="text-3xl font-bold text-blue-600">{summary.totalCompletedVideos || 0}</p>
+                  <p className="text-3xl font-bold text-[#9b172a]">{summary.totalCompletedVideos || 0}</p>
                 </div>
-                <FaCheckCircle className="text-4xl text-blue-600 opacity-80" />
+                <FaCheckCircle className="text-4xl text-[#9b172a] opacity-80" />
               </div>
             </div>
 
@@ -239,9 +239,9 @@ const UserProgressDashboard = () => {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium text-gray-600 dark:text-gray-400">معدل الإنجاز العام</p>
-                  <p className="text-3xl font-bold text-blue-600">{summary.overallCompletionRate || 0}%</p>
+                  <p className="text-3xl font-bold text-[#9b172a]">{summary.overallCompletionRate || 0}%</p>
                 </div>
-                <FaTrophy className="text-4xl text-blue-600 opacity-80" />
+                <FaTrophy className="text-4xl text-[#9b172a] opacity-80" />
               </div>
             </div>
           </div>
@@ -258,7 +258,7 @@ const UserProgressDashboard = () => {
                 placeholder="البحث عن طالب..."
                 value={filters.search}
                 onChange={(e) => handleFilterChange('search', e.target.value)}
-                className="w-full pr-10 pl-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                className="w-full pr-10 pl-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#9b172a] focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               />
             </div>
 
@@ -267,7 +267,7 @@ const UserProgressDashboard = () => {
               <select
                 value={filters.courseId}
                 onChange={(e) => handleFilterChange('courseId', e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#9b172a] focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               >
                 <option value="">جميع الدورات</option>
                 {courses && Array.isArray(courses) && courses.map((course) => (
@@ -283,7 +283,7 @@ const UserProgressDashboard = () => {
               <select
                 value={filters.stageId}
                 onChange={(e) => handleFilterChange('stageId', e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#9b172a] focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               >
                 <option value="">جميع المراحل</option>
                 {stages && Array.isArray(stages) && stages.map((stage) => (
@@ -299,7 +299,7 @@ const UserProgressDashboard = () => {
               <select
                 value={filters.sortBy}
                 onChange={(e) => handleFilterChange('sortBy', e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#9b172a] focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               >
                 <option value="lastWatched">آخر نشاط</option>
                 <option value="totalVideosWatched">عدد الفيديوهات</option>
@@ -313,7 +313,7 @@ const UserProgressDashboard = () => {
               <select
                 value={filters.sortOrder}
                 onChange={(e) => handleFilterChange('sortOrder', e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#9b172a] focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               >
                 <option value="desc">تنازلي</option>
                 <option value="asc">تصاعدي</option>
@@ -327,7 +327,7 @@ const UserProgressDashboard = () => {
           <div className="overflow-x-auto">
             {loading ? (
               <div className="flex items-center justify-center py-12">
-                <FaSpinner className="animate-spin text-4xl text-blue-600 ml-4" />
+                <FaSpinner className="animate-spin text-4xl text-[#9b172a] ml-4" />
                 <span className="text-lg text-gray-600 dark:text-gray-300">جاري تحميل البيانات...</span>
               </div>
             ) : usersProgress.length === 0 ? (
@@ -368,7 +368,7 @@ const UserProgressDashboard = () => {
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="flex items-center">
                           <div className="flex-shrink-0 h-10 w-10">
-                            <div className="h-10 w-10 rounded-full bg-blue-500 flex items-center justify-center">
+                            <div className="h-10 w-10 rounded-full bg-[#9b172a] flex items-center justify-center">
                               <span className="text-white font-medium">
                                 {userProgress.user.fullName?.charAt(0) || 'ط'}
                               </span>
@@ -386,7 +386,7 @@ const UserProgressDashboard = () => {
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
                         <div className="flex items-center">
-                          <FaPlay className="text-blue-500 ml-2" />
+                          <FaPlay className="text-[#9b172a] ml-2" />
                           {userProgress.stats.totalVideosWatched}
                         </div>
                       </td>
@@ -411,7 +411,7 @@ const UserProgressDashboard = () => {
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
                         <div className="flex items-center">
-                          <FaClock className="text-blue-500 ml-2" />
+                          <FaClock className="text-[#9b172a] ml-2" />
                           {userProgress.stats.totalWatchTimeHours}س
                         </div>
                       </td>
@@ -424,7 +424,7 @@ const UserProgressDashboard = () => {
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                         <button
                           onClick={() => showUserDetailsModal(userProgress)}
-                          className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300 flex items-center gap-1"
+                          className="text-[#9b172a] hover:text-[#9b172a]-900 dark:text-[#9b172a]-400 dark:hover:text-[#9b172a]-300 flex items-center gap-1"
                         >
                           <FaEye />
                           عرض التفاصيل
@@ -489,7 +489,7 @@ const UserProgressDashboard = () => {
                           onClick={() => handleFilterChange('page', pageNumber)}
                           className={`relative inline-flex items-center px-4 py-2 border text-sm font-medium ${
                             pageNumber === pagination.currentPage
-                              ? 'z-10 bg-blue-50 dark:bg-blue-900 border-blue-500 text-blue-600 dark:text-blue-400'
+                              ? 'z-10 bg-[#9b172a]-50 dark:bg-[#9b172a]-900 border-[#9b172a] text-[#9b172a] dark:text-[#9b172a]-400'
                               : 'bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-600'
                           }`}
                         >
@@ -576,7 +576,7 @@ const UserProgressDashboard = () => {
                         </div>
                         <div className="text-left">
                           <div className="flex items-center gap-2 mb-1">
-                            <div className={`w-3 h-3 rounded-full ${activity.isCompleted ? 'bg-green-500' : 'bg-blue-500'}`}></div>
+                            <div className={`w-3 h-3 rounded-full ${activity.isCompleted ? 'bg-green-500' : 'bg-[#9b172a]'}`}></div>
                             <span className="text-sm font-medium">
                               {activity.progress}%
                             </span>

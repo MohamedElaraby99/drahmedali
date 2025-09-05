@@ -34,7 +34,7 @@ export const generateProductionFileUrl = (filename, subfolder = '') => {
   if (!filename) return null;
   
   // Always use production domain for now to ensure consistency
-  const baseUrl = process.env.PRODUCTION_URL || 'https://api.almongz.online';
+  const baseUrl = process.env.PRODUCTION_URL || 'https://api.drahmedali.online';
   
   let path = '/api/v1/uploads/';
   if (subfolder) {

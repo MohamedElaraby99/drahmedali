@@ -370,7 +370,7 @@ const OfflineGradesDashboard = () => {
             {/* Download Template Section */}
             <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
               <div className="flex items-center mb-6">
-                <FaDownload className="text-2xl text-blue-500 ml-3" />
+                <FaDownload className="text-2xl text-[#9b172a] ml-3" />
                 <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
                   تحميل قالب الدرجات
                 </h2>
@@ -385,7 +385,7 @@ const OfflineGradesDashboard = () => {
                   <select
                     value={selectedGroup}
                     onChange={(e) => setSelectedGroup(e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#9b172a] focus:border-transparent dark:bg-gray-700 dark:text-white"
                     disabled={loading}
                   >
                     <option value="">اختر مجموعة...</option>
@@ -398,14 +398,14 @@ const OfflineGradesDashboard = () => {
                   
                   {/* Show selected group info */}
                   {selectedGroup && (
-                    <div className="mt-2 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
+                    <div className="mt-2 p-3 bg-[#9b172a]-50 dark:bg-[#9b172a]-900/20 rounded-lg border border-[#9b172a]-200 dark:border-[#9b172a]-800">
                       <div className="flex items-center space-x-2 space-x-reverse">
-                        <FaUsers className="text-blue-500 text-sm" />
-                        <span className="text-sm text-blue-700 dark:text-blue-300">
+                        <FaUsers className="text-[#9b172a] text-sm" />
+                        <span className="text-sm text-[#9b172a]-700 dark:text-[#9b172a]-300">
                                                      المجموعة المختارة: {groups.find(g => g._id === selectedGroup)?.name}
                         </span>
                       </div>
-                      <div className="mt-1 text-xs text-blue-600 dark:text-blue-400">
+                      <div className="mt-1 text-xs text-[#9b172a] dark:text-[#9b172a]-400">
                         عدد الطلاب: {groups.find(g => g._id === selectedGroup)?.students?.length || 0} طالب
                       </div>
                     </div>
@@ -422,7 +422,7 @@ const OfflineGradesDashboard = () => {
                     value={quizName}
                     onChange={(e) => setQuizName(e.target.value)}
                     placeholder="مثال: اختبار الوحدة الأولى"
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#9b172a] focus:border-transparent dark:bg-gray-700 dark:text-white"
                     disabled={loading}
                   />
                 </div>
@@ -431,7 +431,7 @@ const OfflineGradesDashboard = () => {
                 <button
                   onClick={downloadTemplate}
                   disabled={!selectedGroup || loading}
-                  className="w-full flex items-center justify-center space-x-2 space-x-reverse px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  className="w-full flex items-center justify-center space-x-2 space-x-reverse px-4 py-2 bg-[#9b172a] text-white rounded-lg hover:bg-[#9b172a]-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                 >
                   {loading ? (
                     <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
@@ -461,7 +461,7 @@ const OfflineGradesDashboard = () => {
                   <select
                     value={selectedGroup}
                     onChange={(e) => setSelectedGroup(e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#9b172a] focus:border-transparent dark:bg-gray-700 dark:text-white"
                     disabled={uploading}
                   >
                     <option value="">اختر مجموعة...</option>
@@ -498,7 +498,7 @@ const OfflineGradesDashboard = () => {
                     value={quizName}
                     onChange={(e) => setQuizName(e.target.value)}
                     placeholder="مثال: اختبار الوحدة الأولى"
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#9b172a] focus:border-transparent dark:bg-gray-700 dark:text-white"
                     disabled={uploading}
                   />
                 </div>
@@ -513,7 +513,7 @@ const OfflineGradesDashboard = () => {
                     type="file"
                     accept=".xlsx,.xls"
                     onChange={handleFileUpload}
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 dark:file:bg-gray-600 dark:file:text-gray-200"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#9b172a] focus:border-transparent dark:bg-gray-700 dark:text-white file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-[#9b172a]-50 file:text-[#9b172a]-700 hover:file:bg-[#9b172a]-100 dark:file:bg-gray-600 dark:file:text-gray-200"
                     disabled={uploading}
                   />
                   <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
@@ -613,7 +613,7 @@ const OfflineGradesDashboard = () => {
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
                 <div>
                   <span className="font-semibold">إجمالي الدرجات:</span>
-                  <div className="text-lg font-bold text-blue-600">{grades.length}</div>
+                  <div className="text-lg font-bold text-[#9b172a]">{grades.length}</div>
                 </div>
                 <div>
                   <span className="font-semibold">الدرجات المفلترة:</span>
@@ -665,7 +665,7 @@ const OfflineGradesDashboard = () => {
                         <td className="px-4 py-3">
                           <span className={`px-2 py-1 rounded-full text-xs font-medium ${
                             grade.score >= 90 ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' :
-                            grade.score >= 80 ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200' :
+                            grade.score >= 80 ? 'bg-[#9b172a]-100 text-[#9b172a]-800 dark:bg-[#9b172a]-900 dark:text-[#9b172a]-200' :
                             grade.score >= 70 ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200' :
                             'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200'
                           }`}>
@@ -682,7 +682,7 @@ const OfflineGradesDashboard = () => {
                                 setEditingGrade(grade);
                                 setShowGradesModal(true);
                               }}
-                              className="p-2 text-blue-600 hover:bg-blue-100 dark:hover:bg-blue-900 rounded-lg transition-colors"
+                              className="p-2 text-[#9b172a] hover:bg-[#9b172a]-100 dark:hover:bg-[#9b172a]-900 rounded-lg transition-colors"
                             >
                               <FaEdit />
                             </button>
@@ -773,7 +773,7 @@ const OfflineGradesDashboard = () => {
                         <td className="px-4 py-3">
                           <button
                             onClick={() => viewFileDetails(file)}
-                            className="p-2 text-blue-600 hover:bg-blue-100 dark:hover:bg-blue-900 rounded-lg transition-colors"
+                            className="p-2 text-[#9b172a] hover:bg-[#9b172a]-100 dark:hover:bg-[#9b172a]-900 rounded-lg transition-colors"
                           >
                             <FaEye />
                           </button>
@@ -795,7 +795,7 @@ const OfflineGradesDashboard = () => {
             ? 'bg-green-500 text-white' 
             : message.type === 'error'
             ? 'bg-red-500 text-white'
-            : 'bg-blue-500 text-white'
+            : 'bg-[#9b172a] text-white'
         }`}>
           <div className="flex items-center space-x-2 space-x-reverse">
             <span>{message.text}</span>
@@ -966,14 +966,14 @@ const CreateGradeModal = ({ groups, grades, onClose, onSubmit }) => {
              
                            {/* Show selected group info */}
               {formData.groupId && (
-                <div className="mt-2 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
-                  <div className="text-sm text-blue-700 dark:text-blue-300">
+                <div className="mt-2 p-3 bg-[#9b172a]-50 dark:bg-[#9b172a]-900/20 rounded-lg border border-[#9b172a]-200 dark:border-[#9b172a]-800">
+                  <div className="text-sm text-[#9b172a]-700 dark:text-[#9b172a]-300">
                     المجموعة المختارة: {groups.find(g => g._id === formData.groupId)?.name}
                   </div>
-                  <div className="text-xs text-blue-600 dark:text-blue-400 mt-1">
+                  <div className="text-xs text-[#9b172a] dark:text-[#9b172a]-400 mt-1">
                     عدد الطلاب: {selectedGroupStudents.length} طالب
                   </div>
-                  <div className="text-xs text-blue-600 dark:text-blue-400 mt-1">
+                  <div className="text-xs text-[#9b172a] dark:text-[#9b172a]-400 mt-1">
                     الاختبارات المتاحة: {availableExams.join(', ')}
                   </div>
                 </div>

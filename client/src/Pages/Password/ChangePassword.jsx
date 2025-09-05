@@ -54,7 +54,7 @@ export default function ChangePassword() {
           noValidate
           className="flex flex-col dark:bg-base-100 gap-4 rounded-lg md:py-5 py-7 md:px-7 px-3 md:w-[500px] w-full shadow-custom dark:shadow-xl  "
         >
-          <h1 className="text-center dark:text-blue-500 text-4xl font-bold font-inter">
+          <h1 className="text-center dark:text-[#9b172a] text-4xl font-bold font-inter">
             Change Password Page
           </h1>
           
@@ -80,7 +80,7 @@ export default function ChangePassword() {
           {/* submit btn */}
           <button
             type="submit"
-            className="mt-2 bg-blue-500 text-white dark:text-base-200  transition-all ease-in-out duration-300 rounded-md py-2 font-nunito-sans font-[500]  text-lg cursor-pointer"
+            className="mt-2 bg-[#9b172a] text-white dark:text-base-200  transition-all ease-in-out duration-300 rounded-md py-2 font-nunito-sans font-[500]  text-lg cursor-pointer"
             disabled={isLoading}
           >
             {isLoading ? "changing..." : "Change"}
@@ -91,7 +91,7 @@ export default function ChangePassword() {
             Not Remember ?{" "}
             <Link
               to="/reset"
-              className="link text-blue-600 font-lato cursor-pointer"
+              className="link text-[#9b172a] font-lato cursor-pointer"
             >
               {" "}
               reset password

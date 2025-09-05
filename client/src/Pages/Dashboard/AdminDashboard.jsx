@@ -319,9 +319,9 @@ export default function AdminDashboard() {
       title: "إجمالي المستخدمين",
       value: allUsersCount,
       icon: FaUsers,
-      color: "from-blue-500 to-blue-600",
-      bgColor: "bg-blue-50 dark:bg-blue-900/20",
-      textColor: "text-blue-600 dark:text-blue-400",
+      color: "from-[#9b172a] to-[#9b172a]",
+      bgColor: "bg-[#9b172a]-50 dark:bg-[#9b172a]-900/20",
+      textColor: "text-[#9b172a] dark:text-[#9b172a]-400",
       change: "+12%",
       changeType: "increase"
     },
@@ -339,9 +339,9 @@ export default function AdminDashboard() {
       title: "إجمالي الأكواد المستخدمة",
       value: rechargeCodesStats.totalUsed,
       icon: FaQrcode,
-      color: "from-blue-500 to-blue-600",
-      bgColor: "bg-blue-50 dark:bg-blue-900/20",
-      textColor: "text-blue-600 dark:text-blue-400",
+      color: "from-[#9b172a] to-[#9b172a]",
+      bgColor: "bg-[#9b172a]-50 dark:bg-[#9b172a]-900/20",
+      textColor: "text-[#9b172a] dark:text-[#9b172a]-400",
       change: "+15%",
       changeType: "increase"
     },
@@ -384,15 +384,15 @@ export default function AdminDashboard() {
 
   return (
     <Layout>
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900" dir="rtl">
+      <div className="min-h-screen bg-gradient-to-br from-[#9b172a]-50 via-indigo-50 to-[#9b172a]-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900" dir="rtl">
         {/* Hero Section */}
         <section className="relative py-16 px-4 overflow-hidden">
           {/* Background Pattern */}
           <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
           
           {/* Floating Elements */}
-          <div className="absolute top-20 left-10 w-20 h-20 bg-blue-200 dark:bg-blue-800 rounded-full opacity-20 animate-bounce"></div>
-          <div className="absolute top-40 right-20 w-16 h-16 bg-blue-200 dark:bg-blue-800 rounded-full opacity-20 animate-pulse"></div>
+          <div className="absolute top-20 left-10 w-20 h-20 bg-[#9b172a]-200 dark:bg-[#9b172a]-800 rounded-full opacity-20 animate-bounce"></div>
+          <div className="absolute top-40 right-20 w-16 h-16 bg-[#9b172a]-200 dark:bg-[#9b172a]-800 rounded-full opacity-20 animate-pulse"></div>
           
           <div className="relative z-10 container mx-auto">
             {/* Header */}
@@ -401,7 +401,7 @@ export default function AdminDashboard() {
                 ? 'opacity-100 translate-y-0' 
                 : 'opacity-0 translate-y-8'
             }`}>
-              <h1 className={`text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-blue-600 to-indigo-600 dark:from-blue-400 dark:via-blue-400 dark:to-indigo-400 mb-4 transition-all duration-700 delay-200 ${
+              <h1 className={`text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#9b172a] via-[#9b172a] to-indigo-600 dark:from-[#9b172a]-400 dark:via-[#9b172a]-400 dark:to-indigo-400 mb-4 transition-all duration-700 delay-200 ${
                 heroLoaded 
                   ? 'opacity-100 scale-100' 
                   : 'opacity-0 scale-95'
@@ -470,8 +470,8 @@ export default function AdminDashboard() {
                 {/* Course Categories Chart */}
                 <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-4 lg:p-6">
                   <div className="flex items-center gap-3 mb-4 lg:mb-6">
-                    <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
-                      <FaChartLine className="text-blue-600 dark:text-blue-400 text-lg lg:text-xl" />
+                    <div className="p-2 bg-[#9b172a]-100 dark:bg-[#9b172a]-900/30 rounded-lg">
+                      <FaChartLine className="text-[#9b172a] dark:text-[#9b172a]-400 text-lg lg:text-xl" />
                     </div>
                     <h3 className="text-lg lg:text-xl font-bold text-gray-900 dark:text-white text-right">
                       المراحل الدراسية
@@ -480,7 +480,7 @@ export default function AdminDashboard() {
                   <div className="relative h-48 sm:h-56 lg:h-64 w-full">
                     {stagesLoading ? (
                       <div className="flex items-center justify-center h-full">
-                        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
+                        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#9b172a]"></div>
                         <span className="mr-2 text-gray-600 dark:text-gray-300">جاري تحميل بيانات المراحل...</span>
                       </div>
                     ) : (
@@ -547,7 +547,7 @@ export default function AdminDashboard() {
                           </p>
                           <button 
                             onClick={fetchStagesData}
-                            className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg text-sm transition-colors"
+                            className="px-4 py-2 bg-[#9b172a] hover:bg-[#9b172a] text-white rounded-lg text-sm transition-colors"
                           >
                             إعادة التحميل
                           </button>
@@ -638,7 +638,7 @@ export default function AdminDashboard() {
             }`}
             style={{ transitionDelay: '900ms' }}>
               <h3 className="text-lg lg:text-xl font-bold text-gray-900 dark:text-white mb-4 lg:mb-6 flex items-center gap-3 text-right">
-                <FaCog className="text-blue-500" />
+                <FaCog className="text-[#9b172a]" />
                 الإجراءات السريعة
               </h3>
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 lg:gap-4">
@@ -652,14 +652,14 @@ export default function AdminDashboard() {
                 </button>
                 <button
                   onClick={() => navigate("/admin/qa-dashboard")}
-                  className="group p-3 lg:p-4 bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg lg:rounded-xl text-white hover:from-blue-600 hover:to-blue-700 transition-all duration-200 transform hover:scale-105"
+                  className="group p-3 lg:p-4 bg-gradient-to-r from-[#9b172a] to-[#9b172a] rounded-lg lg:rounded-xl text-white hover:from-[#9b172a] hover:to-[#9b172a]-700 transition-all duration-200 transform hover:scale-105"
                 >
                   <FaQuestionCircle className="text-lg lg:text-2xl mx-auto mb-1 lg:mb-2 group-hover:scale-110 transition-transform duration-200" />
                   <span className="text-xs lg:text-sm font-medium">لوحة الأسئلة والأجوبة</span>
                 </button>
                 <button
                   onClick={() => navigate("/admin/course-dashboard")}
-                  className="group p-3 lg:p-4 bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg lg:rounded-xl text-white hover:from-blue-600 hover:to-blue-700 transition-all duration-200 transform hover:scale-105"
+                  className="group p-3 lg:p-4 bg-gradient-to-r from-[#9b172a] to-[#9b172a] rounded-lg lg:rounded-xl text-white hover:from-[#9b172a] hover:to-[#9b172a]-700 transition-all duration-200 transform hover:scale-105"
                 >
                   <FaBook className="text-lg lg:text-2xl mx-auto mb-1 lg:mb-2 group-hover:scale-110 transition-transform duration-200" />
                   <span className="text-xs lg:text-sm font-medium">إدارة الدورات</span>
@@ -680,7 +680,7 @@ export default function AdminDashboard() {
                 </button>
                 <button
                   onClick={() => navigate("/admin/course-content")}
-                  className="group p-3 lg:p-4 bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg lg:rounded-xl text-white hover:from-blue-600 hover:to-blue-700 transition-all duration-200 transform hover:scale-105"
+                  className="group p-3 lg:p-4 bg-gradient-to-r from-[#9b172a] to-[#9b172a] rounded-lg lg:rounded-xl text-white hover:from-[#9b172a] hover:to-[#9b172a]-700 transition-all duration-200 transform hover:scale-105"
                 >
                   <FaClipboardCheck className="text-lg lg:text-2xl mx-auto mb-1 lg:mb-2 group-hover:scale-110 transition-transform duration-200" />
                   <span className="text-xs lg:text-sm font-medium">إدارة محتوى الدورات</span>
@@ -694,7 +694,7 @@ export default function AdminDashboard() {
                 </button>
                 <button
                   onClick={() => navigate("/admin/exam-search")}
-                  className="group p-3 lg:p-4 bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg lg:rounded-xl text-white hover:from-blue-600 hover:to-blue-700 transition-all duration-200 transform hover:scale-105"
+                  className="group p-3 lg:p-4 bg-gradient-to-r from-[#9b172a] to-[#9b172a] rounded-lg lg:rounded-xl text-white hover:from-[#9b172a] hover:to-[#9b172a]-700 transition-all duration-200 transform hover:scale-105"
                 >
                   <FaClipboardList className="text-lg lg:text-2xl mx-auto mb-1 lg:mb-2 group-hover:scale-110 transition-transform duration-200" />
                   <span className="text-xs lg:text-sm font-medium">نتائج الطلاب</span>
@@ -702,7 +702,7 @@ export default function AdminDashboard() {
 
                 <button
                 onClick={()=> navigate("/admin/essay-exams")}
-                className="group p-3 lg:p-4 bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg lg:rounded-xl text-white hover:from-blue-600 hover:to-blue-700 transition-all duration-200 transform hover:scale-105"
+                className="group p-3 lg:p-4 bg-gradient-to-r from-[#9b172a] to-[#9b172a] rounded-lg lg:rounded-xl text-white hover:from-[#9b172a] hover:to-[#9b172a]-700 transition-all duration-200 transform hover:scale-105"
               >
                   <FaBook className="text-lg lg:text-2xl mx-auto mb-1 lg:mb-2 group-hover:scale-110 transition-transform duration-200" />
                   <span className="text-xs lg:text-sm font-medium">الامتحانات المقالية</span>
@@ -713,7 +713,7 @@ export default function AdminDashboard() {
             {/* Admin Management Sections */}
             <div className="bg-white dark:bg-gray-800 rounded-xl lg:rounded-2xl shadow-lg lg:shadow-xl p-4 lg:p-6 mb-8 lg:mb-12">
               <h3 className="text-lg lg:text-xl font-bold text-gray-900 dark:text-white mb-4 lg:mb-6 flex items-center gap-3 text-right">
-                <FaShieldAlt className="text-blue-500" />
+                <FaShieldAlt className="text-[#9b172a]" />
                 إدارة النظام
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
@@ -747,16 +747,16 @@ export default function AdminDashboard() {
                 </div>
 
                 {/* إدارة الأجهزة */}
-                <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl p-4 lg:p-6 text-white hover:from-blue-600 hover:to-blue-700 transition-all duration-200 transform hover:scale-105 cursor-pointer shadow-lg hover:shadow-xl" onClick={() => navigate("/admin/device-management")}>
+                <div className="bg-gradient-to-br from-[#9b172a] to-[#9b172a] rounded-xl p-4 lg:p-6 text-white hover:from-[#9b172a] hover:to-[#9b172a]-700 transition-all duration-200 transform hover:scale-105 cursor-pointer shadow-lg hover:shadow-xl" onClick={() => navigate("/admin/device-management")}>
                   <div className="flex items-center justify-between mb-3">
-                    <FaServer className="text-2xl lg:text-3xl text-blue-200" />
-                    <div className="w-3 h-3 bg-blue-200 rounded-full animate-pulse"></div>
+                    <FaServer className="text-2xl lg:text-3xl text-[#9b172a]-200" />
+                    <div className="w-3 h-3 bg-[#9b172a]-200 rounded-full animate-pulse"></div>
                   </div>
                   <h4 className="text-lg lg:text-xl font-bold mb-2">إدارة الأجهزة</h4>
-                  <p className="text-blue-100 text-sm lg:text-base opacity-90">مراقبة وإدارة الأجهزة المتصلة</p>
+                  <p className="text-[#9b172a]-100 text-sm lg:text-base opacity-90">مراقبة وإدارة الأجهزة المتصلة</p>
                   <div className="mt-4 flex items-center justify-between">
-                    <span className="text-xs text-blue-200">إدارة كاملة</span>
-                    <FaArrowUp className="text-blue-200 transform rotate-45" />
+                    <span className="text-xs text-[#9b172a]-200">إدارة كاملة</span>
+                    <FaArrowUp className="text-[#9b172a]-200 transform rotate-45" />
                   </div>
                 </div>
 
@@ -775,16 +775,16 @@ export default function AdminDashboard() {
                 </div>
 
                 {/* إدارة المراحل */}
-                <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl p-4 lg:p-6 text-white hover:from-blue-600 hover:to-blue-700 transition-all duration-200 transform hover:scale-105 cursor-pointer shadow-lg hover:shadow-xl" onClick={() => navigate("/admin/stages")}>
+                <div className="bg-gradient-to-br from-[#9b172a] to-[#9b172a] rounded-xl p-4 lg:p-6 text-white hover:from-[#9b172a] hover:to-[#9b172a]-700 transition-all duration-200 transform hover:scale-105 cursor-pointer shadow-lg hover:shadow-xl" onClick={() => navigate("/admin/stages")}>
                   <div className="flex items-center justify-between mb-3">
-                    <FaGraduationCap className="text-2xl lg:text-3xl text-blue-200" />
-                    <div className="w-3 h-3 bg-blue-200 rounded-full animate-pulse"></div>
+                    <FaGraduationCap className="text-2xl lg:text-3xl text-[#9b172a]-200" />
+                    <div className="w-3 h-3 bg-[#9b172a]-200 rounded-full animate-pulse"></div>
                   </div>
                   <h4 className="text-lg lg:text-xl font-bold mb-2">إدارة المراحل</h4>
-                  <p className="text-blue-100 text-sm lg:text-base opacity-90">إدارة المراحل الدراسية</p>
+                  <p className="text-[#9b172a]-100 text-sm lg:text-base opacity-90">إدارة المراحل الدراسية</p>
                   <div className="mt-4 flex items-center justify-between">
-                    <span className="text-xs text-blue-200">إدارة كاملة</span>
-                    <FaArrowUp className="text-blue-200 transform rotate-45" />
+                    <span className="text-xs text-[#9b172a]-200">إدارة كاملة</span>
+                    <FaArrowUp className="text-[#9b172a]-200 transform rotate-45" />
                   </div>
                 </div>
 
@@ -814,32 +814,32 @@ export default function AdminDashboard() {
                 </div>
 
                 {/* أكواد فتح الكورس المؤقتة */}
-                <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl p-4 lg:p-6 text-white hover:from-blue-600 hover:to-blue-700 transition-all duration-200 transform hover:scale-105 cursor-pointer shadow-lg hover:shadow-xl" onClick={() => navigate("/admin/course-access-codes")}>
+                <div className="bg-gradient-to-br from-[#9b172a] to-[#9b172a] rounded-xl p-4 lg:p-6 text-white hover:from-[#9b172a] hover:to-[#9b172a]-700 transition-all duration-200 transform hover:scale-105 cursor-pointer shadow-lg hover:shadow-xl" onClick={() => navigate("/admin/course-access-codes")}>
                   <div className="flex items-center justify-between mb-3">
-                    <FaTicketAlt className="text-2xl lg:text-3xl text-blue-200" />
-                    <div className="w-3 h-3 bg-blue-200 rounded-full animate-pulse"></div>
+                    <FaTicketAlt className="text-2xl lg:text-3xl text-[#9b172a]-200" />
+                    <div className="w-3 h-3 bg-[#9b172a]-200 rounded-full animate-pulse"></div>
                   </div>
                   <h4 className="text-lg lg:text-xl font-bold mb-2">أكواد فتح الكورس</h4>
-                  <p className="text-blue-100 text-sm lg:text-base opacity-90">توليد أكواد وصول مؤقتة لكورس محدد</p>
+                  <p className="text-[#9b172a]-100 text-sm lg:text-base opacity-90">توليد أكواد وصول مؤقتة لكورس محدد</p>
                   <div className="mt-4 flex items-center justify-between">
-                    <span className="text-xs text-blue-200">توليد وإدارة</span>
-                    <FaArrowUp className="text-blue-200 transform rotate-45" />
+                    <span className="text-xs text-[#9b172a]-200">توليد وإدارة</span>
+                    <FaArrowUp className="text-[#9b172a]-200 transform rotate-45" />
                   </div>
                 </div>
 
 
 
                 {/* الجلسات المباشرة */}
-                <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl p-4 lg:p-6 text-white hover:from-blue-600 hover:to-blue-700 transition-all duration-200 transform hover:scale-105 cursor-pointer shadow-lg hover:shadow-xl" onClick={() => navigate("/admin/live-meetings")}>
+                <div className="bg-gradient-to-br from-[#9b172a] to-[#9b172a] rounded-xl p-4 lg:p-6 text-white hover:from-[#9b172a] hover:to-[#9b172a]-700 transition-all duration-200 transform hover:scale-105 cursor-pointer shadow-lg hover:shadow-xl" onClick={() => navigate("/admin/live-meetings")}>
                   <div className="flex items-center justify-between mb-3">
-                    <FaVideo className="text-2xl lg:text-3xl text-blue-200" />
-                    <div className="w-3 h-3 bg-blue-200 rounded-full animate-pulse"></div>
+                    <FaVideo className="text-2xl lg:text-3xl text-[#9b172a]-200" />
+                    <div className="w-3 h-3 bg-[#9b172a]-200 rounded-full animate-pulse"></div>
                   </div>
                   <h4 className="text-lg lg:text-xl font-bold mb-2">الجلسات المباشرة</h4>
-                  <p className="text-blue-100 text-sm lg:text-base opacity-90">إدارة الجلسات المباشرة</p>
+                  <p className="text-[#9b172a]-100 text-sm lg:text-base opacity-90">إدارة الجلسات المباشرة</p>
                   <div className="mt-4 flex items-center justify-between">
-                    <span className="text-xs text-blue-200">إدارة كاملة</span>
-                    <FaArrowUp className="text-blue-200 transform rotate-45" />
+                    <span className="text-xs text-[#9b172a]-200">إدارة كاملة</span>
+                    <FaArrowUp className="text-[#9b172a]-200 transform rotate-45" />
                   </div>
                 </div>
 

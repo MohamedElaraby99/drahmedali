@@ -118,7 +118,7 @@ const AnimatedHero = ({ onGetStarted }) => {
             </div>
           </div>
 
-          {/* Left Side - Image with Blue Shape Effect (RTL) */}
+          {/* Left Side - Image with [#9b172a] Shape Effect (RTL) */}
           <div className={`order-1 lg:order-2 relative transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
             {/* Custom Color Shape Container */}
    

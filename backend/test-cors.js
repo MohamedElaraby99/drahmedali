@@ -15,9 +15,9 @@ const allowedOrigins = [
   'http://127.0.0.1:5173',
   'http://localhost:5190',
   'http://127.0.0.1:5190',
-  'https://almongz.online',
-  'https://www.almongz.online',
-  'https://api.almongz.online'
+  'https://drahmedali.online',
+  'https://www.drahmedali.online',
+  'https://api.drahmedali.online'
 ];
 
 console.log('\nAllowed Origins:');
@@ -27,9 +27,9 @@ allowedOrigins.forEach((origin, index) => {
 
 // Test specific problematic origins
 const testOrigins = [
-  'https://almongz.online',
-  'https://api.almongz.online',
-  'https://www.almongz.online'
+  'https://drahmedali.online',
+  'https://api.drahmedali.online',
+  'https://www.drahmedali.online'
 ];
 
 console.log('\nTesting specific origins:');

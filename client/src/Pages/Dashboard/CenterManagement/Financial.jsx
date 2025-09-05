@@ -238,7 +238,7 @@ const Financial = () => {
       change: selectedMonthData?.isCurrent ? '+15.3%' : 'بيانات مؤرشفة',
       changeType: selectedMonthData?.isCurrent ? 'positive' : 'archived',
       icon: FaChartBar,
-      color: 'text-blue-600 dark:text-blue-400'
+      color: 'text-[#9b172a] dark:text-[#9b172a]-400'
     },
     {
       title: selectedMonthData?.isCurrent ? 'المدفوعات المعلقة' : `مدفوعات ${selectedMonthData?.label || 'الشهر'}`,
@@ -365,7 +365,7 @@ const Financial = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
           <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
             <div className="flex items-center mb-4">
-              <FaPiggyBank className="text-2xl text-blue-600 dark:text-blue-400 mr-3" />
+              <FaPiggyBank className="text-2xl text-[#9b172a] dark:text-[#9b172a]-400 mr-3" />
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                 إضافة إيراد
               </h3>
@@ -375,7 +375,7 @@ const Financial = () => {
             </p>
             <button 
               onClick={() => setIsAddIncomeModalOpen(true)}
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition-colors"
+              className="w-full bg-[#9b172a] hover:bg-[#9b172a]-700 text-white py-2 px-4 rounded-lg transition-colors"
             >
               إضافة إيراد
             </button>
@@ -440,7 +440,7 @@ const Financial = () => {
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   placeholder="البحث في المعاملات..."
-                  className="w-full px-4 py-2 pr-10 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  className="w-full px-4 py-2 pr-10 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#9b172a] focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 />
                 <svg className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -448,7 +448,7 @@ const Financial = () => {
               </div>
               <button
                 type="submit"
-                className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+                className="px-4 py-2 bg-[#9b172a] hover:bg-[#9b172a]-700 text-white rounded-lg transition-colors"
               >
                 بحث
               </button>
@@ -462,7 +462,7 @@ const Financial = () => {
                   onClick={() => handleTypeFilter('')}
                   className={`px-3 py-1 rounded-full text-sm transition-colors ${
                     transactionType === '' 
-                      ? 'bg-blue-600 text-white' 
+                      ? 'bg-[#9b172a] text-white' 
                       : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
                   }`}
                 >
@@ -549,7 +549,7 @@ const Financial = () => {
                  {loading ? (
                    <tr>
                      <td colSpan="6" className="py-8 text-center">
-                       <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500 mx-auto mb-2"></div>
+                       <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#9b172a] mx-auto mb-2"></div>
                        <p className="text-gray-500 dark:text-gray-400">جاري تحميل المعاملات...</p>
                      </td>
                    </tr>
@@ -661,7 +661,7 @@ const Financial = () => {
                         onClick={() => handlePageChange(pageNum)}
                         className={`px-3 py-2 text-sm font-medium rounded-lg transition-colors ${
                           currentPage === pageNum
-                            ? 'bg-blue-600 text-white'
+                            ? 'bg-[#9b172a] text-white'
                             : 'text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-600'
                         }`}
                       >

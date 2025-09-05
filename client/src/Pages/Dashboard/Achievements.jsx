@@ -340,7 +340,7 @@ const Achievements = () => {
       'نجم': 'bg-yellow-100 text-yellow-800 border-yellow-200',
       'متفوق': 'bg-green-100 text-green-800 border-green-200',
       'متقدم': 'bg-teal-100 text-teal-800 border-teal-200',
-      'مبتدئ': 'bg-blue-100 text-blue-800 border-blue-200'
+      'مبتدئ': 'bg-[#9b172a]-100 text-[#9b172a]-800 border-[#9b172a]-200'
     };
     
     return (
@@ -399,8 +399,8 @@ const Achievements = () => {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
               <div className="flex items-center">
-                <div className="p-3 bg-blue-100 dark:bg-blue-900 rounded-lg">
-                  <FaUsers className="text-2xl text-blue-600" />
+                <div className="p-3 bg-[#9b172a]-100 dark:bg-[#9b172a]-900 rounded-lg">
+                  <FaUsers className="text-2xl text-[#9b172a]" />
                 </div>
                 <div className="mr-4">
                   <p className="text-sm font-medium text-gray-600 dark:text-gray-400">إجمالي الطلاب</p>
@@ -467,10 +467,10 @@ const Achievements = () => {
                 <p className="text-2xl font-bold text-teal-600">{achievementLevelStats.متقدم}</p>
                 <p className="text-sm text-teal-700 dark:text-teal-300">متقدم</p>
               </div>
-              <div className="text-center p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-                <FaAward className="text-3xl text-blue-500 mx-auto mb-2" />
-                <p className="text-2xl font-bold text-blue-600">{achievementLevelStats.مبتدئ}</p>
-                <p className="text-sm text-blue-700 dark:text-blue-300">مبتدئ</p>
+              <div className="text-center p-4 bg-[#9b172a]-50 dark:bg-[#9b172a]-900/20 rounded-lg">
+                <FaAward className="text-3xl text-[#9b172a] mx-auto mb-2" />
+                <p className="text-2xl font-bold text-[#9b172a]">{achievementLevelStats.مبتدئ}</p>
+                <p className="text-sm text-[#9b172a]-700 dark:text-[#9b172a]-300">مبتدئ</p>
               </div>
             </div>
           </div>
@@ -571,7 +571,7 @@ const Achievements = () => {
                           {getAchievementLevelBadge(student.achievementLevel)}
                         </td>
                         <td className="px-4 py-3">
-                          <span className="px-2 py-1 bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 rounded-full text-xs font-medium">
+                          <span className="px-2 py-1 bg-[#9b172a]-100 text-[#9b172a]-800 dark:bg-[#9b172a]-900 dark:text-[#9b172a]-200 rounded-full text-xs font-medium">
                             {(student.totalPoints || 0).toFixed(1)}
                           </span>
                         </td>
@@ -591,7 +591,7 @@ const Achievements = () => {
                           <div className="flex items-center space-x-2 space-x-reverse">
                             <button 
                               onClick={() => handleViewUserInfo(student)}
-                              className="p-2 text-blue-600 hover:bg-blue-100 dark:hover:bg-blue-900 rounded-lg transition-colors"
+                              className="p-2 text-[#9b172a] hover:bg-[#9b172a]-100 dark:hover:bg-[#9b172a]-900 rounded-lg transition-colors"
                               title="عرض معلومات الطالب"
                             >
                               <FaUser />
@@ -620,7 +620,7 @@ const Achievements = () => {
               ? 'bg-green-500 text-white' 
               : message.type === 'error'
               ? 'bg-red-500 text-white'
-              : 'bg-blue-500 text-white'
+              : 'bg-[#9b172a] text-white'
           }`}>
             <div className="flex items-center space-x-2 space-x-reverse">
               <span>{message.text}</span>
@@ -635,8 +635,8 @@ const Achievements = () => {
               {/* Header */}
               <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-600">
                 <div className="flex items-center space-x-3 space-x-reverse">
-                  <div className="p-3 bg-blue-100 dark:bg-blue-900 rounded-lg">
-                    <FaUser className="text-2xl text-blue-600 dark:text-blue-400" />
+                  <div className="p-3 bg-[#9b172a]-100 dark:bg-[#9b172a]-900 rounded-lg">
+                    <FaUser className="text-2xl text-[#9b172a] dark:text-[#9b172a]-400" />
                   </div>
                   <div>
                     <h2 className="text-xl font-bold text-gray-900 dark:text-white">
@@ -660,7 +660,7 @@ const Achievements = () => {
                 {/* Basic Information */}
                 <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
                   <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
-                    <FaUser className="ml-2 text-blue-600" />
+                    <FaUser className="ml-2 text-[#9b172a]" />
                     المعلومات الأساسية
                   </h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -710,7 +710,7 @@ const Achievements = () => {
                 </div>
 
                 {/* Achievement Information */}
-                <div className="bg-gradient-to-r from-purple-50 to-blue-50 dark:from-purple-900/20 dark:to-blue-900/20 rounded-lg p-4">
+                <div className="bg-gradient-to-r from-purple-50 to-[#9b172a]-50 dark:from-purple-900/20 dark:to-[#9b172a]-900/20 rounded-lg p-4">
                   <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
                     <FaTrophy className="ml-2 text-purple-600" />
                     معلومات الإنجازات
@@ -742,7 +742,7 @@ const Achievements = () => {
                       <p className="text-sm text-gray-600 dark:text-gray-400">نقاط الحضور</p>
                     </div>
                     <div className="text-center p-3 bg-white dark:bg-gray-800 rounded-lg">
-                      <FaAward className="text-2xl text-blue-500 mx-auto mb-2" />
+                      <FaAward className="text-2xl text-[#9b172a] mx-auto mb-2" />
                       <p className="text-xl font-bold text-gray-900 dark:text-white">{selectedUser.gradesPoints?.toFixed(1) || '0.0'}</p>
                       <p className="text-sm text-gray-600 dark:text-gray-400">نقاط الدرجات</p>
                     </div>

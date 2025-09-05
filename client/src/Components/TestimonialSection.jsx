@@ -30,7 +30,7 @@ const TestimonialSection = () => {
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-gray-800">
+    <section className="py-20 bg-gradient-to-br from-gray-50 to-[#9b172a]-50 dark:from-gray-900 dark:to-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
@@ -71,12 +71,12 @@ const TestimonialSection = () => {
 
               <div className="flex items-center mb-4">
                 {[...Array(testimonial.rating)].map((_, i) => (
-                  <FaStar key={i} className="text-blue-400 w-4 h-4" />
+                  <FaStar key={i} className="text-[#9b172a]-400 w-4 h-4" />
                 ))}
               </div>
 
               <div className="relative">
-                <FaQuoteLeft className="absolute -top-2 -left-2 text-blue-200 dark:text-blue-800 text-2xl" />
+                <FaQuoteLeft className="absolute -top-2 -left-2 text-[#9b172a]-200 dark:text-[#9b172a]-800 text-2xl" />
                 <p className="text-gray-600 dark:text-gray-300 leading-relaxed pl-6">
                   "{testimonial.text}"
                 </p>
@@ -89,7 +89,7 @@ const TestimonialSection = () => {
           <div className="inline-flex items-center gap-2 bg-white dark:bg-gray-800 px-6 py-3 rounded-full shadow-lg">
             <div className="flex items-center">
               {[...Array(5)].map((_, i) => (
-                <FaStar key={i} className="text-blue-400 w-4 h-4" />
+                <FaStar key={i} className="text-[#9b172a]-400 w-4 h-4" />
               ))}
             </div>
             <span className="text-gray-900 dark:text-white font-semibold ml-2">

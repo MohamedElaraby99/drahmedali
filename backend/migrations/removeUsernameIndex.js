@@ -12,7 +12,7 @@ dotenv.config();
 const removeUsernameIndex = async () => {
     try {
         // Connect to MongoDB
-        await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/almongezz');
+        await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/drahmedali');
         console.log('Connected to MongoDB');
 
         const db = mongoose.connection.db;

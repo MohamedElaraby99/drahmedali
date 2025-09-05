@@ -124,7 +124,7 @@ const LessonModal = ({ lesson, unitId, lessonId, courseId, onClose, isOpen }) =>
           </button>
           <button
             onClick={handleSubmit}
-            className="flex items-center gap-2 px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+            className="flex items-center gap-2 px-6 py-2 bg-[#9b172a] text-white rounded-md hover:bg-[#9b172a]-700"
           >
             <FaSave className="text-sm" />
             حفظ التغييرات

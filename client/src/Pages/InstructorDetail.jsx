@@ -37,7 +37,7 @@ export default function InstructorDetail() {
         <FaStar
           key={i}
           className={`w-5 h-5 ${
-            i <= rating ? 'text-blue-400' : 'text-gray-300'
+            i <= rating ? 'text-[#9b172a]-400' : 'text-gray-300'
           }`}
         />
       );
@@ -48,10 +48,10 @@ export default function InstructorDetail() {
   if (loading) {
     return (
       <Layout>
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+        <div className="min-h-screen bg-gradient-to-br from-[#9b172a]-50 via-indigo-50 to-[#9b172a]-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
           <div className="container mx-auto px-4 py-16">
             <div className="flex items-center justify-center">
-              <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
+              <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-[#9b172a]"></div>
             </div>
           </div>
         </div>
@@ -62,7 +62,7 @@ export default function InstructorDetail() {
   if (!instructor) {
     return (
       <Layout>
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+        <div className="min-h-screen bg-gradient-to-br from-[#9b172a]-50 via-indigo-50 to-[#9b172a]-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
           <div className="container mx-auto px-4 py-16">
             <div className="text-center">
               <h1 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">
@@ -70,7 +70,7 @@ export default function InstructorDetail() {
               </h1>
               <button
                 onClick={() => navigate('/instructors')}
-                className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg"
+                className="bg-[#9b172a] hover:bg-[#9b172a]-700 text-white px-6 py-3 rounded-lg"
               >
                 العودة لقائمة المدرسين
               </button>
@@ -83,12 +83,12 @@ export default function InstructorDetail() {
 
   return (
     <Layout>
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900" dir="rtl">
+      <div className="min-h-screen bg-gradient-to-br from-[#9b172a]-50 via-indigo-50 to-[#9b172a]-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900" dir="rtl">
         <div className="container mx-auto px-4 py-8">
           {/* Back Button */}
           <button
             onClick={() => navigate('/instructors')}
-            className="flex items-center gap-2 text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 mb-8 transition-colors"
+            className="flex items-center gap-2 text-[#9b172a] hover:text-[#9b172a]-700 dark:text-[#9b172a]-400 dark:hover:text-[#9b172a]-300 mb-8 transition-colors"
           >
             <FaArrowLeft />
             العودة لقائمة المدرسين
@@ -98,7 +98,7 @@ export default function InstructorDetail() {
           <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden mb-8">
             <div className="relative">
               {/* Background Image */}
-              <div className="w-full h-48 bg-gradient-to-r from-blue-500 to-blue-600"></div>
+              <div className="w-full h-48 bg-gradient-to-r from-[#9b172a] to-[#9b172a]"></div>
               
               {/* Profile Image */}
               <div className="absolute -bottom-16 right-8">
@@ -117,7 +117,7 @@ export default function InstructorDetail() {
 
               {/* Featured Badge */}
               {instructor.featured && (
-                <div className="absolute top-4 left-4 bg-blue-400 text-blue-900 px-4 py-2 rounded-full text-sm font-semibold">
+                <div className="absolute top-4 left-4 bg-[#9b172a]-400 text-[#9b172a]-900 px-4 py-2 rounded-full text-sm font-semibold">
                   مميز
                 </div>
               )}
@@ -147,16 +147,16 @@ export default function InstructorDetail() {
 
               {/* Stats */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                <div className="text-center p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-                  <FaUsers className="w-8 h-8 text-blue-600 dark:text-blue-400 mx-auto mb-2" />
+                <div className="text-center p-4 bg-[#9b172a]-50 dark:bg-[#9b172a]-900/20 rounded-lg">
+                  <FaUsers className="w-8 h-8 text-[#9b172a] dark:text-[#9b172a]-400 mx-auto mb-2" />
                   <div className="text-2xl font-bold text-gray-800 dark:text-white">
                     {instructor.totalStudents || 0}
                   </div>
                   <div className="text-sm text-gray-600 dark:text-gray-400">طالب</div>
                 </div>
                 
-                <div className="text-center p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-                  <FaGraduationCap className="w-8 h-8 text-blue-600 dark:text-blue-400 mx-auto mb-2" />
+                <div className="text-center p-4 bg-[#9b172a]-50 dark:bg-[#9b172a]-900/20 rounded-lg">
+                  <FaGraduationCap className="w-8 h-8 text-[#9b172a] dark:text-[#9b172a]-400 mx-auto mb-2" />
                   <div className="text-2xl font-bold text-gray-800 dark:text-white">
                     {instructor.courses?.length || 0}
                   </div>
@@ -181,7 +181,7 @@ export default function InstructorDetail() {
               {/* Bio */}
               <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
                 <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-4 flex items-center gap-2 text-right">
-                  <FaBookOpen className="text-blue-600" />
+                  <FaBookOpen className="text-[#9b172a]" />
                   نبذة عن المدرس
                 </h2>
                 <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-right">
@@ -193,7 +193,7 @@ export default function InstructorDetail() {
               {instructor.education && (
                 <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
                   <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-4 flex items-center gap-2 text-right">
-                    <FaGraduationCap className="text-blue-600" />
+                    <FaGraduationCap className="text-[#9b172a]" />
                     المؤهلات التعليمية
                   </h2>
                   <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-right">
@@ -221,7 +221,7 @@ export default function InstructorDetail() {
               {/* Contact Info */}
               <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
                 <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-4 flex items-center gap-2">
-                  <FaEnvelope className="text-blue-600" />
+                  <FaEnvelope className="text-[#9b172a]" />
                   معلومات التواصل
                 </h3>
                 
@@ -230,7 +230,7 @@ export default function InstructorDetail() {
                     <div className="text-sm text-gray-500 dark:text-gray-400 mb-1">البريد الإلكتروني</div>
                     <a 
                       href={`mailto:${instructor.email}`}
-                      className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
+                      className="text-[#9b172a] hover:text-[#9b172a]-700 dark:text-[#9b172a]-400 dark:hover:text-[#9b172a]-300"
                     >
                       {instructor.email}
                     </a>
@@ -257,7 +257,7 @@ export default function InstructorDetail() {
                           href={instructor.socialLinks.linkedin}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-2 text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 transition-colors"
+                          className="flex items-center gap-2 text-[#9b172a] hover:text-[#9b172a]-700 dark:text-[#9b172a]-400 dark:hover:text-[#9b172a]-300 transition-colors"
                         >
                           <FaLinkedin />
                           LinkedIn
@@ -269,7 +269,7 @@ export default function InstructorDetail() {
                           href={instructor.socialLinks.twitter}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-2 text-blue-400 hover:text-blue-500 dark:text-blue-300 dark:hover:text-blue-200 transition-colors"
+                          className="flex items-center gap-2 text-[#9b172a]-400 hover:text-[#9b172a] dark:text-[#9b172a]-300 dark:hover:text-[#9b172a]-200 transition-colors"
                         >
                           <FaTwitter />
                           Twitter
@@ -281,7 +281,7 @@ export default function InstructorDetail() {
                            href={instructor.socialLinks.facebook}
                            target="_blank"
                            rel="noopener noreferrer"
-                           className="flex items-center gap-2 text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 transition-colors"
+                           className="flex items-center gap-2 text-[#9b172a] hover:text-[#9b172a]-700 dark:text-[#9b172a]-400 dark:hover:text-[#9b172a]-300 transition-colors"
                          >
                            <FaFacebook />
                            Facebook

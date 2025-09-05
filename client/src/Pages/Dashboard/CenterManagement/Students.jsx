@@ -447,7 +447,7 @@ export default function Students() {
       title: 'إجمالي الطلاب',
       value: totalDocs, // Use totalDocs from API
       icon: FaUsers,
-      color: 'bg-blue-500',
+      color: 'bg-[#9b172a]',
       change: '+5'
     },
     {
@@ -479,7 +479,7 @@ export default function Students() {
         <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-4 sm:p-6 lg:p-8" dir="rtl">
           <div className="max-w-7xl mx-auto">
             <div className="text-center py-8">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto"></div>
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#9b172a] mx-auto"></div>
               <p className="text-gray-500 dark:text-gray-400 mt-4">جاري التحميل...</p>
             </div>
           </div>
@@ -499,7 +499,7 @@ export default function Students() {
           <div className="flex justify-end">
             <button 
               onClick={() => setShowAddUserModal(true)}
-              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center space-x-2 space-x-reverse"
+              className="px-4 py-2 bg-[#9b172a] text-white rounded-lg hover:bg-[#9b172a]-700 transition-colors flex items-center space-x-2 space-x-reverse"
             >
               <FaUserPlus />
               <span>إضافة طلاب للمجموعات</span>
@@ -552,7 +552,7 @@ export default function Students() {
                 </button>
                 <button 
                   onClick={() => setShowImportModal(true)}
-                  className="px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center space-x-2 space-x-reverse"
+                  className="px-3 py-2 bg-[#9b172a] text-white rounded-lg hover:bg-[#9b172a]-700 transition-colors flex items-center space-x-2 space-x-reverse"
                 >
                   <FaUpload />
                   <span>استيراد Excel</span>
@@ -572,7 +572,7 @@ export default function Students() {
                     value={filters.search}
                     onChange={(e) => handleFilterChange('search', e.target.value)}
                     placeholder="ابحث بالاسم أو البريد الإلكتروني"
-                    className="w-full px-3 py-2 pr-10 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
+                    className="w-full px-3 py-2 pr-10 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#9b172a] focus:border-transparent dark:bg-gray-700 dark:text-white"
                   />
                   <FaSearch className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
                 </div>
@@ -585,7 +585,7 @@ export default function Students() {
                 <select
                   value={filters.group}
                   onChange={(e) => handleFilterChange('group', e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#9b172a] focus:border-transparent dark:bg-gray-700 dark:text-white"
                 >
                   <option value="">جميع المجموعات</option>
                   {groups.map((group) => (
@@ -603,7 +603,7 @@ export default function Students() {
                 <select
                   value={filters.status}
                   onChange={(e) => handleFilterChange('status', e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#9b172a] focus:border-transparent dark:bg-gray-700 dark:text-white"
                 >
                   <option value="">جميع الحالات</option>
                   <option value="active">نشط</option>
@@ -615,7 +615,7 @@ export default function Students() {
               <div className="flex items-end space-x-2 space-x-reverse">
                 <button
                   onClick={applyFilters}
-                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center space-x-2 space-x-reverse"
+                  className="px-4 py-2 bg-[#9b172a] text-white rounded-lg hover:bg-[#9b172a]-700 transition-colors flex items-center space-x-2 space-x-reverse"
                 >
                   <FaSearch />
                   <span>بحث</span>
@@ -649,8 +649,8 @@ export default function Students() {
                       <tr key={student._id} className="hover:bg-gray-50 dark:hover:bg-gray-700">
                         <td className="px-4 py-3">
                           <div className="flex items-center space-x-3 space-x-reverse">
-                            <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center">
-                              <span className="text-blue-600 dark:text-blue-400 text-sm font-medium">
+                            <div className="w-10 h-10 bg-[#9b172a]-100 dark:bg-[#9b172a]-900 rounded-full flex items-center justify-center">
+                              <span className="text-[#9b172a] dark:text-[#9b172a]-400 text-sm font-medium">
                                 {student.fullName?.charAt(0) || '?'}
                               </span>
                             </div>
@@ -673,7 +673,7 @@ export default function Students() {
                           </div>
                         </td>
                         <td className="px-4 py-3 hidden sm:table-cell">
-                          <span className="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs rounded-full">
+                          <span className="px-2 py-1 bg-[#9b172a]-100 dark:bg-[#9b172a]-900 text-[#9b172a]-800 dark:text-[#9b172a]-200 text-xs rounded-full">
                             {(() => {
                               const studentGroup = groups.find(group => 
                                 group.students && group.students.some(s => s._id === student._id)
@@ -695,7 +695,7 @@ export default function Students() {
                           <div className="flex items-center space-x-2 space-x-reverse">
                             <div className="w-16 bg-gray-200 dark:bg-gray-600 rounded-full h-2">
                               <div 
-                                className="bg-blue-600 h-2 rounded-full" 
+                                className="bg-[#9b172a] h-2 rounded-full" 
                                 style={{ width: `${student.attendanceRate || 0}%` }}
                               ></div>
                             </div>
@@ -708,7 +708,7 @@ export default function Students() {
                           <div className="flex items-center space-x-2 space-x-reverse">
                             <button 
                               onClick={() => handleViewStudentDetails(student)}
-                              className="p-2 text-blue-600 hover:bg-blue-100 dark:hover:bg-blue-900 rounded-lg transition-colors"
+                              className="p-2 text-[#9b172a] hover:bg-[#9b172a]-100 dark:hover:bg-[#9b172a]-900 rounded-lg transition-colors"
                               title="عرض التفاصيل"
                             >
                               <FaEye />
@@ -787,7 +787,7 @@ export default function Students() {
                   <select
                     value={selectedGroup}
                     onChange={(e) => setSelectedGroup(e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#9b172a] focus:border-transparent dark:bg-gray-700 dark:text-white"
                   >
                     <option value="">اختر مجموعة</option>
                     {groups.map((group) => (
@@ -815,7 +815,7 @@ export default function Students() {
                           <div
                             key={user._id}
                             className={`p-3 border-b border-gray-200 dark:border-gray-600 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 ${
-                              isSelected ? 'bg-blue-50 dark:bg-blue-900' : ''
+                              isSelected ? 'bg-[#9b172a]-50 dark:bg-[#9b172a]-900' : ''
                             } ${isInGroup ? 'opacity-50' : ''}`}
                             onClick={() => !isInGroup && toggleUserSelection(user._id)}
                           >
@@ -826,10 +826,10 @@ export default function Students() {
                                   checked={isSelected}
                                   onChange={() => !isInGroup && toggleUserSelection(user._id)}
                                   disabled={isInGroup}
-                                  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                  className="w-4 h-4 text-[#9b172a] bg-gray-100 border-gray-300 rounded focus:ring-[#9b172a] dark:focus:ring-[#9b172a] dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                                 />
-                                <div className="w-8 h-8 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center">
-                                  <span className="text-blue-600 dark:text-blue-400 text-sm font-medium">
+                                <div className="w-8 h-8 bg-[#9b172a]-100 dark:bg-[#9b172a]-900 rounded-full flex items-center justify-center">
+                                  <span className="text-[#9b172a] dark:text-[#9b172a]-400 text-sm font-medium">
                                     {user.fullName?.charAt(0) || '?'}
                                   </span>
                                 </div>
@@ -864,7 +864,7 @@ export default function Students() {
                   <button
                     onClick={handleAddUserToGroup}
                     disabled={!selectedGroup || selectedUsers.length === 0}
-                    className="w-full sm:flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
+                    className="w-full sm:flex-1 px-4 py-2 bg-[#9b172a] text-white rounded-lg hover:bg-[#9b172a]-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
                   >
                     إضافة {selectedUsers.length} طالب للمجموعة
                   </button>
@@ -897,7 +897,7 @@ export default function Students() {
                 <div className="flex items-center gap-3">
                   <button
                     onClick={handlePrint}
-                    className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                    className="flex items-center gap-2 px-4 py-2 bg-[#9b172a] text-white rounded-lg hover:bg-[#9b172a]-700 transition-colors"
                   >
                     <FaFilePdf />
                     طباعة التقرير
@@ -932,7 +932,7 @@ export default function Students() {
                 {/* Student Info */}
                 <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-6 mb-6">
                   <h4 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                    <FaUsers className="text-blue-600" />
+                    <FaUsers className="text-[#9b172a]" />
                     معلومات الطالب
                   </h4>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -953,7 +953,7 @@ export default function Students() {
 
                 {loading ? (
                   <div className="text-center py-8">
-                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#9b172a] mx-auto"></div>
                     <p className="mt-4 text-gray-600 dark:text-gray-400">جاري تحميل البيانات...</p>
                   </div>
                 ) : (
@@ -1016,11 +1016,11 @@ export default function Students() {
                               </div>
                               <div className="text-sm text-red-700 dark:text-red-300">أيام غياب</div>
                             </div>
-                            <div className="bg-blue-50 dark:bg-blue-900 p-3 rounded">
-                              <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">
+                            <div className="bg-[#9b172a]-50 dark:bg-[#9b172a]-900 p-3 rounded">
+                              <div className="text-2xl font-bold text-[#9b172a] dark:text-[#9b172a]-400">
                                 {Math.round((studentDetails.attendance.filter(a => a.status === 'present').length / studentDetails.attendance.length) * 100) || 0}%
                               </div>
-                              <div className="text-sm text-blue-700 dark:text-blue-300">نسبة الحضور</div>
+                              <div className="text-sm text-[#9b172a]-700 dark:text-[#9b172a]-300">نسبة الحضور</div>
                             </div>
                           </div>
                         </div>
@@ -1063,7 +1063,7 @@ export default function Students() {
                                     <td className="py-2">
                                       <span className={`px-2 py-1 rounded-full text-xs ${
                                         percentage >= 90 ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' :
-                                        percentage >= 80 ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200' :
+                                        percentage >= 80 ? 'bg-[#9b172a]-100 text-[#9b172a]-800 dark:bg-[#9b172a]-900 dark:text-[#9b172a]-200' :
                                         percentage >= 70 ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200' :
                                         percentage >= 60 ? 'bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200' :
                                         'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200'
@@ -1082,11 +1082,11 @@ export default function Students() {
                           
                           {/* Grades Summary */}
                           <div className="mt-4 grid grid-cols-2 gap-4 text-center">
-                            <div className="bg-blue-50 dark:bg-blue-900 p-3 rounded">
-                              <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">
+                            <div className="bg-[#9b172a]-50 dark:bg-[#9b172a]-900 p-3 rounded">
+                              <div className="text-2xl font-bold text-[#9b172a] dark:text-[#9b172a]-400">
                                 {Math.round(studentDetails.grades.reduce((sum, grade) => sum + (grade.score / grade.totalMarks * 100), 0) / studentDetails.grades.length) || 0}%
                               </div>
-                              <div className="text-sm text-blue-700 dark:text-blue-300">المتوسط العام</div>
+                              <div className="text-sm text-[#9b172a]-700 dark:text-[#9b172a]-300">المتوسط العام</div>
                             </div>
                             <div className="bg-purple-50 dark:bg-purple-900 p-3 rounded">
                               <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">
@@ -1124,7 +1124,7 @@ export default function Students() {
                                   </p>
                                 </div>
                                 <div className="text-right">
-                                  <div className="text-lg font-bold text-blue-600 dark:text-blue-400">
+                                  <div className="text-lg font-bold text-[#9b172a] dark:text-[#9b172a]-400">
                                     {grade.score}/{grade.maxScore}
                                   </div>
                                   <div className="text-sm text-gray-500">
@@ -1148,7 +1148,7 @@ export default function Students() {
                               </div>
                               
                               {grade.notes && (
-                                <div className="mt-2 p-2 bg-blue-50 dark:bg-blue-900 rounded text-sm">
+                                <div className="mt-2 p-2 bg-[#9b172a]-50 dark:bg-[#9b172a]-900 rounded text-sm">
                                   <strong>ملاحظات:</strong> {grade.notes}
                                 </div>
                               )}
@@ -1279,7 +1279,7 @@ export default function Students() {
                     type="file"
                     accept=".xlsx,.xls"
                     onChange={handleImportFileChange}
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#9b172a] focus:border-transparent dark:bg-gray-700 dark:text-white"
                   />
                   {importFile && (
                     <p className="text-sm text-green-600 dark:text-green-400 mt-1">
@@ -1289,11 +1289,11 @@ export default function Students() {
                 </div>
 
                 {/* Template Info */}
-                <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
-                  <h4 className="text-sm font-medium text-blue-800 dark:text-blue-200 mb-2">
+                <div className="bg-[#9b172a]-50 dark:bg-[#9b172a]-900/20 p-4 rounded-lg">
+                  <h4 className="text-sm font-medium text-[#9b172a]-800 dark:text-[#9b172a]-200 mb-2">
                     تنسيق الملف المطلوب:
                   </h4>
-                  <ul className="text-xs text-blue-700 dark:text-blue-300 space-y-1">
+                  <ul className="text-xs text-[#9b172a]-700 dark:text-[#9b172a]-300 space-y-1">
                     <li>• الاسم الكامل (مطلوب)</li>
                     <li>• رقم الهاتف (مطلوب)</li>
                     <li>• المحافظة (مطلوب - افتراضي: غير محدد)</li>
@@ -1357,7 +1357,7 @@ export default function Students() {
                   <button
                     onClick={handleImportStudents}
                     disabled={!importFile || importLoading}
-                    className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2 space-x-reverse"
+                    className="flex-1 px-4 py-2 bg-[#9b172a] text-white rounded-lg hover:bg-[#9b172a]-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2 space-x-reverse"
                   >
                     {importLoading ? (
                       <>

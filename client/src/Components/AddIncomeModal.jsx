@@ -305,7 +305,7 @@ const AddIncomeModal = ({ isOpen, onClose, onSubmit }) => {
                                  <select
                    value={selectedGroup}
                    onChange={(e) => setSelectedGroup(e.target.value)}
-                   className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                   className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#9b172a] focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                    disabled={groupsLoading}
                  >
                    <option value="">جميع المجموعات</option>
@@ -343,7 +343,7 @@ const AddIncomeModal = ({ isOpen, onClose, onSubmit }) => {
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     placeholder="ابحث بالاسم، البريد الإلكتروني، أو رقم الهاتف..."
-                    className="w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                    className="w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#9b172a] focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                   />
                 </div>
               </div>
@@ -363,7 +363,7 @@ const AddIncomeModal = ({ isOpen, onClose, onSubmit }) => {
                                  <div className="max-h-60 overflow-y-auto border border-gray-200 dark:border-gray-600 rounded-lg">
                    {usersLoading ? (
                      <div className="p-4 text-center text-gray-500 dark:text-gray-400">
-                       <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-500 mx-auto mb-2"></div>
+                       <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-[#9b172a] mx-auto mb-2"></div>
                        جاري تحميل الطلاب...
                      </div>
                    ) : filteredUsers.length === 0 ? (
@@ -379,13 +379,13 @@ const AddIncomeModal = ({ isOpen, onClose, onSubmit }) => {
                            key={user._id || user.id}
                            onClick={() => setSelectedUser(user)}
                            className={`p-3 border-b border-gray-100 dark:border-gray-700 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors ${
-                             (selectedUser?._id || selectedUser?.id) === (user._id || user.id) ? 'bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800' : ''
+                             (selectedUser?._id || selectedUser?.id) === (user._id || user.id) ? 'bg-[#9b172a]-50 dark:bg-[#9b172a]-900/20 border-[#9b172a]-200 dark:border-[#9b172a]-800' : ''
                            }`}
                          >
                          <div className="flex items-center space-x-3 space-x-reverse">
                            <div className={`p-2 rounded-full ${
                              (selectedUser?._id || selectedUser?.id) === (user._id || user.id)
-                               ? 'bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400' 
+                               ? 'bg-[#9b172a]-100 dark:bg-[#9b172a]-900 text-[#9b172a] dark:text-[#9b172a]-400' 
                                : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400'
                            }`}>
                              <FaUser className="text-sm" />
@@ -461,7 +461,7 @@ const AddIncomeModal = ({ isOpen, onClose, onSubmit }) => {
                                    } else {
                                      // No payment info or totalPaid is 0
                                      return (
-                                       <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
+                                       <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-[#9b172a]-100 text-[#9b172a]-800 dark:bg-[#9b172a]-900 dark:text-[#9b172a]-200">
                                          💰 لم يدفع هذا الشهر - {groupPrice} جنيه
                                        </span>
                                      );
@@ -510,7 +510,7 @@ const AddIncomeModal = ({ isOpen, onClose, onSubmit }) => {
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   المبلغ (جنيه) *
                   {selectedGroup && groupsData && (
-                    <span className="text-xs text-blue-600 dark:text-blue-400 mr-2">
+                    <span className="text-xs text-[#9b172a] dark:text-[#9b172a]-400 mr-2">
                       (تم ملؤه تلقائياً من سعر المجموعة)
                     </span>
                   )}
@@ -523,7 +523,7 @@ const AddIncomeModal = ({ isOpen, onClose, onSubmit }) => {
                   min="0"
                   step="0.01"
                   required
-                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#9b172a] focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 />
                 {selectedGroup && groupsData && (
                   <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
@@ -542,7 +542,7 @@ const AddIncomeModal = ({ isOpen, onClose, onSubmit }) => {
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                   placeholder="مثال: رسوم دورة البرمجة - شهر يناير"
-                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#9b172a] focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 />
               </div>
 
@@ -557,7 +557,7 @@ const AddIncomeModal = ({ isOpen, onClose, onSubmit }) => {
                     type="date"
                     value={paymentDate}
                     onChange={(e) => setPaymentDate(e.target.value)}
-                    className="w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                    className="w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#9b172a] focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                   />
                 </div>
               </div>

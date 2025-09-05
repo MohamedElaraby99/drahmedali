@@ -9,7 +9,7 @@ dotenv.config();
 
 const connectDB = async () => {
   try {
-    const uri = process.env.MONGO_URI_ATLAS || process.env.MONGO_URI_COMPASS || process.env.MONGO_URI_COMMUNITY || 'mongodb://localhost:27017/almongezz_database';
+    const uri = process.env.MONGO_URI_ATLAS || process.env.MONGO_URI_COMPASS || process.env.MONGO_URI_COMMUNITY || 'mongodb://localhost:27017/drahmedali_database';
     await mongoose.connect(uri);
     console.log('✅ Connected to MongoDB');
   } catch (error) {

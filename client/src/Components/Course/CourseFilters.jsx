@@ -26,7 +26,7 @@ const CourseFilters = ({ filters, onFilterChange, onClearFilters }) => {
           placeholder="البحث في الدورات..."
           value={filters.search}
           onChange={(e) => handleInputChange('search', e.target.value)}
-          className="block w-full pr-10 pl-3 py-3 border border-gray-300 dark:border-gray-600 rounded-lg leading-5 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          className="block w-full pr-10 pl-3 py-3 border border-gray-300 dark:border-gray-600 rounded-lg leading-5 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#9b172a] focus:border-[#9b172a]"
         />
       </div>
 
@@ -34,7 +34,7 @@ const CourseFilters = ({ filters, onFilterChange, onClearFilters }) => {
       <div className="flex items-center justify-between mb-4">
         <button
           onClick={() => setShowAdvancedFilters(!showAdvancedFilters)}
-          className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-medium flex items-center gap-2"
+          className="text-[#9b172a] dark:text-[#9b172a]-400 hover:text-[#9b172a]-800 dark:hover:text-[#9b172a]-300 font-medium flex items-center gap-2"
         >
           {showAdvancedFilters ? 'إخفاء' : 'إظهار'} الفلاتر المتقدمة
         </button>
@@ -63,7 +63,7 @@ const CourseFilters = ({ filters, onFilterChange, onClearFilters }) => {
               placeholder="اسم المدرب..."
               value={filters.instructor}
               onChange={(e) => handleInputChange('instructor', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#9b172a]"
             />
           </div>
 
@@ -77,7 +77,7 @@ const CourseFilters = ({ filters, onFilterChange, onClearFilters }) => {
               placeholder="اسم المادة..."
               value={filters.subject}
               onChange={(e) => handleInputChange('subject', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#9b172a]"
             />
           </div>
 
@@ -89,7 +89,7 @@ const CourseFilters = ({ filters, onFilterChange, onClearFilters }) => {
             <select
               value={filters.level}
               onChange={(e) => handleInputChange('level', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#9b172a]"
             >
               <option value="">جميع المستويات</option>
               <option value="Beginner">مبتدئ</option>
@@ -106,7 +106,7 @@ const CourseFilters = ({ filters, onFilterChange, onClearFilters }) => {
             <select
               value={filters.language}
               onChange={(e) => handleInputChange('language', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#9b172a]"
             >
               <option value="">جميع اللغات</option>
               <option value="Arabic">العربية</option>
@@ -123,7 +123,7 @@ const CourseFilters = ({ filters, onFilterChange, onClearFilters }) => {
             <select
               value={filters.featured}
               onChange={(e) => handleInputChange('featured', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#9b172a]"
             >
               <option value="">جميع الدورات</option>
               <option value="true">مميزة فقط</option>
@@ -139,7 +139,7 @@ const CourseFilters = ({ filters, onFilterChange, onClearFilters }) => {
             <select
               value={filters.isPublished}
               onChange={(e) => handleInputChange('isPublished', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#9b172a]"
             >
               <option value="">جميع الحالات</option>
               <option value="true">منشورة</option>
@@ -157,7 +157,7 @@ const CourseFilters = ({ filters, onFilterChange, onClearFilters }) => {
               placeholder="اسم الصف..."
               value={filters.grade}
               onChange={(e) => handleInputChange('grade', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#9b172a]"
             />
           </div>
 
@@ -171,7 +171,7 @@ const CourseFilters = ({ filters, onFilterChange, onClearFilters }) => {
               placeholder="اسم المرحلة..."
               value={filters.stage}
               onChange={(e) => handleInputChange('stage', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#9b172a]"
             />
           </div>
         </div>

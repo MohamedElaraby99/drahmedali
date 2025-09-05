@@ -7,7 +7,7 @@ import { placeholderImages } from "../utils/placeholderImages";
 const SubjectCard = ({ subject, showActions = false, onEdit, onDelete, onToggleFeatured }) => {
 
   return (
-    <div className="group bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 dark:border-gray-700 hover:border-blue-200 dark:hover:border-blue-600 hover:-translate-y-2" dir="rtl">
+    <div className="group bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 dark:border-gray-700 hover:border-[#9b172a]-200 dark:hover:border-[#9b172a] hover:-translate-y-2" dir="rtl">
       {/* Image Container */}
       <div className="relative h-68 overflow-hidden">
         <img
@@ -25,7 +25,7 @@ const SubjectCard = ({ subject, showActions = false, onEdit, onDelete, onToggleF
         {/* Featured Badge */}
         {subject.featured && (
           <div className="absolute top-3 right-3">
-            <span className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg backdrop-blur-sm">
+            <span className="bg-gradient-to-r from-[#9b172a] to-purple-600 text-white px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg backdrop-blur-sm">
               ⭐ مميز
             </span>
           </div>
@@ -36,7 +36,7 @@ const SubjectCard = ({ subject, showActions = false, onEdit, onDelete, onToggleF
       <div className="p-2">
         {/* Instructor Badge */}
         <div className="flex items-center gap-2 mb-4">
-          <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-medium bg-gradient-to-r from-blue-50 to-indigo-50 text-blue-700 dark:from-blue-900/30 dark:to-indigo-900/30 dark:text-blue-300 border border-blue-200 dark:border-blue-700">
+          <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-medium bg-gradient-to-r from-[#9b172a]-50 to-indigo-50 text-[#9b172a]-700 dark:from-[#9b172a]-900/30 dark:to-indigo-900/30 dark:text-[#9b172a]-300 border border-[#9b172a]-200 dark:border-[#9b172a]-700">
             <FaGraduationCap className="ml-1.5" />
             {subject.instructor?.name || 'المدرس غير محدد'}
           </span>
@@ -75,7 +75,7 @@ const SubjectCard = ({ subject, showActions = false, onEdit, onDelete, onToggleF
             <div className="flex gap-2">
               <button
                 onClick={() => onEdit(subject)}
-                className="px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-xl text-sm font-medium transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+                className="px-4 py-2 bg-gradient-to-r from-[#9b172a] to-[#9b172a]-700 hover:from-[#9b172a]-700 hover:to-[#9b172a]-800 text-white rounded-xl text-sm font-medium transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
               >
                 تعديل
               </button>

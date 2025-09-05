@@ -186,7 +186,7 @@ export default function MonthlyDataManager({
           </button>
           <div>
             <h2 className="text-xl font-bold text-gray-900 dark:text-white flex items-center space-x-2 space-x-reverse">
-              <FaCalendarAlt className="text-blue-600 dark:text-blue-400" />
+              <FaCalendarAlt className="text-[#9b172a] dark:text-[#9b172a]-400" />
               <span>إدارة البيانات الشهرية</span>
             </h2>
             {!isCollapsed ? (
@@ -225,7 +225,7 @@ export default function MonthlyDataManager({
           <button
             onClick={() => navigateMonth('prev')}
             disabled={availableMonths.findIndex(m => m.key === selectedMonth) === 0}
-            className="p-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            className="p-2 text-gray-600 dark:text-gray-400 hover:text-[#9b172a] dark:hover:text-[#9b172a]-400 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           >
             <FaArrowRight />
           </button>
@@ -242,7 +242,7 @@ export default function MonthlyDataManager({
                   </span>
                 )}
                 {currentMonthData.isFuture && !currentMonthData.isCurrent && (
-                  <span className="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs rounded-full">
+                  <span className="px-2 py-1 bg-[#9b172a]-100 dark:bg-[#9b172a]-900 text-[#9b172a]-800 dark:text-[#9b172a]-200 text-xs rounded-full">
                     شهر مستقبلي
                   </span>
                 )}
@@ -259,7 +259,7 @@ export default function MonthlyDataManager({
           <button
             onClick={() => navigateMonth('next')}
             disabled={availableMonths.findIndex(m => m.key === selectedMonth) === availableMonths.length - 1}
-            className="p-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            className="p-2 text-gray-600 dark:text-gray-400 hover:text-[#9b172a] dark:hover:text-[#9b172a]-400 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           >
             <FaArrowLeft />
           </button>
@@ -273,11 +273,11 @@ export default function MonthlyDataManager({
               onClick={() => handleMonthSelect(month.key)}
               className={`p-3 rounded-lg text-center transition-all ${
                 selectedMonth === month.key
-                  ? 'bg-blue-600 text-white shadow-lg'
+                  ? 'bg-[#9b172a] text-white shadow-lg'
                   : month.isCurrent
                   ? 'bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 border border-green-200 dark:border-green-700 hover:bg-green-100 dark:hover:bg-green-900/30'
                   : month.isFuture
-                  ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-700 hover:bg-blue-100 dark:hover:bg-blue-900/30'
+                  ? 'bg-[#9b172a]-50 dark:bg-[#9b172a]-900/20 text-[#9b172a]-700 dark:text-[#9b172a]-300 border border-[#9b172a]-200 dark:border-[#9b172a]-700 hover:bg-[#9b172a]-100 dark:hover:bg-[#9b172a]-900/30'
                   : 'bg-gray-50 dark:bg-gray-700 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-600'
               }`}
             >
@@ -322,7 +322,7 @@ export default function MonthlyDataManager({
                 </p>
               </div>
               <div className="flex items-center space-x-2 space-x-reverse">
-                <FaChartLine className="text-blue-600 dark:text-blue-400" />
+                <FaChartLine className="text-[#9b172a] dark:text-[#9b172a]-400" />
                 <span className="text-sm text-gray-600 dark:text-gray-400">
                   {currentMonthData.isCurrent ? 'بيانات حية' : 'بيانات مؤرشفة'}
                 </span>

@@ -112,7 +112,7 @@ const DeviceProtection = ({ children }) => {
         
         switch (deviceInfo.deviceType) {
             case 'Mobile':
-                return <FaMobile className="text-blue-500" size={48} />;
+                return <FaMobile className="text-[#9b172a]" size={48} />;
             case 'Tablet':
                 return <FaTabletAlt className="text-green-500" size={48} />;
             default:
@@ -133,7 +133,7 @@ const DeviceProtection = ({ children }) => {
         return (
             <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
                 <div className="text-center p-8">
-                    <FaSpinner className="animate-spin text-blue-500 mx-auto mb-4" size={48} />
+                    <FaSpinner className="animate-spin text-[#9b172a] mx-auto mb-4" size={48} />
                     <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
                         {deviceStatus === 'checking' ? 'جاري التحقق من الجهاز...' : 'جاري تسجيل الجهاز...'}
                     </h2>
@@ -189,7 +189,7 @@ const DeviceProtection = ({ children }) => {
                     <div className="space-y-3">
                         <button
                             onClick={handleContactAdmin}
-                            className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg font-medium"
+                            className="w-full bg-[#9b172a] hover:bg-[#9b172a]-700 text-white py-2 px-4 rounded-lg font-medium"
                         >
                             التواصل مع الإدارة
                         </button>
@@ -201,11 +201,11 @@ const DeviceProtection = ({ children }) => {
                         </button>
                     </div>
 
-                    <div className="mt-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-                        <h4 className="font-medium text-blue-900 dark:text-blue-200 mb-2">
+                    <div className="mt-6 p-4 bg-[#9b172a]-50 dark:bg-[#9b172a]-900/20 rounded-lg">
+                        <h4 className="font-medium text-[#9b172a]-900 dark:text-[#9b172a]-200 mb-2">
                             💡 نصائح للحل:
                         </h4>
-                        <ul className="text-sm text-blue-800 dark:text-blue-300 text-right space-y-1">
+                        <ul className="text-sm text-[#9b172a]-800 dark:text-[#9b172a]-300 text-right space-y-1">
                             <li>• تواصل مع الإدارة لإعادة تعيين أجهزتك</li>
                             <li>• تأكد من تسجيل الخروج من الأجهزة الأخرى</li>
                             <li>• استخدم نفس الجهاز الذي سجلت منه سابقاً</li>

@@ -80,14 +80,14 @@ export default function SubjectList() {
                     placeholder={role === "USER" ? "البحث في كورساتي..." : "Search courses..."}
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
-                    className="w-full pr-10 pl-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
+                    className="w-full pr-10 pl-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#9b172a] focus:border-transparent dark:bg-gray-700 dark:text-white"
                   />
                 </div>
 
                 <select
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
-                  className="px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
+                  className="px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#9b172a] focus:border-transparent dark:bg-gray-700 dark:text-white"
                 >
                   <option value="">All Categories</option>
                   {categories.map((cat) => (
@@ -98,7 +98,7 @@ export default function SubjectList() {
                 <select
                   value={level}
                   onChange={(e) => setLevel(e.target.value)}
-                  className="px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
+                  className="px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#9b172a] focus:border-transparent dark:bg-gray-700 dark:text-white"
                 >
                   <option value="">All Levels</option>
                   {levels.map((level) => (
@@ -109,7 +109,7 @@ export default function SubjectList() {
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
-                  className="px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
+                  className="px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#9b172a] focus:border-transparent dark:bg-gray-700 dark:text-white"
                 >
                   <option value="newest">Newest First</option>
                   <option value="oldest">Oldest First</option>
@@ -121,7 +121,7 @@ export default function SubjectList() {
 
                 <button
                   type="submit"
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-colors duration-200"
+                  className="bg-[#9b172a] hover:bg-[#9b172a]-700 text-white px-6 py-3 rounded-lg transition-colors duration-200"
                 >
                   Search
                 </button>
@@ -134,7 +134,7 @@ export default function SubjectList() {
                 <button
                   type="button"
                   onClick={clearFilters}
-                  className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 text-sm font-medium"
+                  className="text-[#9b172a] hover:text-[#9b172a]-700 dark:text-[#9b172a]-400 dark:hover:text-[#9b172a]-300 text-sm font-medium"
                 >
                   مسح الفلتر
                 </button>
@@ -145,7 +145,7 @@ export default function SubjectList() {
           {/* Courses Grid */}
           {loading ? (
             <div className="text-center py-12">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#9b172a] mx-auto"></div>
               <p className="mt-4 text-gray-600 dark:text-gray-300">
                 {role === "USER" ? "جاري تحميل كورساتي..." : "Loading courses..."}
               </p>
@@ -174,7 +174,7 @@ export default function SubjectList() {
                         }))}
                         className={`px-4 py-2 rounded-lg transition-colors ${
                           page === currentPage
-                            ? 'bg-blue-600 text-white'
+                            ? 'bg-[#9b172a] text-white'
                             : 'bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600'
                         }`}
                       >
@@ -200,7 +200,7 @@ export default function SubjectList() {
               {!search && !category && !level && (
                 <button
                   onClick={clearFilters}
-                  className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-colors duration-200"
+                  className="inline-flex items-center gap-2 bg-[#9b172a] hover:bg-[#9b172a]-700 text-white px-6 py-3 rounded-lg transition-colors duration-200"
                 >
                   <FaSearch />
                   {role === "USER" ? "تصفح جميع كورساتي" : "Browse All Courses"}

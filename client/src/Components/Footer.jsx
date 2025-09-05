@@ -36,7 +36,7 @@ export default function Footer() {
           </span>
           <div className="flex gap-4 sm:gap-5 items-center">
             <a
-              href="https://www.facebook.com/people/MrMahmoud-Abdel-Aziz/100070094625467/?mibextid=ZbWKwL"
+              href="https://www.facebook.com/profile.php?id=100075431541020&mibextid=ZbWKwL"
               target="_blank"
               rel="noopener noreferrer"
               className="text-2xl sm:text-3xl text-gray-900 dark:text-slate-50 hover:text-gray-500 dark:hover:text-slate-300 transition-colors duration-300 p-2 hover:bg-gray-200 dark:hover:bg-gray-800 rounded-full"

@@ -111,7 +111,7 @@ export default function CourseDashboard() {
           <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-8">
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
               <div className="flex items-center gap-4">
-                <FaFilter className="text-blue-500 text-xl" />
+                <FaFilter className="text-[#9b172a] text-xl" />
                 <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
                   تصفية وبحث
                 </h2>
@@ -120,7 +120,7 @@ export default function CourseDashboard() {
               {(role === 'ADMIN' || role === 'SUPER_ADMIN') && (
                 <button
                   onClick={handleCreateCourse}
-                  className="bg-gradient-to-r from-blue-600 to-blue-600 hover:from-blue-700 hover:to-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-200 flex items-center gap-2 shadow-lg hover:shadow-xl transform hover:scale-105"
+                  className="bg-gradient-to-r from-[#9b172a] to-[#9b172a] hover:from-[#9b172a]-700 hover:to-[#9b172a]-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-200 flex items-center gap-2 shadow-lg hover:shadow-xl transform hover:scale-105"
                 >
                   <FaPlus className="text-sm" />
                   إضافة دورة جديدة

@@ -109,7 +109,7 @@ import { formatCairoDate } from '../../../utils/timezone';
 ### **3. Filter Status Display**
 ```javascript
 {filters.group && (
-  <p className="text-sm text-blue-600 dark:text-blue-400 mt-1">
+  <p className="text-sm text-[#9b172a] dark:text-[#9b172a]-400 mt-1">
     عرض سجلات: {groups.find(g => g._id === filters.group)?.name || 'مجموعة محددة'}
   </p>
 )}

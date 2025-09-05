@@ -61,13 +61,13 @@ const UserQRCode = ({ userData }) => {
     <div className="w-full space-y-4">
       <div className="flex justify-between items-center border-b border-gray-200 dark:border-gray-700 pb-2">
         <h2 className="text-xl font-semibold text-gray-800 dark:text-white flex items-center gap-2">
-          <FaQrcode className="text-blue-500" />
+          <FaQrcode className="text-[#9b172a]" />
           رمز الاستجابة السريعة للحضور
         </h2>
         <div className="flex items-center gap-2">
           <button
             onClick={() => setShowQR(!showQR)}
-            className="flex items-center gap-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors"
+            className="flex items-center gap-2 px-4 py-2 bg-[#9b172a] hover:bg-[#9b172a] text-white rounded-lg transition-colors"
           >
             {showQR ? <FaEyeSlash size={14} /> : <FaEye size={14} />}
             {showQR ? 'إخفاء' : 'عرض'} الرمز

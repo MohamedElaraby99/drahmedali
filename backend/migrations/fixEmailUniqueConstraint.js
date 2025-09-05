@@ -5,9 +5,9 @@ dotenv.config();
 
 // Set default environment variables if not provided (same as server.js)
 process.env.JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret_key_here';
-process.env.MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/almongezz';
-process.env.CLIENT_URL = process.env.CLIENT_URL || 'https://almongz.online'; 
-process.env.BACKEND_URL = process.env.BACKEND_URL || 'https://api.almongz.online';
+process.env.MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/drahmedali';
+process.env.CLIENT_URL = process.env.CLIENT_URL || 'https://drahmedali.online'; 
+process.env.BACKEND_URL = process.env.BACKEND_URL || 'https://api.drahmedali.online';
 
 const MONGODB_URI = process.env.MONGODB_URI;
 

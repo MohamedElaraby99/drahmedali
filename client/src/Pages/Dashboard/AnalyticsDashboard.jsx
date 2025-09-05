@@ -185,7 +185,7 @@ export default function AnalyticsDashboard() {
               <div className="flex items-center gap-2">
                 <button
                   onClick={exportExamData}
-                  className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+                  className="flex items-center gap-2 px-4 py-2 bg-[#9b172a] hover:bg-[#9b172a]-700 text-white rounded-lg transition-colors"
                 >
                   <FaDownload />
                   تصدير نتائج الامتحانات
@@ -216,7 +216,7 @@ export default function AnalyticsDashboard() {
                   onClick={() => setActiveTab(id)}
                   className={`flex items-center gap-2 py-2 px-1 border-b-2 font-medium text-sm ${
                     activeTab === id
-                      ? 'border-blue-500 text-blue-600 dark:text-blue-400'
+                      ? 'border-[#9b172a] text-[#9b172a] dark:text-[#9b172a]-400'
                       : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300'
                   }`}
                 >
@@ -237,8 +237,8 @@ export default function AnalyticsDashboard() {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
                   <div className="flex items-center">
-                    <div className="p-3 bg-blue-100 dark:bg-blue-900 rounded-lg">
-                      <FaGraduationCap className="text-blue-600 dark:text-blue-300 text-2xl" />
+                    <div className="p-3 bg-[#9b172a]-100 dark:bg-[#9b172a]-900 rounded-lg">
+                      <FaGraduationCap className="text-[#9b172a] dark:text-[#9b172a]-300 text-2xl" />
                     </div>
                     <div className="mr-4">
                       <p className="text-sm text-gray-600 dark:text-gray-400">إجمالي الامتحانات</p>
@@ -265,8 +265,8 @@ export default function AnalyticsDashboard() {
 
                 <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
                   <div className="flex items-center">
-                    <div className="p-3 bg-blue-100 dark:bg-blue-900 rounded-lg">
-                      <FaVideo className="text-blue-600 dark:text-blue-300 text-2xl" />
+                    <div className="p-3 bg-[#9b172a]-100 dark:bg-[#9b172a]-900 rounded-lg">
+                      <FaVideo className="text-[#9b172a] dark:text-[#9b172a]-300 text-2xl" />
                     </div>
                     <div className="mr-4">
                       <p className="text-sm text-gray-600 dark:text-gray-400">إجمالي المقاطع</p>
@@ -279,8 +279,8 @@ export default function AnalyticsDashboard() {
 
                 <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
                   <div className="flex items-center">
-                    <div className="p-3 bg-blue-100 dark:bg-blue-900 rounded-lg">
-                      <FaClock className="text-blue-600 dark:text-blue-300 text-2xl" />
+                    <div className="p-3 bg-[#9b172a]-100 dark:bg-[#9b172a]-900 rounded-lg">
+                      <FaClock className="text-[#9b172a] dark:text-[#9b172a]-300 text-2xl" />
                     </div>
                     <div className="mr-4">
                       <p className="text-sm text-gray-600 dark:text-gray-400">ساعات المشاهدة</p>
@@ -340,7 +340,7 @@ export default function AnalyticsDashboard() {
                           </p>
                         </div>
                         <div className="text-left">
-                          <p className="font-bold text-blue-600">
+                          <p className="font-bold text-[#9b172a]">
                             {progress.progress}%
                           </p>
                           <p className="text-xs text-gray-500">
@@ -373,7 +373,7 @@ export default function AnalyticsDashboard() {
                       placeholder="اسم الطالب..."
                       value={examFilters.search}
                       onChange={(e) => handleExamFilterChange('search', e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-[#9b172a] dark:bg-gray-700 dark:text-white"
                     />
                   </div>
                   <div>
@@ -384,7 +384,7 @@ export default function AnalyticsDashboard() {
                       type="date"
                       value={examFilters.dateFrom}
                       onChange={(e) => handleExamFilterChange('dateFrom', e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-[#9b172a] dark:bg-gray-700 dark:text-white"
                     />
                   </div>
                   <div>
@@ -395,7 +395,7 @@ export default function AnalyticsDashboard() {
                       type="date"
                       value={examFilters.dateTo}
                       onChange={(e) => handleExamFilterChange('dateTo', e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-[#9b172a] dark:bg-gray-700 dark:text-white"
                     />
                   </div>
                   <div>
@@ -405,7 +405,7 @@ export default function AnalyticsDashboard() {
                     <select
                       value={examFilters.status}
                       onChange={(e) => handleExamFilterChange('status', e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-[#9b172a] dark:bg-gray-700 dark:text-white"
                     >
                       <option value="">الكل</option>
                       <option value="passed">نجح</option>
@@ -415,7 +415,7 @@ export default function AnalyticsDashboard() {
                   <div className="flex items-end">
                     <button
                       onClick={applyExamFilters}
-                      className="w-full px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors"
+                      className="w-full px-4 py-2 bg-[#9b172a] hover:bg-[#9b172a]-700 text-white rounded-md transition-colors"
                     >
                       تطبيق الفلاتر
                     </button>
@@ -458,7 +458,7 @@ export default function AnalyticsDashboard() {
                       {examLoading ? (
                         <tr>
                           <td colSpan={6} className="px-6 py-4 text-center">
-                            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
+                            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#9b172a] mx-auto"></div>
                           </td>
                         </tr>
                       ) : examResults.length > 0 ? (
@@ -487,8 +487,8 @@ export default function AnalyticsDashboard() {
                             <td className="px-6 py-4 whitespace-nowrap">
                               <span className={`inline-flex px-2 py-1 text-xs font-medium rounded-full ${
                                 result.examType === 'training' 
-                                  ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200'
-                                  : 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200'
+                                  ? 'bg-[#9b172a]-100 text-[#9b172a]-800 dark:bg-[#9b172a]-900 dark:text-[#9b172a]-200'
+                                  : 'bg-[#9b172a]-100 text-[#9b172a]-800 dark:bg-[#9b172a]-900 dark:text-[#9b172a]-200'
                               }`}>
                                 {result.examType === 'training' ? 'تدريب' : 'امتحان '}
                               </span>
@@ -497,7 +497,7 @@ export default function AnalyticsDashboard() {
                               {new Date(result.takenAt).toLocaleDateString('ar')}
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                              <button className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300">
+                              <button className="text-[#9b172a] hover:text-[#9b172a]-900 dark:text-[#9b172a]-400 dark:hover:text-[#9b172a]-300">
                                 <FaEye />
                               </button>
                             </td>
@@ -535,7 +535,7 @@ export default function AnalyticsDashboard() {
                       placeholder="اسم الطالب..."
                       value={videoFilters.search}
                       onChange={(e) => handleVideoFilterChange('search', e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-[#9b172a] dark:bg-gray-700 dark:text-white"
                     />
                   </div>
                   <div>
@@ -548,7 +548,7 @@ export default function AnalyticsDashboard() {
                       max="100"
                       value={videoFilters.minProgress}
                       onChange={(e) => handleVideoFilterChange('minProgress', e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-[#9b172a] dark:bg-gray-700 dark:text-white"
                     />
                   </div>
                   <div>
@@ -561,7 +561,7 @@ export default function AnalyticsDashboard() {
                       max="100"
                       value={videoFilters.maxProgress}
                       onChange={(e) => handleVideoFilterChange('maxProgress', e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-[#9b172a] dark:bg-gray-700 dark:text-white"
                     />
                   </div>
                   <div className="flex items-end">
@@ -636,7 +636,7 @@ export default function AnalyticsDashboard() {
                               <div className="flex items-center">
                                 <div className="w-16 bg-gray-200 rounded-full h-2 mr-2">
                                   <div 
-                                    className="bg-blue-600 h-2 rounded-full" 
+                                    className="bg-[#9b172a] h-2 rounded-full" 
                                     style={{ width: `${progress.progress}%` }}
                                   ></div>
                                 </div>
@@ -652,7 +652,7 @@ export default function AnalyticsDashboard() {
                               <span className={`inline-flex px-2 py-1 text-xs font-medium rounded-full ${
                                 progress.isCompleted 
                                   ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
-                                  : 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200'
+                                  : 'bg-[#9b172a]-100 text-[#9b172a]-800 dark:bg-[#9b172a]-900 dark:text-[#9b172a]-200'
                               }`}>
                                 {progress.isCompleted ? 'مكتمل' : 'قيد المشاهدة'}
                               </span>

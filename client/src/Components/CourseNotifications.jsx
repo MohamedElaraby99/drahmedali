@@ -82,7 +82,7 @@ const CourseNotifications = () => {
   const getNotificationIcon = (type) => {
     switch (type) {
       case 'new_video':
-        return <FaVideo className="text-blue-500" />;
+        return <FaVideo className="text-[#9b172a]" />;
       case 'new_lesson':
         return <FaBook className="text-green-500" />;
       case 'new_material':
@@ -155,7 +155,7 @@ const CourseNotifications = () => {
               {unreadCount > 0 && (
                 <button
                   onClick={markAllAsRead}
-                  className="text-xs text-blue-600 dark:text-blue-400 hover:underline"
+                  className="text-xs text-[#9b172a] dark:text-[#9b172a]-400 hover:underline"
                 >
                   تحديد الكل كمقروء
                 </button>
@@ -184,7 +184,7 @@ const CourseNotifications = () => {
                 <div
                   key={notification._id}
                   className={`p-4 border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer transition-colors ${
-                    !notification.isRead ? 'bg-blue-50 dark:bg-blue-900/20' : ''
+                    !notification.isRead ? 'bg-[#9b172a]-50 dark:bg-[#9b172a]-900/20' : ''
                   }`}
                   onClick={async () => {
                     if (!notification.isRead) {
@@ -233,11 +233,11 @@ const CourseNotifications = () => {
                       
                       <div className="flex items-center justify-between mt-2">
                         <div className="flex items-center gap-2">
-                          <span className="text-xs text-blue-600 dark:text-blue-400 font-medium">
+                          <span className="text-xs text-[#9b172a] dark:text-[#9b172a]-400 font-medium">
                             {notification.courseName}
                           </span>
                           {notification.actionText && (
-                            <span className="text-xs bg-blue-100 dark:bg-blue-800 text-blue-700 dark:text-blue-200 px-2 py-1 rounded">
+                            <span className="text-xs bg-[#9b172a]-100 dark:bg-[#9b172a]-800 text-[#9b172a]-700 dark:text-[#9b172a]-200 px-2 py-1 rounded">
                               {notification.actionText}
                             </span>
                           )}
@@ -249,7 +249,7 @@ const CourseNotifications = () => {
                     </div>
                     {!notification.isRead && (
                       <div className="flex-shrink-0">
-                        <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                        <div className="w-2 h-2 bg-[#9b172a] rounded-full"></div>
                       </div>
                     )}
                   </div>
@@ -267,7 +267,7 @@ const CourseNotifications = () => {
                   // Navigate to courses page or notifications page
                   window.location.href = '/courses';
                 }}
-                className="text-sm text-blue-600 dark:text-blue-400 hover:underline"
+                className="text-sm text-[#9b172a] dark:text-[#9b172a]-400 hover:underline"
               >
                 عرض جميع الكورسات
               </button>

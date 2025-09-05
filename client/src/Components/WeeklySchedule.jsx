@@ -143,7 +143,7 @@ const WeeklySchedule = () => {
     return (
       <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
         <div className="text-center py-8">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#9b172a] mx-auto"></div>
           <p className="text-gray-500 dark:text-gray-400 mt-4">جاري تحميل الجدول...</p>
         </div>
       </div>
@@ -155,7 +155,7 @@ const WeeklySchedule = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-4 lg:mb-6">
         <div className="flex items-center space-x-2 sm:space-x-3 space-x-reverse">
-          <FaCalendarAlt className="text-xl sm:text-2xl text-blue-500" />
+          <FaCalendarAlt className="text-xl sm:text-2xl text-[#9b172a]" />
           <div>
             <h2 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">
               جدول الأسبوع الدراسي
@@ -196,7 +196,7 @@ const WeeklySchedule = () => {
                         {getDayName(dayKey)}
                       </h3>
                       {isCurrentDay && (
-                        <span className="inline-block w-3 h-3 bg-blue-500 rounded-full"></span>
+                        <span className="inline-block w-3 h-3 bg-[#9b172a] rounded-full"></span>
                       )}
                     </div>
 
@@ -279,7 +279,7 @@ const WeeklySchedule = () => {
                       {getDayName(dayKey)}
                     </h3>
                     {isCurrentDay && (
-                      <span className="inline-block w-2 h-2 bg-blue-500 rounded-full mt-1"></span>
+                      <span className="inline-block w-2 h-2 bg-[#9b172a] rounded-full mt-1"></span>
                     )}
                   </div>
 

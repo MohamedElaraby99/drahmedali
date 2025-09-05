@@ -795,8 +795,8 @@ export default function CourseDetail() {
            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-4 sm:mb-6">
              <div className={`border rounded-xl p-3 sm:p-4 ${
                courseAccessState?.hasAccess 
-                 ? 'bg-gradient-to-r from-blue-50 to-blue-50 dark:from-blue-900/20 dark:to-blue-900/20 border-red-200 dark:border-red-700'
-                 : 'bg-gradient-to-r from-red-50 to-blue-50 dark:from-red-900/20 dark:to-blue-900/20 border-red-200 dark:border-red-700'
+                 ? 'bg-gradient-to-r from-[#9b172a]-50 to-[#9b172a]-50 dark:from-[#9b172a]-900/20 dark:to-[#9b172a]-900/20 border-red-200 dark:border-red-700'
+                 : 'bg-gradient-to-r from-red-50 to-[#9b172a]-50 dark:from-red-900/20 dark:to-[#9b172a]-900/20 border-red-200 dark:border-red-700'
              }`}>
                <div className="flex items-center justify-center gap-2 sm:gap-3">
                  {courseAccessState?.hasAccess ? (

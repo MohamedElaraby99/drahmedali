@@ -24,7 +24,7 @@ function AboutUs() {
         {/* hero */}
         <div className="flex md:flex-row flex-col-reverse items-center justify-center md:gap-10 gap-7 w-full space-y-7">
           <div className="md:w-1/2 w-full space-y-7 text-right">
-            <h1 className="text-5xl text-blue-500 font-semibold font-inter text-right">
+            <h1 className="text-5xl text-[#9b172a] font-semibold font-inter text-right">
               تعليم <span className="font-nunito-sans">ميسور التكلفة وعالي الجودة</span>
             </h1>
             <p className="text-xl text-gray-600 dark:text-gray-200 font-nunito-sans text-right leading-relaxed">

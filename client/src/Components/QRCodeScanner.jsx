@@ -243,7 +243,7 @@ const QRCodeScanner = ({ onScan, onScanSuccess, onClose, courseId, liveMeetingId
         {/* Header */}
         <div className="flex justify-between items-center p-6 border-b border-gray-200 dark:border-gray-700">
           <h2 className="text-xl font-semibold text-gray-800 dark:text-white flex items-center gap-2">
-            <FaQrcode className="text-blue-500" />
+            <FaQrcode className="text-[#9b172a]" />
             مسح رمز الحضور
           </h2>
           <button
@@ -280,7 +280,7 @@ const QRCodeScanner = ({ onScan, onScanSuccess, onClose, courseId, liveMeetingId
                 {!isScanning ? (
                   <button
                     onClick={startScanning}
-                    className="flex items-center gap-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors"
+                    className="flex items-center gap-2 px-4 py-2 bg-[#9b172a] hover:bg-[#9b172a] text-white rounded-lg transition-colors"
                   >
                     <FaCamera size={16} />
                     بدء المسح
@@ -317,7 +317,7 @@ const QRCodeScanner = ({ onScan, onScanSuccess, onClose, courseId, liveMeetingId
               </p>
               <button
                 onClick={handleManualQRInput}
-                className="flex items-center gap-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors mx-auto"
+                className="flex items-center gap-2 px-4 py-2 bg-[#9b172a] hover:bg-[#9b172a] text-white rounded-lg transition-colors mx-auto"
               >
                 <FaQrcode size={16} />
                 إدخال يدوي
@@ -335,17 +335,17 @@ const QRCodeScanner = ({ onScan, onScanSuccess, onClose, courseId, liveMeetingId
               
               <div className="space-y-2">
                 <div className="flex items-center gap-2">
-                  <FaUser className="text-blue-500" />
+                  <FaUser className="text-[#9b172a]" />
                   <span className="font-medium">الاسم:</span>
                   <span>{scannedData.fullName || 'غير متوفر'}</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <FaUser className="text-blue-500" />
+                  <FaUser className="text-[#9b172a]" />
                   <span className="font-medium">اسم المستخدم:</span>
                   <span>{scannedData.username || 'غير متوفر'}</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <FaCalendarAlt className="text-blue-500" />
+                  <FaCalendarAlt className="text-[#9b172a]" />
                   <span className="font-medium">وقت إنشاء الرمز:</span>
                   <span>
                     {scannedData.timestamp 
@@ -369,7 +369,7 @@ const QRCodeScanner = ({ onScan, onScanSuccess, onClose, courseId, liveMeetingId
                 value={scanLocation}
                 onChange={(e) => setScanLocation(e.target.value)}
                 placeholder="مثال: الفصل الدراسي الأول"
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#9b172a] focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               />
             </div>
 
@@ -382,7 +382,7 @@ const QRCodeScanner = ({ onScan, onScanSuccess, onClose, courseId, liveMeetingId
                 onChange={(e) => setNotes(e.target.value)}
                 placeholder="أي ملاحظات إضافية..."
                 rows={3}
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#9b172a] focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               />
             </div>
           </div>

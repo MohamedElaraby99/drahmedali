@@ -325,7 +325,7 @@ export default function AdminCourseAccessCodes() {
             <input name="quantity" type="number" min="1" max="200" value={form.quantity} onChange={onChange} className="w-full p-2 rounded border dark:bg-gray-700" />
           </div>
           <div className="flex items-end">
-            <button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">توليد الأكواد</button>
+            <button type="submit" className="w-full bg-[#9b172a] hover:bg-[#9b172a]-700 text-white px-4 py-2 rounded">توليد الأكواد</button>
           </div>
         </form>
 

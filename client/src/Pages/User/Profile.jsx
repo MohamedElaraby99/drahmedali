@@ -195,7 +195,7 @@ export default function Profile() {
           dir="rtl"
         >
           <div className="flex justify-center items-center">
-            <h1 className="text-center absolute right-6 md:top-auto top-5 text-violet-500 dark:text-blue-500 md:text-4xl text-3xl font-bold font-inter after:content-[' ']  after:absolute after:-bottom-3.5 after:right-0 after:h-1.5 after:w-[60%] after:rounded-full after:bg-blue-400 dark:after:bg-blue-600">
+            <h1 className="text-center absolute right-6 md:top-auto top-5 text-violet-500 dark:text-[#9b172a] md:text-4xl text-3xl font-bold font-inter after:content-[' ']  after:absolute after:-bottom-3.5 after:right-0 after:h-1.5 after:w-[60%] after:rounded-full after:bg-[#9b172a]-400 dark:after:bg-[#9b172a]">
               الملف الشخصي
             </h1>
             {/* avatar */}
@@ -266,7 +266,7 @@ export default function Profile() {
                 <button
                   type="button"
                   onClick={handleEditClick}
-                  className="flex items-center gap-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors"
+                  className="flex items-center gap-2 px-4 py-2 bg-[#9b172a] hover:bg-[#9b172a] text-white rounded-lg transition-colors"
                 >
                   <FaEdit size={14} />
                   تعديل الملف الشخصي
@@ -278,7 +278,7 @@ export default function Profile() {
               {/* Name */}
               <div className="space-y-2">
                 <label className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300">
-                  <FaUser className="text-blue-500" />
+                  <FaUser className="text-[#9b172a]" />
                   الاسم الكامل
                 </label>
                 <input
@@ -286,7 +286,7 @@ export default function Profile() {
                   value={isEditing ? userInput.name : (userData?.fullName || "")}
                   onChange={(e) => setUserInput({ ...userInput, name: e.target.value })}
                   disabled={!isEditing}
-                  className={`w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-right ${
+                  className={`w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#9b172a] focus:border-transparent text-right ${
                     !isEditing 
                       ? 'bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-300 cursor-not-allowed' 
                       : 'bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
@@ -323,7 +323,7 @@ export default function Profile() {
                   value={isEditing ? userInput.phoneNumber : (userData?.phoneNumber || "")}
                   onChange={(e) => setUserInput({ ...userInput, phoneNumber: e.target.value })}
                   disabled={!isEditing}
-                  className={`w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-left ${
+                  className={`w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#9b172a] focus:border-transparent text-left ${
                     !isEditing 
                       ? 'bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-300 cursor-not-allowed' 
                       : 'bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
@@ -339,7 +339,7 @@ export default function Profile() {
                   {/* Father's Phone Number */}
                   <div className="space-y-2">
                     <label className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300">
-                      <FaPhone className="text-blue-500" />
+                      <FaPhone className="text-[#9b172a]" />
                       رقم هاتف الأب
                     </label>
                     <input
@@ -347,7 +347,7 @@ export default function Profile() {
                       value={isEditing ? userInput.fatherPhoneNumber : (userData?.fatherPhoneNumber || "")}
                       onChange={(e) => setUserInput({ ...userInput, fatherPhoneNumber: e.target.value })}
                       disabled={!isEditing}
-                      className={`w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-left ${
+                      className={`w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#9b172a] focus:border-transparent text-left ${
                         !isEditing 
                           ? 'bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-300 cursor-not-allowed' 
                           : 'bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
@@ -360,7 +360,7 @@ export default function Profile() {
                   {/* Age */}
                   <div className="space-y-2">
                     <label className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300">
-                      <FaCalendarAlt className="text-blue-500" />
+                      <FaCalendarAlt className="text-[#9b172a]" />
                       العمر
                     </label>
                     <input
@@ -368,7 +368,7 @@ export default function Profile() {
                       value={isEditing ? userInput.age : (userData?.age || "")}
                       onChange={(e) => setUserInput({ ...userInput, age: e.target.value })}
                       disabled={!isEditing}
-                      className={`w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-right ${
+                      className={`w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#9b172a] focus:border-transparent text-right ${
                         !isEditing 
                           ? 'bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-300 cursor-not-allowed' 
                           : 'bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
@@ -383,7 +383,7 @@ export default function Profile() {
                   {/* Stage */}
                   <div className="space-y-2">
                     <label className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300">
-                      <FaBook className="text-blue-500" />
+                      <FaBook className="text-[#9b172a]" />
                       المرحلة الدراسية
                     </label>
                     
@@ -405,7 +405,7 @@ export default function Profile() {
                       value={isEditing ? userInput.governorate : (userData?.governorate || "")}
                       onChange={(e) => setUserInput({ ...userInput, governorate: e.target.value })}
                       disabled={!isEditing}
-                      className={`w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-right ${
+                      className={`w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#9b172a] focus:border-transparent text-right ${
                         !isEditing 
                           ? 'bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-300 cursor-not-allowed' 
                           : 'bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
@@ -436,7 +436,7 @@ export default function Profile() {
               {/* Role */}
               <div className="space-y-2">
                 <label className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300">
-                  <FaIdCard className="text-blue-500" />
+                  <FaIdCard className="text-[#9b172a]" />
                   دور الحساب
                 </label>
                 <input
@@ -454,7 +454,7 @@ export default function Profile() {
                   <FaIdCard className="text-green-500" />
                   رقم المستخدم
                 </label>
-                <div className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 font-mono text-sm text-left" dir="ltr">
+                <div className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-[#9b172a]-50 dark:bg-[#9b172a]-900/20 text-[#9b172a]-700 dark:text-[#9b172a]-300 font-mono text-sm text-left" dir="ltr">
                   {userData?._id || "غير متوفر"}
                 </div>
                 <div className="text-xs text-gray-500 dark:text-gray-400">

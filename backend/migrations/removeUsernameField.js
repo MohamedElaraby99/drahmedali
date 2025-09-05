@@ -32,7 +32,7 @@ export async function removeUsernameField() {
 
 // Run migration if this file is executed directly
 if (import.meta.url === `file://${process.argv[1]}`) {
-    await mongoose.connect(process.env.MONGODB_URL || 'mongodb://localhost:27017/almongez');
+    await mongoose.connect(process.env.MONGODB_URL || 'mongodb://localhost:27017/drahmedali');
     await removeUsernameField();
     await mongoose.disconnect();
     process.exit(0);

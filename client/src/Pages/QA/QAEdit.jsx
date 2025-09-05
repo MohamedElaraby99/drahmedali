@@ -111,7 +111,7 @@ export default function QAEdit() {
       <Layout>
         <div className="min-h-screen flex items-center justify-center">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#9b172a] mx-auto"></div>
             <p className="mt-4 text-gray-600 dark:text-gray-300">Loading Q&A...</p>
           </div>
         </div>
@@ -133,7 +133,7 @@ export default function QAEdit() {
             </p>
             <button
               onClick={() => navigate("/qa")}
-              className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-colors duration-200"
+              className="inline-flex items-center gap-2 bg-[#9b172a] hover:bg-[#9b172a]-700 text-white px-6 py-3 rounded-lg transition-colors duration-200"
             >
               <FaArrowLeft />
               Back to Q&As
@@ -152,14 +152,14 @@ export default function QAEdit() {
           <div className="mb-8">
             <button
               onClick={() => navigate(`/qa/${id}`)}
-              className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 transition-colors mb-4"
+              className="inline-flex items-center gap-2 text-[#9b172a] hover:text-[#9b172a]-700 transition-colors mb-4"
             >
               <FaArrowLeft />
               Back to Q&A
             </button>
             
             <div className="text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-600 rounded-full mb-4">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-[#9b172a] rounded-full mb-4">
                 <FaQuestionCircle className="w-8 h-8 text-white" />
               </div>
               <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-2">
@@ -184,7 +184,7 @@ export default function QAEdit() {
                   name="question"
                   value={formData.question}
                   onChange={handleInputChange}
-                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white ${
+                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9b172a] dark:bg-gray-700 dark:text-white ${
                     errors.question ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
                   }`}
                   rows="4"
@@ -204,7 +204,7 @@ export default function QAEdit() {
                   name="answer"
                   value={formData.answer}
                   onChange={handleInputChange}
-                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white ${
+                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9b172a] dark:bg-gray-700 dark:text-white ${
                     errors.answer ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
                   }`}
                   rows="6"
@@ -225,7 +225,7 @@ export default function QAEdit() {
                     name="category"
                     value={formData.category}
                     onChange={handleInputChange}
-                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white ${
+                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9b172a] dark:bg-gray-700 dark:text-white ${
                       errors.category ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
                     }`}
                   >
@@ -249,7 +249,7 @@ export default function QAEdit() {
                     name="author"
                     value={formData.author}
                     onChange={handleInputChange}
-                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white ${
+                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9b172a] dark:bg-gray-700 dark:text-white ${
                       errors.author ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
                     }`}
                     placeholder="Enter author name"
@@ -271,7 +271,7 @@ export default function QAEdit() {
                   name="tags"
                   value={formData.tags}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9b172a] dark:bg-gray-700 dark:text-white"
                   placeholder="Enter tags separated by commas (e.g., javascript, react, tutorial)"
                 />
                 <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
@@ -288,7 +288,7 @@ export default function QAEdit() {
                   name="status"
                   value={formData.status}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9b172a] dark:bg-gray-700 dark:text-white"
                 >
                   <option value="answered">Answered</option>
                   <option value="pending">Pending</option>
@@ -308,7 +308,7 @@ export default function QAEdit() {
                 </button>
                 <button
                   type="submit"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-[#9b172a] text-white rounded-lg hover:bg-[#9b172a]-700 transition-colors font-medium"
                 >
                   <FaSave />
                   Update Q&A

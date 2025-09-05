@@ -88,14 +88,14 @@ export default function QACreate() {
           <div className="mb-8">
             <button
               onClick={() => navigate("/qa")}
-              className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 transition-colors mb-4"
+              className="inline-flex items-center gap-2 text-[#9b172a] hover:text-[#9b172a]-700 transition-colors mb-4"
             >
               <FaArrowLeft />
               العودة إلى الأسئلة والأجوبة
             </button>
             
             <div className="text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-600 rounded-full mb-4">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-[#9b172a] rounded-full mb-4">
                 <FaQuestionCircle className="w-8 h-8 text-white" />
               </div>
               <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-2">
@@ -120,7 +120,7 @@ export default function QACreate() {
                   name="question"
                   value={formData.question}
                   onChange={handleInputChange}
-                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white ${
+                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9b172a] dark:bg-gray-700 dark:text-white ${
                     errors.question ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
                   }`}
                   rows="4"
@@ -143,7 +143,7 @@ export default function QACreate() {
                     name="category"
                     value={formData.category}
                     onChange={handleInputChange}
-                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white ${
+                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9b172a] dark:bg-gray-700 dark:text-white ${
                       errors.category ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
                     }`}
                   >
@@ -167,7 +167,7 @@ export default function QACreate() {
                     name="author"
                     value={formData.author}
                     onChange={handleInputChange}
-                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white ${
+                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9b172a] dark:bg-gray-700 dark:text-white ${
                       errors.author ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
                     }`}
                     placeholder="أدخل اسمك"
@@ -189,7 +189,7 @@ export default function QACreate() {
                   name="tags"
                   value={formData.tags}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9b172a] dark:bg-gray-700 dark:text-white"
                   placeholder="أدخل العلامات مفصولة بفواصل (مثل javascript, react, tutorial)"
                 />
                 <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
@@ -206,7 +206,7 @@ export default function QACreate() {
                   name="status"
                   value={formData.status}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9b172a] dark:bg-gray-700 dark:text-white"
                 >
                   <option value="answered">تمت الإجابة</option>
                   <option value="pending">معلق</option>
@@ -226,7 +226,7 @@ export default function QACreate() {
                 </button>
                 <button
                   type="submit"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-[#9b172a] text-white rounded-lg hover:bg-[#9b172a]-700 transition-colors font-medium"
                 >
                   <FaSave />
                   إنشاء سؤال وجواب
@@ -236,11 +236,11 @@ export default function QACreate() {
           </div>
 
           {/* Tips */}
-          <div className="mt-8 bg-blue-50 dark:bg-blue-900/20 rounded-lg p-6">
-            <h3 className="text-lg font-semibold text-blue-800 dark:text-blue-200 mb-3">
+          <div className="mt-8 bg-[#9b172a]-50 dark:bg-[#9b172a]-900/20 rounded-lg p-6">
+            <h3 className="text-lg font-semibold text-[#9b172a]-800 dark:text-[#9b172a]-200 mb-3">
               💡 نصائح لسؤال وجواب ممتاز
             </h3>
-            <ul className="space-y-2 text-blue-700 dark:text-blue-300">
+            <ul className="space-y-2 text-[#9b172a]-700 dark:text-[#9b172a]-300">
               <li>• كن محدداً وواضحاً في سؤالك</li>
               <li>• قدم السياق والتفاصيل ذات الصلة</li>
               <li>• استخدم العلامات المناسبة لمساعدة الآخرين في العثور على سؤالك</li>

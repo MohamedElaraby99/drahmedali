@@ -94,20 +94,20 @@ export default function QAList() {
 
   const getStatusColor = (status) => {
     switch (status) {
-      case 'featured': return 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200';
+      case 'featured': return 'bg-[#9b172a]-100 text-[#9b172a]-800 dark:bg-[#9b172a]-900 dark:text-[#9b172a]-200';
       case 'answered': return 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200';
-      case 'pending': return 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200';
+      case 'pending': return 'bg-[#9b172a]-100 text-[#9b172a]-800 dark:bg-[#9b172a]-900 dark:text-[#9b172a]-200';
       default: return 'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200';
     }
   };
 
   const getCategoryColor = (category) => {
     const colors = {
-      'General': 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200',
+      'General': 'bg-[#9b172a]-100 text-[#9b172a]-800 dark:bg-[#9b172a]-900 dark:text-[#9b172a]-200',
       'Technical': 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200',
       'Course Related': 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200',
-      'Payment': 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200',
-      'Account': 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200',
+      'Payment': 'bg-[#9b172a]-100 text-[#9b172a]-800 dark:bg-[#9b172a]-900 dark:text-[#9b172a]-200',
+      'Account': 'bg-[#9b172a]-100 text-[#9b172a]-800 dark:bg-[#9b172a]-900 dark:text-[#9b172a]-200',
       'Other': 'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200'
     };
     return colors[category] || colors['Other'];
@@ -131,7 +131,7 @@ export default function QAList() {
             {!isAdmin && (
               <Link
                 to="/qa/create"
-                className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-colors duration-200"
+                className="inline-flex items-center gap-2 bg-[#9b172a] hover:bg-[#9b172a]-700 text-white px-6 py-3 rounded-lg transition-colors duration-200"
               >
                 <FaPlus />
                 اطرح سؤالاً
@@ -150,7 +150,7 @@ export default function QAList() {
                   placeholder="البحث في الأسئلة والأجوبة..."
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#9b172a] focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 />
               </div>
 
@@ -158,7 +158,7 @@ export default function QAList() {
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#9b172a] focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               >
                 <option value="">جميع الفئات</option>
                 {categories.map((cat) => (
@@ -170,7 +170,7 @@ export default function QAList() {
               <select
                 value={status}
                 onChange={(e) => setStatus(e.target.value)}
-                className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#9b172a] focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               >
                 <option value="">جميع الحالات</option>
                 <option value="answered">تم الرد</option>
@@ -182,7 +182,7 @@ export default function QAList() {
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#9b172a] focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               >
                 <option value="newest">الأحدث أولاً</option>
                 <option value="oldest">الأقدم أولاً</option>
@@ -194,9 +194,9 @@ export default function QAList() {
 
           {/* Stats */}
           <div className={`grid gap-4 mb-8 ${isAdmin ? 'grid-cols-1 md:grid-cols-4' : 'grid-cols-1 md:grid-cols-3'}`}>
-            <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
-              <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">{total}</div>
-              <div className="text-sm text-blue-600 dark:text-blue-400">إجمالي الأسئلة والأجوبة</div>
+            <div className="bg-[#9b172a]-50 dark:bg-[#9b172a]-900/20 p-4 rounded-lg">
+              <div className="text-2xl font-bold text-[#9b172a] dark:text-[#9b172a]-400">{total}</div>
+              <div className="text-sm text-[#9b172a] dark:text-[#9b172a]-400">إجمالي الأسئلة والأجوبة</div>
             </div>
             <div className="bg-green-50 dark:bg-green-900/20 p-4 rounded-lg">
               <div className="text-2xl font-bold text-green-600 dark:text-green-400">
@@ -205,25 +205,25 @@ export default function QAList() {
               <div className="text-sm text-green-600 dark:text-green-400">تم الرد</div>
             </div>
             {isAdmin && (
-              <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
-                <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">
+              <div className="bg-[#9b172a]-50 dark:bg-[#9b172a]-900/20 p-4 rounded-lg">
+                <div className="text-2xl font-bold text-[#9b172a] dark:text-[#9b172a]-400">
                   {qas.filter(qa => qa.status === 'pending').length}
                 </div>
-                <div className="text-sm text-blue-600 dark:text-blue-400">في الانتظار</div>
+                <div className="text-sm text-[#9b172a] dark:text-[#9b172a]-400">في الانتظار</div>
               </div>
             )}
-            <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
-              <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">
+            <div className="bg-[#9b172a]-50 dark:bg-[#9b172a]-900/20 p-4 rounded-lg">
+              <div className="text-2xl font-bold text-[#9b172a] dark:text-[#9b172a]-400">
                 {qas.filter(qa => qa.status === 'featured').length}
               </div>
-              <div className="text-sm text-blue-600 dark:text-blue-400">مميز</div>
+              <div className="text-sm text-[#9b172a] dark:text-[#9b172a]-400">مميز</div>
             </div>
           </div>
 
           {/* Q&A List */}
           {loading ? (
             <div className="text-center py-12">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#9b172a] mx-auto"></div>
               <p className="mt-4 text-gray-600 dark:text-gray-300">جاري تحميل الأسئلة والأجوبة...</p>
             </div>
           ) : qas.length > 0 ? (
@@ -244,7 +244,7 @@ export default function QAList() {
 
                       {/* Question */}
                       <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-3">
-                        <Link to={`/qa/${qa._id}`} className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                        <Link to={`/qa/${qa._id}`} className="hover:text-[#9b172a] dark:hover:text-[#9b172a]-400 transition-colors">
                           {qa.question}
                         </Link>
                       </h3>
@@ -255,12 +255,12 @@ export default function QAList() {
                           {qa.answer}
                         </p>
                       ) : isAdmin && (
-                        <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
-                          <div className="flex items-center gap-2 text-blue-800 dark:text-blue-200">
+                        <div className="mb-4 p-3 bg-[#9b172a]-50 dark:bg-[#9b172a]-900/20 border border-[#9b172a]-200 dark:border-[#9b172a]-800 rounded-lg">
+                          <div className="flex items-center gap-2 text-[#9b172a]-800 dark:text-[#9b172a]-200">
                             <FaClock className="text-sm" />
                             <span className="text-sm font-medium">في انتظار الإجابة</span>
                           </div>
-                          <p className="text-blue-700 dark:text-blue-300 text-sm mt-1">
+                          <p className="text-[#9b172a]-700 dark:text-[#9b172a]-300 text-sm mt-1">
                             هذا السؤال في انتظار أن يقدم المدير إجابة.
                           </p>
                         </div>
@@ -322,7 +322,7 @@ export default function QAList() {
                             <div className="flex items-center gap-2">
                               <button
                                 onClick={() => handleAnswerQA(qa._id)}
-                                className="flex items-center gap-1 px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm transition-colors"
+                                className="flex items-center gap-1 px-3 py-1 bg-[#9b172a] hover:bg-[#9b172a]-700 text-white rounded-lg text-sm transition-colors"
                                 title="Answer Question"
                               >
                                 <FaReply />
@@ -330,7 +330,7 @@ export default function QAList() {
                               </button>
                               <button
                                 onClick={() => handleEditQA(qa._id)}
-                                className="flex items-center gap-1 px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm transition-colors"
+                                className="flex items-center gap-1 px-3 py-1 bg-[#9b172a] hover:bg-[#9b172a]-700 text-white rounded-lg text-sm transition-colors"
                                 title="Edit Question"
                               >
                                 <FaEdit />
@@ -370,7 +370,7 @@ export default function QAList() {
               {!search && !category && !status && !isAdmin && (
                 <Link
                   to="/qa/create"
-                  className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-colors duration-200"
+                  className="inline-flex items-center gap-2 bg-[#9b172a] hover:bg-[#9b172a]-700 text-white px-6 py-3 rounded-lg transition-colors duration-200"
                 >
                   <FaPlus />
                   اطرح سؤالاً
@@ -389,7 +389,7 @@ export default function QAList() {
                     onClick={() => dispatch(getAllQAs({ page, category, search, status, sortBy }))}
                     className={`px-4 py-2 rounded-lg transition-colors ${
                       page === currentPage
-                        ? 'bg-blue-600 text-white'
+                        ? 'bg-[#9b172a] text-white'
                         : 'bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600'
                     }`}
                   >

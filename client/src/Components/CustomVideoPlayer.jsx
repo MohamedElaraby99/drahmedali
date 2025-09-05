@@ -914,7 +914,7 @@ const CustomVideoPlayer = ({
                 <p className="text-white text-sm">Please rotate your device to landscape mode for the best viewing experience</p>
                 <button
                   onClick={requestFullscreenAndLandscape}
-                  className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+                  className="mt-4 px-4 py-2 bg-[#9b172a] text-white rounded-lg hover:bg-[#9b172a] transition-colors"
                 >
                   Enter Fullscreen
                 </button>
@@ -1060,7 +1060,7 @@ const CustomVideoPlayer = ({
                   <button
                     onClick={() => setIsBookmarked(!isBookmarked)}
                     className={`p-2 rounded-lg transition-colors ${
-                      isBookmarked ? 'text-blue-500 bg-blue-500/20' : 'text-white hover:bg-black/30'
+                      isBookmarked ? 'text-[#9b172a] bg-[#9b172a]/20' : 'text-white hover:bg-black/30'
                     }`}
                   >
                     <FaBookmark className="text-lg" />
@@ -1145,12 +1145,12 @@ const CustomVideoPlayer = ({
                     ></div>
                     {/* Played progress */}
                     <div 
-                      className="bg-blue-500 h-1 rounded-full transition-all duration-200 relative z-10"
+                      className="bg-[#9b172a] h-1 rounded-full transition-all duration-200 relative z-10"
                       style={{ width: `${duration > 0 ? Math.max(0, Math.min(100, (currentTime / duration) * 100)) : 0}%` }}
                     ></div>
                     {/* Progress indicator */}
                     <div 
-                      className="absolute top-1/2 transform -translate-y-1/2 w-3 h-3 bg-blue-500 rounded-full shadow-lg z-20"
+                      className="absolute top-1/2 transform -translate-y-1/2 w-3 h-3 bg-[#9b172a] rounded-full shadow-lg z-20"
                       style={{ left: `${duration > 0 ? Math.max(0, Math.min(100, (currentTime / duration) * 100)) : 0}%`, marginLeft: '-6px' }}
                     ></div>
                   </div>
@@ -1242,7 +1242,7 @@ const CustomVideoPlayer = ({
                       {duration === 0 && youtubeVideoId && (
                         <button
                           onClick={requestDuration}
-                          className="ml-2 px-2 py-1 bg-blue-500 text-white text-xs rounded hover:bg-blue-600"
+                          className="ml-2 px-2 py-1 bg-[#9b172a] text-white text-xs rounded hover:bg-[#9b172a]"
                           title="Fetch Duration"
                         >
                           Get Duration
@@ -1267,7 +1267,7 @@ const CustomVideoPlayer = ({
                     <button
                       onClick={() => setShowCaptions(!showCaptions)}
                       className={`p-2 rounded-lg transition-colors ${
-                        showCaptions ? 'text-blue-500 bg-blue-500/20' : 'text-white hover:bg-black/30'
+                        showCaptions ? 'text-[#9b172a] bg-[#9b172a]/20' : 'text-white hover:bg-black/30'
                       }`}
                     >
                       <FaClosedCaptioning className="text-lg" />
@@ -1289,7 +1289,7 @@ const CustomVideoPlayer = ({
                               key={rate}
                               onClick={() => changePlaybackRate(rate)}
                               className={`block w-full text-left px-2 py-1 rounded text-sm ${
-                                playbackRate === rate ? 'bg-blue-500' : 'hover:bg-white/20'
+                                playbackRate === rate ? 'bg-[#9b172a]' : 'hover:bg-white/20'
                               }`}
                             >
                               {rate}x
@@ -1359,7 +1359,7 @@ const CustomVideoPlayer = ({
                 value={manualDurationInput}
                 onChange={(e) => setManualDurationInput(e.target.value)}
                 placeholder="e.g., 3:45"
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9b172a] dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                 onKeyPress={(e) => {
                   if (e.key === 'Enter') {
                     handleManualDurationSubmit();
@@ -1369,7 +1369,7 @@ const CustomVideoPlayer = ({
               <div className="flex gap-2 mt-4">
                 <button
                   onClick={handleManualDurationSubmit}
-                  className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                  className="flex-1 px-4 py-2 bg-[#9b172a] text-white rounded-lg hover:bg-[#9b172a]-700"
                 >
                   Set Duration
                 </button>

@@ -204,7 +204,7 @@ const EssayExamModal = ({ examId, onClose, onSuccess }) => {
             {currentExam?.questions && currentExam.questions.length > 0 ? (
               <button
                 onClick={startExam}
-                className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+                className="bg-[#9b172a] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#9b172a]-700 transition-colors"
               >
                 بدء الامتحان
               </button>

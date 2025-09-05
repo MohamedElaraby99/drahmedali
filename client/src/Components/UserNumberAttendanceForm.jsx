@@ -159,7 +159,7 @@ const UserNumberAttendanceForm = ({ selectedGroup, selectedDate, onSuccess, onCl
         {/* User Number Search */}
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-            <FaIdCard className="inline mr-2 text-blue-500" />
+            <FaIdCard className="inline mr-2 text-[#9b172a]" />
             رقم المستخدم
           </label>
           <div className="flex gap-2">
@@ -169,14 +169,14 @@ const UserNumberAttendanceForm = ({ selectedGroup, selectedDate, onSuccess, onCl
               value={formData.userNumber}
               onChange={handleInputChange}
               placeholder="رقم الهوية، اسم المستخدم، أو رقم الهاتف"
-              className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
+              className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#9b172a] focus:border-transparent dark:bg-gray-700 dark:text-white"
               dir="ltr"
             />
             <button
               type="button"
               onClick={searchUserByNumber}
               disabled={usersLoading}
-              className="px-4 py-2 bg-blue-500 hover:bg-blue-600 disabled:bg-blue-300 text-white rounded-lg transition-colors flex items-center gap-2"
+              className="px-4 py-2 bg-[#9b172a] hover:bg-[#9b172a] disabled:bg-[#9b172a]-300 text-white rounded-lg transition-colors flex items-center gap-2"
             >
               {usersLoading ? (
                 <>
@@ -239,7 +239,7 @@ const UserNumberAttendanceForm = ({ selectedGroup, selectedDate, onSuccess, onCl
             name="status"
             value={formData.status}
             onChange={handleInputChange}
-            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#9b172a] focus:border-transparent dark:bg-gray-700 dark:text-white"
           >
             <option value="present">حاضر</option>
             <option value="late">متأخر</option>
@@ -259,7 +259,7 @@ const UserNumberAttendanceForm = ({ selectedGroup, selectedDate, onSuccess, onCl
             value={formData.scanLocation}
             onChange={handleInputChange}
             placeholder="مثال: قاعة المحاضرات الرئيسية"
-            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#9b172a] focus:border-transparent dark:bg-gray-700 dark:text-white"
           />
         </div>
 
@@ -275,7 +275,7 @@ const UserNumberAttendanceForm = ({ selectedGroup, selectedDate, onSuccess, onCl
             onChange={handleInputChange}
             placeholder="أي ملاحظات إضافية..."
             rows={3}
-            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white resize-none"
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#9b172a] focus:border-transparent dark:bg-gray-700 dark:text-white resize-none"
           />
         </div>
 
@@ -317,11 +317,11 @@ const UserNumberAttendanceForm = ({ selectedGroup, selectedDate, onSuccess, onCl
       </form>
 
       {/* Info Section */}
-      <div className="mt-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-        <h4 className="text-sm font-medium text-blue-800 dark:text-blue-300 mb-2">
+      <div className="mt-6 p-4 bg-[#9b172a]-50 dark:bg-[#9b172a]-900/20 rounded-lg">
+        <h4 className="text-sm font-medium text-[#9b172a]-800 dark:text-[#9b172a]-300 mb-2">
           كيفية الاستخدام:
         </h4>
-        <ul className="text-xs text-blue-700 dark:text-blue-400 space-y-1">
+        <ul className="text-xs text-[#9b172a]-700 dark:text-[#9b172a]-400 space-y-1">
           <li>• أدخل رقم الهوية، اسم المستخدم، أو رقم الهاتف</li>
           <li>• اضغط على "بحث" للتحقق من وجود الطالب محلياً (اختياري)</li>
           <li>• يمكنك تسجيل الحضور حتى لو لم يتم العثور على الطالب محلياً</li>
