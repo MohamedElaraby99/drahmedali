@@ -568,7 +568,7 @@ export default function Signup() {
 
 
               {/* Email Field */}
-              <div className="group">
+              {/* <div className="group">
                 <label htmlFor="email" className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3 text-right">
                   البريد الإلكتروني {!isAdminRegistration && "(اختياري)"}
                 </label>
@@ -602,7 +602,7 @@ export default function Signup() {
                     ممكن تسيب الخانة دي فاضية لو مش عايز تستعمل إيميل
                   </p>
                 )}
-              </div>
+              </div> */}
 
               {/* Password Field */}
               <div className="group">
@@ -836,7 +836,7 @@ export default function Signup() {
               )}
 
               {/* Enhanced Avatar Upload */}
-              <div className="group">
+              {/* <div className="group">
                 <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3 text-right">
                   الصورة الشخصية (اختياري)
                 </label>
@@ -877,7 +877,7 @@ export default function Signup() {
                     />
                   </div>
                 </div>
-              </div>
+              </div> */}
 
               {/* CAPTCHA Component */}
               <CaptchaComponent
