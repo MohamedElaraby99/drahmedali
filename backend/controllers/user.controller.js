@@ -103,7 +103,23 @@ const register = async (req, res, next) => {
         }
 
         // Save user in the database and log the user in
-        const user = await userModel.create(userData);
+        let user;
+        try {
+            user = await userModel.create(userData);
+        } catch (error) {
+            // Handle MongoDB duplicate key errors
+            if (error.code === 11000) {
+                const field = Object.keys(error.keyPattern || {})[0];
+                if (field === 'email') {
+                    return next(new AppError("Email already exists, please login or use a different email", 400));
+                } else if (field === 'phoneNumber') {
+                    return next(new AppError("Phone number already exists, please login or use a different phone number", 400));
+                }
+                return next(new AppError("This account information already exists, please login", 400));
+            }
+            // Re-throw other errors
+            throw error;
+        }
 
         if (!user) {
             return next(new AppError("User registration failed, please try again", 400));
