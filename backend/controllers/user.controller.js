@@ -402,7 +402,9 @@ const logout = async (req, res, next) => {
 const getProfile = async (req, res, next) => {
     try {
         const { id } = req.user;
-        const user = await userModel.findById(id).populate('stage', 'name');
+        const user = await userModel.findById(id)
+            .populate('stage', 'name')
+            .populate('center', 'name location');
 
         if (!user) {
             return next(new AppError('User not found', 404));
@@ -416,6 +418,7 @@ const getProfile = async (req, res, next) => {
             fatherPhoneNumber: user.fatherPhoneNumber,
             governorate: user.governorate,
             stage: user.stage,
+            center: user.center,
             age: user.age,
             role: user.role
         });

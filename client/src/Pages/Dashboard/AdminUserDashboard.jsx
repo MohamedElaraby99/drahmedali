@@ -485,6 +485,22 @@ export default function AdminUserDashboard() {
         return { strength: 'strong', color: 'text-green-500', text: 'قوية' };
     };
 
+    const getCenterDisplay = (centerValue) => {
+        if (!centerValue) return 'غير محدد';
+        // If the backend returned just the center ID string
+        if (typeof centerValue === 'string') {
+            const found = centers.find((c) => c._id === centerValue);
+            return found ? (found.location ? `${found.name} - ${found.location}` : found.name) : 'غير محدد';
+        }
+        // If the backend populated center object
+        if (typeof centerValue === 'object') {
+            if (centerValue?.name) {
+                return centerValue.location ? `${centerValue.name} - ${centerValue.location}` : centerValue.name;
+            }
+        }
+        return 'غير محدد';
+    };
+
     return (
         <Layout>
             <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-[#9b172a]-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 py-8" dir="rtl">
@@ -1849,9 +1865,9 @@ export default function AdminUserDashboard() {
                                                     ))}
                                                 </select>
                                             ) : (
-                                                <p className="text-gray-900 dark:text-white font-medium">
-                                                    {selectedUser.center && selectedUser.center.name ? selectedUser.center.name : 'غير محدد'}
-                                                </p>
+                                            <p className="text-gray-900 dark:text-white font-medium">
+                                                {getCenterDisplay(selectedUser.center)}
+                                            </p>
                                             )}
                                         </div>
                                         <div className="space-y-2">

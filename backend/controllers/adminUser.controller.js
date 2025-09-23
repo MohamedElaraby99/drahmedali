@@ -250,7 +250,8 @@ const getUserDetails = async (req, res, next) => {
 
         const user = await userModel.findById(userId)
             .select('-password -forgotPasswordToken -forgotPasswordExpiry')
-            .populate('stage', 'name');
+            .populate('stage', 'name')
+            .populate('center', 'name location');
 
         if (!user) {
             return next(new AppError("User not found", 404));
@@ -278,6 +279,7 @@ const getUserDetails = async (req, res, next) => {
                     fatherPhoneNumber: user.fatherPhoneNumber,
                     governorate: user.governorate,
                     stage: user.stage,
+                    center: user.center,
                     age: user.age,
                     role: user.role,
                     code: user.code,

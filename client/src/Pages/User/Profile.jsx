@@ -21,10 +21,7 @@ export default function Profile() {
   const [isEditing, setIsEditing] = useState(false);
   const [userInput, setUserInput] = useState({
     name: userData?.fullName || "",
-    phoneNumber: userData?.phoneNumber || "",
-    fatherPhoneNumber: userData?.fatherPhoneNumber || "",
     governorate: userData?.governorate || "",
-    center: userData?.center || "",
     age: userData?.age || "",
     avatar: null,
     previewImage: null,
@@ -57,13 +54,10 @@ export default function Profile() {
 
     const formData = new FormData();
     formData.append("fullName", userInput.name);
-    formData.append("phoneNumber", userInput.phoneNumber);
     
     // Only append user-specific fields for regular users
     if (userData?.role !== 'ADMIN' && userData?.role !== 'SUPER_ADMIN') {
-      formData.append("fatherPhoneNumber", userInput.fatherPhoneNumber);
       formData.append("governorate", userInput.governorate);
-      formData.append("center", userInput.center);
       formData.append("age", userInput.age);
     }
     
@@ -95,7 +89,6 @@ export default function Profile() {
       phoneNumber: userData?.phoneNumber || "",
       fatherPhoneNumber: userData?.fatherPhoneNumber || "",
       governorate: userData?.governorate || "",
-      center: userData?.center?._id || "",
       age: userData?.age || "",
       avatar: null,
       previewImage: null,
@@ -117,10 +110,7 @@ export default function Profile() {
     // Reset to original values
     setUserInput({
       name: userData?.fullName || "",
-      phoneNumber: userData?.phoneNumber || "",
-      fatherPhoneNumber: userData?.fatherPhoneNumber || "",
       governorate: userData?.governorate || "",
-      center: userData?.center?._id || "",
       age: userData?.age || "",
       avatar: null,
       previewImage: null,
@@ -132,15 +122,12 @@ export default function Profile() {
     if (isEditing) {
       let hasChanges = 
         userInput.name !== userData?.fullName || 
-        userInput.phoneNumber !== userData?.phoneNumber ||
         userInput.avatar;
       
       // Only check user-specific fields for regular users
       if (userData?.role !== 'ADMIN' && userData?.role !== 'SUPER_ADMIN') {
         hasChanges = hasChanges ||
-          userInput.fatherPhoneNumber !== userData?.fatherPhoneNumber ||
           userInput.governorate !== userData?.governorate ||
-          userInput.center !== (userData?.center?._id || "") ||
           userInput.age !== userData?.age;
       }
       
@@ -197,8 +184,6 @@ export default function Profile() {
     setUserInput({
       ...userInput,
         name: userData?.fullName || "",
-        phoneNumber: userData?.phoneNumber || "",
-        fatherPhoneNumber: userData?.fatherPhoneNumber || "",
         governorate: userData?.governorate || "",
         age: userData?.age || "",
       userId: userData?._id,
@@ -342,19 +327,12 @@ export default function Profile() {
                   <FaPhone className="text-green-500" />
                   رقم الهاتف
                 </label>
-                <input
-                  type="tel"
-                  value={isEditing ? userInput.phoneNumber : (userData?.phoneNumber || "")}
-                  onChange={(e) => setUserInput({ ...userInput, phoneNumber: e.target.value })}
-                  disabled={!isEditing}
-                  className={`w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#9b172a] focus:border-transparent text-left ${
-                    !isEditing 
-                      ? 'bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-300 cursor-not-allowed' 
-                      : 'bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
-                  }`}
-                  placeholder="أدخل رقم هاتفك"
-                  dir="ltr"
-                />
+                <div className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-left" dir="ltr">
+                  {userData?.phoneNumber || "غير محدد"}
+                </div>
+                <div className="text-xs text-gray-500 dark:text-gray-400">
+                  رقم الهاتف لا يمكن تعديله
+                </div>
               </div>
 
               {/* User-specific fields - only show for regular users */}
@@ -366,19 +344,12 @@ export default function Profile() {
                       <FaPhone className="text-[#9b172a]" />
                       رقم هاتف الأب
                     </label>
-                    <input
-                      type="tel"
-                      value={isEditing ? userInput.fatherPhoneNumber : (userData?.fatherPhoneNumber || "")}
-                      onChange={(e) => setUserInput({ ...userInput, fatherPhoneNumber: e.target.value })}
-                      disabled={!isEditing}
-                      className={`w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#9b172a] focus:border-transparent text-left ${
-                        !isEditing 
-                          ? 'bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-300 cursor-not-allowed' 
-                          : 'bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
-                      }`}
-                      placeholder="أدخل رقم هاتف الأب"
-                      dir="ltr"
-                    />
+                    <div className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-left" dir="ltr">
+                      {userData?.fatherPhoneNumber || "غير محدد"}
+                    </div>
+                    <div className="text-xs text-gray-500 dark:text-gray-400">
+                      رقم هاتف الأب لا يمكن تعديله
+                    </div>
                   </div>
 
                   {/* Age */}
@@ -425,31 +396,14 @@ export default function Profile() {
                       <FaBuilding className="text-[#9b172a]" />
                       المركز التعليمي
                     </label>
-                    <select
-                      value={isEditing ? userInput.center : (userData?.center?._id || "")}
-                      onChange={(e) => setUserInput({ ...userInput, center: e.target.value })}
-                      disabled={!isEditing}
-                      className={`w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#9b172a] focus:border-transparent text-right ${
-                        !isEditing 
-                          ? 'bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-300 cursor-not-allowed' 
-                          : 'bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
-                      }`}
-                      dir="rtl"
-                    >
-                      <option value="">اختر المركز التعليمي</option>
-                      {centers.map((center) => (
-                        <option key={center._id} value={center._id}>
-                          {center.name}
-                          {center.location && ` - ${center.location}`}
-                        </option>
-                      ))}
-                    </select>
-                    {!isEditing && userData?.center && (
-                      <div className="text-xs text-gray-500 dark:text-gray-400">
-                        المركز الحالي: {userData.center.name}
-                        {userData.center.location && ` - ${userData.center.location}`}
-                      </div>
-                    )}
+                    
+                    <div className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-right" dir="rtl">
+                      {userData?.center?.name || userData?.center || "غير محدد"}
+                      {userData?.center?.location && ` - ${userData.center.location}`}
+                    </div>
+                    <div className="text-xs text-gray-500 dark:text-gray-400">
+                      المركز التعليمي لا يمكن تعديله
+                    </div>
                   </div>
 
                   {/* Governorate */}
